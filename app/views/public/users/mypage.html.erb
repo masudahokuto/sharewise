@@ -1,0 +1,12 @@
+<!-- app/views/public/users/index.html.erb -->
+<h1>Users List</h1>
+  <%= @user.last_name %><br>
+  <%= @user.first_name %><br>
+  <%= @user.nick_name %><br>
+  <%= @user.birthday %><br>
+  <%= @user.gender %><br>
+  <%= @user.email %><br>
+  <%= @user.is_active %><br>
+  <%= @user.profile %><br>
+  <%= image_tag @user.profile_image, size: "80x50" %>
+<%= link_to "top", root_path %>

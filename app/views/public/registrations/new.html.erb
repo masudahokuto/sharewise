@@ -1,0 +1,69 @@
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :post, multipart: true }) do |f| %>
+  <%= devise_error_messages! %>
+
+  <div class="field">
+    <%= f.label :last_name, "姓" %><br />
+    <%= f.text_field :last_name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :first_name, "名" %><br />
+    <%= f.text_field :first_name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :nick_name, "ニックネーム" %><br />
+    <%= f.text_field :nick_name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :profile, "プロフィール" %><br />
+    <%= f.text_area :profile %>
+  </div>
+
+  <div class="field">
+    <%= f.label :gender, "性別" %><br />
+    <div>
+      <% User.genders.keys.each do |gender| %>
+        <%= f.radio_button :gender, gender %>
+        <%= f.label :gender, User.human_attribute_name("gender.#{gender}"), value: gender %>
+      <% end %>
+    </div>
+  </div>
+
+<div class="field">
+  <%= f.label :birthday, "生年月日" %><br />
+  <%= f.date_select :birthday,
+                   start_year: 1900,
+                   end_year: Time.current.year,
+                   use_month_number: true,   # 月を数字で表示
+                   default: { year: 2000, month: 1, day: 1 },
+                   order: [:year, :month, :day] %>
+</div>
+
+  <div class="field">
+    <%= f.label :email, "メールアドレス" %><br />
+    <%= f.email_field :email %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password, "パスワード" %><br />
+    <%= f.password_field :password %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password_confirmation, "パスワード確認" %><br />
+    <%= f.password_field :password_confirmation %>
+  </div>
+
+  <div class="field">
+    <%= f.label :profile_image, "プロフィール画像" %><br />
+    <%= f.file_field :profile_image %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "登録" %>
+  </div>
+<% end %>
+
+
