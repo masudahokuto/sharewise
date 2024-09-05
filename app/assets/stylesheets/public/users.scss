@@ -37,10 +37,6 @@
 }
 
 .img-fluid {
-  width: 80%;             /* 画像の幅をコンテナの80%に設定 */
-  height: auto;           /* 高さを自動調整 */
-  border-radius: 8px;    /* 画像の角を丸くする */
-  max-width: 240px;       /* 最大幅を240pxに設定 */
-  max-height: 160px;      /* 最大高さを160pxに設定 */
-  object-fit: cover;      /* 画像が枠に収まるようにトリミング */
+  width: 110%;             /* 画像の幅をコンテナに合わせる */
+  height: 90%;            /* 高さを自動調整 */
 }
