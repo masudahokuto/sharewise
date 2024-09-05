@@ -1,0 +1,23 @@
+<!-- app/views/users/index.html.erb -->
+
+<%= stylesheet_link_tag 'application', media: 'all' %>
+<div class="container-fluid">
+  <div class="row">
+    <!-- 左側にcurrent_user情報を表示 -->
+    <div class="col-md-2 d-flex flex-column align-items-center">
+      <%= render 'user_card', user: @current_user %>
+      <%= link_to 'プロフィール編集', edit_user_path(@current_user), class: 'btn btn-primary mt-3' %>
+    </div>
+    <!-- 右側に他のユーザーを表示 -->
+    <div class="offset-1 col-md-9">
+      <div class="row">
+        <% @users.each do |user| %>
+          <div class="col-md-4 mb-4">
+            <!-- ここから .card クラスを削除 -->
+            <%= render partial: 'index_user_card', locals: { user: user } %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

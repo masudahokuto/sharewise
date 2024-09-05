@@ -7,8 +7,8 @@ class Public::UsersController < ApplicationController
   end
 
   def index
-    @user = current_user
-    @users = User.all
+    @current_user = current_user
+    @users = User.where.not(id: current_user.id) # current_user 以外のユーザーを取得
   end
 
   def show

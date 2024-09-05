@@ -1,5 +1,6 @@
-<%= image_tag user.get_profile_image(200, 200) %><br>
-<%= user.nick_name %><br>
-<%= user.profile %><br>
-<!--フォロー数フォロワー数リンク張る-->
-
+<!-- app/views/public/users/_user_card.html.erb -->
+<div class="user-card current-user">
+  <%= image_tag user.get_profile_image(200, 200), class: 'profile-image' %>
+  <h5><%= user.nick_name %></h5>
+  <p><%= user.profile %></p>
+</div>
