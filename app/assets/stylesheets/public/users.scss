@@ -100,3 +100,45 @@
     }
   }
 }
+
+// その他のスタイル
+.post-link {
+  display: block;          /* ブロック要素として表示 */
+  text-decoration: none;  /* 下線を削除 */
+  color: inherit;         /* 親要素の文字色を継承 */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* トランジションの追加 */
+
+  &:hover .post-row {
+    background-color: #fafafa; /* ホバー時の背景色 */
+    border-color: #007bff;     /* ホバー時のボーダー色 */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* ホバー時のシャドウ */
+    transform: scale(1.02);    /* ホバー時に少し拡大 */
+  }
+
+  &:hover {
+    text-decoration: none;  /* ホバー時も下線を削除 */
+  }
+}
+
+.post-row {
+  border: 1px solid #ddd;   /* デフォルトのボーダー色 */
+  border-radius: 10px;      /* ボーダーの角を丸くする */
+  padding: 15px;            /* 内側の余白を追加 */
+  margin-bottom: 15px;      /* 下の余白を追加 */
+  overflow-y: auto;
+  max-height: 220px;
+  background-color: #fff;   /* 背景色 */
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease; /* トランジションの追加 */
+
+  /* 投稿内容のカスタムスタイル */
+  p {
+    margin: 0;
+    white-space: pre-wrap; /* 改行を維持 */
+    color: #333;           /* 文字色 */
+  }
+}
+
+.img-fluid {
+  width: 110%;             /* 画像の幅をコンテナに合わせる */
+  height: 90%;            /* 高さを自動調整 */
+}
