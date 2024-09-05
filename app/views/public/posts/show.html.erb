@@ -1,0 +1,22 @@
+<div class="container-fluid">
+  <div class="row d-flex justify-content-between">
+    <div class="col-2">
+      <%= render 'public/users/user_card', user: @user %>
+    </div>
+    <!-- 本文を表示する部分 -->
+    <div class="col-7">
+      <p><%= simple_format(@post.body) %></p>
+    </div>
+
+    <!-- 画像を右端に縦に並べる部分 -->
+    <div class="col-3">
+      <div class="d-flex flex-column align-items-end">
+        <% @post.images.each do |image| %>
+          <div class="mb-3">
+            <%= image_tag image, style: "width: 500px; height: 300px; object-fit: cover;", alt: "Post Image", class: "img-fluid" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

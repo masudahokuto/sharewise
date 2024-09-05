@@ -16,18 +16,20 @@ Rails.application.routes.draw do
 
   # Admin側のルーティング
   namespace :admin do
-    resources :users, only: [:index, :show, :update]
+    resources :users, only: %i[index show update]
   end
 
   # Public側のルーティング
   scope module: :public do
     root to: 'homes#top'
     get 'homes/about'
-    resources :users, only: [:index, :show, :edit, :update] do
+    resources :users, except: %i[new create] do
       collection do
         get 'mypage', to: 'users#mypage'
         patch 'withdraw'  # 退会処理
       end
     end
+
+     resources :posts
   end
 end
