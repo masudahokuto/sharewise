@@ -1,6 +1,11 @@
 <!-- app/views/public/users/_user_card.html.erb -->
-<div class="user-card current-user">
-  <%= image_tag user.get_profile_image(200, 200), class: 'profile-image' %>
-  <h5><%= user.nick_name %></h5>
-  <p><%= user.profile %></p>
-</div>
+<% if user.present? %>
+  <div class="user-card current-user">
+    <%= image_tag user.get_profile_image(150, 150), class: 'profile-image' %>
+    <h5><%= user.nick_name %></h5>
+    <p><%= user.profile %></p>
+  </div>
+<% else %>
+  
+  <p>ユーザー情報がありません</p>
+<% end %>

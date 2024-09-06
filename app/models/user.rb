@@ -26,4 +26,9 @@ class User < ApplicationRecord
     end
     profile_image.variant(resize_to_limit: [width, height]).processed
   end
+
+  # ユーザーの最新の投稿を取得
+  def recent_post
+    posts.order(created_at: :desc).first
+  end
 end

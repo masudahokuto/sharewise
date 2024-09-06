@@ -1,23 +1,59 @@
-<!-- app/views/users/index.html.erb -->
-
-<%= stylesheet_link_tag 'application', media: 'all' %>
+<!-- app/views/public/users/index.html.erb -->
+<%= stylesheet_link_tag 'public/users', media: 'all' %>
 <div class="container-fluid">
-  <div class="row">
-    <!-- 左側にcurrent_user情報を表示 -->
-    <div class="col-md-2 d-flex flex-column align-items-center">
+  <div class="row d-flex">
+    <div class="col-2 d-flex flex-column align-items-center">
       <%= render 'user_card', user: @current_user %>
-      <%= link_to 'プロフィール編集', edit_user_path(@current_user), class: 'btn btn-primary mt-3' %>
     </div>
-    <!-- 右側に他のユーザーを表示 -->
-    <div class="offset-1 col-md-9">
-      <div class="row">
+    <!-- ユーザー一覧 -->
+    <div class="col-10">
+      <% if @users.any? %>
         <% @users.each do |user| %>
-          <div class="col-md-4 mb-4">
-            <!-- ここから .card クラスを削除 -->
-            <%= render partial: 'index_user_card', locals: { user: user } %>
+          <div class="post-link">
+            <div class="post-row d-flex mb-3">
+              <!-- ユーザー情報 -->
+              <div class="col-md-2 d-flex flex-column">
+                <%= render 'index_user_card', user: user %>
+              </div>
+
+              <!-- 最新投稿内容と画像部分 -->
+              <div class="col-md-10 d-flex">
+                <!-- 本文の列 -->
+                <div class="col-md-7">
+                  <% if user.recent_post %>
+                    <%= link_to post_path(user.recent_post)do %>
+                      <div class="d-flex flex-column">
+                        <div class="mb-3">
+                          <p><%= simple_format(user.recent_post.body) %></p>
+                        </div>
+                      </div>
+                    <% end %>
+                  <% else %>
+                    <p>投稿がありません。</p>
+                  <% end %>
+                </div>
+
+                <!-- 画像の列 -->
+                <div class="col-md-5 d-flex flex-column align-items-end">
+                  <% if user.recent_post %>
+                    <% user.recent_post.images.each do |image| %>
+                      <div class="mb-3">
+                        <%= image_tag image, class: "img-fluid", alt: "Post Image" %>
+                      </div>
+                    <% end %>
+                  <% end %>
+                </div>
+              </div>
+            </div>
           </div>
         <% end %>
-      </div>
+      <% else %>
+        <p>ユーザーがいません。</p>
+      <% end %>
     </div>
   </div>
 </div>
+
+<%= link_to '投稿一覧', posts_path %> <!-- 投稿一覧へのリンク -->
+<%= link_to '新しい投稿を作成', new_post_path %> <!-- 新しい投稿を作成するリンク -->
+<%= link_to "top", root_path %> <!-- トップページへのリンク -->

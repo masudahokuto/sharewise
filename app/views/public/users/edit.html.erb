@@ -1,0 +1,137 @@
+<!-- app/views/public/users/edit.html.erb -->
+
+<%= stylesheet_link_tag 'registrations', media: 'all', 'data-turbolinks-track': 'reload' %>
+
+<% if flash.any? %>
+  <div class="flash-messages">
+    <% flash.each do |key, message| %>
+      <div class="alert alert-<%= key %>"><%= message %></div>
+    <% end %>
+  </div>
+<% end %>
+<div class="registration-form-container">
+  <div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+      <%= form_with(model: @user, url: user_path(@user), method: :patch, local: true, html: { multipart: true }) do |f| %>
+        <div class="card p-4 shadow-sm">
+          <div class="card-body">
+            <% if @user.errors.any? %>
+              <div class="alert alert-danger">
+                <h4>次のエラーが発生しました:</h4>
+                <ul>
+                  <% @user.errors.full_messages.each do |message| %>
+                    <li><%= message %></li>
+                  <% end %>
+                </ul>
+              </div>
+            <% end %>
+
+            <h2 class="text-center mb-4">プロフィール編集</h2>
+
+            <div class="form-group">
+              <%= f.label :last_name, "姓", class: 'form-label' %>
+              <%= f.text_field :last_name, class: 'form-control' %>
+            </div>
+
+            <div class="form-group">
+              <%= f.label :first_name, "名", class: 'form-label' %>
+              <%= f.text_field :first_name, class: 'form-control' %>
+            </div>
+
+            <div class="form-group">
+              <%= f.label :nick_name, "ニックネーム", class: 'form-label' %>
+              <%= f.text_field :nick_name, class: 'form-control' %>
+            </div>
+
+            <div class="form-group">
+              <%= f.label :profile, "プロフィール", class: 'form-label' %>
+              <%= f.text_area :profile, class: 'form-control' %>
+            </div>
+
+            <div class="form-group">
+              <%= f.label :gender, "性別", class: 'form-label' %>
+              <div class="d-flex">
+                <% User.genders.keys.each do |gender| %>
+                  <div class="form-check mr-3">
+                    <%= f.radio_button :gender, gender, class: 'form-check-input' %>
+                    <%= f.label :gender, User.human_attribute_name("gender.#{gender}"), value: gender, class: 'form-check-label' %>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <%= f.label :birthday, "生年月日", class: 'form-label' %>
+              <%= f.date_select :birthday,
+                                start_year: 1900,
+                                end_year: Time.current.year,
+                                use_month_number: true,
+                                default: { year: 2000, month: 1, day: 1 },
+                                order: [:year, :month, :day],
+                                class: 'form-control',
+                                include_blank: false,
+                                id: 'user_birthday' %>
+            </div>
+
+            <div class="form-group">
+              <%= f.label :email, "メールアドレス", class: 'form-label' %>
+              <%= f.email_field :email, class: 'form-control' %>
+            </div>
+
+            <div class="form-group">
+              <%= f.label :profile_image, "プロフィール画像", class: 'form-label' %>
+              <%= f.file_field :profile_image, class: 'form-control-file' %>
+            </div>
+
+            <div class="form-group text-center">
+              <%= f.submit "更新", class: 'btn btn-primary' %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+      <!-- 退会リンク -->
+      <div class="text-center mt-4">
+        <%= link_to "退会する", withdraw_users_path(@user), method: :patch, data: { confirm: "本当に退会しますか？" }, class: 'btn btn-danger' %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const daySelect = document.querySelector('#user_birthday_3i');
+    const monthSelect = document.querySelector('#user_birthday_2i');
+    const yearSelect = document.querySelector('#user_birthday_1i');
+
+    function updateDayOptions() {
+      const month = parseInt(monthSelect.value, 10);
+      const year = parseInt(yearSelect.value, 10);
+
+      let maxDays;
+
+      if (month === 2) {
+        maxDays = (year % 4 === 0 && (year % 100 !== 0 || year % 400 === 0)) ? 29 : 28;
+      } else if ([4, 6, 9, 11].includes(month)) {
+        maxDays = 30;
+      } else {
+        maxDays = 31;
+      }
+
+      for (let day = 1; day <= 31; day++) {
+        const option = daySelect.querySelector(`option[value="${day}"]`);
+        if (option) {
+          if (day > maxDays) {
+            option.style.display = 'none';
+          } else {
+            option.style.display = 'block';
+          }
+        }
+      }
+    }
+
+    monthSelect.addEventListener('change', updateDayOptions);
+    yearSelect.addEventListener('change', updateDayOptions);
+
+    updateDayOptions();
+  });
+</script>

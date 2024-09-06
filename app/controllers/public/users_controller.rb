@@ -1,5 +1,5 @@
 class Public::UsersController < ApplicationController
-  before_action :authenticate_user!  # ユーザーがログインしていることを確認
+  before_action :authenticate_user!, except: [:index]  # ユーザーがログインしていることを確認
 
   def mypage
     @user = current_user
@@ -8,7 +8,8 @@ class Public::UsersController < ApplicationController
 
   def index
     @current_user = current_user
-    @users = User.where.not(id: current_user.id) # current_user 以外のユーザーを取得
+    @users = User.where.not(id: @current_user.id) if @current_user
+    @users ||= User.all # ログインしていない場合は全ユーザーを取得
   end
 
   def show
@@ -25,7 +26,7 @@ class Public::UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     if @user.update(user_params)
-      redirect_to mypage_path, notice: 'プロフィールが更新されました'
+      redirect_to mypage_users_path, notice: 'プロフィールが更新されました'
     else
       render :edit
     end
@@ -44,6 +45,6 @@ class Public::UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:last_name, :first_name, :nick_name, :profile, :gender, :birthday_1i, :birthday_2i, :birthday_3i, :email, :profile_image)
+    params.require(:user).permit(:last_name, :first_name, :nick_name, :profile, :gender, :birthday_1i, :birthday_2i, :birthday_3i, :email, :profile_image, :is_active)
   end
 end

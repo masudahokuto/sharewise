@@ -17,6 +17,9 @@ Rails.application.routes.draw do
   # Admin側のルーティング
   namespace :admin do
     resources :users, only: %i[index show update]
+    resources :posts, only: %i[index show destroy]
+    get "/" => "homes#top"
+    get '/about', to:'homes#about', as:'about'
   end
 
   # Public側のルーティング

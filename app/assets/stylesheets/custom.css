@@ -1,0 +1,67 @@
+/* 非アクティブ時のデフォルトスタイル */
+.hover-effect {
+    color: #f8f9fa;
+    transition: color 0.3s ease;
+}
+
+/* ホバー時のスタイル */
+.hover-effect:hover {
+    color: #8B4513;
+}
+
+/* アクティブなリンクのスタイル */
+.active {
+    color: #8B4513; /* 茶色 */
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.custom-header {
+    background-color: #8FBC8F;
+    height: 60px;
+    display: flex;
+    align-items: center;
+}
+
+.customer-greeting {
+    font-size: 12px;
+    color: #f8f9fa;
+    align-items: center;
+    display: flex;
+    height: 100%;
+}
+
+/*.hover-effect {*/
+/*    color: #f8f9fa;*/
+    /*transition: color 0.3s ease;*/
+/*}*/
+
+/*.hover-effect:hover {*/
+    /*color: #8B4513; */
+/*}*/
+
+.fa-search {
+    color: white;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.custom-header {
+    flex-shrink: 0;
+}
+
+.main-content {
+    flex-grow: 1;
+    background-color: #f8f4e6;
+}
+
