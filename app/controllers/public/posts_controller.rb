@@ -17,7 +17,8 @@ class Public::PostsController < ApplicationController
   end
 
   def index
-    @posts = Post.all
+    @current_user = current_user
+    @posts = Post.page(params[:page]).per(10)
   end
 
   def show
