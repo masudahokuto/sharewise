@@ -40,19 +40,19 @@
     <!-- ログイン別のメニュー部分 -->
 <div>
   <% if admin_signed_in? %>
-    <%= link_to 'user一覧', admin_users_path, class: "text-decoration-none hover-effect mx-3 #{'active' if current_page?(admin_users_path)}" %>
-    <%= link_to 'post一覧', admin_posts_path, class: "text-decoration-none hover-effect mx-3 #{'active' if current_page?(admin_posts_path)}" %>
-    <%= link_to 'ログアウト', destroy_admin_session_path, method: :delete, class: 'text-decoration-none hover-effect mx-3' %>
+    <%= link_to 'user一覧', admin_users_path, class: "header-link text-decoration-none hover-effect mx-3 #{'active' if current_page?(admin_users_path)}" %>
+    <%= link_to 'post一覧', admin_posts_path, class: "header-link text-decoration-none hover-effect mx-3 #{'active' if current_page?(admin_posts_path)}" %>
+    <%= link_to 'ログアウト', destroy_admin_session_path, method: :delete, class: 'header-link text-decoration-none hover-effect mx-3', data: { confirm: 'ログアウトしますか？' } %>
   <% elsif user_signed_in? %>
-    <%= link_to 'マイページ', mypage_users_path, class: "text-decoration-none hover-effect mx-3 #{'active' if current_page?(mypage_users_path)}" %>
-    <%= link_to 'user一覧', users_path, class: "text-decoration-none hover-effect mx-3 #{'active' if current_page?(users_path)}" %>
-    <%= link_to 'post一覧', posts_path, class: "text-decoration-none hover-effect mx-3 #{'active' if current_page?(posts_path)}" %>
-    <%= link_to '新規投稿', new_post_path, class: "text-decoration-none hover-effect mx-3 #{'active' if current_page?(new_post_path)}" %>
-    <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: 'text-decoration-none hover-effect mx-3' %>
+    <%= link_to 'マイページ', mypage_users_path, class: "header-link text-decoration-none hover-effect mx-3 #{'active' if current_page?(mypage_users_path)}" %>
+    <%= link_to 'user一覧', users_path, class: "header-link text-decoration-none hover-effect mx-3 #{'active' if current_page?(users_path)}" %>
+    <%= link_to 'post一覧', posts_path, class: "header-link text-decoration-none hover-effect mx-3 #{'active' if current_page?(posts_path)}" %>
+    <%= link_to '新規投稿', new_post_path, class: "header-link text-decoration-none hover-effect mx-3 #{'active' if current_page?(new_post_path)}" %>
+    <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: 'header-link text-decoration-none hover-effect mx-3', data: { confirm: 'ログアウトしますか？' } %>
   <% else %>
-    <%= link_to 'user一覧', users_path, class: "text-decoration-none hover-effect mx-3 #{'active' if current_page?(users_path)}" %>
-    <%= link_to 'post一覧', posts_path, class: "text-decoration-none hover-effect mx-3 #{'active' if current_page?(posts_path)}" %>
-    <%= link_to 'ログイン', new_user_session_path, class: "text-decoration-none hover-effect mx-3 #{'active' if current_page?(new_user_session_path)}" %>
+    <%= link_to 'user一覧', users_path, class: "header-link text-decoration-none hover-effect mx-3 #{'active' if current_page?(users_path)}" %>
+    <%= link_to 'post一覧', posts_path, class: "header-link text-decoration-none hover-effect mx-3 #{'active' if current_page?(posts_path)}" %>
+    <%= link_to 'ログイン', new_user_session_path, class: "header-link text-decoration-none hover-effect mx-3 #{'active' if current_page?(new_user_session_path)}" %>
   <% end %>
 </div>
   </div>

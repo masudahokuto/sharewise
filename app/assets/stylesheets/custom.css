@@ -9,16 +9,22 @@
     color: #8B4513;
 }
 
-/* アクティブなリンクのスタイル */
+.header-link {
+  font-size: 20px; 
+  text-decoration: none;
+}
+
+/* アクティブ時のリンク */
 .active {
-    color: #8B4513; /* 茶色 */
-    font-size: 25px;
-    font-weight: bold;
+  color: #8B4513; /* 茶色 */
+  font-size: 30px; /* アクティブ時のサイズ */
+  font-weight: bold;
+  text-decoration: none;
 }
 
 .custom-header {
     background-color: #8FBC8F;
-    height: 60px;
+    height: 100px;
     display: flex;
     align-items: center;
 }

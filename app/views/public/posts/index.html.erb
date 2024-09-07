@@ -10,17 +10,17 @@
       <% if @posts.any? %>
         <% @posts.each do |post| %>
           <div class="post-link">
+            <!-- 投稿の表示 -->
             <div class="post-row d-flex mb-3">
               <!-- ユーザー情報 -->
               <div class="col-md-2 d-flex flex-column">
-                <%= render 'public/users/index_user_card', user: post.user %> <!-- ユーザー情報の表示 -->
+                <%= render 'public/users/index_user_card', user: post.user %>
               </div>
 
               <!-- 投稿内容と画像部分 -->
               <div class="col-md-10 d-flex">
-                <!-- 本文の列 -->
                 <div class="col-md-7">
-                  <%= link_to post_path(post) do %>
+                  <%= link_to post_path(post), style: 'text-decoration: none;' do %>
                     <div class="d-flex flex-column">
                       <div class="mb-3">
                         <p><%= simple_format(post.body) %></p>
@@ -28,8 +28,6 @@
                     </div>
                   <% end %>
                 </div>
-
-                <!-- 画像の列 -->
                 <div class="col-md-5 d-flex flex-column align-items-end">
                   <% post.images.each do |image| %>
                     <div class="mb-3">
@@ -44,14 +42,9 @@
       <% else %>
         <p>投稿がありません。</p>
       <% end %>
-      <!-- ページネーションのリンク -->
-      <div class="pagination">
+      <div id="pagination">
         <%= paginate @posts %>
       </div>
     </div>
   </div>
 </div>
-
-<%= link_to 'ユーザー一覧', users_path %> <!-- ユーザー一覧へのリンク -->
-<%= link_to '新しい投稿を作成', new_post_path %> <!-- 新しい投稿を作成するリンク -->
-<%= link_to "top", root_path %> <!-- トップページへのリンク -->

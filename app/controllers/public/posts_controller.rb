@@ -3,6 +3,7 @@ class Public::PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
 
   def new
+    @user = current_user
     @post = Post.new
   end
 
@@ -18,7 +19,7 @@ class Public::PostsController < ApplicationController
 
   def index
     @current_user = current_user
-    @posts = Post.page(params[:page]).per(10)
+    @posts = Post.order(created_at: :desc).page(params[:page]).per(2)
   end
 
   def show

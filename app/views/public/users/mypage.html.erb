@@ -33,10 +33,9 @@
       <% else %>
         <p>投稿はありません。</p>
       <% end %>
+      <div id="pagination">
+        <%= paginate @posts %>
+      </div>
     </div>
   </div>
 </div>
-<%= link_to '投稿一覧', posts_path %> <!-- 投稿一覧へのリンク -->
-<%= link_to '新しい投稿を作成', new_post_path %> <!-- 新しい投稿を作成するリンク -->
-<%= link_to "top", root_path %> <!-- トップページへのリンク -->
-<%= @user.is_active %>
