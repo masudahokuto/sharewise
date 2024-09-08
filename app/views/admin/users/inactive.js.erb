@@ -1,0 +1,2 @@
+$('#admin-users-list').html('');
+$('#inactive-user-list').html("<%= j render partial: 'inactive_user_list', locals: { users: @inactive_users } %>");

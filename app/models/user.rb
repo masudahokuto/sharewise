@@ -7,10 +7,10 @@ class User < ApplicationRecord
   enum gender: { male: 0, female: 1, other: 2 }
 
   # バリデーション設定
-  validates :last_name, presence: true, length: { maximum: 50 }
-  validates :first_name, presence: true, length: { maximum: 50 }
-  validates :nick_name, presence: true, length: { maximum: 50 }
-  validates :profile, length: { maximum: 100 }
+  validates :last_name, presence: true, length: { maximum: 10 }
+  validates :first_name, presence: true, length: { maximum: 10 }
+  validates :nick_name, presence: true, length: { maximum: 10 }
+  validates :profile, length: { maximum: 40 }
   validates :gender, presence: true, inclusion: { in: genders.keys }
   validates :birthday, presence: true
   validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
@@ -30,5 +30,14 @@ class User < ApplicationRecord
   # ユーザーの最新の投稿を取得
   def recent_post
     posts.order(created_at: :desc).first
+  end
+
+  # 年齢を計算するメソッド
+  def age
+    return if birthday.nil?
+    today = Date.today
+    age = today.year - birthday.year
+    age -= 1 if today < birthday + age.years # 誕生日がまだ来ていない場合は1歳引く
+    age
   end
 end
