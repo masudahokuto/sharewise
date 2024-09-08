@@ -1,11 +1,18 @@
-<!-- app/views/public/users/_user_card.html.erb -->
-<% if user.present? %>
-  <div class="user-card current-user">
-    <%= image_tag user.get_profile_image(150, 150), class: 'profile-image' %>
+<% if user %>
+  <div class="user-card <%= 'current-user' if user == @current_user %>">
+    <% if user.profile_image.attached? %>
+      <%= image_tag user.get_profile_image(150, 150), class: 'profile-image' %>
+    <% else %>
+      <%= image_tag 'no_image.jpg', size: '150x150', class: 'profile-image' %>
+    <% end %>
     <h5><%= user.nick_name %></h5>
+    <p>の投稿ページ</p>
     <p><%= user.profile %></p>
   </div>
 <% else %>
-
-  <p>ユーザー情報がありません</p>
+  <div class="user-card">
+    <%= image_tag 'no_image.jpg', size: '150x150', class: 'profile-image' %>
+    <h5>ゲスト</h5>
+    <p>投稿するにはログインが必要です</p>
+  </div>
 <% end %>

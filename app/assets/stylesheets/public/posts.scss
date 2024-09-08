@@ -1,3 +1,220 @@
-// Place all the styles related to the public/Posts controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: https://sass-lang.com/
+// ユーザーカード全般
+.show-row {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+}
+.user-card-link {
+  display: block;
+}
+
+// ユーザーカードリストのスタイル
+.user-card-list {
+  background-color: #C19A6B;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 15px; /* パディングを少し小さく */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  width: 200px; /* 幅を小さく */
+  height: 220px; /* 高さを小さく */
+  overflow: hidden; /* 内容がはみ出さないように */
+
+  img.profile-image {
+    border-radius: 50%; /* 画像を丸く表示 */
+    width: 120px; /* 固定サイズ */
+    height: 120px; /* 固定サイズ */
+    object-fit: cover; /* 画像の切り取り */
+    margin-bottom: 10px;
+  }
+
+  .user-card-name,
+  .user-card-profile {
+    font-size: 1.1em; /* フォントサイズ調整 */
+    margin: 0; /* マージンをリセット */
+    text-decoration: none; /* 下線を削除 */
+    color: black; /* 文字色 */
+  }
+
+  .user-card-profile {
+    font-size: 0.8em; /* フォントサイズ調整 */
+    overflow: hidden; /* 内容がカード外に出ないように */
+    text-overflow: ellipsis; /* 長いテキストを省略記号で表示 */
+    white-space: nowrap; /* テキストが折り返さないように */
+  }
+
+  &:hover {
+    background-color: #D2B48C;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    transform: scale(1.02);
+  }
+}
+
+
+// ユーザーカードのスタイル
+.user-card {
+  background-color: #C19A6B;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+
+  img {
+    border-radius: 50%; // 画像を丸くする
+    width: 150px; // 幅を固定
+    height: 150px; // 高さも同じに設定
+    object-fit: cover; // 画像が枠に収まるようにカバー
+    margin-bottom: 10px;
+  }
+
+  &.current-user {
+    img {
+      width: auto; // current-user では自動サイズに戻す
+      height: auto;
+    }
+  }
+
+  &:not(.current-user) {
+    // その他のユーザーのスタイルが必要であればここに追加
+  }
+}
+
+// 右側のユーザーリスト
+.col-md-10 {
+  .row {
+    margin: -15px; // カード間の余白を調整
+
+    .col-md-4 {
+      padding: 15px;
+
+      .user-card {
+        border: none;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+        &:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+      }
+    }
+  }
+}
+
+// 投稿リンクのスタイル
+.post-link {
+  display: block;          /* ブロック要素として表示 */
+  text-decoration: none;  /* 下線を削除 */
+  color: inherit;         /* 親要素の文字色を継承 */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* トランジションの追加 */
+
+  &:hover {
+    text-decoration: none;  /* ホバー時も下線を削除 */
+
+    .post-row {
+      background-color: #fafafa; /* ホバー時の背景色 */
+      border-color: #007bff;     /* ホバー時のボーダー色 */
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* ホバー時のシャドウ */
+      transform: scale(1.02);    /* ホバー時に少し拡大 */
+    }
+  }
+}
+
+// 投稿行のスタイル
+.post-row {
+  border: 1px solid #ddd;   /* デフォルトのボーダー色 */
+  border-radius: 10px;      /* ボーダーの角を丸くする */
+  padding: 15px;            /* 内側の余白を追加 */
+  margin-bottom: 15px;      /* 下の余白を追加 */
+  overflow-y: auto;
+  max-height: 300px;
+  background-color: #fff;   /* 背景色 */
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease; /* トランジションの追加 */
+
+  p {
+    margin: 0;
+    white-space: pre-wrap; /* 改行を維持 */
+    color: #333;           /* 文字色 */
+  }
+}
+
+// 画像のスタイル
+.img-fluid {
+  width: 100%;  // 画像の幅をコンテナに合わせる
+  height: 100%;  // 高さを自動調整
+}
+
+.no-image {
+  background-color: #FFC0CB;
+  border-radius: 8px;
+  padding: 20px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+
+  img.no-image {
+    width: 150px; /* 幅を固定 */
+    height: 150px; /* 高さも同じに設定 */
+    object-fit: cover; /* 画像が枠に収まるようにカバー */
+    margin-bottom: 10px; /* 下にマージンを設定 */
+  }
+}
+
+// .new-img{
+//   width: 330px;
+//   height: 280px;
+//   object-fit: cover;
+//   display: flex;
+//   flex-direction: column;
+//   align-items: flex-end;
+// }
+
+.post-text-area {
+  width: 100%;
+  height: 1000px;
+  box-sizing: border-box; /* Paddingとボーダーを含めて幅を設定 */
+}
+.form-control {
+  width: 300px;
+}
+
+// .post-image-field {
+//   width: 100%;
+//   display: flex;
+//   flex-direction: column;
+//   align-items: flex-end; /* これで右寄せにします */
+// }
+
+.new-img {
+  width: 100%;
+  height: 270px;
+  object-fit: cover;
+}
+
+.post-image {
+  width: 100%;
+  height: 270px;
+  object-fit: cover;  
+}
+// .image-element {
+//   margin-top: 10px; /* 画像間の右側にスペースを作る */
+//   margin-bottom: 10px; /* 画像間の下側にスペースを作る */
+
+//   align-items: flex-end;
+
+// }
+
+// .image-element img {
+//   display: block; /* 画像の下にスペースが入るのを防ぐ */
+
+//   align-items: flex-end;
+
+// }
+
+// .image-element input[type="file"] {
+//   margin-top: 40px; /* ファイル選択ボタンと画像プレビューの間にスペースを作る */
+// }

@@ -1,0 +1,43 @@
+/* app/assets/stylesheets/public/home.scss */
+.fa-book-atlas {
+  color: #004d00;
+}
+
+.fa-pencil {
+  color: #004d00;
+}
+
+.home-buttons .btn {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.home-buttons .btn:hover {
+  transform: translateY(-5px); /* 上に5px移動させる */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.8); /* 浮かせた感じのシャドウ */
+}
+
+.home-container {
+  background-color: #f8f9fa; /* 背景色 */
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 8px 8px rgba(0, 0, 0, 0.1);
+
+  .site-title {
+    font-size: 5rem; /* サイト名のフォントサイズを大きく設定 */
+    color: #8B4513;
+    margin-bottom: 1rem;
+    font-weight: bold; /* フォントを太くする */
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6); /* タイトルにシャドウ */
+  }
+
+  .site-description {
+    font-size: 1.25rem;
+    color: #6c757d;
+    margin-bottom: 2rem;
+  }
+
+  .home-buttons .btn {
+    font-size: 1.1rem;
+    padding: 0.75rem 1.5rem;
+  }
+}

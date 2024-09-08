@@ -1,9 +1,19 @@
-<!-- app/views/public/users/_user_card.html.erb -->
-<%= link_to user_path(user), class: 'user-card-link' do %>
-  <div class="d-flex mb-3 border rounded p-3">
-    <div class="user-card-list me-3 d-flex flex-column align-items-center">
-      <%= image_tag user.get_profile_image(100, 100), class: 'profile-image' %>
-      <h5 class="mt-2"><%= user.nick_name %></h5>
+<% if user == current_user %>
+  <%= link_to mypage_users_path, class: 'user-card-link', style: 'text-decoration: none;' do %>
+    <div class="d-flex mb-3 border rounded p-3">
+      <div class="user-card-list me-3 d-flex flex-column align-items-center">
+        <%= image_tag user.get_profile_image(100, 100), class: 'profile-image' %>
+        <h5 class="mt-2" style="color: black;"><%= user.nick_name %></h5>
+      </div>
     </div>
-  </div>
+  <% end %>
+<% else %>
+  <%= link_to user_path(user), class: 'user-card-link', style: 'text-decoration: none;' do %>
+    <div class="d-flex mb-3 border rounded p-3">
+      <div class="user-card-list me-3 d-flex flex-column align-items-center">
+        <%= image_tag user.get_profile_image(100, 100), class: 'profile-image' %>
+        <h5 class="mt-2" style="color: black;"><%= user.nick_name %></h5>
+      </div>
+    </div>
+  <% end %>
 <% end %>

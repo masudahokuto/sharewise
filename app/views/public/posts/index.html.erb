@@ -1,0 +1,51 @@
+<%= stylesheet_link_tag 'public/posts', media: 'all' %>
+<div class="container-fluid">
+  <div class="row d-flex">
+    <div class="col-2 d-flex flex-column align-items-center">
+      <%= render 'public/users/user_card', user: @current_user %>
+      <% if @current_user %>
+        <%= link_to 'プロフィール編集', edit_user_path(@current_user), class: 'btn btn-primary mt-3' %>
+      <% end %>
+    </div>
+    <div class="col-10">
+    <!-- 投稿一覧 -->
+      <% if @posts.any? %>
+        <% @posts.each do |post| %>
+          <div class="post-link">
+            <!-- 投稿の表示 -->
+            <div class="post-row d-flex mb-3">
+              <!-- ユーザー情報 -->
+              <div class="col-md-2 d-flex flex-column">
+                <%= render 'public/users/index_user_card', user: post.user %>
+              </div>
+              <!-- 投稿内容と画像部分 -->
+              <div class="col-md-10 d-flex">
+                <div class="col-md-7">
+                  <%= link_to post_path(post), style: 'text-decoration: none;' do %>
+                    <div class="d-flex flex-column">
+                      <div class="mb-3">
+                        <p><%= simple_format(post.body) %></p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-5 d-flex flex-column align-items-end">
+                    <% post.images.each do |image| %>
+                      <div class="post-image mb-3">
+                        <%= image_tag image, class: "img-fluid", alt: "Post Image" %>
+                      </div>
+                    <% end %>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      <% else %>
+        <p>投稿がありません。</p>
+      <% end %>
+      <div id="pagination">
+        <%= paginate @posts %>
+      </div>
+    </div>
+  </div>
+</div>

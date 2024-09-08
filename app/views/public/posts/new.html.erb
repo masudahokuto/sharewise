@@ -1,33 +1,36 @@
-<%= form_with model: @post, local: true do |form| %>
-  <div class="field">
-    <%= form.label :body %>
-    <%= form.text_area :body %>
-  </div>
-
-  <div id="image_fields">
-    <div class="field">
-      <%= form.label :images, "Images" %>
-      <%= form.file_field :images, multiple: true %>
+<%= stylesheet_link_tag 'public/posts', media: 'all' %>
+<div class="container-fluid">
+  <div class="row d-flex justify-content-center">
+    <div class="col-2 d-flex flex-column align-items-center">
+      <%= render 'public/users/user_card', user: @user %>
+    </div>
+    <!-- 本文を表示する部分 -->
+    <div class="col-10">
+      <%= form_with model: @post, local: true, html: { id: 'post_form', enctype: 'multipart/form-data' } do |f| %>
+        <div class="row d-flex mb-3">
+          <div class="field col-md-8">
+            <%= f.label :投稿内容を入力してください %>
+            <%= f.text_area :body, class: "post-text-area" %>
+          </div>
+          <div class="col-md-4 mt-4">
+            <div class="text-right">
+              <button id="add_image_button" type="button" class="image-add-btn btn-secondary">画像を追加する</button>
+            </div>
+            <div class="post-image-field">
+              <div class="file-field_0 mb-3">
+                <input name="post[images][]" type="file" class="post_image" aria-num="0" onchange="fileSelect(this);">
+                <img id="preview_area_0">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row d-flex justify-content-center">
+          <div class="col-12 text-center">
+            <%= f.submit "Create Post", class: 'btn btn-primary' %>
+          </div>
+        </div>
+      <% end %>
     </div>
   </div>
+</div>
 
-  <button type="button" id="add_image_button">Add more images</button>
-
-  <div class="actions">
-    <%= form.submit "Create Post" %>
-  </div>
-<% end %>
-
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    const addImageButton = document.getElementById('add_image_button');
-    const imageFields = document.getElementById('image_fields');
-
-    addImageButton.addEventListener('click', function() {
-      const newField = document.createElement('div');
-      newField.classList.add('field');
-      newField.innerHTML = `<input type="file" name="post[images][]" multiple="multiple" />`;
-      imageFields.appendChild(newField);
-    });
-  });
-</script>

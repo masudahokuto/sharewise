@@ -22,7 +22,7 @@
               <!-- 画像の列（右寄せ） -->
               <div class="col-4 d-flex flex-column align-items-end">
                 <% post.images.each do |image| %>
-                  <div class="mb-3 text-right">
+                  <div class="post-image mb-3">
                     <%= image_tag image, class: "img-fluid", alt: "Post Image" %>
                   </div>
                 <% end %>
@@ -33,10 +33,9 @@
       <% else %>
         <p>投稿はありません。</p>
       <% end %>
+      <div id="pagination">
+        <%= paginate @posts %>
+      </div>
     </div>
   </div>
 </div>
-<%= link_to '投稿一覧', posts_path %> <!-- 投稿一覧へのリンク -->
-<%= link_to '新しい投稿を作成', new_post_path %> <!-- 新しい投稿を作成するリンク -->
-<%= link_to "top", root_path %> <!-- トップページへのリンク -->
-<%= @user.is_active %>

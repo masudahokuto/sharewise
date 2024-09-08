@@ -1,20 +1,20 @@
 class Public::UsersController < ApplicationController
-  before_action :authenticate_user!, except: [:index]  # ユーザーがログインしていることを確認
+  before_action :authenticate_user!, except: [:index, :show]  # ユーザーがログインしていることを確認
 
   def mypage
     @user = current_user
-    @posts = @user.posts
+    @posts = @user.posts.page(params[:page]).per(10)
   end
 
   def index
     @current_user = current_user
-    @users = User.where.not(id: @current_user.id) if @current_user
-    @users ||= User.all # ログインしていない場合は全ユーザーを取得
+    @users = User.where.not(id: @current_user.id).page(params[:page]).per(10) if @current_user
+    @users ||= User.all.page(params[:page]).per(10) # ログインしていない場合は全ユーザーを取得
   end
 
   def show
     @user = User.find(params[:id])
-    @posts = @user.posts
+    @posts = @user.posts.page(params[:page]).per(10)
   end
 
   def edit
