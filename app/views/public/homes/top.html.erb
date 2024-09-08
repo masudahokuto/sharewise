@@ -1,7 +1,13 @@
-<h1>Public::Homes#top</h1>
-<p>Find me in app/views/public/homes/top.html.erb</p>
-<!-- app/views/public/home/index.html.erb -->
-<h1>ホームトップ</h1>
-<% if user_signed_in? %>
-  <%= button_to 'ログアウト', destroy_user_session_path, method: :delete, class: 'btn btn-danger' %>
-<% end %>
+<%= stylesheet_link_tag 'homes', media: 'all' %>
+<div class="home-container text-center">
+  <h1 class="site-title">
+    <i class="fa-solid fa-book-atlas"></i>
+    ShareWise
+    <i class="fa-solid fa-pencil"></i>
+  </h1>
+  <div class="home-buttons text-center mt-4">
+    <%= link_to '新規登録', new_user_registration_path, class: 'btn btn-primary my-4 w-50' %>
+    <%= link_to 'ログイン', new_user_session_path, class: 'btn btn-success my-4 w-50' %>
+    <%= link_to 'ゲストログイン', posts_path, class: 'btn btn-secondary my-4 w-50' %>
+  </div>
+</div>

@@ -3,7 +3,9 @@
   <div class="row d-flex">
     <div class="col-2 d-flex flex-column align-items-center">
       <%= render 'public/users/user_card', user: @current_user %>
-      <%= link_to 'プロフィール編集', edit_user_path(@current_user), class: 'btn btn-primary mt-3' %>
+      <% if @current_user %>
+        <%= link_to 'プロフィール編集', edit_user_path(@current_user), class: 'btn btn-primary mt-3' %>
+      <% end %>
     </div>
     <div class="col-10">
     <!-- 投稿一覧 -->
@@ -16,7 +18,6 @@
               <div class="col-md-2 d-flex flex-column">
                 <%= render 'public/users/index_user_card', user: post.user %>
               </div>
-
               <!-- 投稿内容と画像部分 -->
               <div class="col-md-10 d-flex">
                 <div class="col-md-7">
@@ -26,13 +27,13 @@
                         <p><%= simple_format(post.body) %></p>
                       </div>
                     </div>
-                  <% end %>
-                </div>
-                <div class="col-md-5 d-flex flex-column align-items-end">
-                  <% post.images.each do |image| %>
-                    <div class="mb-3">
-                      <%= image_tag image, class: "img-fluid", alt: "Post Image" %>
-                    </div>
+                  </div>
+                  <div class="col-md-5 d-flex flex-column align-items-end">
+                    <% post.images.each do |image| %>
+                      <div class="post-image mb-3">
+                        <%= image_tag image, class: "img-fluid", alt: "Post Image" %>
+                      </div>
+                    <% end %>
                   <% end %>
                 </div>
               </div>

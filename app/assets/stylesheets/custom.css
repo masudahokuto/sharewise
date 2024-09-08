@@ -1,4 +1,35 @@
 /* 非アクティブ時のデフォルトスタイル */
+/* home iconのデフォルトスタイル */
+/* アイコンとShareWise文字のデフォルトスタイル */
+.home-icon {
+    font-size: 30px;
+    font-weight: bold;
+}
+.home-icon i, .home-icon .site-title {
+    color: #fff; /* デフォルトで白色 */
+    transition: color 0.3s ease; /* 色のスムーズな変化 */
+}
+
+.home-icon .site-title {
+    font-family: 'Lobster', cursive; /* おしゃれなフォント設定 */
+    font-size: 30px; /* 文字サイズ */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* 影をつける */
+}
+
+/* ホバー時のスタイル */
+.home-icon:hover i, .home-icon:hover .site-title {
+    color: #8B4513; /* ホバー時に茶色に変わる */
+}
+
+/* "ShareWise"の文字スタイル */
+.site-title {
+    font-family: 'Lobster', cursive; /* Google Fontsで指定したフォント */
+    font-size: 36px; /* サイズ調整 */
+    color: #fff; /* 白色の文字 */
+    margin: 0;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* 影をつけておしゃれに */
+}
+
 .hover-effect {
     color: #f8f9fa;
     transition: color 0.3s ease;
@@ -10,7 +41,7 @@
 }
 
 .header-link {
-  font-size: 20px; 
+  font-size: 20px;
   text-decoration: none;
 }
 
@@ -36,15 +67,6 @@
     display: flex;
     height: 100%;
 }
-
-/*.hover-effect {*/
-/*    color: #f8f9fa;*/
-    /*transition: color 0.3s ease;*/
-/*}*/
-
-/*.hover-effect:hover {*/
-    /*color: #8B4513; */
-/*}*/
 
 .fa-search {
     color: white;
