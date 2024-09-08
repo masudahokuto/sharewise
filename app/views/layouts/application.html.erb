@@ -20,7 +20,7 @@
     <!-- アイコンとShareWiseの文字部分 -->
     <div class="home-icon d-flex align-items-center">
       <% if admin_signed_in? %>
-        <%= link_to admin_path, class: (current_page?(admin_path) ? 'text-decoration-none active' : 'text-decoration-none') do %>
+        <%= link_to admin_users_path, class: (current_page?(admin_path) ? 'text-decoration-none active' : 'text-decoration-none') do %>
           <i class="fa-solid fa-house"></i>
           <span class="site-title">ShareWise</span> <!-- ホームアイコンの右にテキストを追加 -->
         <% end %>

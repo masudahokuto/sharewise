@@ -6,13 +6,13 @@
       <%= image_tag 'no_image.jpg', size: '150x150', class: 'profile-image' %>
     <% end %>
     <h5><%= user.nick_name %></h5>
-    <p>の投稿ページ</p>
-    <p><%= user.profile %></p>
+    <p class="user-profile"><%= user.profile %></p>
   </div>
 <% else %>
   <div class="user-card">
     <%= image_tag 'no_image.jpg', size: '150x150', class: 'profile-image' %>
     <h5>ゲスト</h5>
-    <p>投稿するにはログインが必要です</p>
+    <p>投稿するには</br>
+    <p>ログインが必要です</p>
   </div>
 <% end %>

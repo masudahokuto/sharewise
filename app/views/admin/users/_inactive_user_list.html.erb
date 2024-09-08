@@ -1,0 +1,9 @@
+<div class="row">
+  <% @inactive_users.each_slice(5) do |user_slice| %> <!-- 5つごとに行を作成 -->
+    <% user_slice.each do |user| %>
+      <div class="col-12">
+        <%= render 'user_card_admin', user: user %>
+      </div>
+    <% end %>
+  <% end %>
+</div>

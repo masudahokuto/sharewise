@@ -16,7 +16,12 @@ Rails.application.routes.draw do
 
   # Admin側のルーティング
   namespace :admin do
-    resources :users, only: %i[index show update]
+    resources :users, only: %i[index show update] do
+      collection do
+        get :age_distribution # 年齢分布のデータを取得
+        get 'inactive' # 非アクティブユーザー表示用のルートを追加
+      end
+    end
     resources :posts, only: %i[index show destroy]
     get "/" => "homes#top"
     get '/about', to:'homes#about', as:'about'

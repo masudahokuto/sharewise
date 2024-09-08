@@ -73,8 +73,8 @@
 
   &.current-user {
     img {
-      width: auto; // current-user では自動サイズに戻す
-      height: auto;
+      width: 150px; // current-user では自動サイズに戻す
+      height: 150px;
     }
   }
 
@@ -152,7 +152,6 @@
 .no-image {
   background-color: #FFC0CB;
   border-radius: 8px;
-  padding: 20px;
   text-align: center;
   transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
 
@@ -198,7 +197,7 @@
 .post-image {
   width: 100%;
   height: 270px;
-  object-fit: cover;  
+  object-fit: cover;
 }
 // .image-element {
 //   margin-top: 10px; /* 画像間の右側にスペースを作る */
