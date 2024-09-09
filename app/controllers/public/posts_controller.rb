@@ -1,7 +1,6 @@
 class Public::PostsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
-  before_action :set_post, only: [:show, :edit, :update, :destroy]
-
+  before_action :correct_user, only: [:edit, :update]
   def new
     @user = current_user
     @post = Post.new
@@ -10,7 +9,7 @@ class Public::PostsController < ApplicationController
   def create
     @post = current_user.posts.new(post_params) # current_user を使用して投稿を作成
     if @post.save
-      redirect_to mypage_users_path, notice: '投稿に成功しました'
+      redirect_to mypage_users_path
     else
       flash[:alert] = '投稿に失敗しました'
       render :new
@@ -19,19 +18,25 @@ class Public::PostsController < ApplicationController
 
   def index
     @current_user = current_user
-    @posts = Post.order(created_at: :desc).page(params[:page]).per(10)
+    @posts = Post.active_user_posts.order(created_at: :desc).page(params[:page]).per(10)
   end
 
   def show
-    @post = Post.find(params[:id])  # Postを検索
-    @user = @post.user              # Postの所有者であるUserを取得
+    @post = Post.find_by(id: params[:id])
+    if @post.nil? || !@post.user.is_active
+      redirect_to posts_path, alert: '投稿が見つからないか、ユーザーが退会しています。'
+    else
+      @user = @post.user
+      @post_comment = PostComment.new
+    end
   end
 
   def edit
-    # @post は before_action で設定されている
+    @post = Post.find(params[:id])
   end
 
   def update
+    @post = Post.find(params[:id])
     if @post.update(post_params)
       redirect_to @post, notice: '編集に成功しました'
     else
@@ -40,14 +45,19 @@ class Public::PostsController < ApplicationController
   end
 
   def destroy
+    @post = Post.find(params[:id])
     @post.destroy
     redirect_back(fallback_location: root_path)
   end
 
   private
 
-  def set_post
+  # 自分以外のuserがedit、update、destroy出来ないようにする
+  def correct_user
     @post = Post.find(params[:id])
+    unless @post.user == current_user
+      redirect_to posts_path
+    end
   end
 
   def post_params

@@ -8,19 +8,28 @@ class Public::UsersController < ApplicationController
 
   def index
     @current_user = current_user
-    @users = User.where.not(id: @current_user.id).page(params[:page]).per(10) if @current_user
-    @users ||= User.all.page(params[:page]).per(10) # ログインしていない場合は全ユーザーを取得
+    if @current_user
+      @users = User.where(is_active: true).where.not(id: @current_user.id).page(params[:page]).per(10)
+    else
+      @users = User.where(is_active: true).page(params[:page]).per(10) # ログインしていない場合もアクティブなユーザーのみを表示
+    end
   end
 
   def show
     @user = User.find(params[:id])
-    @posts = @user.posts.page(params[:page]).per(10)
+    if @user.is_active == false
+      redirect_to users_path
+    else
+      @posts = @user.posts.page(params[:page]).per(10)
+    end
   end
 
   def edit
     @user = User.find(params[:id])
     # ユーザーが自分のプロフィールを編集できるかを確認する
-    redirect_to mypage_path unless @user == current_user
+    if @user != current_user
+      redirect_to users_path # 適切なリダイレクト先に変更可能
+    end
   end
 
   def update

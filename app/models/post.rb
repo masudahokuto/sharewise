@@ -1,10 +1,16 @@
 class Post < ApplicationRecord
   belongs_to :user
+  has_many :post_comments, dependent: :destroy
+
   has_many_attached :images  # 複数画像
+
   validates :body, presence: true
   validate :images_format
   validate :image_length
   private
+
+  # 退会したユーザーのコメントを除外
+  scope :active_user_posts, -> { joins(:user).where(users: { is_active: true }) }
 
   def images_format
     if images.attached?
