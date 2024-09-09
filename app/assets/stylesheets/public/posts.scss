@@ -1,10 +1,4 @@
 // ユーザーカード全般
-.show-row {
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  background-color: #ffffff;
-}
 .user-card-link {
   display: block;
 }
@@ -17,10 +11,17 @@
   padding: 15px; /* パディングを少し小さく */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   text-align: center;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  width: 200px; /* 幅を小さく */
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  width: 170px; /* 幅を小さく */
   height: 220px; /* 高さを小さく */
   overflow: hidden; /* 内容がはみ出さないように */
+
+  &:hover {
+    background-color: #D2B48C;
+    border-color: #007bff; /* ホバー時の枠線色 */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    transform: scale(1.02);
+  }
 
   img.profile-image {
     border-radius: 50%; /* 画像を丸く表示 */
@@ -44,14 +45,7 @@
     text-overflow: ellipsis; /* 長いテキストを省略記号で表示 */
     white-space: nowrap; /* テキストが折り返さないように */
   }
-
-  &:hover {
-    background-color: #D2B48C;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    transform: scale(1.02);
-  }
 }
-
 
 // ユーザーカードのスタイル
 .user-card {
@@ -61,19 +55,19 @@
   padding: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   text-align: center;
-  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 
   img {
-    border-radius: 50%; // 画像を丸くする
-    width: 150px; // 幅を固定
-    height: 150px; // 高さも同じに設定
-    object-fit: cover; // 画像が枠に収まるようにカバー
+    border-radius: 50%; /* 画像を丸くする */
+    width: 150px; /* 幅を固定 */
+    height: 150px; /* 高さも同じに設定 */
+    object-fit: cover; /* 画像が枠に収まるようにカバー */
     margin-bottom: 10px;
   }
 
   &.current-user {
     img {
-      width: 150px; // current-user では自動サイズに戻す
+      width: 150px; /* current-user では自動サイズに戻す */
       height: 150px;
     }
   }
@@ -86,18 +80,19 @@
 // 右側のユーザーリスト
 .col-md-10 {
   .row {
-    margin: -15px; // カード間の余白を調整
+    margin: -15px; /* カード間の余白を調整 */
 
     .col-md-4 {
       padding: 15px;
 
       .user-card {
-        border: none;
+        border: 1px solid #ddd;
         border-radius: 8px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 
         &:hover {
+          border-color: #007bff; /* ホバー時の枠線色 */
           transform: translateY(-5px);
           box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
         }
@@ -111,7 +106,7 @@
   display: block;          /* ブロック要素として表示 */
   text-decoration: none;  /* 下線を削除 */
   color: inherit;         /* 親要素の文字色を継承 */
-  transition: transform 0.3s ease, box-shadow 0.3s ease; /* トランジションの追加 */
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease; /* トランジションの追加 */
 
   &:hover {
     text-decoration: none;  /* ホバー時も下線を削除 */
@@ -128,7 +123,7 @@
 // 投稿行のスタイル
 .post-row {
   border: 1px solid #ddd;   /* デフォルトのボーダー色 */
-  border-radius: 10px;      /* ボーダーの角を丸くする */
+  border-radius: 8px;      /* ボーダーの角を丸くする */
   padding: 15px;            /* 内側の余白を追加 */
   margin-bottom: 15px;      /* 下の余白を追加 */
   overflow-y: auto;
@@ -140,6 +135,12 @@
     margin: 0;
     white-space: pre-wrap; /* 改行を維持 */
     color: #333;           /* 文字色 */
+  }
+
+  &:hover {
+    border-color: #007bff; /* ホバー時の背景色 */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* ホバー時のシャドウ */
+    transform: scale(1.02); /* ホバー時に少し拡大 */
   }
 }
 
@@ -153,30 +154,20 @@
   background-color: #FFC0CB;
   border-radius: 8px;
   text-align: center;
-  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
 
   img.no-image {
+    // border-radius: 80%; /* 画像を丸く表示 */
     width: 150px; /* 幅を固定 */
     height: 150px; /* 高さも同じに設定 */
     object-fit: cover; /* 画像が枠に収まるようにカバー */
     margin-bottom: 10px; /* 下にマージンを設定 */
   }
-}
 
-.post-text-area {
-  width: 100%;
-  height: 1000px;
-  box-sizing: border-box;
-}
-.form-control {
-  width: 300px;
-}
-
-
-.new-img {
-  width: 100%;
-  height: 270px;
-  object-fit: cover;
+  &:hover {
+    border-color: #007bff; /* ホバー時の枠線色 */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* ホバー時のシャドウ */
+  }
 }
 
 .post-image {
@@ -185,13 +176,37 @@
   object-fit: cover;
 }
 
+.index_card_image {
+  border: none !important;
+  padding-top: 25px;
+}
+
+.post-text-area {
+  width: 100%;
+  height: 1000px;
+}
+
+.show-row {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+}
+
+.comment-field {
+  width: 100%;
+}
+
 .comment-table {
   width: 100%;
   background-color: #ffffff;
   border-collapse: collapse;
-  border-radius: 8px;
-}
 
+  .mt-2 {
+    max-width: 280px;
+    overflow-wrap: break-word;
+  }
+}
 .comment-field {
   width: 100%;
 }
@@ -224,4 +239,9 @@
 .comment-nick_name:hover {
   color: #007bff;
   cursor: pointer;
+}
+
+.new-img {
+  width: 100%;
+  height: 280px;
 }

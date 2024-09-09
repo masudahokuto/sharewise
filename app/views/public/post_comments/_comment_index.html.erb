@@ -2,33 +2,33 @@
 <table class="comment-table">
   <tr>
     <% post.post_comments.active_user_comments.each do |post_comment| %>
-      <th class="align-middle-link">
+      <th class="align-middle-link" style="border-top: 1px solid #bbb;">
         <%= link_to user_path(post_comment.user) do %>
           <%= image_tag post_comment.user.get_profile_image(50, 50), class: 'comment-image' %>
         <% end %>
       </th>
-      <th class="align-middle">
+      <th class="align-middle" style="border-top: 1px solid #bbb;">
         <%= link_to user_path(post_comment.user), class: 'd-block no-underline' do %>
           <div class="comment-nick_name"><%= post_comment.user.nick_name %></div>
         <% end %>
       </th>
-      <th></th>
+      <td class="align-middle" style="border-top: 1px solid #bbb;">
+        <% if post_comment.user == current_user %>
+          <div class="mt-2">
+            <%= link_to "削除", post_post_comment_path(post, post_comment), method: :delete, class: "btn btn-sm btn-danger", style: "white-space: nowrap;", data: { confirm: "コメントを削除しますか？" } %>
+          </div>
+        <% end %>
+      </td>
     </tr>
   <tbody>
     <tr>
-      <td></td>
-      <td class="comment-field">
+      <td style="border-bottom: 1px solid #bbb;"></td>
+      <td class="comment-field" style="border-bottom: 1px solid #bbb;">
         <div class="mt-2">
           <%= post_comment.comment %>
         </div>
       </td>
-      <td class="align-middle">
-        <% if post_comment.user == current_user %>
-          <div class="mt-2">
-            <%= link_to "Destroy", post_post_comment_path(post, post_comment), method: :delete, class: "btn btn-sm btn-danger", data: { confirm: "本当に削除しますか？" } %>
-          </div>
-        <% end %>
-      </td>
+      <td style="border-bottom: 1px solid #bbb;"></td>
     </tr>
     <tr>
       <td class="table-blank">&nbsp;</td><td class="table-blank">&nbsp;</td><td class="table-blank">&nbsp;</td>

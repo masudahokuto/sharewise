@@ -21,15 +21,8 @@
             <button id="add_image_button" type="button" class="image-add-btn btn-secondary">画像を追加する</button>
           </div>
           <div class="post-image-field">
-            <%# @post.images.each_with_index do |image, index| %>
             <div class="file-field_0 mb-3">
-                <!-- 既存の画像を表示 -->
-                <%# image_tag image.variant(resize: "150x150").processed, alt: "Image", class: "img-fluid", id: "preview_area_#{index}" %>
-                <!-- 画像フィールド -->
-                <%# f.file_field :images, multiple: true, aria: { num: index }, class: 'post_image' %>
-              <!--</div>-->
-            <%# end %>
-            <!-- 新規画像を追加するためのフィールド -->
+              <!-- 画像を追加するためのフィールド -->
               <input name="post[images][]" type="file" class="post_image" aria-num="0" onchange="fileSelect(this);" multiple>
               <img id="preview_area_0">
             </div>
