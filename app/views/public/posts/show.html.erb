@@ -7,7 +7,9 @@
     <!-- 本文を表示する部分 -->
     <div class="col-md-7">
       <div class="text-center my-3">
-        <%= link_to '投稿を編集', edit_post_path(@post), class: 'btn btn-primary w-50' %>
+        <% if current_user == @post.user %>
+          <%= link_to '投稿を編集', edit_post_path(@post), class: 'btn btn-success w-50' %>
+        <% end %>
       </div>
       <div class="show-row row d-flex mb-3">
         <div class="col-md-8 d-flex flex-column">
@@ -23,7 +25,15 @@
           </div>
         </div>
       </div>
+      <div class="text-center my-3">
+        <% if current_user == @post.user %>
+          <%= link_to '投稿を削除', post_path(@post), method: :delete, data: { confirm: '本当に削除してもよろしいですか？' }, class: 'btn btn-danger w-50' %>
+        <% end %>
+      </div>
     </div>
-    <div class="col-md-3">tst</div>
+    <div class="col-md-3">
+      <%= render "public/post_comments/comment_index", post: @post, post_comment: @post_comment %>
+      <%= render "public/post_comments/comment_form", post: @post, post_comment: @post_comment %>
+    </div>
   </div>
 </div>

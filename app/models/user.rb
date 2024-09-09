@@ -3,6 +3,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   has_many :posts, dependent: :destroy
+  has_many :post_comments, dependent: :destroy
   # Genderのenum設定
   enum gender: { male: 0, female: 1, other: 2 }
 
