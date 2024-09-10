@@ -1,7 +1,7 @@
 <!-- app/views/public/post_comments/_comment_index.html.erb -->
 <table class="comment-table">
   <tbody>
-    <% post.post_comments.active_user_comments.each do |post_comment| %>
+    <% post_comments.each do |post_comment| %>
       <tr>
         <th class="align-middle-link" style="border-top: 1px solid #bbb;">
           <% if post_comment.user == current_user %>

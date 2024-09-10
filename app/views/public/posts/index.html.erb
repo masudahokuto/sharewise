@@ -1,16 +1,19 @@
 <%= stylesheet_link_tag 'public/posts', media: 'all' %>
 <div class="container-fluid">
-  <div class="row d-flex">
-    <div class="col-2 d-flex flex-column align-items-center">
+  <div class="row d-flex justify-content-center">
+    <div class="col-md-2 d-flex flex-column align-items-center">
       <%= render 'public/users/user_card', user: @current_user %>
       <% if @current_user %>
         <%= link_to 'プロフィール編集', edit_user_path(@current_user), class: 'btn btn-primary mt-3' %>
       <% end %>
     </div>
-    <div class="col-10">
+    <div class="col-md-9">
       <!-- 投稿一覧 -->
       <% if @posts.any? %>
         <% @posts.each do |post| %>
+          <div class="text-center d-flex justify-content-end align-items-center">
+            <%= render 'public/favorites/like', post: post %>
+          </div>
           <div class="post-row post-link d-flex">
             <!-- ユーザー情報 -->
             <div class="user-card-link col-md-2 d-flex flex-column">

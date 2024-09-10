@@ -1,6 +1,6 @@
 <%= stylesheet_link_tag 'public/users', media: 'all' %>
 <div class="container-fluid">
-  <div class="row d-flex">
+  <div class="row d-flex justify-content-center">
     <div class="col-md-2 d-flex flex-column align-items-center">
       <%= render 'user_card', user: @user, followings_count: @followings_count, followers_count: @followers_count %>
 
@@ -12,9 +12,12 @@
         <% end %>
       <% end %>
     </div>
-    <div class="col-md-10">
+    <div class="col-md-9">
       <% if @posts.any? %>
         <% @posts.each do |post| %>
+          <div class="text-center d-flex justify-content-end align-items-center">
+            <%= render 'public/favorites/like', post: post %>
+          </div>
           <%= link_to post_path(post), class: "post-link" do %>
             <div class="post-row d-flex mb-3">
               <!-- 本文の列 -->
