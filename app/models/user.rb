@@ -5,6 +5,7 @@ class User < ApplicationRecord
   has_many :posts, dependent: :destroy
   has_many :post_comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
+  has_many :liked_posts, through: :favorites, source: :post #Favoriteモデルを通じて関連するPostモデルのレコードを取得
 
   # フォローフォロワーここから-----------------------------------------------------------
   has_many :relationships, foreign_key: 'follower_id', dependent: :destroy
@@ -63,5 +64,10 @@ class User < ApplicationRecord
     age = today.year - birthday.year
     age -= 1 if today < birthday + age.years # 誕生日がまだ来ていない場合は1歳引く
     age
+  end
+
+  # ユーザーが特定のポストをいいねしているかを判定
+  def favorited_by?(post)
+    favorites.exists?(post_id: post.id)
   end
 end

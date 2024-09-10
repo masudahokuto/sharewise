@@ -2,6 +2,8 @@ class Post < ApplicationRecord
   belongs_to :user
   has_many :post_comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
+  #Postがfavoritesを介してUserに関連付けられfavorited_by_usersメソッドを使用してポストをいいねしたユーザーを取得
+  has_many :favorited_by_users, through: :favorites, source: :user
 
   has_many_attached :images  # 複数画像
 
@@ -34,4 +36,9 @@ class Post < ApplicationRecord
   def favorited_by?(user)
     favorites.exists?(user_id: user.id)
   end
+
+  # ユーザーがいいねした投稿を取得するスコープ
+  scope :liked_by, -> (user) {
+    joins(:favorites).where(favorites: { user_id: user.id })
+  }
 end

@@ -1,9 +1,12 @@
-<%= link_to post_favorite_path(post), method: post.favorited_by?(current_user) ? :delete : :post, remote: true, class: 'favorite-link' do %>
-  <% if post.favorited_by?(current_user) %>
-    <i class="fa-solid fa-heart" style="color: red;"></i>
-    <span style="color: red; font-weight: bold"><%= post.favorites.count %></span>
+<div id="like-button-<%= post.id %>">
+  <% if current_user && post.favorited_by?(current_user) %>
+    <%= link_to post_favorite_path(post), method: :delete, remote: true, style: "color: red; text-decoration: none;" do %>
+      <i class="fas fa-heart"></i> いいね <%= post.favorites.count %>
+    <% end %>
   <% else %>
-    <i class="fa-regular fa-heart" style="color: red;"></i>
-    <span style="color: red; font-weight: bold"><%= post.favorites.count %></span>
+    <%= link_to post_favorite_path(post), method: :post, remote: true, style: "color: blue; text-decoration: none;" do %>
+      <i class="far fa-heart"></i> いいね <%= post.favorites.count %>
+    <% end %>
   <% end %>
-<% end %>
+</div>
+

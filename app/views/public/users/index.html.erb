@@ -14,7 +14,7 @@
           <% latest_post = user.posts.order(created_at: :desc).first %> <!-- 直近1件のポストを取得 -->
           <% if latest_post %>
             <div class="text-center d-flex justify-content-end align-items-center">
-              <%= render 'public/favorites/like', post: latest_post %>
+              <%= render 'public/favorites/like', post: latest_post, user: user %>
             </div>
             <div class="post-row d-flex mb-3">
               <!-- ユーザー情報 -->
