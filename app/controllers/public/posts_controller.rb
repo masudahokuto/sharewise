@@ -11,7 +11,6 @@ class Public::PostsController < ApplicationController
     if @post.save
       redirect_to mypage_users_path
     else
-      flash[:alert] = '投稿に失敗しました'
       render :new
     end
   end
@@ -22,11 +21,13 @@ class Public::PostsController < ApplicationController
   end
 
   def show
+    @current_user = current_user
     @post = Post.find_by(id: params[:id])
     @post_comments = @post.post_comments.active_user_comments.page(params[:page]).per(10)
     if @post.nil? || !@post.user.is_active
-      redirect_to posts_path, alert: '投稿が見つからないか、ユーザーが退会しています。'
+      redirect_to posts_path
     else
+      @current_user = current_user
       @user = @post.user
       @post_comment = PostComment.new
     end
@@ -40,7 +41,7 @@ class Public::PostsController < ApplicationController
   def update
     @post = Post.find(params[:id])
     if @post.update(post_params)
-      redirect_to @post, notice: '編集に成功しました'
+      redirect_to @post
     else
       render :edit
     end

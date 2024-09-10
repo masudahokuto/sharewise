@@ -268,3 +268,19 @@
 .favorite-link {
   text-decoration: none !important;
 }
+
+.favorite-link:hover {
+  text-decoration: none !important;
+}
+
+.favo-link {
+  font-weight: bold;
+  text-decoration: none !important;
+  color: red;
+}
+
+.favo-link:hover {
+  font-weight: bold;
+  text-decoration: none !important;
+  color: #b30000;
+}

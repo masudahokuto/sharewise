@@ -7,11 +7,14 @@
     <% end %>
     <h5 class="nick-name"><%= user.nick_name %></h5>
     <p class="user-profile"><%= user.profile %></p>
-    <p>
+    <div>
       <%= link_to "#{user.followings.count} フォロー", user_followings_path(user), class: "follows-count" %>
       |
       <%= link_to "#{user.followers.count} フォロワー", user_followers_path(user), class: "follows-count" %>
-    </p>
+    </div>
+    <% if user == @current_user %>
+      <span><%= link_to '❤いいねした投稿を見る', likes_user_path(user), class: 'favo-link' %></span>
+    <% end %>
   </div>
 <% else %>
   <div class="user-card">

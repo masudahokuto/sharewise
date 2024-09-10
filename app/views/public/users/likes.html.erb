@@ -1,2 +1,51 @@
-<h1>Public::Favorites#index</h1>
-<p>Find me in app/views/public/favorites/index.html.erb</p>
+<!-- app/views/public/users/likes.html.erb -->
+<%= stylesheet_link_tag 'public/users', media: 'all' %>
+<div class="container-fluid">
+  <div class="row d-flex justify-content-center">
+    <!-- ユーザー情報のカード -->
+    <div class="col-md-2 d-flex flex-column align-items-center">
+      <%= render 'user_card', user: @user %>
+      <%= link_to 'プロフィール編集', edit_user_path(@user), class: 'btn btn-primary mt-3' %>
+    </div>
+    
+    <!-- 投稿一覧 -->
+    <div class="col-md-9">
+      <% if @posts.any? %>
+        <% @posts.each do |post| %>
+          <!-- いいねボタン -->
+          <div class="text-center d-flex justify-content-end align-items-center">
+            <%= render 'public/favorites/like', post: post %>
+          </div>
+
+          <!-- 投稿リンク -->
+          <%= link_to post_path(post), class: "post-link" do %>
+            <div class="post-row d-flex mb-3">
+              <!-- 投稿本文の列 -->
+              <div class="col-8 d-flex flex-column">
+                <div class="flex-grow-1">
+                  <p><%= simple_format(post.body) %></p>
+                </div>
+              </div>
+
+              <!-- 画像の列（右寄せ） -->
+              <div class="col-4 d-flex flex-column align-items-end">
+                <% post.images.each do |image| %>
+                  <div class="post-image mb-3">
+                    <%= image_tag image, class: "img-fluid", alt: "Post Image" %>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+
+        <!-- ページネーション -->
+        <div id="pagination">
+          <%= paginate @posts %>
+        </div>
+      <% else %>
+        <p>いいねした投稿はありません。</p>
+      <% end %>
+    </div>
+  </div>
+</div>

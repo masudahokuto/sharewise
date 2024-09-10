@@ -34,6 +34,15 @@ class Public::UsersController < ApplicationController
     @followers_count = @user.followers.count
   end
 
+  def likes
+    @user = User.find(params[:id])
+    if current_user.nil? || current_user != @user
+      redirect_to posts_path
+      return
+    end
+    @posts = @user.liked_posts.page(params[:page]).per(10)
+  end
+
   def edit
     @user = User.find(params[:id])
     # ユーザーが自分のプロフィールを編集できるかを確認する
