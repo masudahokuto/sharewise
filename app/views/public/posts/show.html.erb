@@ -1,16 +1,24 @@
 <%= stylesheet_link_tag 'public/posts', media: 'all' %>
 <div class="container-fluid">
   <div class="row d-flex justify-content-center">
-    <div class="col-md-2 d-flex flex-column align-items-center">
+    <div class="col-md-2 d-flex flex-column align-items-end">
       <%= render 'public/users/user_card', user: @user %>
     </div>
     <!-- 本文を表示する部分 -->
+
     <div class="col-md-7">
-      <div class="text-center my-3">
+      <div class="text-center d-flex justify-content-end align-items-center">
         <% if current_user == @post.user %>
-          <%= link_to '投稿を編集', edit_post_path(@post), class: 'btn btn-success w-50' %>
+          <%= link_to '投稿を編集', edit_post_path(@post), class: 'btn btn-success mr-1', style: 'margin-right: 0;' %>
         <% end %>
+        <% if current_user == @post.user %>
+          <%= link_to '投稿を削除', post_path(@post), method: :delete, data: { confirm: '本当に削除してもよろしいですか？' }, class: 'btn btn-danger mr-1', style: 'margin-right: 0;' %>
+        <% end %>
+        <div class="favorite-post-show">
+          <%= render 'public/favorites/like', post: @post %>
+        </div>
       </div>
+
       <div class="show-row row d-flex mb-3">
         <div class="col-md-8 d-flex flex-column">
           <%= simple_format(@post.body) %>
@@ -25,14 +33,9 @@
           </div>
         </div>
       </div>
-      <div class="text-center my-3">
-        <% if current_user == @post.user %>
-          <%= link_to '投稿を削除', post_path(@post), method: :delete, data: { confirm: '本当に削除してもよろしいですか？' }, class: 'btn btn-danger w-50' %>
-        <% end %>
-      </div>
     </div>
     <div class="col-md-3">
-      <%= render "public/post_comments/comment_index", post: @post, post_comment: @post_comment %>
+      <%= render "public/post_comments/comment_index", post: @post, post_comments: @post_comments %>
       <%= render "public/post_comments/comment_form", post: @post, post_comment: @post_comment %>
       <div id="pagination">
         <%= paginate  @post_comments %>
