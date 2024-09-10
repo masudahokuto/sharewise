@@ -36,6 +36,9 @@ Rails.application.routes.draw do
         get 'mypage', to: 'users#mypage'
         patch 'withdraw'  # 退会処理
       end
+      resources :relationships, only: [:create, :destroy]
+        get "followings" => "relationships#followings", as: "followings"
+        get "followers" => "relationships#followers", as: "followers"    
     end
 
     resources :posts do

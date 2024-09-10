@@ -22,6 +22,16 @@ class Public::UsersController < ApplicationController
     else
       @posts = @user.posts.page(params[:page]).per(10)
     end
+    # 自分のプロフィールページへの直接アクセスをマイページにリダイレクト
+    if @user == current_user
+      redirect_to mypage_users_path and return
+    end
+    # フォロー判定
+    @is_following = current_user.following?(@user) if current_user.present?
+    @relationship = current_user.relationships.find_by(followed_id: @user.id) if user_signed_in?
+    # フォローフォロワー数確認
+    @followings_count = @user.followings.count
+    @followers_count = @user.followers.count
   end
 
   def edit

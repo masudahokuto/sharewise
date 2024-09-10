@@ -7,11 +7,11 @@
     <!-- 本文を表示する部分 -->
     <div class="col-10">
       <%= form_with model: @post, local: true, html: { id: 'post_form', enctype: 'multipart/form-data' } do |f| %>
-          <div class="row d-flex justify-content-center">
-            <div class="col-12 text-center">
-              <%= f.submit "投稿する", class: 'btn btn-primary w-50' %>
-            </div>
+        <div class="row d-flex justify-content-center">
+          <div class="col-12 text-center">
+            <%= f.submit "投稿する", class: 'btn btn-primary w-50' %>
           </div>
+        </div>
         <div class="row d-flex mb-3">
           <div class="field col-md-8">
             <%= f.label :body, '投稿内容を入力してください' %>

@@ -1,10 +1,18 @@
 <%= stylesheet_link_tag 'public/users', media: 'all' %>
 <div class="container-fluid">
   <div class="row d-flex">
-    <div class="col-2 d-flex flex-column align-items-center">
-      <%= render 'user_card', user: @user %>
+    <div class="col-md-2 d-flex flex-column align-items-center">
+      <%= render 'user_card', user: @user, followings_count: @followings_count, followers_count: @followers_count %>
+
+      <% if current_user.present? %>
+        <% if @is_following %>
+          <%= link_to 'フォローを外す', user_relationship_path(current_user, @user), method: :delete, class: 'btn btn-danger mt-3' %>
+        <% else %>
+          <%= link_to 'フォローする', user_relationships_path(user_id: current_user.id, followed_id: @user.id), method: :post, class: 'btn btn-primary mt-3' %>
+        <% end %>
+      <% end %>
     </div>
-    <div class="col-10">
+    <div class="col-md-10">
       <% if @posts.any? %>
         <% @posts.each do |post| %>
           <%= link_to post_path(post), class: "post-link" do %>

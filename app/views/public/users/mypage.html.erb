@@ -7,7 +7,6 @@
     </div>
     <!-- 投稿本文と画像部分 -->
     <div class="col-10">
-      <h2>マイポスト</h2>
       <% if @posts.any? %>
         <% @posts.each do |post| %>
           <%= link_to post_path(post), class: "post-link" do %>
