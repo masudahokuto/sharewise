@@ -34,6 +34,9 @@
     <div class="col-md-3">
       <%= render "public/post_comments/comment_index", post: @post, post_comment: @post_comment %>
       <%= render "public/post_comments/comment_form", post: @post, post_comment: @post_comment %>
+      <div id="pagination">
+        <%= paginate  @post_comments %>
+      </div>
     </div>
   </div>
 </div>

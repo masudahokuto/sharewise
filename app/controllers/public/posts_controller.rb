@@ -23,7 +23,7 @@ class Public::PostsController < ApplicationController
 
   def show
     @post = Post.find_by(id: params[:id])
-    # @post_comments = @post.post_comments.page(params[:page]).per(1)
+    @post_comments = @post.post_comments.page(params[:page]).per(1)
     if @post.nil? || !@post.user.is_active
       redirect_to posts_path, alert: '投稿が見つからないか、ユーザーが退会しています。'
     else

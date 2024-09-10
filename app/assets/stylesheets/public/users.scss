@@ -51,6 +51,7 @@
 
 // ユーザーカードのスタイル
 .user-card {
+  width: 220px;
   background-color: #C19A6B;
   border: 1px solid #ddd;
   border-radius: 8px;
@@ -175,4 +176,78 @@
 .index_card_image {
   border: none !important;
   padding-top: 25px;
+}
+
+.nick-name {
+  font-weight: bold;
+}
+.user-profile {
+  margin: 0px;
+}
+
+.follows-count {
+  font-size: 15px;
+  font-weight: bold;
+  color: #008080;
+  margin: 0px;
+  text-decoration: none !important;
+}
+
+.user-card-follows {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #C19A6B;
+  width: 220px; /* カードの幅を固定 */
+  height: 360px; /* カードの高さを固定 */
+  padding: 1rem;
+  border: 1px solid #dee2e6;
+  border-radius: 0.375rem;
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+  text-align: center; /* テキストを中央揃えに */
+  margin: 10px;
+  overflow: hidden;
+  transition: box-shadow 0.3s ease, transform 0.3s ease; /* ホバー時のアニメーション */
+}
+
+.follows-info {
+  margin-top: auto;
+}
+
+.user-card-follows:hover {
+  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.2);
+  transform: scale(1.02);
+}
+
+.profile-image {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+}
+
+.user-nick-name {
+  margin-bottom: 0rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: bold;
+}
+
+.user-profile {
+  margin-bottom: -0.1rem;
+}
+
+.user-card-link {
+  height: 276px;
+  text-decoration: none; /* 下線を消す */
+  color: inherit; /* 親要素の文字色を継承 */
+}
+
+.user-card-link:hover {
+  text-decoration: none; /* ホバー時も下線を消す */
+  color: inherit; /* ホバー時も親要素の文字色を継承 */
+}
+
+.spacer {
+  width: 100%; /* 空白の幅 */
 }

@@ -4,6 +4,35 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   has_many :posts, dependent: :destroy
   has_many :post_comments, dependent: :destroy
+
+  # フォローフォロワーここから-----------------------------------------------------------
+  # フォローしている関連付け
+  has_many :relationships, foreign_key: 'follower_id', dependent: :destroy
+  has_many :followings, -> { where(is_active: true) }, through: :relationships, source: :followed
+
+  has_many :reverse_relationships, class_name: 'Relationship', foreign_key: 'followed_id', dependent: :destroy
+  has_many :followers, -> { where(is_active: true) }, through: :reverse_relationships, source: :follower
+  # has_many :active_relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
+  # # フォローされている関連付け
+  # has_many :passive_relationships, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
+  # # フォローしているユーザーを取得(退会していないユーザーのみ)
+  # has_many :followings, -> { joins(:followed).where(users: { is_active: true }) }, through: :active_relationships, source: :followed
+  # # フォロワーを取得(退会していないユーザーのみ)
+  # has_many :followers, -> { joins(:follower).where(users: { is_active: true }) }, through: :passive_relationships, source: :follower
+  # # 指定したユーザーをフォローするメソッド
+  def follow(user)
+    relationships.create(followed_id: user.id)
+  end
+  # 指定したユーザーのフォローを解除する
+  def unfollow(user)
+    relationships.find_by(followed_id: user.id)&.destroy
+  end
+  # 指定したユーザーをフォローしているかどうかを判定 (退会していないユーザーのみ)
+  def following?(user)
+    followings.include?(user)
+  end
+  # フォローフォロワーここまで-----------------------------------------------------------
+
   # Genderのenum設定
   enum gender: { male: 0, female: 1, other: 2 }
 
