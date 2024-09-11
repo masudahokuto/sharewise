@@ -1,0 +1,37 @@
+<!-- app/views/public/post_comments/_comment_index.html.erb -->
+<table class="comment-table">
+  <tbody>
+    <% post_comments.each do |post_comment| %>
+      <tr>
+        <th class="align-middle-link" style="border-top: 1px solid #bbb;">
+          <%= link_to admin_user_path(post_comment.user) do %>
+            <%= image_tag post_comment.user.get_profile_image(50, 50), class: 'comment-image' %>
+          <% end %>
+        </th>
+        <th class="align-middle" style="border-top: 1px solid #bbb;">
+
+            <%= link_to admin_user_path(post_comment.user), class: 'd-block no-underline' do %>
+              <div class="comment-nick_name"><%= post_comment.user.nick_name %></div>
+            <% end %>
+        </th>
+        <td class="align-middle" style="border-top: 1px solid #bbb;">
+          <div class="mt-2">
+            <%= link_to "削除", admin_post_post_comment_path(post, post_comment), method: :delete, class: "btn btn-sm btn-danger", style: "white-space: nowrap;", data: { confirm: "コメントを削除しますか？" } %>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td style="border-bottom: 1px solid #bbb;"></td>
+        <td class="comment-field" style="border-bottom: 1px solid #bbb;">
+          <div class="mt-2">
+            <%= post_comment.comment %>
+          </div>
+        </td>
+        <td style="border-bottom: 1px solid #bbb;"></td>
+      </tr>
+      <tr>
+        <td class="table-blank">&nbsp;</td><td class="table-blank">&nbsp;</td><td class="table-blank">&nbsp;</td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

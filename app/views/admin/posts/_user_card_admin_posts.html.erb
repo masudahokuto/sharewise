@@ -1,0 +1,16 @@
+<%= link_to admin_user_path(user), class: 'user-card-link' do %>
+  <div class="user-card-post-index <%= user.is_active ? 'user-card-true' : 'user-card-false' %>">
+    <% if user.profile_image.attached? %>
+      <%= image_tag user.get_profile_image(100, 100), class: 'profile-image-post-index' %>
+    <% else %>
+      <%= image_tag 'no_image.jpg', size: '100x100', class: 'profile-image-post-index' %>
+    <% end %>
+    <p class="user-nick-name"><%= user.nick_name %></p>
+    <p class="user_id">User_ID: <%= user.id %></p>
+    <% if user.is_active %>
+      <p class="is_active_true">登録中</p>
+    <% else %>
+      <p class="is_active_false">退会中</p>
+    <% end %>
+  </div>
+<% end %>

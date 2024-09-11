@@ -40,7 +40,7 @@
 }
 
 // ユーザーindexのカード
-.user-card {
+.user-card, {
   width: 220px; /* カードの幅を固定 */
   height: 360px; /* カードの高さを固定 */
   padding: 1rem;
@@ -170,4 +170,30 @@
 .img-fluid {
   width: 100%;  // 画像の幅をコンテナに合わせる
   height: 100%;  // 高さを自動調整
+}
+
+.user-card-post-index {
+  width: 150px; /* カードの幅を固定 */
+  height: 250px; /* カードの高さを固定 */
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center; /* テキストを中央揃えに */
+  margin: 10px;
+  overflow: hidden;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
+}
+
+.user-card-post-index:hover {
+  border-color: #007bff;
+  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.2);
+  transform: scale(1.02);
+
+}
+
+.profile-image-post-index {
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
 }

@@ -21,7 +21,9 @@ Rails.application.routes.draw do
         get 'inactive' # 非アクティブユーザー表示用のルートを追加
       end
     end
-    resources :posts, only: %i[index show destroy]
+    resources :posts, only: %i[index show destroy] do
+      resources :post_comments, only: %i[destroy]
+    end
     get "/" => "homes#top"
     get '/about', to:'homes#about', as:'about'
   end
