@@ -3,3 +3,4 @@
 //= link public/users.css
 //= link public/posts.css
 //= link admin/users.css
+//= link admin/posts.css

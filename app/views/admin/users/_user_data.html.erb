@@ -1,0 +1,79 @@
+<div class="user-summary">
+  <h3>ユーザー統計</h3>
+  <table class="table custom-table">
+    <thead>
+      <tr>
+        <th>登録状況</th>
+        <th>人数</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>現登録者数</td>
+        <td><%= @active_users %></td>
+      </tr>
+      <tr>
+        <td>退会者数</td>
+        <td><%= @inactive_users %></td>
+      </tr>
+      <tr>
+        <td>全登録者数</td>
+        <td><%= @total_users %></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class="gender-ratio">
+  <h3>性別比率</h3>
+  <table class="table custom-table">
+    <thead>
+      <tr>
+        <th>性別</th>
+        <th>人数</th>
+        <th>割合(%)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% if @total_users > 0 %>
+        <tr>
+          <td class="gender-male"><i class="fa-solid fa-person"></i>男性</td>
+          <td class="gender-male"><%= @gender_counts[:male] %></td>
+          <td class="gender-male"><%= (@gender_counts[:male].to_f / @total_users * 100).round(2) %></td>
+        </tr>
+        <tr >
+          <td class="gender-female"><i class="fa-solid fa-person-dress"></i>女性</td>
+          <td class="gender-female"><%= @gender_counts[:female] %></td>
+          <td class="gender-female"><%= (@gender_counts[:female].to_f / @total_users * 100).round(2) %></td>
+        </tr>
+        <tr class="gender-other">
+          <td>その他</td>
+          <td><%= @gender_counts[:other] %></td>
+          <td><%= (@gender_counts[:other].to_f / @total_users * 100).round(2) %></td>
+        </tr>
+      <% else %>
+        <tr>
+          <td colspan="3">ユーザーがまだいません。</td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+<div class="age-distribution mt-4">
+  <h3>年齢層割合</h3>
+  <table class="table custom-table">
+    <thead>
+      <tr>
+        <th>年齢層</th>
+        <th>割合(%)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @age_distribution.each do |age_group, percentage| %>
+        <tr>
+          <td><%= age_group %></td>
+          <td><%= percentage %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
