@@ -29,14 +29,27 @@ class Admin::UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @posts = @user.posts.order(created_at: :desc).page(params[:page]).per(10)
   end
 
   def update
     @user = User.find(params[:id])
     if @user.update(user_params)
-      redirect_to admin_user_path(@user), notice: 'ユーザー情報が更新されました'
+      if @user.is_active?
+        flash.now[:notice] = "顧客が再開されました"
+      else
+        flash.now[:alert] = "顧客が退会されました"
+      end
+      respond_to do |format|
+        format.html { redirect_to admin_user_path(@user) }
+        format.js   # update.js.erb を呼び出す
+      end
     else
-      render :show
+      flash.now[:alert] = "顧客情報の更新に失敗しました"
+      respond_to do |format|
+        format.html { render :edit }
+        format.js   # エラーメッセージを表示するためのJS
+      end
     end
   end
 
@@ -60,6 +73,7 @@ class Admin::UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:last_name, :first_name, :nick_name, :profile, :gender, :birthday, :email, :profile_image, :is_active)
+    params.require(:user).permit(:is_active)
   end
 end
+# :last_name, :first_name, :nick_name, :profile, :gender, :birthday, :email, :profile_image,

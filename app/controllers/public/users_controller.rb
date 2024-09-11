@@ -3,7 +3,7 @@ class Public::UsersController < ApplicationController
 
   def mypage
     @user = current_user
-    @posts = @user.posts.page(params[:page]).per(10)
+    @posts = @user.posts.order(created_at: :desc).page(params[:page]).per(10)
   end
 
   def index
@@ -20,7 +20,7 @@ class Public::UsersController < ApplicationController
     if @user.is_active == false
       redirect_to users_path
     else
-      @posts = @user.posts.page(params[:page]).per(10)
+      @posts = @user.posts.order(created_at: :desc).page(params[:page]).per(10)
     end
     # 自分のプロフィールページへの直接アクセスをマイページにリダイレクト
     if @user == current_user
@@ -72,6 +72,9 @@ class Public::UsersController < ApplicationController
 
   private
 
+  def newest
+    posts.order(created_at: :desc)
+  end
   def user_params
     params.require(:user).permit(:last_name, :first_name, :nick_name, :profile, :gender, :birthday_1i, :birthday_2i, :birthday_3i, :email, :profile_image, :is_active)
   end

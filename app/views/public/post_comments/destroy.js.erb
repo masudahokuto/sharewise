@@ -1,0 +1,2 @@
+$("#comment-<%= @post_comment.id %>").remove();
+$("#post-comments").html("<%= j(render 'public/post_comments/comment_index', post: @post, post_comments: @post.post_comments) %>");

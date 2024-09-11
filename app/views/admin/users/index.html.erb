@@ -2,7 +2,7 @@
 
 <div class="container-fluid">
   <div class="row d-flex">
-    <div class="col-3 d-flex flex-column align-items-center">
+    <div class="col-md-3 d-flex flex-column align-items-center">
       <div class="user-summary">
         <h3>ユーザー統計</h3>
         <table class="table custom-table">
@@ -84,7 +84,7 @@
         </table>
       </div>
     </div>
-    <div class="col-9">
+    <div class="col-md-9">
       <div class="d-flex">      <!-- 非アクティブユーザー表示ボタン -->
         <%= button_to '退会ユーザーを表示', inactive_admin_users_path, method: :get, remote: true, class: 'btn btn-danger', id: 'show-inactive-users' %>
       　<%= link_to 'ユーザー一覧を表示', admin_users_path, class: 'btn btn-primary' %>

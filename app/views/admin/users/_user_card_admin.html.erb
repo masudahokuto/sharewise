@@ -1,4 +1,3 @@
-<!-- user_card_admin.html.erb -->
 <div class="user-card <%= user.is_active ? 'user-card-true' : 'user-card-false' %>">
   <%= link_to admin_user_path(user), class: 'user-card-link' do %>
     <% if user.profile_image.attached? %>

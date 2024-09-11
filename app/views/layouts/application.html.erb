@@ -56,10 +56,16 @@
 </div>
   </div>
 </header>
-
-    <main class="main-content py-5">
-    <%= yield %>
-    </main>
-    <footer class="custom-footer pt-3"></footer>
+<div id="flash-messages">
+  <% flash.each do |type, message| %>
+    <div class="alert alert-<%= type == 'alert' ? 'danger' : 'success' %>">
+      <%= message %>
+    </div>
+  <% end %>
+</div>
+<main class="main-content py-5">
+  <%= yield %>
+</main>
+<footer class="custom-footer pt-3"></footer>
   </body>
 </html>
