@@ -16,7 +16,7 @@ class User < ApplicationRecord
 
   # # 指定したユーザーをフォローするメソッド
   def follow(user)
-    relationships.create(followed_id: user.id)
+    relationships.find_or_create_by(followed_id: user.id)
   end
   # 指定したユーザーのフォローを解除する
   def unfollow(user)
@@ -24,7 +24,7 @@ class User < ApplicationRecord
   end
   # 指定したユーザーをフォローしているかどうかを判定 (退会していないユーザーのみ)
   def following?(user)
-    followings.include?(user)
+    relationships.pluck(:followed_id).include?(user.id)
   end
   # フォローフォロワーここまで-----------------------------------------------------------
 
@@ -64,6 +64,10 @@ class User < ApplicationRecord
     age = today.year - birthday.year
     age -= 1 if today < birthday + age.years # 誕生日がまだ来ていない場合は1歳引く
     age
+  end
+  
+  def favorite(post)
+    self.favorites.find_or_create_by(post_id: post.id)
   end
 
   # ユーザーが特定のポストをいいねしているかを判定

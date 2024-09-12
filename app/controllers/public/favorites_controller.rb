@@ -3,7 +3,7 @@ class Public::FavoritesController < ApplicationController
 
   def create
     @post = Post.find(params[:post_id])
-    current_user.favorites.create(post: @post)
+    current_user.favorite(@post)
     respond_to do |format|
       format.js
     end
@@ -11,7 +11,7 @@ class Public::FavoritesController < ApplicationController
 
   def destroy
     @post = Post.find(params[:post_id])
-    current_user.favorites.find_by(post: @post).destroy
+    current_user.favorites.find_by(post: @post)&.destroy
     respond_to do |format|
       format.js
     end
