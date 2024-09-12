@@ -1,0 +1,19 @@
+<% if user == current_user %>
+  <%= link_to mypage_users_path, class: 'user-card-link', style: 'text-decoration: none;' do %>
+    <div class="index_card_image d-flex border rounded">
+      <div class="user-card-list d-flex flex-column align-items-center">
+        <%= image_tag user.get_profile_image(100, 100), class: 'profile-image' %>
+        <h5 class="mt-2" style="color: black;"><%= user.nick_name %></h5>
+      </div>
+    </div>
+  <% end %>
+<% else %>
+  <%= link_to user_path(user), class: 'user-card-link', style: 'text-decoration: none;' do %>
+    <div class="index_card_image d-flex border rounded">
+      <div class="user-card-list d-flex flex-column align-items-center">
+        <%= image_tag user.get_profile_image(100, 100), class: 'profile-image' %>
+        <h5 class="mt-2" style="color: black;"><%= user.nick_name %></h5>
+      </div>
+    </div>
+  <% end %>
+<% end %>

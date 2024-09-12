@@ -1,0 +1,60 @@
+<%= stylesheet_link_tag 'admin/users', media: 'all' %>
+<div class="container-fluid">
+  <div class="row d-flex justify-content-center">
+    <div class="col-md-2 d-flex flex-column align-items-center">
+      <div class="card_is_active">
+        <%= render 'user_card_admin', user: @user %>
+      </div>
+      <div id="user-status">
+        <% if @user.is_active? %>
+          <%= button_to '退会させる', admin_user_path(@user),
+            method: :patch,
+            remote: true,
+            params: { user: { is_active: false } },
+            class: "btn btn-danger",
+            data: { confirm: '本当に退会させますか？' } %>
+        <% else %>
+          <%= button_to '再開させる', admin_user_path(@user),
+            method: :patch,
+            remote: true,
+            params: { user: { is_active: true } },
+            class: "btn btn-success",
+            data: { confirm: 'このユーザーを再開させますか？' } %>
+        <% end %>
+      </div>
+    </div>
+    <div class="col-md-9">
+      <% if @posts.any? %>
+        <% @posts.each do |post| %>
+          <div class="text-center d-flex justify-content-end align-items-center">
+            <i class="fas fa-heart mb-1" style="color: red;">いいね数 <%= post.favorites.count %></i>
+          </div>
+          <%= link_to admin_post_path(post), class: "post-link" do %>
+            <div class="post-row d-flex mb-3">
+              <!-- 本文の列 -->
+              <div class="col-8 d-flex flex-column">
+                <div class="flex-grow-1">
+                  <p><%= simple_format(post.body) %></p>
+                </div>
+              </div>
+
+              <!-- 画像の列（右寄せ） -->
+              <div class="col-4 d-flex flex-column align-items-end">
+                <% post.images.each do |image| %>
+                  <div class="post-image mb-3">
+                    <%= image_tag image, class: "img-fluid", alt: "Post Image" %>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+      <% else %>
+        <p>投稿はありません。</p>
+      <% end %>
+      <div id="pagination">
+        <%= paginate @posts %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,12 +1,43 @@
-<!-- app/views/public/users/index.html.erb -->
-<h1>Users List</h1>
-  <%= @user.last_name %><br>
-  <%= @user.first_name %><br>
-  <%= @user.nick_name %><br>
-  <%= @user.birthday %><br>
-  <%= @user.gender %><br>
-  <%= @user.email %><br>
-  <%= @user.is_active %><br>
-  <%= @user.profile %><br>
-  <%= image_tag @user.profile_image, size: "80x50" %>
-<%= link_to "top", root_path %>
+<%= stylesheet_link_tag 'public/users', media: 'all' %>
+<div class="container-fluid">
+  <div class="row d-flex justify-content-center">
+    <div class="col-md-2 d-flex flex-column align-items-center">
+      <%= render 'user_card', user: @user %>
+      <%= link_to 'プロフィール編集', edit_user_path(@user), class: 'btn btn-primary mt-3' %>
+    </div>
+    <!-- 投稿本文と画像部分 -->
+    <div class="col-md-9">
+      <% if @posts.any? %>
+        <% @posts.each do |post| %>
+          <div class="text-center d-flex justify-content-end align-items-center">
+            <%= render 'public/favorites/like', post: post %>
+          </div>
+          <%= link_to post_path(post), class: "post-link" do %>
+            <div class="post-row d-flex mb-3">
+              <!-- 本文の列 -->
+              <div class="col-8 d-flex flex-column">
+                <div class="flex-grow-1">
+                  <p><%= simple_format(post.body) %></p>
+                </div>
+              </div>
+
+              <!-- 画像の列（右寄せ） -->
+              <div class="col-4 d-flex flex-column align-items-end">
+                <% post.images.each do |image| %>
+                  <div class="post-image mb-3">
+                    <%= image_tag image, class: "img-fluid", alt: "Post Image" %>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+      <% else %>
+        <p>投稿はありません。</p>
+      <% end %>
+      <div id="pagination">
+        <%= paginate @posts %>
+      </div>
+    </div>
+  </div>
+</div>

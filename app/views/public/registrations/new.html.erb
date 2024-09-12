@@ -1,69 +1,131 @@
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :post, multipart: true }) do |f| %>
-  <%= devise_error_messages! %>
+<%= stylesheet_link_tag 'registrations', media: 'all', 'data-turbolinks-track': 'reload' %>
+<%= flash[:alert] %>
+<div class="registration-form-container">
+  <div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :post, multipart: true }) do |f| %>
+        <div class="card p-4 shadow-sm">
+          <div class="card-body">
+            <%= devise_error_messages! %>
 
-  <div class="field">
-    <%= f.label :last_name, "姓" %><br />
-    <%= f.text_field :last_name %>
-  </div>
+            <h2 class="text-center mb-4">新規登録</h2>
 
-  <div class="field">
-    <%= f.label :first_name, "名" %><br />
-    <%= f.text_field :first_name %>
-  </div>
+            <div class="form-group">
+              <%= f.label :last_name, "姓", class: 'form-label' %>
+              <%= f.text_field :last_name, class: 'form-control' %>
+            </div>
 
-  <div class="field">
-    <%= f.label :nick_name, "ニックネーム" %><br />
-    <%= f.text_field :nick_name %>
-  </div>
+            <div class="form-group">
+              <%= f.label :first_name, "名", class: 'form-label' %>
+              <%= f.text_field :first_name, class: 'form-control' %>
+            </div>
 
-  <div class="field">
-    <%= f.label :profile, "プロフィール" %><br />
-    <%= f.text_area :profile %>
-  </div>
+            <div class="form-group">
+              <%= f.label :nick_name, "ニックネーム", class: 'form-label' %>
+              <%= f.text_field :nick_name, class: 'form-control' %>
+            </div>
 
-  <div class="field">
-    <%= f.label :gender, "性別" %><br />
-    <div>
-      <% User.genders.keys.each do |gender| %>
-        <%= f.radio_button :gender, gender %>
-        <%= f.label :gender, User.human_attribute_name("gender.#{gender}"), value: gender %>
+            <div class="form-group">
+              <%= f.label :profile, "プロフィール", class: 'form-label' %>
+              <%= f.text_area :profile, class: 'form-control' %>
+            </div>
+
+            <div class="form-group">
+              <%= f.label :gender, "性別", class: 'form-label' %>
+              <div class="d-flex">
+                <% User.genders.keys.each do |gender| %>
+                  <div class="form-check mr-3">
+                    <%= f.radio_button :gender, gender, class: 'form-check-input' %>
+                    <%= f.label :gender, User.human_attribute_name("gender.#{gender}"), value: gender, class: 'form-check-label' %>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <%= f.label :birthday, "生年月日", class: 'form-label' %>
+              <%= f.date_select :birthday,
+                                start_year: 1900,
+                                end_year: Time.current.year,
+                                use_month_number: true,
+                                default: { year: 2000, month: 1, day: 1 },
+                                order: [:year, :month, :day],
+                                class: 'form-control',
+                                include_blank: false,
+                                id: 'user_birthday' %>
+            </div>
+
+            <div class="form-group">
+              <%= f.label :email, "メールアドレス", class: 'form-label' %>
+              <%= f.email_field :email, class: 'form-control' %>
+            </div>
+
+            <div class="form-group">
+              <%= f.label :password, "パスワード", class: 'form-label' %>
+              <%= f.password_field :password, class: 'form-control' %>
+            </div>
+
+            <div class="form-group">
+              <%= f.label :password_confirmation, "パスワード確認", class: 'form-label' %>
+              <%= f.password_field :password_confirmation, class: 'form-control' %>
+            </div>
+
+            <div class="form-group">
+              <%= f.label :profile_image, "プロフィール画像", class: 'form-label' %>
+              <%= f.file_field :profile_image, class: 'form-control-file' %>
+            </div>
+
+            <div class="form-group text-center">
+              <%= f.submit "登録", class: 'btn btn-primary' %>
+            </div>
+          </div>
+        </div>
       <% end %>
     </div>
   </div>
-
-<div class="field">
-  <%= f.label :birthday, "生年月日" %><br />
-  <%= f.date_select :birthday,
-                   start_year: 1900,
-                   end_year: Time.current.year,
-                   use_month_number: true,   # 月を数字で表示
-                   default: { year: 2000, month: 1, day: 1 },
-                   order: [:year, :month, :day] %>
 </div>
 
-  <div class="field">
-    <%= f.label :email, "メールアドレス" %><br />
-    <%= f.email_field :email %>
-  </div>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const daySelect = document.querySelector('#user_birthday_3i');
+  const monthSelect = document.querySelector('#user_birthday_2i');
+  const yearSelect = document.querySelector('#user_birthday_1i');
 
-  <div class="field">
-    <%= f.label :password, "パスワード" %><br />
-    <%= f.password_field :password %>
-  </div>
+  function updateDayOptions() {
+    const month = parseInt(monthSelect.value, 10);
+    const year = parseInt(yearSelect.value, 10);
 
-  <div class="field">
-    <%= f.label :password_confirmation, "パスワード確認" %><br />
-    <%= f.password_field :password_confirmation %>
-  </div>
+    let maxDays;
 
-  <div class="field">
-    <%= f.label :profile_image, "プロフィール画像" %><br />
-    <%= f.file_field :profile_image %>
-  </div>
+    if (month === 2) {
+      // 2月の最大日数を計算
+      maxDays = (year % 4 === 0 && (year % 100 !== 0 || year % 400 === 0)) ? 29 : 28;
+    } else if ([4, 6, 9, 11].includes(month)) {
+      // 30日の月
+      maxDays = 30;
+    } else {
+      // 31日の月
+      maxDays = 31;
+    }
 
-  <div class="actions">
-    <%= f.submit "登録" %>
-  </div>
-<% end %>
+    // 現在の日の選択肢を制限
+    for (let day = 1; day <= 31; day++) {
+      const option = daySelect.querySelector(`option[value="${day}"]`);
+      if (option) {
+        if (day > maxDays) {
+          option.style.display = 'none';
+        } else {
+          option.style.display = 'block';
+        }
+      }
+    }
+  }
 
+  // 月または年が変更されたときに日の選択肢を更新
+  monthSelect.addEventListener('change', updateDayOptions);
+  yearSelect.addEventListener('change', updateDayOptions);
 
+  // ページ読み込み時に選択肢を初期化
+  updateDayOptions();
+});
+</script>

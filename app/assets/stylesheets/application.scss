@@ -13,3 +13,9 @@
  *= require_tree .
  *= require_self
  */
+
+@import "public/users";
+@import "public/posts";
+@import "registrations";
+@import "sessions";
+@import "admin/users";

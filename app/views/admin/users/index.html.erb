@@ -1,0 +1,27 @@
+<%= stylesheet_link_tag 'admin/users', media: 'all' %>
+
+<div class="container-fluid">
+  <div class="row d-flex">
+    <div class="col-md-3 d-flex flex-column align-items-center">
+      <%= render 'user_data' %>
+    </div>
+    <div class="col-md-9">
+      <div class="d-flex">      <!-- 非アクティブユーザー表示ボタン -->
+        <%= button_to '退会ユーザーを表示', inactive_admin_users_path, method: :get, remote: true, class: 'btn btn-danger', id: 'show-inactive-users' %>
+      　<%= link_to 'ユーザー一覧を表示', admin_users_path, class: 'btn btn-primary' %>
+    　</div>
+    　<div id="admin-users-list" class="row">
+        <% @admin_users.each_slice(5) do |user_slice| %> <!-- 5つごとに行を作成 -->
+          <% user_slice.each do |user| %>
+            <%= render 'user_card_admin', user: user %>
+          <% end %>
+        <% end %>
+      </div>
+      <div id="inactive-user-list" class="row"></div> <!-- 非アクティブユーザーを表示するエリア -->
+      <div id="pagination">
+        <%= paginate @admin_users %>
+      </div>
+    </div>
+  </div>
+</div>
+<!--inactive.js呼び出し-->

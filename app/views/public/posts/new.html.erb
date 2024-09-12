@@ -1,0 +1,36 @@
+<%= stylesheet_link_tag 'public/posts', media: 'all' %>
+<div class="container-fluid">
+  <div class="row d-flex justify-content-center">
+    <div class="col-2 d-flex flex-column align-items-center">
+      <%= render 'public/users/user_card', user: @user %>
+    </div>
+    <!-- 本文を表示する部分 -->
+    <div class="col-10">
+      <%= form_with model: @post, local: true, html: { id: 'post_form', enctype: 'multipart/form-data' } do |f| %>
+        <div class="row d-flex justify-content-center">
+          <div class="col-12 text-center">
+            <%= f.submit "投稿する", class: 'btn btn-primary' %>
+          </div>
+        </div>
+        <div class="row d-flex mb-3">
+          <div class="field col-md-8">
+            <%= f.label :body, '投稿内容を入力してください' %>
+            <%= f.text_area :body, class: "post-text-area" %>
+          </div>
+          <div class="col-md-4 mt-4">
+            <div class="text-right">
+              <button id="add_image_button" type="button" class="image-add-btn btn-secondary">画像を追加する</button>
+            </div>
+            <div class="post-image-field">
+              <div class="file-field_0 mb-3">
+                <input name="post[images][]" type="file" class="post_image" aria-num="0" onchange="fileSelect(this);">
+                <img id="preview_area_0">
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+

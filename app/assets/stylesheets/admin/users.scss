@@ -1,3 +1,199 @@
-// Place all the styles related to the admin/users controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: https://sass-lang.com/
+/* assets/stylesheets/admin/users.scss */
+
+.custom-table {
+  width: 100%;
+  border-collapse: collapse;
+
+  th, td {
+    border: 1px solid #dee2e6;
+    text-align: center;
+    font-weight: bold; /* 太字 */
+  }
+
+  th {
+    background-color: #f8f9fa;
+  }
+
+  tbody tr:nth-child(odd) {
+    background-color: #f2f2f2;
+  }
+
+  tbody tr:nth-child(even) {
+    background-color: #fff;
+  }
+}
+
+/* 性別比率のテーブル行のスタイル */
+.gender-male {
+  background-color: #d0e6ff; /* 男性用青色 */
+  color: blue; /* 文字色が見やすいように黒 */
+}
+
+.gender-female {
+  background-color: #fddede; /* 女性用赤色 */
+  color: red; /* 文字色が見やすいように黒 */
+}
+
+.gender-other {
+  background-color: #f0f0f0; /* その他用のデフォルト色 */
+  color: #000; /* 文字色が見やすいように黒 */
+}
+
+// ユーザーindexのカード
+.user-card, {
+  width: 220px; /* カードの幅を固定 */
+  height: 360px; /* カードの高さを固定 */
+  padding: 1rem;
+  border: 1px solid #dee2e6;
+  border-radius: 0.375rem;
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+  text-align: center; /* テキストを中央揃えに */
+  margin: 10px;
+  overflow: hidden;
+  transition: box-shadow 0.3s ease, transform 0.3s ease; /* ホバー時のアニメーション */
+}
+
+.user-card:hover {
+  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.2);
+  transform: scale(1.02);
+}
+
+.profile-image {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+}
+
+.user-nick-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: bold;
+}
+
+.is_active_true {
+  color: limegreen;
+  font-weight: bold;
+}
+
+.is_active_false {
+  color: #8b0000;
+  font-weight: bold;
+}
+
+.user-card-true {
+  background-color: #c2f0c2;
+}
+
+.user-card-false {
+  background-color: #ffc0cb;
+}
+
+.user-profile {
+  margin-bottom: -0.1rem;
+}
+
+.user_id {
+  color: #0000ff;
+  font-weight: bold;
+  margin-bottom: -0.1rem;
+}
+
+/* ボタンの横並び */
+.btn-group {
+  display: flex;
+  gap: 10px; /* ボタン間の間隔 */
+}
+
+.user-card-link {
+  text-decoration: none; /* 下線を消す */
+  color: inherit; /* 親要素の文字色を継承 */
+}
+
+/* ホバー時のスタイルも設定する場合 */
+.user-card-link:hover {
+  text-decoration: none; /* ホバー時も下線を消す */
+  color: inherit; /* ホバー時も親要素の文字色を継承 */
+}
+
+.follows-count {
+  margin-bottom: 0px;
+}
+
+.post-row {
+  border: 1px solid #ddd;   /* デフォルトのボーダー色 */
+  border-radius: 8px;      /* ボーダーの角を丸くする */
+  padding: 15px;            /* 内側の余白を追加 */
+  margin-bottom: 15px;      /* 下の余白を追加 */
+  overflow-y: auto;
+  max-height: 300px;
+  background-color: #fff;   /* 背景色 */
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease; /* トランジションの追加 */
+
+  p {
+    margin: 0;
+    white-space: pre-wrap; /* 改行を維持 */
+    color: #333;           /* 文字色 */
+  }
+
+  &:hover {
+    border-color: #007bff; /* ホバー時の背景色 */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* ホバー時のシャドウ */
+    transform: scale(1.02); /* ホバー時に少し拡大 */
+  }
+}
+
+.post-link {
+  display: block;          /* ブロック要素として表示 */
+  text-decoration: none;  /* 下線を削除 */
+  color: inherit;         /* 親要素の文字色を継承 */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* トランジションの追加 */
+
+  &:hover {
+    text-decoration: none;  /* ホバー時も下線を削除 */
+
+    .post-row {
+      background-color: #fafafa; /* ホバー時の背景色 */
+      border-color: #007bff;     /* ホバー時のボーダー色 */
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* ホバー時のシャドウ */
+      transform: scale(1.02);    /* ホバー時に少し拡大 */
+    }
+  }
+}
+
+.post-image {
+  width: 100%;
+  height: 270px;
+  object-fit: cover;
+}
+
+.img-fluid {
+  width: 100%;  // 画像の幅をコンテナに合わせる
+  height: 100%;  // 高さを自動調整
+}
+
+.user-card-post-index {
+  width: 150px; /* カードの幅を固定 */
+  height: 250px; /* カードの高さを固定 */
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center; /* テキストを中央揃えに */
+  margin: 10px;
+  overflow: hidden;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
+}
+
+.user-card-post-index:hover {
+  border-color: #007bff;
+  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.2);
+  transform: scale(1.02);
+
+}
+
+.profile-image-post-index {
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+}

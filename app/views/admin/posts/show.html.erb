@@ -1,0 +1,39 @@
+<%= stylesheet_link_tag 'admin/posts', media: 'all' %>
+<%= stylesheet_link_tag 'admin/users', media: 'all' %>
+<div class="container-fluid">
+  <div class="row d-flex justify-content-center">
+    <div class="col-md-2 d-flex flex-column align-items-end">
+      <%= render 'admin/users/user_card_admin', user: @user %>
+    </div>
+    <!-- 本文を表示する部分 -->
+
+    <div class="col-md-7">
+      <div class="text-center d-flex justify-content-end align-items-center">
+        <%= link_to '削除する', admin_post_path(@post), method: :delete, data: { confirm: 'このポストを削除しますか？' }, class: 'btn btn-danger mr-1', style: 'margin-right: 0;' %>
+        <div class="favorite-post-show">
+          <i class="fas fa-heart mb-1" style="color: red;">いいね数 <%= @post.favorites.count %></i>
+        </div>
+      </div>
+      <div class="show-row row d-flex mb-3">
+        <div class="col-md-8 d-flex flex-column">
+          <%= simple_format(@post.body) %>
+        </div>
+        <div class="col-md-4 d-flex flex-column align-items-end">
+          <div class="d-flex flex-column align-items-end">
+            <% @post.images.each do |image| %>
+              <div class="my-3">
+                <%= image_tag image, style: "width: 500px; height: 300px; object-fit: cover;", alt: "Post Image", class: "img-fluid" %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <%= render "admin/post_comments/admin_comment_index", post: @post, post_comments: @post_comments %>
+      <div id="pagination">
+        <%= paginate  @post_comments %>
+      </div>
+    </div>
+  </div>
+</div>

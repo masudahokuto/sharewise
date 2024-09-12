@@ -1,0 +1,26 @@
+<% if user %>
+  <div class="user-card <%= 'current-user' if user == @current_user %>">
+    <% if user.profile_image.attached? %>
+      <%= image_tag user.get_profile_image(150, 150), class: 'profile-image' %>
+    <% else %>
+      <%= image_tag 'no_image.jpg', size: '150x150', class: 'profile-image' %>
+    <% end %>
+    <h5 class="nick-name"><%= user.nick_name %></h5>
+    <p class="user-profile"><%= user.profile %></p>
+    <div>
+      <%= link_to "#{user.followings.count} フォロー", user_followings_path(user), class: "follows-count" %>
+      |
+      <%= link_to "#{user.followers.count} フォロワー", user_followers_path(user), class: "follows-count" %>
+    </div>
+    <% if user == @current_user %>
+      <span><%= link_to '❤いいねした投稿を見る', likes_user_path(user), class: 'favo-link' %></span>
+    <% end %>
+  </div>
+<% else %>
+  <div class="user-card">
+    <%= image_tag 'no_image.jpg', size: '150x150', class: 'profile-image' %>
+    <h5>ゲスト</h5>
+    <p class="gest-text">投稿するには</br>
+    <p class="gest-text">ログインが必要です</p>
+  </div>
+<% end %>

@@ -1,0 +1,47 @@
+/* app/assets/stylesheets/sessions.scss */
+
+.session-form-container {
+  margin-top: 40px;
+  background: #f7f7f7; /* 背景色を明るいグレーに設定 */
+  padding: 20px; /* 内側の余白を追加 */
+  border-radius: 10px; /* 角を丸くする */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* 大きめのシャドウを追加 */
+}
+
+.card {
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  background: #ffffff; /* カードの背景色 */
+  border: 1px solid #e0e0e0; /* カードのボーダー色 */
+}
+
+.field {
+  margin-bottom: 15px;
+}
+
+.field label {
+  font-weight: 600;
+  color: #333;
+}
+
+.field input {
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  padding: 10px;
+  width: 100%;
+}
+
+.btn-primary {
+  background-color: #ff6f61;
+  border: none;
+  border-radius: 6px;
+  padding: 12px 24px;
+  font-size: 18px;
+  color: white;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-primary:hover {
+  background-color: #e55e50;
+  transform: scale(1.05); /* ホバー時に少し拡大 */
+}

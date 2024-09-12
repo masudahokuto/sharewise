@@ -1,0 +1,50 @@
+<%= stylesheet_link_tag 'admin/posts', media: 'all' %>
+<%= stylesheet_link_tag 'admin/users', media: 'all' %>
+<div class="container-fluid">
+  <div class="row d-flex">
+    <div class="col-md-2 d-flex flex-column align-items-center">
+      <%= render 'admin/users/user_data' %>
+    </div>
+      <div class="col-md-10">
+        <% if @posts.any? %>
+          <% @posts.each do |post| %>
+            <div class="text-center d-flex justify-content-end align-items-center">
+              <div class="favorite-post-show">
+                <i class="fas fa-heart mb-1" style="color: red;">いいね数 <%= post.favorites.count %></i>
+              </div>
+            </div>
+            <div class="post-row post-link d-flex">
+              <!-- ユーザー情報 -->
+              <div class="user-card-link col-md-2 d-flex flex-column">
+                <%= render 'admin/posts/user_card_admin_posts', user: post.user %>
+              </div>
+            <div class="show-link col-md-10 d-flex" style="flex-grow: 1;">
+              <%= link_to admin_post_path(post), style: 'text-decoration: none; display: flex; width: 100%;' do %>
+                <!-- 本文部分 -->
+                <div class="col-md-7 d-flex" style="flex-grow: 1;">
+                  <div>
+                    <p><%= simple_format(post.body) %></p>
+                  </div>
+                </div>
+                <!-- 画像部分 -->
+                <div class="col-md-5 d-flex flex-column align-items-end">
+                  <% post.images.each do |image| %>
+                    <div class="post-image mb-3">
+                      <%= image_tag image, class: "img-fluid", alt: "Post Image", style: "max-width: 100%;" %>
+                    </div>
+                  <% end %>
+                </div>
+              <% end %> <!-- link_to post_path -->
+            </div>
+          </div>
+        <% end %>
+      <% else %>
+        <p>投稿がありません。</p>
+      <% end %>
+      <!-- ページネーション -->
+      <div id="pagination">
+        <%= paginate @posts %>
+      </div>
+    </div>
+  </div>
+</div>
