@@ -1,6 +1,8 @@
 class Public::GenresController < ApplicationController
   def show
     @genre = Genre.find(params[:id])
+    @title = @genre.title
+    @category = @title.category
     @contents = @genre.contents
     @content = Content.new
   end

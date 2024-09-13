@@ -1,0 +1,14 @@
+<h1><%= @genre.genre_name %> ジャンル詳細</h1>
+
+<!-- コンテンツの新規作成ボタン -->
+<%= link_to '新しいコンテンツを作成', new_category_title_genre_content_path(@category, @title, @genre), class: 'btn btn-primary' %>
+
+<!-- コンテンツの一覧表示 -->
+<h2>コンテンツ一覧</h2>
+<ul>
+  <% @contents.each do |content| %>
+    <li>
+      <%= link_to content.name, category_title_genre_content_path(@category, @title, @genre, content) %>
+    </li>
+  <% end %>
+</ul>
