@@ -25,13 +25,12 @@ Rails.application.routes.draw do
       resources :post_comments, only: %i[destroy]
     end
     get "/" => "homes#top"
-    get '/about', to:'homes#about', as:'about'
   end
 
   # Public側のルーティング
   scope module: :public do
     root to: 'homes#top'
-    get 'homes/about'
+    get 'about', to: 'homes#about'
     resources :users, except: %i[new create] do
       collection do
         get 'mypage', to: 'users#mypage'

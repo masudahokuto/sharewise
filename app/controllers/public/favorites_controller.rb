@@ -8,7 +8,6 @@ class Public::FavoritesController < ApplicationController
       format.js
     end
   end
-  
   # 後でモデルに記述する
   def destroy
     @post = Post.find(params[:post_id])
