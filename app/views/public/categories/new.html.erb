@@ -1,0 +1,27 @@
+<!-- app/views/public/categories/new.html.erb -->
+<h1>カテゴリ新規登録</h1>
+
+<%= form_with(model: @category, url: categories_path, method: :post, local: true) do |f| %>
+  <div>
+    <%= f.label :category_name, "カテゴリ名" %>
+    <%= f.text_field :category_name %>
+  </div>
+  <div>
+    <%= f.submit "カテゴリを登録" %>
+  </div>
+<% end %>
+
+<h2>登録済みカテゴリ一覧</h2>
+
+<ul>
+  <% @categories.each do |category| %>
+    <li>
+      <%= link_to category.category_name, category_path(category) %>
+      <%= link_to "削除", category_path(category), method: :delete, data: { confirm: "本当に削除しますか？" } %>
+
+      <!-- ここは不要です。詳細ページでタイトルを表示するため、こちらの処理は不要 -->
+    </li>
+  <% end %>
+</ul>
+
+<p><%= link_to 'マイページへ', mypage_users_path %></p>

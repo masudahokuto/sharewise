@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   }
 
 
-  # Admin側のルーティング
+  # 管理者用のルーティング
   namespace :admin do
     resources :users, only: %i[index show update] do
       collection do
@@ -27,7 +27,7 @@ Rails.application.routes.draw do
     get "/" => "homes#top"
   end
 
-  # Public側のルーティング
+  # 顧客用のルーティング
   scope module: :public do
     root to: 'homes#top'
     get 'about', to: 'homes#about'
@@ -49,6 +49,14 @@ Rails.application.routes.draw do
     resources :posts do
       resource :favorite, only: %i[create destroy]
       resources :post_comments, only: %i[create destroy]
+    end
+
+    resources :categories, only: %i[new create update destroy show] do
+      resources :titles, only: %i[show create update destroy] do
+        resources :genres, only: %i[show create update destroy] do
+          resources :contens, only: %i[new show create update destroy]
+        end
+      end
     end
   end
 end

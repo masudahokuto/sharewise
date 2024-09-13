@@ -1,0 +1,22 @@
+<h1><%= @title.title_name %> タイトル詳細</h1>
+
+<%= form_with(model: [@category, @title, @genre], url: category_title_genres_path(@category, @title), method: :post, local: true) do |f| %>
+  <div>
+    <%= f.label :genre_name, "ジャンル名" %>
+    <%= f.text_field :genre_name %>
+  </div>
+  <div>
+    <%= f.submit "ジャンルを登録" %>
+  </div>
+<% end %>
+
+<ul>
+  <% @genres.each do |genre| %>
+    <li>
+      <%= link_to genre.genre_name, category_title_genre_path(@category, @title, genre) %>
+      <%= link_to "削除", category_title_path(@category, @title, genre), method: :delete, data: { confirm: "本当に削除しますか？" } %>
+    </li>
+  <% end %>
+</ul>
+
+<p><%= link_to 'タイトル一覧へ戻る', category_path(@category) %></p>
