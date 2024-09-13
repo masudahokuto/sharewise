@@ -6,6 +6,7 @@
       <%= image_tag 'no_image.jpg', size: '100x100', class: 'profile-image-post-index' %>
     <% end %>
     <p class="user-nick-name"><%= user.nick_name %></p>
+    <p class="user-full-name"><%= user.full_name %></p>
     <p class="user_id">User_ID: <%= user.id %></p>
     <% if user.is_active %>
       <p class="is_active_true">登録中</p>

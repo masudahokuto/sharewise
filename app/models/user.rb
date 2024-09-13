@@ -65,7 +65,7 @@ class User < ApplicationRecord
     age -= 1 if today < birthday + age.years # 誕生日がまだ来ていない場合は1歳引く
     age
   end
-  
+
   def favorite(post)
     self.favorites.find_or_create_by(post_id: post.id)
   end
@@ -73,5 +73,9 @@ class User < ApplicationRecord
   # ユーザーが特定のポストをいいねしているかを判定
   def favorited_by?(post)
     favorites.exists?(post_id: post.id)
+  end
+
+  def full_name
+    "#{last_name} #{first_name}"
   end
 end

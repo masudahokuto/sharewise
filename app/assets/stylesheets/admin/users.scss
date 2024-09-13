@@ -69,8 +69,13 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   font-weight: bold;
+  margin-bottom: -0.3rem;
 }
 
+.followed-count {
+  font-weight: bold;
+  margin-bottom: -0.3rem;
+}
 .is_active_true {
   color: limegreen;
   font-weight: bold;
@@ -93,10 +98,10 @@
   margin-bottom: -0.1rem;
 }
 
-.user_id {
-  color: #0000ff;
+.user-full-name {
+  color: #0000ff !important;
   font-weight: bold;
-  margin-bottom: -0.1rem;
+  margin-bottom: -0.3rem !important;
 }
 
 /* ボタンの横並び */
