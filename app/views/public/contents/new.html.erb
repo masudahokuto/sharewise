@@ -1,0 +1,41 @@
+<%= stylesheet_link_tag 'public/posts', media: 'all' %>
+
+<div class="container-fluid">
+  <div class="row d-flex justify-content-center">
+    <div class="col-md-2 d-flex flex-column align-items-center">
+      <%= render 'public/users/user_card', user: @user %>
+    </div>
+
+    <!-- コンテンツ作成フォーム -->
+    <div class="col-md-10">
+      <%= form_with model: @content, url: category_title_genre_contents_path(@category, @title, @genre), local: true, html: { id: 'content_form', enctype: 'multipart/form-data' } do |f| %>
+        <div class="row d-flex justify-content-center">
+          <div class="col-md-12 text-center">
+            <%= f.submit "投稿する", class: 'btn btn-primary' %>
+          </div>
+        </div>
+        <div class="row d-flex mb-3">
+          <div class="field col-md-8">
+            <%= f.label :content_name, 'コンテンツ名を入力してください' %>
+            <%= f.text_field :content_name, class: "form-control" %>
+          </div>
+          <div class="field col-md-8">
+            <%= f.label :body, 'コンテンツの内容を入力してください' %>
+            <%= f.text_area :body, class: "post-text-area" %>
+          </div>
+          <div class="col-md-4 mt-4">
+            <div class="text-right">
+              <button id="add_image_button" type="button" class="image-add-btn btn-secondary">画像を追加する</button>
+            </div>
+            <div class="content-image-field">
+              <div class="file-field_0 mb-3">
+                <input name="content[images][]" type="file" class="content_image" aria-num="0" onchange="fileSelect(this);">
+                <img id="preview_area_0">
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
