@@ -1,2 +1,43 @@
-<h1>Public::Contens#show</h1>
-<p>Find me in app/views/public/contens/show.html.erb</p>
+<%= stylesheet_link_tag 'public/posts', media: 'all' %>
+<div class="container-fluid">
+  <div class="row d-flex justify-content-center">
+    <div class="col-md-2 d-flex flex-column align-items-end">
+      <%= render 'public/users/user_card', user: @user %>
+    </div>
+    <!-- 本文を表示する部分 -->
+
+    <div class="col-md-9">
+      <div class="text-center d-flex justify-content-between align-items-center">
+        <div class="d-flexflex-column">
+          <h6 class="category-name m-0 font-weight-bold"><%= @category.category_name %></3>
+          <h5 class="category-name m-0 font-weight-bold"><%= @title.title_name %></h>
+          <h4 class="category-name m-0 font-weight-bold"><%= @genre.genre_name %></h>
+          <h3 class="category-name m-0 font-weight-bold"><%= @content.content_name %></h>
+        </div>
+        <div>
+        <% if current_user == @content.genre.title.category.user %>
+          <%= link_to 'コンテンツを編集', edit_category_title_genre_content_path(@category, @title, @genre, @content), class: 'btn btn-success mr-1', style: 'margin-right: 0;' %>
+        <% end %>
+        <% if current_user == @content.genre.title.category.user %>
+          <%= link_to 'コンテンツを削除', category_title_genre_content_path(@category, @title, @genre, @content), method: :delete, data: { confirm: '本当に削除してもよろしいですか？' }, class: 'btn btn-danger mr-1', style: 'margin-right: 0;' %>
+        <% end %>
+        </div>
+      </div>
+
+      <div class="show-row row d-flex mb-3">
+        <div class="col-md-8 d-flex flex-column">
+          <%= simple_format(@content.body) %>
+        </div>
+        <div class="col-md-4 d-flex flex-column align-items-end">
+          <div class="d-flex flex-column align-items-end">
+            <% @content.images.each do |image| %>
+              <div class="my-3">
+                <%= image_tag image, style: "width: 500px; height: 300px; object-fit: cover;", alt: "Content Image", class: "img-fluid" %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

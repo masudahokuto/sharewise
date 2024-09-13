@@ -1,4 +1,5 @@
 class Public::GenresController < ApplicationController
+  before_action :authenticate_user!
   def show
     @genre = Genre.find(params[:id])
     @title = @genre.title

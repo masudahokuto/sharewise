@@ -54,7 +54,7 @@ Rails.application.routes.draw do
     resources :categories, only: %i[new create update destroy show] do
       resources :titles, only: %i[show create update destroy] do
         resources :genres, only: %i[show create update destroy] do
-          resources :contents, only: %i[new show create update destroy]
+          resources :contents, only: %i[new edit show create update destroy]
         end
       end
     end
