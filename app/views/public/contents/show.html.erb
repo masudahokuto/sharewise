@@ -8,11 +8,11 @@
 
     <div class="col-md-9">
       <div class="text-center d-flex justify-content-between align-items-center">
-        <div class="d-flexflex-column">
-          <h6 class="category-name m-0 font-weight-bold"><%= @category.category_name %></3>
+        <div>
+          <h5 class="category-name m-0 font-weight-bold"><%= @category.category_name %></3>
           <h5 class="category-name m-0 font-weight-bold"><%= @title.title_name %></h>
-          <h4 class="category-name m-0 font-weight-bold"><%= @genre.genre_name %></h>
-          <h3 class="category-name m-0 font-weight-bold"><%= @content.content_name %></h>
+          <h5 class="category-name m-0 font-weight-bold"><%= @genre.genre_name %></h>
+          <h5 class="category-name m-0 font-weight-bold"><%= @content.content_name %></h>
         </div>
         <div>
         <% if current_user == @content.genre.title.category.user %>

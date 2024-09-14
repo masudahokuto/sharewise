@@ -14,7 +14,7 @@
   <% @genres.each do |genre| %>
     <li>
       <%= link_to genre.genre_name, category_title_genre_path(@category, @title, genre) %>
-      <%= link_to "削除", category_title_path(@category, @title, genre), method: :delete, data: { confirm: "本当に削除しますか？" } %>
+      <%= link_to "削除", category_title_genre_path(@category, @title, genre), method: :delete, data: { confirm: "本当に削除しますか？" } %>
     </li>
   <% end %>
 </ul>

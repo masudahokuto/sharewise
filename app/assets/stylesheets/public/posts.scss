@@ -49,6 +49,7 @@
 
 // ユーザーカードのスタイル
 .user-card {
+  width: 220px;
   background-color: #C19A6B;
   border: 1px solid #ddd;
   border-radius: 8px;
@@ -280,4 +281,19 @@
   font-weight: bold;
   text-decoration: none !important;
   color: #b30000;
+}
+
+.fa-caret-left {
+  font-size: 20px !important;
+  color: #F8F5E6;
+  background-color: #4169e1;
+  border-radius: 10px;
+  transition: all 0.1s ease-in-out;
+}
+
+.fa-caret-left:hover {
+  color: #4169e1;
+  background-color: #F8F5E6;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  transform: translateY(-2px);
 }

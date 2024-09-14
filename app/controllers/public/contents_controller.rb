@@ -30,6 +30,23 @@ class Public::ContentsController < ApplicationController
   end
 
   def edit
+    @category = Category.find(params[:category_id])
+    @title = @category.titles.find(params[:title_id])
+    @genre = @title.genres.find(params[:genre_id])
+    @content = @genre.contents.find(params[:id])
+  end
+
+  def update
+    @category = Category.find(params[:category_id])
+    @title = @category.titles.find(params[:title_id])
+    @genre = @title.genres.find(params[:genre_id])
+    @content = @genre.contents.find(params[:id])
+
+    if @content.update(content_params)
+      redirect_to category_title_genre_content_path(@category, @title, @genre, @content), notice: 'コンテンツが更新されました。'
+    else
+      redirect_back(fallback_location: root_path)
+    end
   end
 
   def destroy

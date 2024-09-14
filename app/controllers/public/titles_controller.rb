@@ -1,7 +1,7 @@
 class Public::TitlesController < ApplicationController
   def show
     @title = Title.find(params[:id])
-    @category = @title.category
+    @category = Category.find(params[:category_id])
     @genres = @title.genres
     @genre = Genre.new
   end

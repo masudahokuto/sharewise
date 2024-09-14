@@ -1,2 +1,77 @@
-<h1>Public::Contens#edit</h1>
-<p>Find me in app/views/public/contens/edit.html.erb</p>
+<!-- app/views/posts/edit.html.erb -->
+<%= stylesheet_link_tag 'public/posts', media: 'all' %>
+<div class="row d-flex justify-content-center">
+  <div class="col-md-2 d-flex flex-column align-items-center">
+    <%= render 'public/users/user_card', user: @user %>
+  </div>
+  <div class="col-md-10">
+    <%= form_with model: [@category, @title, @genre, @content], local: true, html: { id: 'post_form', enctype: 'multipart/form-data' } do |f| %>
+      <div class="row">
+        <div class="col-md-8 mb-4">
+          <div class="text-center d-flex justify-content-between align-items-center">
+            <%= f.label :body, '※編集内容を入力してください', style: "margin-bottom: -2rem" %>
+            <div>
+              <%= f.submit 'コンテンツを保存', class: 'btn btn-success' %>
+              <%= link_to 'コンテンツを削除', category_title_genre_content_path(@category, @title, @genre, @content), method: :delete, data: { confirm: '本当に削除してもよろしいですか？' }, class: 'btn btn-danger mr-1', style: 'margin-right: 0;' %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row d-flex mb-3">
+        <div class="field col-md-8">
+          <%= f.text_area :body, class: 'post-text-area' %>
+        </div>
+        <div class="col-md-4 mt-4">
+          <div class="text-right">
+            <button id="add_image_button" type="button" class="image-add-btn btn-secondary">画像を追加する</button>
+          </div>
+          <div class="content-image-field">
+            <div class="file-field_0 mb-3">
+              <!-- 画像を追加するためのフィールド -->
+              <input name="content[images][]" type="file" class="content_image" aria-num="0" onchange="fileSelect(this);" multiple>
+              <img id="preview_area_0">
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<!--<script>-->
+<!--// app/javascript/packs/application.js-->
+<!--$(document).on('turbolinks:load', function() {-->
+  <!--// 画像フィールド追加処理-->
+<!--  $('#add_image_button').click(function () {-->
+    <!--const fieldsNum = $('.post-image-field').children("div").length; // .post-image-field内部のdivタグの数を調べる-->
+
+    <!--if (fieldsNum >= 3) { // 3枚制限-->
+<!--      return false;-->
+<!--    }-->
+
+    <!--// 追加するフィールド情報-->
+<!--    const field = `-->
+<!--      <div class="file-field_${fieldsNum} mb-3">-->
+<!--        <input name="post[images][]" type="file" aria-num="${fieldsNum}" onchange="fileSelect(this);">-->
+<!--        <img id="preview_area_${fieldsNum}">-->
+<!--      </div>-->
+<!--      `-->
+    <!--$('.post-image-field').append(field) // HTMLをフィールドに追加-->
+<!--  })-->
+
+
+<!--  window.fileSelect = function (element) {-->
+    <!--const fieldsNum = $(element).attr('aria-num'); // フィールド番号-->
+    <!--const file = $(element).prop('files')[0]; // ファィル1つ目-->
+    <!--const reader = new FileReader(); // Base64に変更準備-->
+
+    <!--// 画像をBase64エンコード-->
+<!--    reader.onload = (function(file){-->
+<!--      return function(e){-->
+<!--        $(`#preview_area_${fieldsNum}`).addClass('new-img mt-2').attr('src', e.target.result)-->
+<!--      };-->
+<!--    })(file);-->
+<!--    reader.readAsDataURL(file);-->
+<!--  }-->
+<!--});-->
+<!--</script>-->

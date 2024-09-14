@@ -1,27 +1,46 @@
-<!-- app/views/public/categories/new.html.erb -->
-<h1>カテゴリ新規登録</h1>
+<%= stylesheet_link_tag 'public/posts', media: 'all' %>
 
-<%= form_with(model: @category, url: categories_path, method: :post, local: true) do |f| %>
-  <div>
-    <%= f.label :category_name, "カテゴリ名" %>
-    <%= f.text_field :category_name %>
+<div class="container-fluid">
+  <div class="row d-flex justify-content-center">
+    <div class="col-md-2 d-flex flex-column">
+
+        <%= link_to mypage_users_path, class: "caret-left" do %>
+          <i class="fa fa-caret-left p-2 mr-2"> マイページ</i>
+        <% end %>
+
+      <div class="d-flex flex-column mt-5">
+        <%= render 'public/users/user_card', user: @user %>
+      </div>
+    </div>
+
+    <!-- 本文を表示する部分 -->
+    <div class="col-md-9">
+      <div class="d-flex justify-content-center align-items-center w-100 mb-2">
+        <%= form_with(model: @category, url: categories_path, method: :post, local: true, class: 'w-50') do |f| %>
+          <div class="d-flex">
+            <%= f.text_field :category_name, class: "form-control mr-2", placeholder: "項目名を入力(20文字まで登録できます)               このボタンで保存⇨" %>
+
+            <%= f.submit "項目を追加", class: "btn btn-primary", title: 'フォームに入力してこのボタンで保存します(保存をすると保存順に切り替わります)' %>
+          </div>
+        <% end %>
+
+      </div>
+
+      <%= link_to '五十音順', new_category_path(sort_order: 'alphabetical'),title:
+'0(半角数字)
+０(全角数字)a(半角小文字)
+ａ(全角小文字)
+A(半角大文字)
+Ａ(全角大文字)
+ｱ(半角カナ)
+ァ(全角カナ)
+ぁ(かな)
+漢字
+その他の順で並びます
+' %>
+      |
+      <%= link_to '登録順', new_category_path(sort_order: 'created_at'), title: '保存順で並びます' %>
+      <%= render 'category_save_oder', sorted_categories: @sorted_categories %>
+    </div>
   </div>
-  <div>
-    <%= f.submit "カテゴリを登録" %>
-  </div>
-<% end %>
-
-<h2>登録済みカテゴリ一覧</h2>
-
-<ul>
-  <% @categories.each do |category| %>
-    <li>
-      <%= link_to category.category_name, category_path(category) %>
-      <%= link_to "削除", category_path(category), method: :delete, data: { confirm: "本当に削除しますか？" } %>
-
-      <!-- ここは不要です。詳細ページでタイトルを表示するため、こちらの処理は不要 -->
-    </li>
-  <% end %>
-</ul>
-
-<p><%= link_to 'マイページへ', mypage_users_path %></p>
+</div>

@@ -13,7 +13,7 @@
 <ul>
   <% @titles.each do |title| %>
     <li>
-      <%= link_to title.title_name, category_title_path(title) %>
+      <%= link_to title.title_name, category_title_path(@category,title) %>
       <%= link_to "削除", category_title_path(@category, title), method: :delete, data: { confirm: "本当に削除しますか？" } %>
     </li>
   <% end %>
