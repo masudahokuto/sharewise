@@ -3,14 +3,9 @@
 <div class="container-fluid">
   <div class="row d-flex justify-content-center">
     <div class="col-md-2 d-flex flex-column">
-
-        <%= link_to mypage_users_path, class: "caret-left" do %>
-          <i class="fa fa-caret-left p-2 mr-2"> マイページ</i>
-        <% end %>
-
-      <div class="d-flex flex-column mt-5">
-        <%= render 'public/users/user_card', user: @user %>
-      </div>
+      <%= link_to mypage_users_path, class: "caret-left" do %>
+        <i class="fa fa-caret-left p-2 mr-2"> マイページ</i>
+      <% end %>
     </div>
 
     <!-- 本文を表示する部分 -->
