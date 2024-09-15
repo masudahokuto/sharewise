@@ -1,7 +1,7 @@
 class Public::CategoriesController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_category, only: [:show, :destroy]
-  before_action :authorize_user!, only: [:show, :destroy]
+  before_action :set_category, only: [:show, :destroy, :update]
+  before_action :authorize_user!, only: [:show, :destroy, :update]
 
   def new
     @category = Category.new
@@ -26,6 +26,20 @@ class Public::CategoriesController < ApplicationController
     @titles = @category.titles
     @sort_order = params[:sort_order] || 'created_at'
     @sorted_titles = @category.titles.sort_titles(@sort_order)
+  end
+
+  def update
+    if @category.update(category_params)
+      respond_to do |format|
+        format.js # JavaScriptでレスポンスを返す
+        format.html { redirect_to new_category_path, notice: 'カテゴリー名が更新されました。' }
+      end
+    else
+      respond_to do |format|
+        format.js
+        format.html { render :new }
+      end
+    end
   end
 
   def destroy

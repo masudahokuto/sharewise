@@ -28,7 +28,7 @@
       <% elsif user_signed_in? %>
         <%= link_to 'マイページ', mypage_users_path, class: "header-link text-decoration-none hover-effect mx-3 #{'active' if current_page?(mypage_users_path)}" %>
         <%= link_to new_category_path, class: "header-link text-decoration-none hover-effect mx-3 #{'active' if current_page?(new_category_path)}" do %>
-          <i class="fa-solid fa-book-open">もくじ</i>
+          <i class="fa-solid fa-book-open">もくじを見る</i>
         <% end %>
         <%= link_to 'user一覧', users_path, class: "header-link text-decoration-none hover-effect mx-3 #{'active' if current_page?(users_path)}" %>
         <%= link_to 'post一覧', posts_path, class: "header-link text-decoration-none hover-effect mx-3 #{'active' if current_page?(posts_path)}" %>
