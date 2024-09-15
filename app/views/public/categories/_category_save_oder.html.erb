@@ -106,6 +106,7 @@
       var categoryId = form.attr('id').replace('edit-form-', '');
       $('#category-name-' + categoryId).text(form.find('input[name="category_name"]').val());
       toggleEditForm(categoryId);
+    });
     $(document).on('ajax:error', 'form[id^="edit-form-"]', function(event) {
     });
   });
