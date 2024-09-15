@@ -22,10 +22,10 @@ class Public::ContentsController < ApplicationController
   end
 
   def show
-    @category = Category.find(params[:category_id])
-    @title = @category.titles.find(params[:title_id])
-    @genre = @title.genres.find(params[:genre_id])
     @content = @genre.contents.find(params[:id])
+    @genre = @content.genre
+    @title = @genre.title
+    @category = @title.category
     @user = @content.genre.title.category.user
   end
 
@@ -43,7 +43,7 @@ class Public::ContentsController < ApplicationController
     @content = @genre.contents.find(params[:id])
 
     if @content.update(content_params)
-      redirect_to category_title_genre_content_path(@category, @title, @genre, @content), notice: 'コンテンツが更新されました。'
+      redirect_to category_title_genre_path(@category, @title, @genre), notice: 'コンテンツが更新されました。'
     else
       redirect_back(fallback_location: root_path)
     end
@@ -53,10 +53,9 @@ class Public::ContentsController < ApplicationController
     if current_user == @content.genre.title.category.user
       @content.destroy
       flash[:notice] = "コンテンツが削除されました。"
-      redirect_to new_category_path
+      redirect_to category_title_genre_path(@category, @title, @genre), notice: 'コンテンツが削除されました。'
     else
-      flash[:alert] = "削除権限がありません。"
-      redirect_back(fallback_location: root_path)
+      redirect_to mypage_path
     end
   end
 

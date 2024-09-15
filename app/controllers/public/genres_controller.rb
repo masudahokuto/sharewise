@@ -6,6 +6,8 @@ class Public::GenresController < ApplicationController
     @category = @title.category
     @contents = @genre.contents
     @content = Content.new
+    @sort_order = params[:sort_order] || 'created_at'
+    @sorted_contents = @genre.contents.sort_contents(@sort_order)
   end
 
   def create

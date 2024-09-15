@@ -15,12 +15,12 @@
           <h5 class="category-name m-0 font-weight-bold"><%= @content.content_name %></h>
         </div>
         <div>
-        <% if current_user == @content.genre.title.category.user %>
-          <%= link_to 'コンテンツを編集', edit_category_title_genre_content_path(@category, @title, @genre, @content), class: 'btn btn-success mr-1', style: 'margin-right: 0;' %>
-        <% end %>
-        <% if current_user == @content.genre.title.category.user %>
-          <%= link_to 'コンテンツを削除', category_title_genre_content_path(@category, @title, @genre, @content), method: :delete, data: { confirm: '本当に削除してもよろしいですか？' }, class: 'btn btn-danger mr-1', style: 'margin-right: 0;' %>
-        <% end %>
+          <% if current_user == @content.genre.title.category.user %>
+            <%= link_to 'コンテンツを編集', edit_category_title_genre_content_path(@category, @title, @genre, @content), class: 'btn btn-success mr-1', style: 'margin-right: 0;' %>
+          <% end %>
+          <% if current_user == @content.genre.title.category.user %>
+            <%= link_to 'コンテンツを削除', category_title_genre_content_path(@category, @title, @genre, @content), method: :delete, data: { confirm: '本当に削除してもよろしいですか？' }, class: 'btn btn-danger mr-1', style: 'margin-right: 0;' %>
+          <% end %>
         </div>
       </div>
 

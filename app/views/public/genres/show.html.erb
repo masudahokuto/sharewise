@@ -1,14 +1,33 @@
-<h1><%= @genre.genre_name %> ジャンル詳細</h1>
-
-<!-- コンテンツの新規作成ボタン -->
-<%= link_to '新しいコンテンツを作成', new_category_title_genre_content_path(@category, @title, @genre), class: 'btn btn-primary' %>
-
-<!-- コンテンツの一覧表示 -->
-<h2>コンテンツ一覧</h2>
-<ul>
-  <% @contents.each do |content| %>
-    <li>
-      <%= link_to content.content_name, category_title_genre_content_path(@category, @title, @genre, content) %>
-    </li>
-  <% end %>
-</ul>
+<%= stylesheet_link_tag 'public/posts', media: 'all' %>
+<div class="container-fluid">
+  <div class="row d-flex justify-content-center">
+    <div class="col-md-10">
+      <%= link_to  mypage_users_path, class: 'mypage-link', title: 'マイページ' do %>
+        <i class="fa-solid fa-user"></i>
+      <% end %>
+      <%= link_to '＜＜＜', new_category_path, class: 'return-link', title: 'みっつ前に戻る' %>
+      <%= link_to '＜＜', category_path(@category), class: 'return-link', title: 'ふたつ前に戻る' %>
+      <%= link_to '＜', category_title_path(@category, @title), class: 'return-link', title: 'ひとつ前に戻る' %>
+      <div class="d-flex justify-content-center align-items-center mb-2">
+        <div class="d-flex">
+          <%= link_to '新しいコンテンツを作成', new_category_title_genre_content_path(@category, @title, @genre), class: 'btn btn-primary' %>
+        </div>
+      </div>
+      <%= link_to '五十音順', category_title_genre_path(sort_order: 'alphabetical'),genre:
+'0(半角数字)
+０(全角数字)a(半角小文字)
+ａ(全角小文字)
+A(半角大文字)
+Ａ(全角大文字)
+ｱ(半角カナ)
+ァ(全角カナ)
+ぁ(かな)
+漢字
+その他の順で並びます
+' %>
+      |
+      <%= link_to '登録順', category_title_genre_path(sort_order: 'created_at'), genre: '保存順で並びます' %>
+      <%= render 'content_save_order', sorted_contents: @sorted_contents, title: @title, category: @category, content: @content %>
+    </div>
+  </div>
+</div>
