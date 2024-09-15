@@ -4,10 +4,10 @@
     <div class="col-md-10">
       <%= link_to  mypage_users_path, class: 'mypage-link', title: 'マイページ' do %>
         <i class="fa-solid fa-user"></i>
-      <% end %>
-      <%= link_to '＜＜', new_category_path, class: 'return-link', title: 'ふたつ前に戻る' %>
-      <%= link_to '＜', category_path(@category), class: 'return-link', title: 'ひとつ前に戻る' %>
-      <div class="d-flex justify-content-center align-items-center mb-2">
+      <% end %>＞
+      <%= link_to 'もくじ', new_category_path, class: 'return-link-black', title: 'ふたつ前に戻る' %>＞
+      <%= link_to @category.category_name, category_path(@category), class: 'return-link-brown', title: 'ひとつ前に戻る' %>＞
+      <div class="d-flex justify-content-center align-items-center my-2">
 
         <%= form_with(model: [@category, @title, @genre], url: category_title_genres_path(@category, @title), method: :post, local: true, class: 'w-50') do |f| %>
 
@@ -17,6 +17,7 @@
           </div>
         <% end %>
       </div>
+      <span class="title-name"><%= @title.title_name %></span>
       <%= link_to '五十音順', category_title_path(sort_order: 'alphabetical'),title:
 '0(半角数字)
 ０(全角数字)a(半角小文字)

@@ -2,9 +2,9 @@
 <div class="container-fluid">
   <div class="row d-flex justify-content-center">
     <div class="col-md-10">
-      <%= link_to  mypage_users_path, class: 'mypage-link' do %>
+      <%= link_to  mypage_users_path, class: 'mypage-link', title: 'マイページ' do %>
         <i class="fa-solid fa-user"></i>
-      <% end %>
+      <% end %>＞
       <div class="d-flex justify-content-center align-items-center w-100 mb-2">
         <%= form_with(model: @category, url: categories_path, method: :post, local: true, class: 'w-50') do |f| %>
           <div class="d-flex">
@@ -13,7 +13,8 @@
           </div>
         <% end %>
       </div>
-        <%= link_to '五十音順', new_category_path(sort_order: 'alphabetical'),title:
+      <span class="mokuji">もくじ</span>
+      <%= link_to '五十音順', new_category_path(sort_order: 'alphabetical'),title:
 '0(半角数字)
 ０(全角数字)a(半角小文字)
 ａ(全角小文字)

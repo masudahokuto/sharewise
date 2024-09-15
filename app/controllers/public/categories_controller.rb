@@ -1,5 +1,7 @@
 class Public::CategoriesController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_category, only: [:show, :destroy]
+  before_action :authorize_user!, only: [:show, :destroy]
 
   def new
     @category = Category.new
@@ -19,7 +21,7 @@ class Public::CategoriesController < ApplicationController
   end
 
   def show
-    @category = Category.find(params[:id])
+    # set_category と authorize_user! により、他ユーザーのアクセスを防止済み
     @title = Title.new
     @titles = @category.titles
     @sort_order = params[:sort_order] || 'created_at'
@@ -27,12 +29,22 @@ class Public::CategoriesController < ApplicationController
   end
 
   def destroy
-    @category = current_user.categories.find(params[:id])
+    # set_category と authorize_user! により、他ユーザーの削除を防止済み
     @category.destroy
     redirect_to new_category_path, notice: "カテゴリを削除しました。"
   end
 
   private
+
+  def set_category
+    # パラメータで渡されたカテゴリを取得
+    @category = Category.find(params[:id])
+  end
+
+  def authorize_user!
+    # current_user がそのカテゴリの所有者であるか確認
+    redirect_to root_path, alert: 'アクセス権がありません' unless @category.user == current_user
+  end
 
   def category_params
     params.require(:category).permit(:category_name)

@@ -1,6 +1,8 @@
 class Public::ContentsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_content, only: [:show, :edit, :update, :destroy]
+  before_action :authorize_user!, only: [:edit, :update, :destroy]
+
   def new
     @category = Category.find(params[:category_id])
     @title = @category.titles.find(params[:title_id])
@@ -22,26 +24,18 @@ class Public::ContentsController < ApplicationController
   end
 
   def show
-    @content = @genre.contents.find(params[:id])
     @genre = @content.genre
     @title = @genre.title
     @category = @title.category
-    @user = @content.genre.title.category.user
+    @user = @category.user
   end
 
   def edit
-    @category = Category.find(params[:category_id])
-    @title = @category.titles.find(params[:title_id])
-    @genre = @title.genres.find(params[:genre_id])
-    @content = @genre.contents.find(params[:id])
+    # @content は set_content コールバックで設定されている
   end
 
   def update
-    @category = Category.find(params[:category_id])
-    @title = @category.titles.find(params[:title_id])
-    @genre = @title.genres.find(params[:genre_id])
-    @content = @genre.contents.find(params[:id])
-
+    # @content は set_content コールバックで設定されている
     if @content.update(content_params)
       redirect_to category_title_genre_path(@category, @title, @genre), notice: 'コンテンツが更新されました。'
     else
@@ -50,14 +44,12 @@ class Public::ContentsController < ApplicationController
   end
 
   def destroy
-    if current_user == @content.genre.title.category.user
-      @content.destroy
-      flash[:notice] = "コンテンツが削除されました。"
-      redirect_to category_title_genre_path(@category, @title, @genre), notice: 'コンテンツが削除されました。'
-    else
-      redirect_to mypage_path
-    end
+    @content.destroy
+    flash[:notice] = "コンテンツが削除されました。"
+    redirect_to category_title_genre_path(@category, @title, @genre)
   end
+
+  private
 
   def set_content
     @category = Category.find_by(id: params[:category_id])
@@ -66,7 +58,12 @@ class Public::ContentsController < ApplicationController
     @content = @genre.contents.find_by(id: params[:id]) if @genre
   end
 
-  private
+  def authorize_user!
+    # @content から関連するカテゴリを取得
+    @category = @content.genre.title.category
+    # current_user がカテゴリの所有者であることを確認
+    redirect_to mypage_path, alert: 'アクセス権がありません' unless @category.user == current_user
+  end
 
   def content_params
     params.require(:content).permit(:content_name, :body, images: [])

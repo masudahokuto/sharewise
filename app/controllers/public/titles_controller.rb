@@ -1,6 +1,9 @@
 class Public::TitlesController < ApplicationController
+  before_action :authenticate_user!
+  before_action :set_title, only: [:show, :destroy]
+  before_action :authorize_user!, only: [:show, :destroy]
+
   def show
-    @title = Title.find(params[:id])
     @category = Category.find(params[:category_id])
     @genres = @title.genres
     @genre = Genre.new
@@ -19,12 +22,21 @@ class Public::TitlesController < ApplicationController
   end
 
   def destroy
-    @title = Title.find(params[:id])
     @title.destroy
-   redirect_back(fallback_location: root_path)
+    redirect_back(fallback_location: root_path)
   end
 
   private
+
+  def set_title
+    @title = Title.find(params[:id])
+  end
+
+  def authorize_user!
+    @category = Category.find(params[:category_id])
+    # current_user がカテゴリの所有者であることを確認
+    redirect_to root_path, alert: 'アクセス権がありません' unless @category.user == current_user
+  end
 
   def title_params
     params.require(:title).permit(:title_name)

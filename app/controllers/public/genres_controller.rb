@@ -1,7 +1,9 @@
 class Public::GenresController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_genre, only: [:show, :destroy]
+  before_action :authorize_user!, only: [:show, :destroy]
+
   def show
-    @genre = Genre.find(params[:id])
     @title = @genre.title
     @category = @title.category
     @contents = @genre.contents
@@ -21,12 +23,22 @@ class Public::GenresController < ApplicationController
   end
 
   def destroy
-    @genre = Genre.find(params[:id])
     @genre.destroy
     redirect_back(fallback_location: root_path, notice: 'ジャンルが削除されました。')
   end
 
   private
+
+  def set_genre
+    @genre = Genre.find(params[:id])
+  end
+
+  def authorize_user!
+    @title = @genre.title
+    @category = @title.category
+    # current_user がカテゴリの所有者であることを確認
+    redirect_to root_path, alert: 'アクセス権がありません' unless @category.user == current_user
+  end
 
   def genre_params
     params.require(:genre).permit(:genre_name)
