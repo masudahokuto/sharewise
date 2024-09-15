@@ -1,6 +1,6 @@
 class Public::TitlesController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_title, only: [:show, :destroy]
+  before_action :set_title, only: [:show, :destroy, :update]
   before_action :authorize_user!, only: [:show, :destroy]
 
   def show
@@ -18,6 +18,21 @@ class Public::TitlesController < ApplicationController
       redirect_back(fallback_location: root_path)
     else
       redirect_back(fallback_location: root_path)
+    end
+  end
+
+  def update
+    @category = Category.find(params[:category_id])
+    if @title.update(title_params)
+      respond_to do |format|
+        format.js # JavaScriptでレスポンスを返す
+        format.html { redirect_to category_path(@category), notice: 'カテゴリー名が更新されました。' }
+      end
+    else
+      respond_to do |format|
+        format.js
+        format.html { render :sho }
+      end
     end
   end
 

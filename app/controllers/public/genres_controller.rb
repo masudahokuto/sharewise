@@ -1,6 +1,6 @@
 class Public::GenresController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_genre, only: [:show, :destroy]
+  before_action :set_genre, only: [:show, :destroy, :update]
   before_action :authorize_user!, only: [:show, :destroy]
 
   def show
@@ -22,6 +22,22 @@ class Public::GenresController < ApplicationController
     end
   end
 
+  def update
+    @title = Title.find(params[:title_id])
+    @category = Category.find(params[:category_id])
+    if @genre.update(genre_params)
+      respond_to do |format|
+        format.js # JavaScriptでレスポンスを返す
+        format.html { redirect_to category_title_path(@category, @title), notice: 'カテゴリー名が更新されました。' }
+      end
+    else
+      respond_to do |format|
+        format.js
+        format.html { render :show }
+      end
+    end
+  end
+
   def destroy
     @genre.destroy
     redirect_back(fallback_location: root_path, notice: 'ジャンルが削除されました。')
@@ -30,7 +46,10 @@ class Public::GenresController < ApplicationController
   private
 
   def set_genre
-    @genre = Genre.find(params[:id])
+    @genre = Genre.find_by(id: params[:id])
+    if @genre.nil?
+      redirect_to root_path, alert: 'ジャンルが見つかりません。'
+    end
   end
 
   def authorize_user!

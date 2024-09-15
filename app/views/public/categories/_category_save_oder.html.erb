@@ -63,7 +63,7 @@
           <td class="link-cell">
             <span id="category-name-<%= category.id %>">
               <%= link_to category_path(category), class: 'full-link d-flex align-items-center' do %>
-                <i class="fa-solid fa-book mr-3 icon-shadow" style="color: #8b4513; font-size: 20px;"></i>
+                <i class="fa-solid fa-book mr-3 icon-shadow" style="color: #8b4513;"></i>
                 <%= category.category_name %>
               <% end %>
             </span>
@@ -91,34 +91,22 @@
 
 
 <script>
-$(document).on('turbolinks:load', function() {
-  console.log('Turbolinks load event fired.');
-
-  window.toggleEditForm = function(categoryId) {
-    console.log('Toggling edit form for categoryId:', categoryId);
-    $('#category-name-' + categoryId).toggle();
-    $('#category-edit-form-' + categoryId).toggle();
-  };
-
-  $(document).on('click', '.edit-btn', function() {
-    var categoryId = $(this).data('category-id');
-    console.log('Button clicked, categoryId:', categoryId);
-    toggleEditForm(categoryId);
+  $(document).on('turbolinks:load', function() {
+    window.toggleEditForm = function(categoryId) {
+      $('#category-name-' + categoryId).toggle();
+      $('#category-edit-form-' + categoryId).toggle();
+    };
+    $(document).on('click', '.edit-btn', function() {
+      var categoryId = $(this).data('category-id');
+      toggleEditForm(categoryId);
+    });
+    $(document).on('ajax:success', 'form[id^="edit-form-"]', function(event) {
+      var [data, status, xhr] = event.detail;
+      var form = $(this);
+      var categoryId = form.attr('id').replace('edit-form-', '');
+      $('#category-name-' + categoryId).text(form.find('input[name="category_name"]').val());
+      toggleEditForm(categoryId);
+    $(document).on('ajax:error', 'form[id^="edit-form-"]', function(event) {
+    });
   });
-
-  // フォーム送信の処理（`form_with` の非同期送信を活用する場合）
-  $(document).on('ajax:success', 'form[id^="edit-form-"]', function(event) {
-    var [data, status, xhr] = event.detail;
-    console.log('Form successfully submitted.');
-    var form = $(this);
-    var categoryId = form.attr('id').replace('edit-form-', '');
-    $('#category-name-' + categoryId).text(form.find('input[name="category_name"]').val());
-    toggleEditForm(categoryId); // フォームを隠す
-  });
-
-  $(document).on('ajax:error', 'form[id^="edit-form-"]', function(event) {
-    console.log('Form submission failed.');
-  });
-});
-
 </script>

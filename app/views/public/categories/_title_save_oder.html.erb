@@ -6,6 +6,10 @@
     background-color: #ffffff; /* 奇数行の背景色 */
   }
 
+  .table th, .table td {
+    vertical-align: middle;
+  }
+
   .icon-shadow {
     color: #ffd700;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
@@ -39,24 +43,37 @@
       <th style="background-color: #d3d3d3">もくじ名</th>
       <th style="background-color: #d3d3d3">保存日</th>
       <th style="background-color: #d3d3d3"></th>
+      <th style="background-color: #d3d3d3"></th>
       <th style="background-color: #d3d3d3">もくじ名</th>
       <th style="background-color: #d3d3d3">保存日</th>
+      <th style="background-color: #d3d3d3"></th>
       <th style="background-color: #d3d3d3"></th>
     </tr>
   </thead>
 
   <tbody>
-    <% @sorted_titles.each_slice(2) do |slice| %>
+    <% sorted_titles.each_slice(2) do |slice| %>
       <tr>
         <% slice.each do |title| %>
           <td class="link-cell">
-            <%= link_to category_title_path(category, title), class: 'full-link d-flex align-items-center' do %>
-              <i class="fa-solid fa-book mr-3 icon-shadow" style="color: #8b4513; font-size: 20px;"></i>
-              <%= title.title_name %>
-            <% end %>
+            <span id="title-name-<%= title.id %>">
+              <%= link_to category_title_path(category, title), class: 'full-link d-flex align-items-center' do %>
+                <i class="fa-solid fa-book mr-3 icon-shadow" style="color: #8b4513;"></i>
+                <%= title.title_name %>
+              <% end %>
+            </span>
+            <span id="title-edit-form-<%= title.id %>" style="display: none;">
+              <%= form_with(model: title, url: category_title_path(category, title), method: :patch, remote: true, html: { id: "edit-form-#{title.id}" }) do |f| %>
+                <%= f.text_field :title_name, value: title.title_name %>
+                <%= f.submit '保存', class: 'btn btn-primary btn-sm' %>
+              <% end %>
+            </span>
           </td>
           <td>
             <%= title.created_at.strftime("%Y/%m/%d") %>
+          </td>
+          <td>
+            <button class="btn btn-success btn-sm edit-btn" data-title-id="<%= title.id %>">編集</button>
           </td>
           <td class="link-cell">
             <%= link_to '削除', category_title_path(category, title), method: :delete, data: { confirm: '中身も全て消えてしまいますが本当に削除しますか？' }, class: 'full-link', style: 'color: red;' %>
@@ -66,3 +83,30 @@
     <% end %>
   </tbody>
 </table>
+
+<script>
+  $(document).on('turbolinks:load', function() {
+
+    window.toggleEditForm = function(titleId) {
+      $('#title-name-' + titleId).toggle();
+      $('#title-edit-form-' + titleId).toggle();
+    };
+
+    $(document).on('click', '.edit-btn', function() {
+      var titleId = $(this).data('title-id');
+      toggleEditForm(titleId);
+    });
+
+    // フォーム送信の処理（`form_with` の非同期送信を活用する場合）
+    $(document).on('ajax:success', 'form[id^="edit-form-"]', function(event) {
+      var [data, status, xhr] = event.detail;
+      var form = $(this);
+      var titleId = form.attr('id').replace('edit-form-', '');
+      $('#title-name-' + titleId).text(form.find('input[name="title_name"]').val());
+      toggleEditForm(titleId); // フォームを隠す
+    });
+
+    $(document).on('ajax:error', 'form[id^="edit-form-"]', function(event) {
+    });
+  });
+</script>
