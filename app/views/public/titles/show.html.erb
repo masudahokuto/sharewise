@@ -1,22 +1,50 @@
-<h1><%= @title.title_name %> タイトル詳細</h1>
+<%= stylesheet_link_tag 'public/posts', media: 'all' %>
+<div class="container-fluid">
+  <div class="row d-flex justify-content-center">
+    <div class="col-md-10">
+      <%= link_to  mypage_users_path, class: 'mypage-link', title: 'マイページ' do %>
+        <i class="fa-solid fa-user"></i>
+      <% end %>
+      <%= link_to '＜＜', new_category_path, class: 'return-link', title: 'ふたつ前に戻る' %>
+      <%= link_to '＜', category_path(@category), class: 'return-link', title: 'ひとつ前に戻る' %>
+      <div class="d-flex justify-content-center align-items-center mb-2">
 
-<%= form_with(model: [@category, @title, @genre], url: category_title_genres_path(@category, @title), method: :post, local: true) do |f| %>
-  <div>
-    <%= f.label :genre_name, "ジャンル名" %>
-    <%= f.text_field :genre_name %>
+        <%= form_with(model: [@category, @title, @genre], url: category_title_genres_path(@category, @title), method: :post, local: true, class: 'w-50') do |f| %>
+
+          <div class="d-flex">
+            <%= f.text_field :genre_name, class: "form-control mr-2", placeholder: "項目名を入力(20文字まで登録できます)                                このボタンで保存⇨" %>
+            <%= f.submit "項目を追加", class: "btn btn-primary", title: 'フォームに入力してこのボタンで保存します(保存をすると保存順に切り替わります)' %>
+          </div>
+        <% end %>
+      </div>
+      <%= link_to '五十音順', category_title_path(sort_order: 'alphabetical'),title:
+'0(半角数字)
+０(全角数字)a(半角小文字)
+ａ(全角小文字)
+A(半角大文字)
+Ａ(全角大文字)
+ｱ(半角カナ)
+ァ(全角カナ)
+ぁ(かな)
+漢字
+その他の順で並びます
+' %>
+      |
+      <%= link_to '登録順', category_title_path(sort_order: 'created_at'), genre: '保存順で並びます' %>
+      <%= render 'genre_save_order', sorted_genres: @sorted_genres, title: @title, category: @category %>
+    </div>
   </div>
-  <div>
-    <%= f.submit "ジャンルを登録" %>
-  </div>
-<% end %>
+</div>
 
-<ul>
-  <% @genres.each do |genre| %>
-    <li>
-      <%= link_to genre.genre_name, category_title_genre_path(@category, @title, genre) %>
-      <%= link_to "削除", category_title_genre_path(@category, @title, genre), method: :delete, data: { confirm: "本当に削除しますか？" } %>
-    </li>
-  <% end %>
-</ul>
 
-<p><%= link_to 'タイトル一覧へ戻る', category_path(@category) %></p>
+
+
+
+
+
+
+
+
+
+
+

@@ -4,6 +4,8 @@ class Public::TitlesController < ApplicationController
     @category = Category.find(params[:category_id])
     @genres = @title.genres
     @genre = Genre.new
+    @sort_order = params[:sort_order] || 'created_at'
+    @sorted_genres = @title.genres.sort_genres(@sort_order)
   end
 
   def create

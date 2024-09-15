@@ -2,7 +2,6 @@ class Public::CategoriesController < ApplicationController
   before_action :authenticate_user!
 
   def new
-    @user = current_user
     @category = Category.new
     @categories = current_user.categories
     # ソート(モデルに記述あり)
@@ -20,7 +19,6 @@ class Public::CategoriesController < ApplicationController
   end
 
   def show
-    @user = current_user
     @category = Category.find(params[:id])
     @title = Title.new
     @titles = @category.titles

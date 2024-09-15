@@ -2,10 +2,10 @@
 <div class="container-fluid">
   <div class="row d-flex justify-content-center">
     <div class="col-md-10">
-      <%= link_to  mypage_users_path, class: 'mypage-link' do %>
+      <%= link_to  mypage_users_path, class: 'mypage-link', title: 'マイページ' do %>
         <i class="fa-solid fa-user"></i>
       <% end %>
-      <%= link_to '＜', new_category_path, class: 'return-link' %>
+      <%= link_to '＜', new_category_path, class: 'return-link', title: 'ひとつ前に戻る' %>
       <div class="d-flex justify-content-center align-items-center mb-2">
         <%= form_with(model: [@category, @title], url: category_titles_path(@category), method: :post, local: true, class: 'w-50') do |f| %>
           <div class="d-flex">
