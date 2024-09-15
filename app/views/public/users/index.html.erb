@@ -24,7 +24,7 @@
 
               <!-- 投稿内容と画像部分 -->
               <div class="show-link col-md-10 d-flex">
-                <%= link_to user_path(user), style: 'text-decoration: none; display: flex; width: 100%;' do %>
+                <%= link_to post_path(user), style: 'text-decoration: none; display: flex; width: 100%;' do %>
                   <!-- 投稿内容 -->
                   <div class="d-flex flex-column flex-grow-1 me-3">
                     <div class="mb-3">
@@ -45,11 +45,24 @@
               </div>
             </div>
           <% else %>
-            <p>最近の投稿がありません。</p>
+            <div class="post-row col-md-12 d-flex mb-3">
+              <div class="user-card-link col-md-2 d-flex flex-column">
+                <%= render 'public/users/index_user_card', user: user %>
+              </div>
+                <%= link_to user_path(user), style: 'text-decoration: none; display: flex; width: 100%;' do %>
+                  <!-- 投稿内容 -->
+                  <div class="d-flex flex-column flex-grow-1 me-3">
+                    <div class="mb-3" style="color: black;">
+                      投稿はまだありません。
+                    </div>
+                  </div>
+                <% end %>
+              </div>
+            </div>
           <% end %>
         <% end %>
       <% else %>
-        <p>ユーザーがいません。</p>
+        <p>ユーザーはまだいません。</p>
       <% end %>
       <!-- ページネーション -->
       <div id="pagination">
