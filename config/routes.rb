@@ -17,7 +17,7 @@ Rails.application.routes.draw do
   get '/posts/search', to: 'public/posts#search', as: 'post_search'
   # 管理者用のルーティング
   namespace :admin do
-    resources :users, only: %i[index show update] do
+    resources :users, only: %i[index show update destroy] do
       collection do
         get :age_distribution # 年齢分布のデータを取得
         get 'inactive' # 非アクティブユーザー表示用のルートを追加
