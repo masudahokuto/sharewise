@@ -36,9 +36,18 @@ class Post < ApplicationRecord
   def favorited_by?(user)
     favorites.exists?(user_id: user.id)
   end
+  # アクティブなユーザーの投稿を取得するスコープ
+  scope :active_user_posts, -> {
+    joins(:user).where(users: { is_active: true })
+  }
 
   # ユーザーがいいねした投稿を取得するスコープ
   scope :liked_by, -> (user) {
     joins(:favorites).where(favorites: { user_id: user.id })
+  }
+
+  # 部分一致検索をするスコープ
+  scope :search_by_body, ->(query) {
+    where('body LIKE ?', "%#{query}%")
   }
 end

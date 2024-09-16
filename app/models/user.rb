@@ -6,6 +6,7 @@ class User < ApplicationRecord
   has_many :post_comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
   has_many :liked_posts, through: :favorites, source: :post #Favoriteモデルを通じて関連するPostモデルのレコードを取得
+  has_many :categories, dependent: :destroy
 
   # フォローフォロワーここから-----------------------------------------------------------
   has_many :relationships, foreign_key: 'follower_id', dependent: :destroy
@@ -78,4 +79,9 @@ class User < ApplicationRecord
   def full_name
     "#{last_name} #{first_name}"
   end
+
+  # user検索機能　部分一致のみ
+  scope :search, -> (query) {
+    where('nick_name LIKE ?', "%#{query}%")
+  }
 end

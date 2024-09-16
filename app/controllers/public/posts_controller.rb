@@ -1,6 +1,7 @@
 class Public::PostsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :correct_user, only: [:edit, :update]
+
   def new
     @user = current_user
     @post = Post.new
@@ -18,6 +19,10 @@ class Public::PostsController < ApplicationController
   def index
     @current_user = current_user
     @posts = Post.active_user_posts.order(created_at: :desc).page(params[:page]).per(10)
+  # ポスト検索機能
+    if params[:query].present?
+      @posts = @posts.search(params[:query])
+    end
   end
 
   def show
@@ -31,6 +36,11 @@ class Public::PostsController < ApplicationController
       @user = @post.user
       @post_comment = PostComment.new
     end
+  end
+
+  def search
+    @current_user = current_user
+    @posts = Post.active_user_posts.search_by_body(params[:query]).order(created_at: :desc).page(params[:page]).per(10)
   end
 
   def edit
@@ -51,6 +61,29 @@ class Public::PostsController < ApplicationController
     @post = Post.find(params[:id])
     @post.destroy
     redirect_back(fallback_location: root_path)
+  end
+
+  # contentのpost機能
+  def create_from_content
+    content = Content.find(params[:id])
+    # Postモデルのbodyにcontent_nameとbodyとuser_idをセット
+    @post = Post.new(
+      body: "#{content.content_name}\n\n#{content.body}",
+      user_id: current_user.id
+    )
+
+    # ContentのimagesをPostのimagesにコピー
+    if content.images.attached?
+      content.images.each do |image|
+        @post.images.attach(image.blob)
+      end
+    end
+
+    if @post.save
+      redirect_to post_path(@post), notice: '投稿が成功しました。'
+    else
+      redirect_to root_path
+    end
   end
 
   private

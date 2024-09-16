@@ -1,0 +1,48 @@
+<%= stylesheet_link_tag 'public/posts', media: 'all' %>
+<div class="container-fluid">
+  <div class="row d-flex justify-content-center">
+    <div class="col-md-10">
+      <%= link_to  mypage_users_path, class: 'mypage-link', title: 'マイページ' do %>
+        <i class="fa-solid fa-user"></i>
+      <% end %>＞
+      <%= link_to 'もくじ', new_category_path, class: 'return-link-black', title: 'ひとつ前に戻る' %>＞
+      <div class="d-flex justify-content-center align-items-center mb-2">
+        <%= form_with(model: [@category, @title], url: category_titles_path(@category), method: :post, local: true, class: 'w-50') do |f| %>
+          <div class="d-flex">
+            <%= f.text_field :title_name, class: "form-control mr-2", placeholder: "項目名を入力(20文字まで登録できます)                                このボタンで保存⇨" %>
+            <%= f.submit "項目を追加", class: "btn btn-primary", title: 'フォームに入力してこのボタンで保存します(保存をすると保存順に切り替わります)' %>
+          </div>
+        <% end %>
+      </div>
+      <span class="category-name"><%= @category.category_name %></span>
+      <%= link_to '五十音順', category_path(sort_order: 'alphabetical'),title:
+'0(半角数字)
+０(全角数字)a(半角小文字)
+ａ(全角小文字)
+A(半角大文字)
+Ａ(全角大文字)
+ｱ(半角カナ)
+ァ(全角カナ)
+ぁ(かな)
+漢字
+その他の順で並びます
+' %>
+      |
+      <%= link_to '登録順', category_path(sort_order: 'created_at'), title: '保存順で並びます' %>
+      <%= render 'title_save_oder', sorted_titles: @sorted_titles, category: @category %>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+

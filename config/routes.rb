@@ -12,10 +12,12 @@ Rails.application.routes.draw do
     sessions: "admin/sessions"
   }
 
-
-  # Admin側のルーティング
+  #検索機能
+  get "/search", to: "searches#search"
+  get '/posts/search', to: 'public/posts#search', as: 'post_search'
+  # 管理者用のルーティング
   namespace :admin do
-    resources :users, only: %i[index show update] do
+    resources :users, only: %i[index show update destroy] do
       collection do
         get :age_distribution # 年齢分布のデータを取得
         get 'inactive' # 非アクティブユーザー表示用のルートを追加
@@ -27,7 +29,7 @@ Rails.application.routes.draw do
     get "/" => "homes#top"
   end
 
-  # Public側のルーティング
+  # 顧客用のルーティング
   scope module: :public do
     root to: 'homes#top'
     get 'about', to: 'homes#about'
@@ -49,6 +51,15 @@ Rails.application.routes.draw do
     resources :posts do
       resource :favorite, only: %i[create destroy]
       resources :post_comments, only: %i[create destroy]
+      post 'create_from_content', on: :member
+    end
+
+    resources :categories, only: %i[new create update destroy show] do
+      resources :titles, only: %i[show create update destroy] do
+        resources :genres, only: %i[show create update destroy] do
+          resources :contents, only: %i[new edit show create update destroy]
+        end
+      end
     end
   end
 end

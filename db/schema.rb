@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_09_10_081549) do
+ActiveRecord::Schema.define(version: 2024_09_13_022420) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -52,6 +52,22 @@ ActiveRecord::Schema.define(version: 2024_09_10_081549) do
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
   end
 
+  create_table "categories", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.string "category_name", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_categories_on_user_id"
+  end
+
+  create_table "contents", force: :cascade do |t|
+    t.integer "genre_id", null: false
+    t.string "content_name", null: false
+    t.text "body", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "favorites", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "post_id", null: false
@@ -60,6 +76,13 @@ ActiveRecord::Schema.define(version: 2024_09_10_081549) do
     t.index ["post_id"], name: "index_favorites_on_post_id"
     t.index ["user_id", "post_id"], name: "index_favorites_on_user_id_and_post_id", unique: true
     t.index ["user_id"], name: "index_favorites_on_user_id"
+  end
+
+  create_table "genres", force: :cascade do |t|
+    t.integer "title_id", null: false
+    t.string "genre_name", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "post_comments", force: :cascade do |t|
@@ -88,6 +111,13 @@ ActiveRecord::Schema.define(version: 2024_09_10_081549) do
     t.index ["follower_id"], name: "index_relationships_on_follower_id"
   end
 
+  create_table "titles", force: :cascade do |t|
+    t.integer "category_id", null: false
+    t.string "title_name", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "last_name", null: false
     t.string "first_name", null: false
@@ -109,6 +139,7 @@ ActiveRecord::Schema.define(version: 2024_09_10_081549) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "categories", "users"
   add_foreign_key "favorites", "posts"
   add_foreign_key "posts", "users"
   add_foreign_key "relationships", "users", column: "followed_id"

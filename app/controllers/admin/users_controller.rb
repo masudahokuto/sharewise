@@ -53,6 +53,12 @@ class Admin::UsersController < ApplicationController
     end
   end
 
+  def destroy
+    @user = User.find(params[:id])
+    @user.destroy
+    redirect_to admin_users_path, notice: 'ユーザーが削除されました。'
+  end
+
   private
 
   def age_distribution
