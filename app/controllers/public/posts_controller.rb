@@ -1,6 +1,7 @@
 class Public::PostsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :correct_user, only: [:edit, :update]
+
   def new
     @user = current_user
     @post = Post.new
@@ -60,6 +61,29 @@ class Public::PostsController < ApplicationController
     @post = Post.find(params[:id])
     @post.destroy
     redirect_back(fallback_location: root_path)
+  end
+
+  # contentのpost機能
+  def create_from_content
+    content = Content.find(params[:id])
+    # Postモデルのbodyにcontent_nameとbodyをセット
+    @post = Post.new(
+      body: "#{content.content_name}\n\n#{content.body}",
+      user_id: current_user.id
+    )
+
+    # ContentのimagesをPostのimagesにコピー
+    if content.images.attached?
+      content.images.each do |image|
+        @post.images.attach(image.blob)
+      end
+    end
+
+    if @post.save
+      redirect_to post_path(@post), notice: '投稿が成功しました。'
+    else
+      redirect_to root_path
+    end
   end
 
   private

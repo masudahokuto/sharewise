@@ -51,6 +51,7 @@ Rails.application.routes.draw do
     resources :posts do
       resource :favorite, only: %i[create destroy]
       resources :post_comments, only: %i[create destroy]
+      post 'create_from_content', on: :member
     end
 
     resources :categories, only: %i[new create update destroy show] do
