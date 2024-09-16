@@ -12,7 +12,9 @@ Rails.application.routes.draw do
     sessions: "admin/sessions"
   }
 
-
+  #検索機能
+  get "/search", to: "searches#search"
+  get '/posts/search', to: 'public/posts#search', as: 'post_search'
   # 管理者用のルーティング
   namespace :admin do
     resources :users, only: %i[index show update] do

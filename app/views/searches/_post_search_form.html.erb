@@ -1,0 +1,13 @@
+<% if user_signed_in? %>
+  <%= form_with url: post_search_path, method: :get, local: true do %>
+  <div class="d-flex justify-content-center">
+    <div class="form-group mb-1">
+      <%= text_field_tag :query, params[:query], class: 'form-control', style: "width: 100%;", placeholder: "投稿を検索" %>
+    </div>
+    <div class="ml-1">
+    <%= hidden_field_tag :model, 'post' %> <!-- 検索対象モデルを指定 -->
+    <%= submit_tag '検索', class: 'btn btn-primary' %>
+    </div>
+  </div>
+  <% end %>
+<% end %>

@@ -79,4 +79,9 @@ class User < ApplicationRecord
   def full_name
     "#{last_name} #{first_name}"
   end
+
+  # user検索機能　部分一致のみ
+  scope :search, -> (query) {
+    where('nick_name LIKE ?', "%#{query}%")
+  }
 end

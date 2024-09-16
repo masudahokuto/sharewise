@@ -1,9 +1,9 @@
-<%= stylesheet_link_tag 'public/posts', media: 'all' %>
+<%= stylesheet_link_tag 'public/users', media: 'all' %>
 <div class="container-fluid">
   <div class="row d-flex justify-content-center">
     <div class="col-md-2 d-flex flex-column align-items-center">
       <div class="d-flex justify-content-center mb-2">
-        <%= render "searches/post_search_form" %>
+        <%= render 'searches/post_search_form' %>
       </div>
       <%= render 'public/users/user_card', user: @current_user %>
       <% if @current_user %>
@@ -11,7 +11,6 @@
       <% end %>
     </div>
     <div class="col-md-9">
-      <!-- 投稿一覧 -->
       <% if @posts.any? %>
         <% @posts.each do |post| %>
           <div class="text-center d-flex justify-content-end align-items-center">
@@ -45,7 +44,7 @@
           </div>
         <% end %>
       <% else %>
-        <p>投稿がありません。</p>
+        <p>検索結果がありません。</p>
       <% end %>
       <!-- ページネーション -->
       <div id="pagination">

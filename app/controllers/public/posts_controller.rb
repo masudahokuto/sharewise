@@ -18,6 +18,10 @@ class Public::PostsController < ApplicationController
   def index
     @current_user = current_user
     @posts = Post.active_user_posts.order(created_at: :desc).page(params[:page]).per(10)
+  # ポスト検索機能
+    if params[:query].present?
+      @posts = @posts.search(params[:query])
+    end
   end
 
   def show
@@ -31,6 +35,11 @@ class Public::PostsController < ApplicationController
       @user = @post.user
       @post_comment = PostComment.new
     end
+  end
+
+  def search
+    @current_user = current_user
+    @posts = Post.active_user_posts.search_by_body(params[:query]).order(created_at: :desc).page(params[:page]).per(10)
   end
 
   def edit
