@@ -10,7 +10,7 @@
         <%= link_to 'プロフィール編集', edit_user_path(@current_user), class: 'btn btn-primary mt-3' %>
       <% end %>
     </div>
-    <div class="col-md-9">
+    <div class="col-md-10">
       <!-- ユーザー一覧 -->
       <% if @users.any? %>
         <% @users.each do |user| %>
@@ -24,7 +24,7 @@
                 <%= render 'public/users/index_user_card', user: user %>
               </div>
               <div class="show-link col-md-10 d-flex">
-                <%= link_to post_path(user), style: 'text-decoration: none; display: flex; width: 100%;' do %>
+                <%= link_to post_path(latest_post), style: 'text-decoration: none; display: flex; width: 100%;' do %>
                   <div class="d-flex flex-column flex-grow-1 me-3">
                     <div class="mb-3">
                       <p><%= simple_format(latest_post.body) %></p>

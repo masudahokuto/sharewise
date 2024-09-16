@@ -66,7 +66,7 @@ class Public::PostsController < ApplicationController
   # contentのpost機能
   def create_from_content
     content = Content.find(params[:id])
-    # Postモデルのbodyにcontent_nameとbodyをセット
+    # Postモデルのbodyにcontent_nameとbodyとuser_idをセット
     @post = Post.new(
       body: "#{content.content_name}\n\n#{content.body}",
       user_id: current_user.id
