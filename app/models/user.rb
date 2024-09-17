@@ -33,9 +33,9 @@ class User < ApplicationRecord
   enum gender: { male: 0, female: 1, other: 2 }
 
   # バリデーション設定
-  validates :last_name, presence: true, length: { maximum: 10 }
-  validates :first_name, presence: true, length: { maximum: 10 }
-  validates :nick_name, presence: true, length: { maximum: 10 }
+  validates :last_name, presence: true, length: { maximum: 20 }
+  validates :first_name, presence: true, length: { maximum: 20 }
+  validates :nick_name, presence: true, length: { maximum: 20 }
   validates :profile, length: { maximum: 40 }
   validates :gender, presence: true, inclusion: { in: genders.keys }
   validates :birthday, presence: true

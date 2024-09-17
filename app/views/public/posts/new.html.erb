@@ -16,7 +16,7 @@
             <div class="d-flex justify-content-between mb-1">
               <%= f.submit "投稿する", class: 'btn btn-primary ml-auto', style: 'width: 20%', title: "このボタンで投稿します" %>
             </div>
-            <%= f.text_area :body, class: "post-text-area", autofocus: true , placeholder: "投稿内容を入力してください" %>
+            <%= f.text_area :body, class: "post-text-area", autofocus: true, id: 'body', placeholder: "内容を入力してください(5000文字まで登録できます)" %>
           </div>
           <div class="col-md-4 mt-4">
             <div class="text-left mb-1">

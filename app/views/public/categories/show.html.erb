@@ -9,7 +9,7 @@
       <div class="d-flex justify-content-center align-items-center mb-2">
         <%= form_with(model: [@category, @title], url: category_titles_path(@category), method: :post, local: true, class: 'w-50') do |f| %>
           <div class="d-flex">
-            <%= f.text_field :title_name, class: "form-control mr-2", placeholder: "項目名を入力(20文字まで登録できます)                                このボタンで保存⇨" %>
+            <%= f.text_field :title_name, class: "form-control mr-2", id: 'title_name', placeholder: "項目名を入力(20文字まで登録できます)                                このボタンで保存⇨" %>
             <%= f.submit "項目を追加", class: "btn btn-primary", title: 'フォームに入力してこのボタンで保存します(保存をすると保存順に切り替わります)' %>
           </div>
         <% end %>

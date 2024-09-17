@@ -19,3 +19,4 @@ Turbolinks.start()
 ActiveStorage.start()
 // require('./preview')
 import './preview'
+import './valid_color'
