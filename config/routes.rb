@@ -28,7 +28,7 @@ Rails.application.routes.draw do
     end
     get "/" => "homes#top"
   end
-
+  resources :multi_creates, only: %i[new create]
   # 顧客用のルーティング
   scope module: :public do
     root to: 'homes#top'
@@ -53,7 +53,9 @@ Rails.application.routes.draw do
       resources :post_comments, only: %i[create destroy]
       post 'create_from_content', on: :member
     end
-
+    
+   
+    
     resources :categories, only: %i[new create update destroy show] do
       resources :titles, only: %i[show create update destroy] do
         resources :genres, only: %i[show create update destroy] do

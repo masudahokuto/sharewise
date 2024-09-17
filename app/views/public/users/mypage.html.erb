@@ -6,7 +6,7 @@
       <%= link_to 'プロフィール編集', edit_user_path(@user), class: 'btn btn-primary mt-3' %>
     </div>
     <!-- 投稿本文と画像部分 -->
-    <div class="col-md-9">
+    <div class="col-md-10">
       <% if @posts.any? %>
         <% @posts.each do |post| %>
           <div class="text-center d-flex justify-content-end align-items-center">

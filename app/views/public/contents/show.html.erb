@@ -1,5 +1,16 @@
 <%= stylesheet_link_tag 'public/posts', media: 'all' %>
 <div class="container-fluid">
+  <% if flash[:success] %>
+    <div class="alert alert-success">
+      <%= flash[:success] %>
+    </div>
+  <% end %>
+  
+  <% if flash[:error] %>
+    <div class="alert alert-danger">
+      <%= flash[:error] %>
+    </div>
+  <% end %>
   <div class="row d-flex justify-content-center">
     <div class="col-md-2 d-flex flex-column align-items-center">
       <%= render 'public/users/user_card', user: @user %>

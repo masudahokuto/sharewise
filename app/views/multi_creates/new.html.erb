@@ -1,0 +1,60 @@
+<%= stylesheet_link_tag 'public/posts', media: 'all' %>
+<div class="container-fluid">
+  <div class="row d-flex justify-content-center">
+    <div class="col-2 d-flex flex-column align-items-center">
+      <%= render 'public/users/user_card', user: @user %>
+    </div>
+    <div class="col-md-10">
+      <%= form_with model: @category, url: multi_creates_path, local: true, html: { id: 'content_form', enctype: 'multipart/form-data' } do |f| %>
+        <div class="row d-flex justify-content-center mb-3">
+          <div class="field col-md-8">
+            <%= f.submit "作成", class: "btn btn-primary" %>
+          <!--<div class="form-group">-->
+            <%= f.label :category_name, "カテゴリー名" %>
+            <%= f.text_field :category_name, class: "form-control" %>
+          <!--</div>-->
+
+            <%= fields_for @title do |title_form| %>
+              <!--<div class="form-group">-->
+              <%= title_form.label :title_name, "タイトル名" %>
+              <%= title_form.text_field :title_name, class: "form-control" %>
+              <!--</div>-->
+            <% end %>
+
+            <%= fields_for @genre do |genre_form| %>
+          <!--<div class="form-group">-->
+              <%= genre_form.label :genre_name, "ジャンル名" %>
+              <%= genre_form.text_field :genre_name, class: "form-control" %>
+          <!--</div>-->
+            <% end %>
+
+            <%= fields_for @content do |content_form| %>
+          <!--<div class="form-group">-->
+              <%= content_form.label :content_name, "コンテンツ名" %>
+              <%= content_form.text_field :content_name, class: "form-control" %>
+          <!--</div>-->
+          <!--<div class="form-group">-->
+              <%= content_form.label :body, "内容" %>
+              <%= content_form.text_area :body, class: "form-control" %>
+          <!--</div>-->
+            <% end %>
+          </div>
+          <div class="col-md-4 mt-4">
+            <div class="text-left mb-1">
+              <button id="add_image_button" type="button" class="image-add-btn btn-secondary" title="画像を追加出来ます">画像を追加する</button>
+              ※画像は3枚まで登録できます
+            </div>
+            <div class="content-image-field">
+              <div class="file-field_0 mb-3">
+                <input name="content[images][]" type="file" class="content_image" aria-num="0" onchange="fileSelect(this);">
+                <img id="preview_area_0">
+              </div>
+            </div>
+          </div>
+        <!--<div class="form-group">-->
+        <!--</div>-->
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
