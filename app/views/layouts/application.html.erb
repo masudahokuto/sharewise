@@ -28,3 +28,16 @@
     <footer class="custom-footer pt-3"></footer>
   </body>
 </html>
+<script>
+  // 3秒後にフラッシュメッセージをフェードアウト
+  setTimeout(function() {
+    var flashMessages = document.getElementById('flash-messages');
+    if (flashMessages) {
+      flashMessages.style.transition = 'opacity 0.5s ease';
+      flashMessages.style.opacity = '0';
+      setTimeout(function() {
+        flashMessages.remove();
+      }, 500);  // フェードアウトが終わった後に要素を削除
+    }
+  }, 3000);  // 3000ms = 3秒
+</script>

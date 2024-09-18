@@ -30,33 +30,30 @@
 
             <div class="form-group">
               <%= f.label :last_name, "姓", class: 'form-label' %>
-              <%= f.text_field :last_name, class: 'form-control' %>
+              <%= f.text_field :last_name, class: 'form-control', id: 'last_name', autofocus: true, placeholder: "姓を入力(20文字まで登録できます)" %>
             </div>
 
             <div class="form-group">
               <%= f.label :first_name, "名", class: 'form-label' %>
-              <%= f.text_field :first_name, class: 'form-control' %>
+              <%= f.text_field :first_name, class: 'form-control', id: 'first_name', placeholder: "名を入力(20文字まで登録できます)" %>
             </div>
 
             <div class="form-group">
               <%= f.label :nick_name, "ニックネーム", class: 'form-label' %>
-              <%= f.text_field :nick_name, class: 'form-control' %>
+              <%= f.text_field :nick_name, class: 'form-control', id: 'nick_name', placeholder: "ニックネームを入力(20文字まで登録できます)" %>
             </div>
 
             <div class="form-group">
               <%= f.label :profile, "プロフィール", class: 'form-label' %>
-              <%= f.text_area :profile, class: 'form-control' %>
+              <%= f.text_area :profile, class: 'form-control', id: 'profile', placeholder: "プロフィールを入力(40文字まで登録できます)" %>
             </div>
 
             <div class="form-group">
               <%= f.label :gender, "性別", class: 'form-label' %>
               <div class="d-flex">
-                <% User.genders.keys.each do |gender| %>
-                  <div class="form-check mr-3">
-                    <%= f.radio_button :gender, gender, class: 'form-check-input' %>
-                    <%= f.label :gender, User.human_attribute_name("gender.#{gender}"), value: gender, class: 'form-check-label' %>
-                  </div>
-                <% end %>
+                <div class="form-check mr-3">
+                  <%= f.collection_radio_buttons :gender, User.genders.keys, :to_s, ->(gender) { I18n.t("activerecord.attributes.user.gender.#{gender}") } %>
+                </div>
               </div>
             </div>
 
@@ -75,7 +72,7 @@
 
             <div class="form-group">
               <%= f.label :email, "メールアドレス", class: 'form-label' %>
-              <%= f.email_field :email, class: 'form-control' %>
+              <%= f.email_field :email, class: 'form-control', placeholder: "メールアドレスを入力" %>
             </div>
 
             <div class="form-group">

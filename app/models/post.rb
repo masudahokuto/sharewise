@@ -10,6 +10,10 @@ class Post < ApplicationRecord
   validates :body, presence: true
   validate :images_format
   validate :image_length
+  # 許可するファイル形式を設定
+  validates :images, content_type: { in: ['image/jpg', 'image/jpeg', 'image/png'] }
+  # 画像のサイズを制限 (例: 5MB 以下)
+  validates :images, size: { less_than: 5.megabytes }
 
   # 退会したユーザーのコメントを除外
   scope :active_user_posts, -> { joins(:user).where(users: { is_active: true }) }

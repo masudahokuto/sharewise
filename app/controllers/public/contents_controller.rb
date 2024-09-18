@@ -17,8 +17,17 @@ class Public::ContentsController < ApplicationController
     @genre = @title.genres.find(params[:genre_id])
     @content = @genre.contents.new(content_params)
     if @content.save
-      redirect_to category_title_genre_content_path(@category, @title, @genre, @content), notice: 'コンテンツが登録されました。'
+      if params[:save_and_show]
+        flash[:success] = "ページを作成しました"
+        redirect_to category_title_genre_content_path(@category, @title, @genre, @content)
+      elsif params[:save_and_new]
+        flash[:success] = "ページを作成しました"
+        redirect_to new_category_title_genre_content_path(@category, @title, @genre)
+      else
+        redirect_to new_category_title_genre_content_path(@category, @title, @genre)
+      end
     else
+      flash[:alert] = "エラーが発生しました"
       redirect_back(fallback_location: root_path)
     end
   end

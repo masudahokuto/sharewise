@@ -87,3 +87,63 @@ $(document).on('turbolinks:load', function() {
     });
   }
 });
+
+$(document).on('turbolinks:load', function() {
+  const lastNameField = document.getElementById('last_name');
+  const maxLength = 20;
+
+  if (lastNameField) {
+    lastNameField.addEventListener('input', function() {
+      if (lastNameField.value.length > maxLength) {
+        lastNameField.style.color = 'red';
+      } else {
+        lastNameField.style.color = '';
+      }
+    });
+  }
+});
+
+$(document).on('turbolinks:load', function() {
+  const firstNameField = document.getElementById('first_name');
+  const maxLength = 20;
+
+  if (firstNameField) {
+    firstNameField.addEventListener('input', function() {
+      if (firstNameField.value.length > maxLength) {
+        firstNameField.style.color = 'red';
+      } else {
+        firstNameField.style.color = '';
+      }
+    });
+  }
+});
+
+$(document).on('turbolinks:load', function() {
+  const nickNameField = document.getElementById('nick_name');
+  const maxLength = 20;
+
+  if (nickNameField) {
+    nickNameField.addEventListener('input', function() {
+      if (nickNameField.value.length > maxLength) {
+        nickNameField.style.color = 'red';
+      } else {
+        nickNameField.style.color = '';
+      }
+    });
+  }
+});
+
+$(document).on('turbolinks:load', function() {
+  const profileArea = document.getElementById('profile');
+  const maxLength = 40;
+
+  if (profileArea) {
+    profileArea.addEventListener('input', function() {
+      if (profileArea.value.length > maxLength) {
+        profileArea.style.color = 'red';
+      } else {
+        profileArea.style.color = '';
+      }
+    });
+  }
+});

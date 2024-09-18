@@ -8,6 +8,7 @@ class User < ApplicationRecord
   has_many :liked_posts, through: :favorites, source: :post #Favoriteモデルを通じて関連するPostモデルのレコードを取得
   has_many :categories, dependent: :destroy
   has_many :notifications, dependent: :destroy
+  has_one_attached :profile_image
   # フォローフォロワーここから-----------------------------------------------------------
   has_many :relationships, foreign_key: 'follower_id', dependent: :destroy
   has_many :followings, -> { where(is_active: true) }, through: :relationships, source: :followed
@@ -42,15 +43,17 @@ class User < ApplicationRecord
   validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :password, presence: true, length: { minimum: 6 }, if: -> { new_record? || !password.nil? }
 
-  # ActiveStorageの設定（画像1つ）
-  has_one_attached :profile_image
+  # 許可するファイル形式を設定
+  validates :profile_image, content_type: { in: ['image/jpg', 'image/jpeg', 'image/png'] }
+  # 画像のサイズを制限 (例: 5MB 以下)
+  validates :profile_image, size: { less_than: 5.megabytes }
 
   def get_profile_image(width, height)
     unless profile_image.attached?
       file_path = Rails.root.join('app/assets/images/no_image.jpg')
       profile_image.attach(io: File.open(file_path), filename: 'default-image.jpg', content_type: 'image/jpeg')
     end
-    profile_image.variant(resize_to_limit: [width, height]).processed
+    profile_image.variant(resize_to_limit: [150, 150]).processed
   end
 
   # ユーザーの最新の投稿を取得
