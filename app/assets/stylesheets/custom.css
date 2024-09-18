@@ -1,6 +1,3 @@
-/* 非アクティブ時のデフォルトスタイル */
-/* home iconのデフォルトスタイル */
-/* アイコンとShareWise文字のデフォルトスタイル */
 #flash-messages .alert {
   margin: 0;
   text-align: center;
@@ -8,93 +5,93 @@
 }
 
 .home-icon {
-    font-size: 30px;
-    font-weight: bold;
+  font-size: 30px;
+  font-weight: bold;
 }
 .home-icon i, .home-icon .site-title {
-    color: #fff; /* デフォルトで白色 */
-    transition: color 0.3s ease; /* 色のスムーズな変化 */
+  color: #fff;
+  transition: color 0.3s ease;
 }
 
 .home-icon .site-title {
-    font-family: 'Lobster', cursive; /* おしゃれなフォント設定 */
-    font-size: 30px; /* 文字サイズ */
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* 影をつける */
+  font-family: 'Lobster', cursive;
+  font-size: 30px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
-/* ホバー時のスタイル */
 .home-icon:hover i, .home-icon:hover .site-title {
-    color: #8B4513; /* ホバー時に茶色に変わる */
+  color: #8B4513;
 }
 
 /* "ShareWise"の文字スタイル */
 .site-title {
-    font-family: 'Lobster', cursive; /* Google Fontsで指定したフォント */
-    font-size: 36px; /* サイズ調整 */
-    color: #fff; /* 白色の文字 */
-    margin: 0;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* 影をつけておしゃれに */
+  font-family: 'Lobster', cursive;
+  font-size: 36px;
+  color: #fff;
+  margin: 0;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .hover-effect {
-    color: #f8f9fa;
-    transition: color 0.3s ease;
+  color: #f8f9fa;
+  transition: color 0.3s ease;
 }
 
-/* ホバー時のスタイル */
 .hover-effect:hover {
-    color: #8B4513;
+  color: #8B4513;
 }
 
 .header-link {
-  font-size: 20px;
+  font-size: 30px;
   text-decoration: none;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 /* アクティブ時のリンク */
 .active {
-  color: #8B4513; /* 茶色 */
-  font-size: 30px; /* アクティブ時のサイズ */
+  color: #8B4513;
+  font-size: 40px;
   font-weight: bold;
   text-decoration: none;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .custom-header {
-    background-color: #8FBC8F;
-    height: 100px;
-    display: flex;
-    align-items: center;
+  background-color: #8FBC8F;
+  height: 100px;
+  display: flex;
+  align-items: center;
 }
 
 .customer-greeting {
-    font-size: 12px;
-    color: #f8f9fa;
-    align-items: center;
-    display: flex;
-    height: 100%;
+  font-size: 12px;
+  color: #f8f9fa;
+  align-items: center;
+  display: flex;
+  height: 100%;
 }
 
 .fa-search {
-    color: white;
+  color: white;
 }
 
 html, body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 .custom-header {
-    flex-shrink: 0;
+  flex-shrink: 0;
 }
 
 .main-content {
-    flex-grow: 1;
-    background-color: #f8f4e6;
+  flex-grow: 1;
+  background-color: #f8f4e6;
 }

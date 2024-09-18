@@ -1,6 +1,6 @@
 <style>
   tbody tr:nth-child(even) {
-    background-color: #f2f2f2; /* 偶数行の背景色 */
+    background-color: #d1a07d52; /* 偶数行の背景色 */
   }
   tbody tr:nth-child(odd) {
     background-color: #ffffff; /* 奇数行の背景色 */
@@ -80,7 +80,7 @@
           <td>
             <button class="btn btn-success btn-sm edit-btn" data-category-id="<%= category.id %>">編集</button>
           </td>
-          <td class="link-cell">
+          <td>
             <%= link_to '削除', category_path(category), method: :delete, data: { confirm: '中身も全て消えてしまいますが本当に削除しますか？' }, class: 'btn btn-danger btn-sm' %>
           </td>
         <% end %>

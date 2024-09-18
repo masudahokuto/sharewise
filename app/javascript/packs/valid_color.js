@@ -72,3 +72,18 @@ $(document).on('turbolinks:load', function() {
     });
   }
 });
+
+$(document).on('turbolinks:load', function() {
+  const commentArea = document.getElementById('comment');
+  const maxLength = 200;
+
+  if (commentArea) {
+    commentArea.addEventListener('input', function() {
+      if (commentArea.value.length > maxLength) {
+        commentArea.style.color = 'red';
+      } else {
+        commentArea.style.color = '';
+      }
+    });
+  }
+});
