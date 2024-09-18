@@ -4,6 +4,12 @@ class Public::UsersController < ApplicationController
   def mypage
     @user = current_user
     @posts = @user.posts.order(created_at: :desc).page(params[:page]).per(10)
+    if user_signed_in?
+      @notifications = current_user.notifications.where(read: false)
+      @unread_count = @notifications.where(read: false).count
+    else
+      redirect_to new_user_session_path, alert: 'ログインしてください'
+    end
   end
 
   def index

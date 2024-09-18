@@ -1,0 +1,26 @@
+<h1>Notifications</h1>
+
+<% if @notifications.any? %>
+  <%= button_to '通知を全て消す', mark_all_as_read_notifications_path, method: :patch, class: 'btn btn-danger', data: { confirm: '本当にすべての通知を既読にしますか？' } %>
+
+  <ul>
+    <% @notifications.each do |notification| %>
+      <li>
+        <% case notification.notificable_type %>
+        <% when 'Favorite' %>
+          <%= "#{notification.notificable.user.nick_name}さんからいいねされました" %> <!-- いいねをしたユーザーの名前を表示 -->
+        <% when 'PostComment' %>
+          <%= "#{notification.notificable.user.nick_name}さんからのコメントがあります" %> <!-- コメントをしたユーザーの名前を表示 -->
+        <% else %>
+          <%= "Unknown notification type" %>
+        <% end %>
+
+        <% unless notification.read %>
+          <%= link_to 'Mark as read', notification_path(notification), method: :patch %>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>通知はありません</p>
+<% end %>
