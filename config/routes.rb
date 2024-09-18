@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :notifications, only: [:index, :update]
   # 顧客用
   # URL /customers/sign_in ...
   devise_for :users,skip: [:passwords], controllers: {
@@ -53,9 +54,9 @@ Rails.application.routes.draw do
       resources :post_comments, only: %i[create destroy]
       post 'create_from_content', on: :member
     end
-    
-   
-    
+
+
+
     resources :categories, only: %i[new create update destroy show] do
       resources :titles, only: %i[show create update destroy] do
         resources :genres, only: %i[show create update destroy] do

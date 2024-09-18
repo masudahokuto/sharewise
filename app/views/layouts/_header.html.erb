@@ -49,6 +49,12 @@
         <% end %>
         <%= link_to destroy_user_session_path, method: :delete, class: 'header-link text-decoration-none hover-effect mx-3', data: { confirm: 'ログアウトしますか？'} do %>
           <i class="fa-solid fa-right-to-bracket" title= "ログアウト"></i>
+        <!--通知-->
+          <%= link_to notifications_path do %>
+            <i class="fas fa-bell"></i>
+            <% unread_count = current_user.notifications.where(read: false).count %>
+            <span><%= unread_count if unread_count > 0 %></span>
+          <% end %>
         <% end %>
 
       <% else %>
