@@ -1,6 +1,12 @@
 Rails.application.routes.draw do
-  resources :notifications, only: [:index, :update]
-  # 顧客用
+  #通知
+  resources :notifications, only: %i[update] do
+    collection do
+      patch :mark_all_as_read
+    end
+  end
+
+    # 顧客用
   # URL /customers/sign_in ...
   devise_for :users,skip: [:passwords], controllers: {
     registrations: "public/registrations",
@@ -9,7 +15,7 @@ Rails.application.routes.draw do
 
   # 管理者用
   # URL /admin/sign_in ...
-  devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
+  devise_for :admin, skip: %i[registrations, passwords] ,controllers: {
     sessions: "admin/sessions"
   }
 

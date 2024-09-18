@@ -6,7 +6,7 @@
       <%= link_to 'プロフィール編集', edit_user_path(@user), class: 'btn btn-primary mt-3' %>
     </div>
     <!-- 投稿本文と画像部分 -->
-    <div class="col-md-10">
+    <div class="col-md-8">
       <% if @posts.any? %>
         <% @posts.each do |post| %>
           <div class="text-center d-flex justify-content-end align-items-center">
@@ -39,5 +39,47 @@
         <%= paginate @posts %>
       </div>
     </div>
+<div class="col-2 d-flex flex-column align-items-center">
+  <% if @notifications.any? %>
+    <!-- ボタン -->
+    <%= link_to mark_all_as_read_notifications_path, method: :patch, class: 'notification-all-check', title: '全ての通知を既読にする', data: { confirm: '全ての通知を既読にしますか？' } do %>
+      <i class="fas fa-bell"></i>
+      <span class="unread-count"><%= @unread_count if @unread_count > 0 %></span>
+      <i class="fa-solid fa-circle-check"></i>
+    <% end %>
+    <!-- 通知リスト -->
+    <ul class="list-unstyled">
+      <% @notifications.each do |notification| %>
+        <li style="margin-bottom: 20px;">
+          <% case notification.notificable_type %>
+          <% when 'Favorite' %>
+            <% unless notification.read %>
+              <i class="fas fa-bell" style="color: #ffd700"></i>
+              <%= link_to notification_path(notification), method: :patch, class: "notification-favo-name" do %>
+                <span><%= "#{notification.notificable.user.nick_name}" %>さんから </span>
+                  <i class="fa-solid fa-heart"></i> されました
+              <% end %>
+            <% end %>
+          <% when 'PostComment' %>
+            <% unless notification.read %>
+              <i class="fas fa-bell" style="color: #ffd700"></i>
+              <%= link_to notification_path(notification), method: :patch, class: "notification-comment-name" do %>
+                <span><%= "#{notification.notificable.user.nick_name}" %>さんから </span>
+              <i class="fa-solid fa-comment"></i> が来ました
+              <% end %>
+            <% end %>
+          <% else %>
+            <%= "Unknown notification type" %>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <i class="fas fa-bell" style="color: gray; font-size: 20px"> 通知はありません</i>
+  <% end %>
+</div>
+
+    </div>
   </div>
 </div>
+

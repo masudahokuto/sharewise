@@ -13,8 +13,10 @@ class Favorite < ApplicationRecord
   private
 
   def create_notification(user_id:)
+    return if user == post.user # 自分のポストに対する自分の「いいね」は通知しない
+
     Notification.create(
-      user_id: user_id,
+      user: post.user, # 通知を受け取るユーザー（投稿のユーザー）
       notificable: self,
       read: false
     )
