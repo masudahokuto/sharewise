@@ -7,7 +7,7 @@ class Post < ApplicationRecord
   # has_many :notifications, as: :notificable
   has_many_attached :images  # 複数画像
 
-  validates :body, presence: true
+  validates :body, presence: true, length: { maximum: 3000 }
   validate :images_format
   validate :image_length
   # 許可するファイル形式を設定

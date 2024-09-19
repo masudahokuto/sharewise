@@ -60,7 +60,7 @@ $(document).on('turbolinks:load', function() {
 
 $(document).on('turbolinks:load', function() {
   const bodyArea = document.getElementById('body');
-  const maxLength = 5000;
+  const maxLength = 3000;
 
   if (bodyArea) {
     bodyArea.addEventListener('input', function() {

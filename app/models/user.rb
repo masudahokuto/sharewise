@@ -87,4 +87,12 @@ class User < ApplicationRecord
   scope :search, -> (query) {
     where('nick_name LIKE ?', "%#{query}%")
   }
+
+  scope :search_by, -> (field, query) {
+    if field == 'id'
+      where('id LIKE ?', "%#{query}%")
+    else
+      where("#{field} LIKE ?", "%#{query}%")
+    end
+  }
 end

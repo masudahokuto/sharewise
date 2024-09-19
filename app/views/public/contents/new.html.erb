@@ -21,13 +21,13 @@
               <%= f.text_field :content_name, class: "form-control", id: 'content_name', autofocus: true, placeholder: "項目名を入力(20文字まで登録できます)", style: "width: 350px;" %>
               <div style="margin-left: 10px;">
                 <%= f.submit '保存して内容確認', name: 'save_and_show', class: 'btn btn-primary', title: "保存して内容を確認" %>
-              
-                <%= f.submit '保存して新規作成', name: 'save_and_new', class: 'btn btn-secondary', title: "保存して次のページ" %>
+
+                <%= f.submit '保存して新規作成', name: 'save_and_new', class: 'btn btn-info', title: "保存して次のページ" %>
               </div>
             </div>
             <div class="row">
               <div class="col-md-8 p-0">
-                <%= f.text_area :body, class: "post-text-area", id: 'body', placeholder: "内容を入力してください(5000文字まで登録できます)" %>
+                <%= f.text_area :body, class: "post-text-area", id: 'body', placeholder: "内容を入力してください(3000文字まで登録できます)" %>
               </div>
               <div class="col-md-4 pt-0">
                 <div class="d-flex justify-content-left mb-1">

@@ -9,6 +9,7 @@
     <p class="user-profile"><%= user.profile %></p>
     ﾌｫﾛﾜｰ数：<span class="followed-count"><%= user.followers.count %></span>
     <p class="user-full-name"><%= user.full_name %></p>
+    <p class="mail"><%= user.email %></p>
     <% if user.is_active %>
       <p class="is_active_true">登録中</p>
     <% else %>
