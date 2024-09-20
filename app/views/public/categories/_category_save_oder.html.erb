@@ -75,7 +75,7 @@
             </span>
           </td>
           <td>
-            <%= category.created_at.strftime("%Y/%m/%d") %>
+            <%= category.created_at.in_time_zone("Tokyo").strftime("%Y/%m/%d %H:%M") %>
           </td>
           <td>
             <button class="btn btn-success btn-sm edit-btn" data-category-id="<%= category.id %>">編集</button>

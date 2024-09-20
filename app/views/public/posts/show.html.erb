@@ -11,8 +11,8 @@
         <% end %>
       <% end %>
     </div>
-    <!-- 本文を表示する部分 -->
     <div class="col-md-7">
+      <h3><%= @post.user.nick_name %>さんの投稿詳細ページ</h3>
       <div class="text-center d-flex justify-content-end align-items-center">
         <% if current_user == @post.user %>
           <%= link_to '投稿を編集', edit_post_path(@post), class: 'btn btn-success mr-1', style: 'margin-right: 0;' %>

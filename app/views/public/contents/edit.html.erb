@@ -4,6 +4,10 @@
   <div class="row d-flex justify-content-center">
     <div class="col-md-2 d-flex flex-column align-items-center">
       <%= render 'public/users/user_card', user: @user %>
+       <% if @current_user %>
+        <%= link_to 'プロフィール編集', edit_user_path(@current_user), class: 'btn btn-primary mt-3' %>
+      <% end %>
+      <%= render 'public/content_names' %>
     </div>
     <div class="col-md-10">
       <%= form_with model: [@category, @title, @genre, @content], local: true, html: { id: 'post_form', enctype: 'multipart/form-data' } do |f| %>

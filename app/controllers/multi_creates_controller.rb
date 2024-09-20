@@ -4,6 +4,7 @@ class MultiCreatesController < ApplicationController
     @title = @category.titles.build
     @genre = @title.genres.build
     @content = @genre.contents.build
+    @include_clock_js = true
   end
 
   def create

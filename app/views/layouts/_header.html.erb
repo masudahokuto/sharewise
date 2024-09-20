@@ -1,76 +1,77 @@
 <header class="custom-header py-3">
   <div class="container-fluid px-5 d-flex justify-content-between align-items-center">
-    <!-- アイコンとShareWiseの文字部分 -->
-    <div class="home-icon d-flex align-items-center">
-      <% if admin_signed_in? %>
-        <%= link_to admin_posts_path, class: (current_page?(admin_path) ? 'text-decoration-none active' : 'text-decoration-none') do %>
-          <i class="fa-solid fa-house" title= "投稿一覧"></i>
-          <span class="site-title" title= "投稿一覧">ShareWise</span> <!-- ホームアイコンの右にテキストを追加 -->
+    <div class="d-flex align-items-center"
+      <!-- アイコンとShareWiseの文字部分 -->
+      <div class="home-icon d-flex align-items-center">
+        <% if admin_signed_in? %>
+          <%= link_to admin_posts_path, class: (current_page?(admin_path) ? 'text-decoration-none active' : 'text-decoration-none') do %>
+            <i class="fa-solid fa-house" title="投稿一覧"></i>
+            <span class="site-title" title="投稿一覧">ShareWise</span>
+          <% end %>
+        <% elsif user_signed_in? %>
+          <%= link_to root_path, class: (current_page?(root_path) ? 'text-decoration-none active' : 'text-decoration-none') do %>
+            <i class="fa-solid fa-house" title="Top page"></i>
+            <span class="site-title" title="Top page">ShareWise</span>
+          <% end %>
+        <% else %>
+          <%= link_to root_path, class: (current_page?(root_path) ? 'text-decoration-none active' : 'text-decoration-none') do %>
+            <i class="fa-solid fa-house" title="Top page"></i>
+            <span class="site-title" title="Top page">ShareWise</span>
+          <% end %>
         <% end %>
-      <% elsif user_signed_in? %>
-        <%= link_to root_path, class: (current_page?(root_path) ? 'text-decoration-none active' : 'text-decoration-none') do %>
-          <i class="fa-solid fa-house" title= "Top page"></i>
-          <span class="site-title" title= "Top page">ShareWise</span>
-        <% end %>
-      <% else %>
-        <%= link_to root_path, class: (current_page?(root_path) ? 'text-decoration-none active' : 'text-decoration-none') do %>
-          <i class="fa-solid fa-house" title= "Top page"></i>
-          <span class="site-title" title= "Top page">ShareWise</span>
+      </div>
+
+      <% if user_signed_in? %>
+        <%= link_to new_category_path, class: "header-link text-decoration-none hover-effect mx-3 #{'active' if current_page?(new_category_path)}" do %>
+          <i class="fa-solid fa-book-open" title="My Dictionary"></i>
         <% end %>
       <% end %>
     </div>
-    <!-- ログイン別のメニュー部分 -->
+
     <div>
-      <% if admin_signed_in? %>
-        <%= link_to admin_users_path, class: "header-link text-decoration-none hover-effect mx-3 #{'active' if current_page?(admin_users_path)}" do %>
-          <i class="fa-solid fa-users" title= "user一覧"></i>
-        <% end %>
-        <%= link_to admin_posts_path, class: "header-link text-decoration-none hover-effect mx-3 #{'active' if current_page?(admin_posts_path)}" do %>
-          <i class="fa-solid fa-comments" title= "投稿一覧"></i>
-        <% end %>
-        <%= link_to destroy_admin_session_path, method: :delete, class: 'header-link text-decoration-none hover-effect mx-3', data: { confirm: 'ログアウトしますか？' } do %>
-          <i class="fa-solid fa-right-to-bracket" title= "ログアウト"></i>
-        <% end %>
-      <% elsif user_signed_in? %>
-        <!--通知-->
-        <% if user_signed_in? %>
-          <% unread_count = current_user.notifications.where(read: false).count %>
-          <%= link_to mypage_users_path, class: "notification-icon #{'has-unread' if unread_count > 0}" do %>
-            <i class="fas fa-bell"></i>
-            <span class="unread-count"><%= unread_count if unread_count > 0 %></span>
-          <% end %>
+      <% if user_signed_in? %>
+        <% unread_count = current_user.notifications.where(read: false).count %>
+        <%= link_to mypage_users_path, class: "notification-icon #{'has-unread' if unread_count > 0}" do %>
+          <i class="fas fa-bell"></i>
+          <span class="unread-count"><%= unread_count if unread_count > 0 %></span>
         <% end %>
         <%= link_to mypage_users_path, class: "header-link text-decoration-none hover-effect ml-2 mr-3 #{'active' if current_page?(mypage_users_path)}" do %>
-          <i class="fa-solid fa-address-card" title= "My Page"></i>
-        <% end %>
-        <%= link_to new_category_path, class: "header-link text-decoration-none hover-effect mx-3 #{'active' if current_page?(new_category_path)}" do %>
-          <i class="fa-solid fa-book-open" title= "My Dictionary"></i>
+          <i class="fa-solid fa-address-card" title="My Page"></i>
         <% end %>
         <%= link_to users_path, class: "header-link text-decoration-none hover-effect mx-3 #{'active' if current_page?(users_path)}" do %>
-          <i class="fa-solid fa-users" title= "user一覧"></i>
+          <i class="fa-solid fa-users" title="user一覧"></i>
         <% end %>
         <%= link_to posts_path, class: "header-link text-decoration-none hover-effect mx-3 #{'active' if current_page?(posts_path)}" do %>
-          <i class="fa-solid fa-comments" title= "投稿一覧"></i>
+          <i class="fa-solid fa-comments" title="投稿一覧"></i>
         <% end %>
         <%= link_to new_post_path, class: "header-link text-decoration-none hover-effect mx-3 #{'active' if current_page?(new_post_path)}" do %>
-          <i class="fa-solid fa-user" title= "投稿して知識を共有"><i class="fa-solid fa-comment ml-1"></i></i>
+          <i class="fa-solid fa-user" title="投稿して知識を共有"><i class="fa-solid fa-comment ml-1"></i></i>
         <% end %>
         <%= link_to destroy_user_session_path, method: :delete, class: 'header-link text-decoration-none hover-effect mx-3', data: { confirm: 'ログアウトしますか？'} do %>
-          <i class="fa-solid fa-right-to-bracket" title= "ログアウト"></i>
+          <i class="fa-solid fa-right-to-bracket" title="ログアウト"></i>
         <% end %>
-
+      <% elsif admin_signed_in? %>
+        <%= link_to admin_users_path, class: "header-link text-decoration-none hover-effect mx-3 #{'active' if current_page?(admin_users_path)}" do %>
+          <i class="fa-solid fa-users" title="user一覧"></i>
+        <% end %>
+        <%= link_to admin_posts_path, class: "header-link text-decoration-none hover-effect mx-3 #{'active' if current_page?(admin_posts_path)}" do %>
+          <i class="fa-solid fa-comments" title="投稿一覧"></i>
+        <% end %>
+        <%= link_to destroy_admin_session_path, method: :delete, class: 'header-link text-decoration-none hover-effect mx-3', data: { confirm: 'ログアウトしますか？' } do %>
+          <i class="fa-solid fa-right-to-bracket" title="ログアウト"></i>
+        <% end %>
       <% else %>
         <%= link_to about_path, class: "header-link text-decoration-none hover-effect mx-3 #{'active' if current_page?(about_path)}" do %>
-          <i class="fa-solid fa-puzzle-piece" title= "Introduction"></i>
+          <i class="fa-solid fa-puzzle-piece" title="Introduction"></i>
         <% end %>
         <%= link_to users_path, class: "header-link text-decoration-none hover-effect mx-3 #{'active' if current_page?(users_path)}" do %>
-          <i class="fa-solid fa-users" title= "user一覧"></i>
+          <i class="fa-solid fa-users" title="user一覧"></i>
         <% end %>
         <%= link_to posts_path, class: "header-link text-decoration-none hover-effect mx-3 #{'active' if current_page?(posts_path)}" do %>
-          <i class="fa-solid fa-comments" title= "投稿一覧"></i>
+          <i class="fa-solid fa-comments" title="投稿一覧"></i>
         <% end %>
         <%= link_to new_user_session_path, class: "header-link text-decoration-none hover-effect mx-3 #{'active' if current_page?(new_user_session_path)}" do %>
-          <i class="fa-solid fa-right-to-bracket fa-flip-horizontal" title= "ログイン"></i>
+          <i class="fa-solid fa-right-to-bracket fa-flip-horizontal" title="ログイン"></i>
         <% end %>
       <% end %>
     </div>

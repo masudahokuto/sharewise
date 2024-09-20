@@ -452,3 +452,97 @@
   font-weight: bold;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
+// 時計
+.analog-clock {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 133px; /* 時計の高さを200pxから2/3のサイズに変更 */
+    width: 133px;  /* 時計の幅を200pxから2/3のサイズに変更 */
+    border: 4px solid #333; /* ボーダーのサイズも調整 */
+    border-radius: 50%;
+    position: relative;
+    background-color: #fff;
+
+
+  .clock-face {
+    position: relative;
+    height: 100%;
+    width: 100%;
+  }
+
+  .hand {
+    position: absolute;
+    background-color: #333;
+    transform-origin: bottom center; /* 針の底部を回転の中心に設定 */
+    transition: transform 0.5s ease-in-out;
+  }
+
+  .hour-hand {
+    width: 3px; /* 針の幅を縮小 */
+    height: 33px; /* 針の長さを縮小 */
+    bottom: 50%; /* 時計の中心から50%上 */
+    left: 50%; /* 時計の中心から50%左 */
+    transform: translateX(-50%) rotate(0deg); /* 中心に合わせて移動し、回転 */
+  }
+
+  .minute-hand {
+    width: 2px; /* 針の幅を縮小 */
+    height: 47px; /* 針の長さを縮小 */
+    bottom: 50%; /* 時計の中心から50%上 */
+    left: 50%; /* 時計の中心から50%左 */
+    transform: translateX(-50%) rotate(0deg);
+  }
+
+  .second-hand {
+    width: 1px; /* 針の幅を縮小 */
+    height: 60px; /* 針の長さを縮小 */
+    bottom: 50%; /* 時計の中心から50%上 */
+    left: 50%; /* 時計の中心から50%左 */
+    background-color: red;
+    transform: translateX(-50%) rotate(0deg);
+  }
+
+  .center-dot {
+    position: absolute;
+    background-color: #333;
+    border-radius: 50%;
+    height: 7px; /* 中心の点のサイズを縮小 */
+    width: 7px;  /* 中心の点のサイズを縮小 */
+    top: 50%; /* 時計の中心から50%下 */
+    left: 50%; /* 時計の中心から50%左 */
+    transform: translate(-50%, -50%);
+  }
+
+  .number {
+    position: absolute;
+    font-size: 14px; /* 数字のサイズ */
+    text-align: center;
+    width: 20px; /* 数字のボックスの幅 */
+    height: 20px; /* 数字のボックスの高さ */
+    line-height: 123px;
+    transform-origin: 50% 100%;
+  }
+
+  .number-1  { transform: rotate(30deg) translate(0, -55.5px) rotate(-30deg) translateX(53px); }
+  .number-2  { transform: rotate(60deg) translate(0, -55.5px) rotate(-60deg) translateX(53px); }
+  .number-3  { transform: rotate(90deg) translate(0, -55.5px) rotate(-90deg) translateX(53px); }
+  .number-4  { transform: rotate(120deg) translate(0, -55.5px) rotate(-120deg) translateX(53px); }
+  .number-5  { transform: rotate(150deg) translate(0, -55.5px) rotate(-150deg) translateX(53px); }
+  .number-6  { transform: rotate(180deg) translate(0, -55.5px) rotate(-180deg) translateX(53px); }
+  .number-7  { transform: rotate(210deg) translate(0, -55.5px) rotate(-210deg) translateX(53px); }
+  .number-8  { transform: rotate(240deg) translate(0, -55.5px) rotate(-240deg) translateX(53px); }
+  .number-9  { transform: rotate(270deg) translate(0, -55.5px) rotate(-270deg) translateX(53px); }
+  .number-10 { transform: rotate(300deg) translate(0, -55.5px) rotate(-300deg) translateX(53px); }
+  .number-11 { transform: rotate(330deg) translate(0, -55.5px) rotate(-330deg) translateX(53px); }
+  .number-12 { transform: rotate(360deg) translate(0, -55.5px) rotate(-360deg) translateX(53px); }
+}
+
+.hidden {
+  display: none;
+}
+
+#toggleClockButton {
+  font-size: 10px;
+  margin-bottom: 5px;
+}

@@ -1,7 +1,12 @@
 class Admin::PostsController < ApplicationController
   before_action :authenticate_admin!
   def index
-    @posts = Post.order(created_at: :desc).page(params[:page]).per(10)
+    if params[:query].present?
+      @posts = Post.search_by_body(params[:query]).order(created_at: :desc).page(params[:page]).per(10)
+    else
+      @posts = Post.order(created_at: :desc).page(params[:page]).per(10)
+    end
+
     @admin_users = User.page(params[:page]).per(50)
       @gender_counts = {
       male: User.where(gender: :male).count,

@@ -1,7 +1,7 @@
 class Public::ContentsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_content, only: [:show, :edit, :update, :destroy]
-  before_action :authorize_user!, only: [:edit, :update, :destroy]
+  before_action :authorize_user!, only: [:update, :destroy]
 
   def new
     @category = Category.find(params[:category_id])
@@ -9,6 +9,7 @@ class Public::ContentsController < ApplicationController
     @genre = @title.genres.find(params[:genre_id])
     @content = @genre.contents.new
     @user = current_user
+    @include_clock_js = true
   end
 
   def create
@@ -36,11 +37,12 @@ class Public::ContentsController < ApplicationController
     @genre = @content.genre
     @title = @genre.title
     @category = @title.category
-    @user = @category.user
+    @user = current_user
   end
 
   def edit
     # @content は set_content コールバックで設定されている
+    @user = current_user
   end
 
   def update
@@ -48,6 +50,7 @@ class Public::ContentsController < ApplicationController
     if @content.update(content_params)
       redirect_to category_title_genre_path(@category, @title, @genre), notice: 'コンテンツが更新されました。'
     else
+      flash[:alert] = "エラーが発生しました"
       redirect_back(fallback_location: root_path)
     end
   end
