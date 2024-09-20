@@ -10,9 +10,11 @@ class Public::PostsController < ApplicationController
   def create
     @post = current_user.posts.new(post_params) # current_user を使用して投稿を作成
     if @post.save
+      flash[:success] = "投稿しました"
       redirect_to mypage_users_path
     else
-      render :new
+      flash[:alert] = "エラーが発生しました"
+      redirect_back(fallback_location: root_path)
     end
   end
 
@@ -80,8 +82,10 @@ class Public::PostsController < ApplicationController
     end
 
     if @post.save
-      redirect_to post_path(@post), notice: '投稿が成功しました。'
+      flash[:success] = "投稿しました"
+      redirect_to post_path(@post)
     else
+      flash[:alert] = "エラーが発生しました"
       redirect_to root_path
     end
   end

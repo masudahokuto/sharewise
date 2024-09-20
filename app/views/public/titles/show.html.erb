@@ -12,7 +12,7 @@
         <%= form_with(model: [@category, @title, @genre], url: category_title_genres_path(@category, @title), method: :post, local: true, class: 'w-50') do |f| %>
 
           <div class="d-flex">
-            <%= f.text_field :genre_name, class: "form-control mr-2", placeholder: "項目名を入力(20文字まで登録できます)                                このボタンで保存⇨" %>
+            <%= f.text_field :genre_name, class: "form-control mr-2", id: 'genre_name', autofocus: true, placeholder: "項目名を入力(20文字まで登録できます)※必須" %>
             <%= f.submit "項目を追加", class: "btn btn-primary", title: 'フォームに入力してこのボタンで保存します(保存をすると保存順に切り替わります)' %>
           </div>
         <% end %>

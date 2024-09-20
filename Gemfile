@@ -57,7 +57,8 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'devise'
 gem 'kaminari'
 gem 'jquery-rails'
-
+gem 'active_storage_validations'
+gem 'rails-i18n'
 # デプロイ用-----------
 gem 'dotenv-rails'
 group :production do

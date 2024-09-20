@@ -1,5 +1,12 @@
 Rails.application.routes.draw do
-  # 顧客用
+  #通知
+  resources :notifications, only: %i[update] do
+    collection do
+      patch :mark_all_as_read
+    end
+  end
+
+    # 顧客用
   # URL /customers/sign_in ...
   devise_for :users,skip: [:passwords], controllers: {
     registrations: "public/registrations",
@@ -8,7 +15,7 @@ Rails.application.routes.draw do
 
   # 管理者用
   # URL /admin/sign_in ...
-  devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
+  devise_for :admin, skip: %i[registrations, passwords] ,controllers: {
     sessions: "admin/sessions"
   }
 
@@ -28,12 +35,13 @@ Rails.application.routes.draw do
     end
     get "/" => "homes#top"
   end
-
+  resources :multi_creates, only: %i[new create]
   # 顧客用のルーティング
   scope module: :public do
     root to: 'homes#top'
     get 'about', to: 'homes#about'
     resources :users, except: %i[new create] do
+      resources :links, only: %i[new create destroy]
       collection do
         get 'mypage', to: 'users#mypage'
         patch 'withdraw'  # 退会処理
@@ -53,6 +61,8 @@ Rails.application.routes.draw do
       resources :post_comments, only: %i[create destroy]
       post 'create_from_content', on: :member
     end
+
+
 
     resources :categories, only: %i[new create update destroy show] do
       resources :titles, only: %i[show create update destroy] do

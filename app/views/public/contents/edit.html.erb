@@ -4,11 +4,15 @@
   <div class="row d-flex justify-content-center">
     <div class="col-md-2 d-flex flex-column align-items-center">
       <%= render 'public/users/user_card', user: @user %>
+       <% if @current_user %>
+        <%= link_to 'プロフィール編集', edit_user_path(@current_user), class: 'btn btn-primary mt-3' %>
+      <% end %>
+      <%= render 'public/content_names' %>
     </div>
     <div class="col-md-10">
       <%= form_with model: [@category, @title, @genre, @content], local: true, html: { id: 'post_form', enctype: 'multipart/form-data' } do |f| %>
-        <div class="row">
-          <div class="col-md-8 mb-4">
+        <div class="row d-flex justify-content-center mb-3">
+          <div class="field col-md-12">
             <div>
               <%= link_to  mypage_users_path, class: 'mypage-link', title: 'マイページ' do %>
                 <i class="fa-solid fa-user"></i>
@@ -18,31 +22,29 @@
               <%= link_to @title.title_name, category_title_path(@category, @title), class: 'return-link-blue', title: 'ふたつ前に戻る' %>＞
               <%= link_to @genre.genre_name, category_title_genre_path(@category, @title, @genre), class: 'return-link-green', title: 'ひとつ前に戻る' %>＞
             </div>
-            <div class="text-center d-flex justify-content-between align-items-center mt-2">
-              <%= f.label :body, '※項目名を編集(20文字まで入力できます)', style: "margin-bottom: -2rem" %>
-              <div>
-                <%= f.submit 'ページを保存', class: 'btn btn-success' %>
+            <div class="d-flex justify-content-between align-items-center my-4">
+              <%= f.text_field :content_name, class: "form-control", id: 'content_name', autofocus: true , placeholder: "項目名を入力(20文字まで登録できます)", style: "width: 350px;" %>
+              <div style="margin-left: 10px;">
+                <%= f.submit 'ページを保存', class: 'btn btn-success', title: "このボタンで保存します" %>
                 <%= link_to 'ページを削除', category_title_genre_content_path(@category, @title, @genre, @content), method: :delete, data: { confirm: '本当に削除してもよろしいですか？' }, class: 'btn btn-danger mr-1', style: 'margin-right: 0;' %>
               </div>
             </div>
-          </div>
-        </div>
-        <div class="row d-flex mb-3">
-          <div class="field col-md-8">
-            <%= f.text_field :content_name, class: 'form-control mb-3', autofocus: true %>
-            <%= f.label :body, '※編集内容を入力してください', style: "margin-bottom: -2rem" %>
-            <%= f.text_area :body, class: 'post-text-area' %>
-          </div>
-          <div class="col-md-4 mt-4">
-            <div class="text-left mb-2">
-              <button id="add_image_button" type="button" class="image-add-btn btn-secondary" style="width: 50%">画像を追加する</button>
-              ※画像は3枚まで登録できます
-            </div>
-            <div class="content-image-field">
-              <div class="file-field_0 mb-3">
-                <!-- 画像を追加するためのフィールド -->
-                <input name="content[images][]" type="file" class="content_image" aria-num="0" onchange="fileSelect(this);" multiple>
-                <img id="preview_area_0">
+            <div class="row">
+              <div class="col-md-8 p-0">
+                <%= f.text_area :body, class: 'post-text-area', id: 'body', placeholder: "内容を入力してください(5000文字まで登録できます)" %>
+              </div>
+              <div class="pt-0 col-md-4 pt-0">
+                <div class="d-flex justify-content-left mb-1">
+                  <button id="add_image_button" type="button" class="image-add-btn btn-secondary" style="width: 50%">画像を追加する</button>
+                  ※画像は3枚まで登録できます
+                </div>
+                <div class="content-image-field">
+                  <div class="file-field_0 mb-3">
+                    <!-- 画像を追加するためのフィールド -->
+                    <input name="content[images][]" type="file" class="content_image" aria-num="0" onchange="fileSelect(this);" multiple>
+                    <img id="preview_area_0">
+                  </div>
+                </div>
               </div>
             </div>
           </div>

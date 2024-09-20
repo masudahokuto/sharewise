@@ -1,0 +1,58 @@
+ja:
+  errors:
+    format: "%{attribute} %{message}"
+    messages:
+      accepted: "を受け入れる必要があります"
+      absent: "を含んではいけません"
+      blank: "を入力してください"
+      confirmed: "と確認が一致しません"
+      empty: "を入力してください"
+      equal_to: "は%{count}でなければなりません"
+      even: "は偶数でなければなりません"
+      exclusion: "は一覧に含まれてはいけません"
+      excluded: "は一覧に含まれてはいけません"
+      greater_than: "は%{count}より大きくなければなりません"
+      greater_than_or_equal_to: "は%{count}以上でなければなりません"
+      less_than: "は%{count}より小さくなければなりません"
+      less_than_or_equal_to: "は%{count}以下でなければなりません"
+      not_a_number: "は数値ではありません"
+      not_an_integer: "は整数ではありません"
+      odd: "は奇数でなければなりません"
+      present: "は空ではいけません"
+      record_invalid: "保存できませんでした: %{errors}"
+      taken: "はすでに存在します"
+      too_long: "は%{count}文字以内にしてください"
+      too_short: "は%{count}文字以上でなければなりません"
+      wrong_length: "は%{count}文字でなければなりません"
+    header_message:
+      one: "1件のエラーがあります"
+      other: "%{count}件のエラーがあります"
+    full_messages:
+      one: "1件のエラーがあります: %{message}"
+      other: "%{count}件のエラーがあります: %{messages}"
+  devise:
+    failure:
+      already_authenticated: "すでにログインしています"
+      invalid: "無効なメールアドレスまたはパスワードです"
+      locked: "アカウントがロックされています"
+      not_found_in_database: "メールアドレスとパスワードが一致しません"
+      omniauth_callback_error: "認証エラーです"
+      timeout: "セッションがタイムアウトしました"
+      unauthenticated: "ログインしてください"
+      unconfirmed: "メールアドレスが確認されていません"
+      invalid_token: "無効なトークンです"
+      invalid_credentials: "無効な認証情報です"
+      already_confirmed: "すでに確認済みです"
+    sessions:
+      signed_in: "ログインしました"
+      signed_out: "ログアウトしました"
+    registrations:
+      signed_up: "アカウントが作成されました"
+      updated: "アカウント情報が更新されました"
+      destroyed: "アカウントが削除されました"
+    passwords:
+      send_instructions: "パスワード再設定の指示をメールで送信しました"
+      updated: "パスワードが更新されました"
+      updated_not_active: "パスワードが更新されましたが、アカウントはアクティブではありません"
+    unlocks:
+      unlocked: "アカウントがアンロックされました"

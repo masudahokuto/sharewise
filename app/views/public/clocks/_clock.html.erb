@@ -1,0 +1,40 @@
+<button id="toggleClockButton">時計</button>
+<div class="analog-clock mb-3" id="clockContainer">
+  <div class="clock-face" title="
+動かない場合はページを読み込み直して下さい。
+不規則な動きをする場合があります。
+正確な時間を保証するものではありません。">
+    <div class="number number-1">1</div>
+    <div class="number number-2">2</div>
+    <div class="number number-3">3</div>
+    <div class="number number-4">4</div>
+    <div class="number number-5">5</div>
+    <div class="number number-6">6</div>
+    <div class="number number-7">7</div>
+    <div class="number number-8">8</div>
+    <div class="number number-9">9</div>
+    <div class="number number-10">10</div>
+    <div class="number number-11">11</div>
+    <div class="number number-12">12</div>
+    <div class="hand hour-hand"></div>
+    <div class="hand minute-hand"></div>
+    <div class="hand second-hand"></div>
+    <div class="center-dot"></div>
+  </div>
+</div>
+<script>
+document.getElementById('toggleClockButton').addEventListener('click', function() {
+  var clockContainer = document.getElementById('clockContainer');
+
+  if (clockContainer.classList.contains('hidden')) {
+    clockContainer.classList.remove('hidden');
+    this.textContent = '時計'; // ボタンのテキストを更新
+  } else {
+    clockContainer.classList.add('hidden');
+    this.textContent = '時計'; // ボタンのテキストを更新
+  }
+});
+</script>
+<% if @include_clock_js %>
+  <%= javascript_pack_tag 'clock' %>
+<% end %>

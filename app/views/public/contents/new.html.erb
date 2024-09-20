@@ -2,14 +2,16 @@
 <div class="container-fluid">
   <div class="row d-flex justify-content-center">
     <div class="col-md-2 d-flex flex-column align-items-center">
-      <%= render 'public/users/user_card', user: @user %>
+      <%= render 'public/clocks/clock' %>
+      <%= render 'public/content_names' %>
+      <%= render 'public/links/link_table', links: @links %>
     </div>
     <div class="col-md-10">
       <%= form_with model: @content, url: category_title_genre_contents_path(@category, @title, @genre), local: true, html: { id: 'content_form', enctype: 'multipart/form-data' } do |f| %>
-        <div class="row d-flex">
-          <div class="field col-md-8">
+        <div class="row d-flex justify-content-center mb-3">
+          <div class="field col-md-12">
             <div>
-              <%= link_to  mypage_users_path, class: 'mypage-link', title: 'マイページ' do %>
+              <%= link_to mypage_users_path, class: 'mypage-link', title: 'マイページ' do %>
                 <i class="fa-solid fa-user"></i>
               <% end %>＞
               <%= link_to 'もくじ', new_category_path, class: 'return-link-black', title: 'よっつ前に戻る' %>＞
@@ -17,25 +19,29 @@
               <%= link_to @title.title_name, category_title_path(@category, @title), class: 'return-link-blue', title: 'ふたつ前に戻る' %>＞
               <%= link_to @genre.genre_name, category_title_genre_path(@category, @title, @genre), class: 'return-link-green', title: 'ひとつ前に戻る' %>＞
             </div>
-            <div class="text-center d-flex justify-content-end my-2 align-items-center mb-0">
-              <%= f.submit "ページを保存", class: 'btn btn-primary ml-auto', style: 'width: 20%' %>
+            <div class="d-flex justify-content-between align-items-center my-4">
+              <%= f.text_field :content_name, class: "form-control", id: 'content_name', autofocus: true, placeholder: "項目名を入力(20文字まで登録できます)※必須", style: "width: 380px;" %>
+              <div style="margin-left: 10px;">
+                <%= f.submit '保存して内容確認', name: 'save_and_show', class: 'btn btn-primary', title: "保存して内容を確認" %>
+
+                <%= f.submit '保存して新規作成', name: 'save_and_new', class: 'btn btn-info', title: "保存して次のページ" %>
+              </div>
             </div>
-            <div>
-              <%= f.text_field :content_name, class: "form-control mb-3", autofocus: true , placeholder: "項目名を入力(20文字まで登録できます)" %>
-            </div>
-          </div>
-          <div class="field col-md-8">
-            <%= f.text_area :body, class: "post-text-area", placeholder: "内容を入力してください" %>
-          </div>
-          <div class="pt-0 col-md-4">
-            <div class="text-left mb-1">
-              <button id="add_image_button" type="button" class="image-add-btn btn-secondary">画像を追加する</button>
-              ※画像は3枚まで登録できます
-            </div>
-            <div class="content-image-field">
-              <div class="file-field_0 mb-3">
-                <input name="content[images][]" type="file" class="content_image" aria-num="0" onchange="fileSelect(this);">
-                <img id="preview_area_0">
+            <div class="row">
+              <div class="col-md-8 p-0">
+                <%= f.text_area :body, class: "post-text-area", id: 'body', placeholder: "内容を入力してください(3000文字まで登録できます)" %>
+              </div>
+              <div class="col-md-4 pt-0">
+                <div class="d-flex justify-content-left mb-1">
+                  <button id="add_image_button" type="button" class="image-add-btn btn-secondary">画像を追加する</button>
+                  ※画像は3枚まで登録できます
+                </div>
+                <div class="content-image-field">
+                  <div class="file-field_0 mb-3">
+                    <input name="content[images][]" type="file" class="content_image" aria-num="0" onchange="fileSelect(this);">
+                    <img id="preview_area_0">
+                  </div>
+                </div>
               </div>
             </div>
           </div>

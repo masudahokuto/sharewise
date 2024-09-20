@@ -4,12 +4,16 @@ class Post < ApplicationRecord
   has_many :favorites, dependent: :destroy
   #Postがfavoritesを介してUserに関連付けられfavorited_by_usersメソッドを使用してポストをいいねしたユーザーを取得
   has_many :favorited_by_users, through: :favorites, source: :user
-
+  # has_many :notifications, as: :notificable
   has_many_attached :images  # 複数画像
 
-  validates :body, presence: true
+  validates :body, presence: true, length: { maximum: 3000 }
   validate :images_format
   validate :image_length
+  # 許可するファイル形式を設定
+  validates :images, content_type: { in: ['image/jpg', 'image/jpeg', 'image/png'] }
+  # 画像のサイズを制限 (例: 5MB 以下)
+  validates :images, size: { less_than: 5.megabytes }
 
   # 退会したユーザーのコメントを除外
   scope :active_user_posts, -> { joins(:user).where(users: { is_active: true }) }

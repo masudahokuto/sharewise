@@ -3,25 +3,28 @@
   <div class="row d-flex justify-content-center">
     <div class="col-2 d-flex flex-column align-items-center">
       <%= render 'public/users/user_card', user: @user %>
+       <% if @current_user %>
+        <%= link_to 'プロフィール編集', edit_user_path(@current_user), class: 'btn btn-primary mt-3' %>
+      <% end %>
+      <%= render 'public/content_names' %>
     </div>
     <!-- 本文を表示する部分 -->
-    <div class="col-10">
+    <div class="col-md-10">
       <%= form_with model: @post, local: true, html: { id: 'post_form', enctype: 'multipart/form-data' } do |f| %>
-
         <div class="row d-flex justify-content-center mb-3">
           <div class="field col-md-8">
-              <div style="width: 57%; background-color: #ffff00">
-                ！こちらから投稿する内容はノートには保存されません<br>
-                保存されたい場合はノートに保存後、詳細ページから投稿してください。
-              </div>
-            <div class="d-flex justify-content-between mb-2">
-              <%= f.submit "投稿する", class: 'btn btn-primary ml-auto', style: 'width: 20%' %>
+            <div style="width: 57%; background-color: #ffff00">
+              ！こちらから投稿する内容はノートには保存されません<br>
+              保存されたい場合はノートに保存後、詳細ページから投稿してください。
             </div>
-            <%= f.text_area :body, class: "post-text-area", autofocus: true , placeholder: "投稿内容を入力してください" %>
+            <div class="d-flex justify-content-between mb-1">
+              <%= f.submit "投稿する", class: 'btn btn-primary ml-auto', style: 'width: 20%', title: "このボタンで投稿します" %>
+            </div>
+            <%= f.text_area :body, class: "post-text-area", autofocus: true, id: 'body', placeholder: "内容を入力してください(3000文字まで登録できます)※必須" %>
           </div>
           <div class="col-md-4 mt-4">
-            <div class="text-left mb-2">
-              <button id="add_image_button" type="button" class="image-add-btn btn-secondary">画像を追加する</button>
+            <div class="text-left mb-1">
+              <button id="add_image_button" type="button" class="image-add-btn btn-secondary" title="画像を追加出来ます">画像を追加する</button>
               ※画像は3枚まで登録できます
             </div>
             <div class="post-image-field">

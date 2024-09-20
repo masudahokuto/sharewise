@@ -1,6 +1,6 @@
 <style>
   tbody tr:nth-child(even) {
-    background-color: #f2f2f2; /* 偶数行の背景色 */
+    background-color: #007bff29; /* 偶数行の背景色 */
   }
   tbody tr:nth-child(odd) {
     background-color: #ffffff; /* 奇数行の背景色 */
@@ -70,12 +70,12 @@
             </span>
           </td>
           <td>
-            <%= title.created_at.strftime("%Y/%m/%d") %>
+            <%= title.created_at.in_time_zone("Tokyo").strftime("%Y/%m/%d %H:%M") %>
           </td>
           <td>
             <button class="btn btn-success btn-sm edit-btn" data-title-id="<%= title.id %>">編集</button>
           </td>
-          <td class="link-cell">
+          <td>
             <%= link_to '削除', category_title_path(category, title), method: :delete, data: { confirm: '中身も全て消えてしまいますが本当に削除しますか？' }, class: 'full-link', style: 'color: red;' %>
           </td>
         <% end %>

@@ -16,13 +16,16 @@
       |
       <%= link_to "#{user.followers.count} フォロワー", user_followers_path(user), class: "follows-count" %>
     </p>
-    <!-- フォロー解除ボタン -->
+    <!-- フォローボタン -->
     <% if current_user == user %>
       <!-- current_userと表示しているuserが同じ場合はマイページへのリンクを表示 -->
       <%= link_to 'マイページ', mypage_users_path, class: 'btn btn-success btn-sm' %>
     <% elsif current_user.following?(user) %>
       <!-- フォロー中の場合はフォローを外すボタンを表示 -->
       <%= link_to 'フォローを外す', user_relationship_path(current_user, user), method: :delete, class: 'btn btn-danger btn-sm' %>
+    <% else %>
+      <!-- フォローしていない場合はフォローボタンを表示 -->
+      <%= link_to 'フォローする', user_relationships_path(followed_id: user.id), method: :post, class: 'btn btn-primary btn-sm' %>
     <% end %>
   </div>
 </div>

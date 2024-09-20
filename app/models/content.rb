@@ -4,7 +4,17 @@ class Content < ApplicationRecord
 
   validates :genre_id, presence: true
   validates :content_name, presence: true, uniqueness: { scope: :genre_id }, length: { maximum: 20 }
-  validates :body, presence: true, length: { maximum: 5000 }
+  validates :body, presence: true, length: { maximum: 3000 }
+  # 許可するファイル形式を設定
+  validates :images, content_type: { in: ['image/jpg', 'image/jpeg', 'image/png'] }
+  # 画像のサイズを制限 (例: 5MB 以下)
+  validates :images, size: { less_than: 5.megabytes }
+  # 画像3枚まで
+  def image_length
+    if images.length >= 4
+      errors.add(:images, "は3枚以内にしてください")
+    end
+  end
 
   # 五十音順
   def self.sort_contents(sort_order)

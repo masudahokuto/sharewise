@@ -221,7 +221,7 @@
 
 .profile-image {
   max-width: 150px;
-  height: auto;
+  height: 150px;
   display: block;
   margin: 0 auto;
   border-radius: 50%;
@@ -276,4 +276,77 @@
   font-weight: bold;
   text-decoration: none !important;
   color: #b30000;
+}
+
+.notification-favo-name {
+  color: #696969;
+  font-size: 15px;
+  font-weight: bold;
+  text-decoration: none !important;
+
+  .fa-heart {
+    color: red;
+  }
+}
+
+.notification-favo-name:hover {
+  font-size: 15px;
+  color: #333333;
+  font-weight: bold;
+}
+
+.notification-comment-name {
+  color: #696969;
+  font-size: 15px;
+  font-weight: bold;
+  text-decoration: none !important;
+
+  .fa-comment {
+    color: blue;
+  }
+}
+
+.notification-comment-name:hover {
+  color: #333333;
+  font-size: 15px;
+  font-weight: bold;
+  text-decoration: none !important;
+}
+
+.notification-all-check {
+  color: #ffd700;
+  font-size: 30px;
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+  text-decoration: none !important;
+  margin-bottom: 10px;
+
+  .unread-count {
+    font-size: 16px;
+    color: #ffd700;
+    border-radius: 50%;
+    padding: 2px 6px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translate(50%, -50%);
+  }
+}
+
+.notification-all-check:hover {
+  color: #ccad00;
+  font-size: 30px;
+  text-decoration: none !important;
+
+    .unread-count {
+    font-size: 16px;
+    color: #ccad00;
+    border-radius: 50%;
+    padding: 2px 6px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translate(50%, -50%);
+  }
 }

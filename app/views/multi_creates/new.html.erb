@@ -1,0 +1,71 @@
+<%= stylesheet_link_tag 'public/posts', media: 'all' %>
+<div class="container-fluid">
+  <div class="row d-flex justify-content-center">
+    <div class="col-2 d-flex flex-column align-items-center">
+      <%= render 'public/clocks/clock' %>
+      <%= render 'public/content_names' %>
+      <%= render 'public/links/link_table', links: @links %>
+    </div>
+    <div class="col-md-10">
+      <%= form_with model: @category, url: multi_creates_path, local: true, html: { id: 'content_form', enctype: 'multipart/form-data' } do |f| %>
+        <div class="row d-flex justify-content-center mb-3">
+          <div class="field col-md-12">
+            <div class="mb-2">
+              <%= link_to mypage_users_path, class: 'mypage-link', title: 'マイページ' do %>
+                <i class="fa-solid fa-user"></i>
+              <% end %>＞
+              <%= link_to 'もくじ', new_category_path, class: 'return-link-black', title: 'ひとつ前に戻る' %>＞
+            </div>
+            <div class="mb-2 d-flex justify-content-left align-items-center">
+              <div style="color: #8b4513; font-weight: bold;">もくじ１</div>
+              <%= f.text_field :category_name, class: "form-control", id: 'category_name', autofocus: true, placeholder: "20文字まで登録できます※必須", style: "width: 350px;" %>
+              <div class="ml-2"style="background-color: yellow;">※同名のもくじ１が既に保存されている場合、こちらの画面からはページを保存できません</div>
+            </div>
+            <%= fields_for @title do |title_form| %>
+            <div class="mb-2 d-flex justify-content-left align-items-center">
+              <div style="color: #4169e1; font-weight: bold;">もくじ２</div>
+              <%= title_form.text_field :title_name, class: "form-control", id: 'title_name', placeholder: "20文字まで登録できます※必須", style: "width: 350px;" %>
+            </div>
+            <% end %>
+            <%= fields_for @genre do |genre_form| %>
+            <div class="mb-2 d-flex justify-content-left align-items-center">
+              <div style="color: #2e8b57; font-weight: bold;">もくじ３</div>
+              <%= genre_form.text_field :genre_name, class: "form-control", id: 'genre_name', placeholder: "20文字まで登録できます※必須", style: "width: 350px;" %>
+            </div>
+            <% end %>
+            <%= fields_for @content do |content_form| %>
+            <div class="mb-2 d-flex justify-content-between align-items-center">
+              <div style="display: flex; align-items: center; color: #dc143c; font-weight: bold;">
+                もくじ４
+                <%= content_form.text_field :content_name, class: "form-control", id: 'content_name', placeholder: "20文字まで登録できます※必須", style: "width: 350px;" %>
+              </div>
+              <div>
+                <%= f.submit "一括で全て保存", class: "btn btn-primary btn-sm", style: "width: 200px;", title: "もくじ１～４と内容を全て保存します" %>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-8">
+              <%= content_form.text_area :body, class: "post-text-area", id: 'body', placeholder: "内容を入力してください(5000文字まで登録できます)※必須" %>
+            <% end %>
+          </div>
+          <div class="col-4">
+            <div class="text-left mb-1">
+              <button id="add_image_button" type="button" class="image-add-btn btn-secondary" title="画像を追加出来ます">画像を追加する</button>
+              ※画像は3枚まで登録できます
+            </div>
+            <div class="content-image-field">
+              <div class="file-field_0 mb-3">
+                <input name="content[images][]" type="file" class="content_image" aria-num="0" onchange="fileSelect(this);">
+                <img id="preview_area_0">
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<% if @include_clock_js %>
+  <%= javascript_pack_tag 'clock' %>
+<% end %>

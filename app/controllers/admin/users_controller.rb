@@ -16,6 +16,13 @@ class Admin::UsersController < ApplicationController
     @total_users = User.count
     @inactive_users = User.where(is_active: false).count
     @active_users = @total_users - @inactive_users
+
+    # params[:query] が存在する場合は検索、なければ全ユーザーを表示
+    if params[:query].present? && params[:search_field].present?
+      @admin_users = User.search_by(params[:search_field], params[:query]).page(params[:page]).per(10)
+    else
+      @admin_users = User.page(params[:page]).per(10)
+    end
   end
 
   # 退会中のuserを取得

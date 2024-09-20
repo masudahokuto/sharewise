@@ -1,0 +1,182 @@
+html, body {
+  height: 100%; /* 必ず全体の高さを指定 */
+  margin: 0;
+  padding: 0;
+}
+
+#flash-messages .alert {
+  margin: 0;
+  text-align: center;
+  font-weight: bold;
+}
+
+.home-icon {
+  font-size: 30px;
+  font-weight: bold;
+}
+.home-icon i, .home-icon .site-title {
+  color: #fff;
+  transition: color 0.3s ease;
+}
+
+.home-icon .site-title {
+  font-family: 'Lobster', cursive;
+  font-size: 30px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.home-icon:hover i, .home-icon:hover .site-title {
+  color: #8B4513;
+}
+
+/* "ShareWise"の文字スタイル */
+.site-title {
+  font-family: 'Lobster', cursive;
+  font-size: 36px;
+  color: #fff;
+  margin: 0;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.hover-effect {
+  color: #f8f9fa;
+  transition: color 0.3s ease;
+}
+
+.hover-effect:hover {
+  color: #8B4513;
+}
+
+.header-link {
+  font-size: 30px;
+  text-decoration: none;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* アクティブ時のリンク */
+.active {
+  color: #8B4513;
+  font-size: 40px;
+  font-weight: bold;
+  text-decoration: none;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.custom-header {
+  background-color: #8FBC8F;
+  height: 100px;
+  display: flex;
+  align-items: center;
+}
+
+.customer-greeting {
+  font-size: 12px;
+  color: #f8f9fa;
+  align-items: center;
+  display: flex;
+  height: 100%;
+}
+
+.custom-footer {
+  display: flex;
+  justify-content: center; /* 文字を中央に配置 */
+  align-items: center;
+  position: relative;
+  background-color: #8FBC8F; /* 背景色 */
+  min-height: 100px;
+}
+
+.footer-content {
+  font-weight: bold;
+  color: #ffffff;
+}
+
+#back {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 1000;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+#back a {
+  color: #808080;
+  text-decoration: none;
+}
+
+
+.fa-search {
+  color: white;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.custom-header {
+  flex-shrink: 0;
+}
+
+.main-content {
+  flex-grow: 1;
+  background-color: #f8f4e6;
+}
+
+// 通知部分
+.notification-icon {
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+  text-decoration: none !important;
+
+  i.fas.fa-bell {
+    font-size: 20px;
+    color: #ffffff;
+  }
+
+  .unread-count {
+    font-size: 12px;
+    color: #ff0;
+    border-radius: 50%;
+    padding: 2px 6px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translate(50%, -50%);
+  }
+
+  &.has-unread {
+    i.fas.fa-bell {
+      color: #ff0;
+    }
+  }
+}
+
+#content-name a {
+  color : #dc143c;
+  padding: 3px;
+  font-size: 14px !important;
+  font-weight: bold !important;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: all 0.1s ease-in-out;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+#content-name a:hover {
+  color : #F8F5E6;
+  background-color: #dc143c;
+  font-size: 15px !important;
+  font-weight: bold !important;
+  text-decoration: none;
+  transform: translateY(-2px);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
