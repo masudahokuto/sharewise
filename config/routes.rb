@@ -41,6 +41,7 @@ Rails.application.routes.draw do
     root to: 'homes#top'
     get 'about', to: 'homes#about'
     resources :users, except: %i[new create] do
+      resources :links, only: %i[new create destroy]
       collection do
         get 'mypage', to: 'users#mypage'
         patch 'withdraw'  # 退会処理

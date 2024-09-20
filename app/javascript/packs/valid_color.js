@@ -59,6 +59,21 @@ $(document).on('turbolinks:load', function() {
 });
 
 $(document).on('turbolinks:load', function() {
+  const linkNameField = document.getElementById('link_name');
+  const maxLength = 20;
+
+  if (linkNameField) {
+    linkNameField.addEventListener('input', function() {
+      if (linkNameField.value.length > maxLength) {
+        linkNameField.style.color = 'red';
+      } else {
+        linkNameField.style.color = '';
+      }
+    });
+  }
+});
+
+$(document).on('turbolinks:load', function() {
   const bodyArea = document.getElementById('body');
   const maxLength = 3000;
 

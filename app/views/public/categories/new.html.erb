@@ -11,7 +11,7 @@
             <%= link_to '一括登録', new_multi_create_path, class: "btn btn-warning w-50", style: "color: #ffffff;" %>
           </div>
           <div class="d-flex">
-            <%= f.text_field :category_name, class: "form-control mr-2", id: 'category_name', placeholder: "項目名を入力(20文字まで登録できます)※必須" %>
+            <%= f.text_field :category_name, class: "form-control mr-2", id: 'category_name', autofocus: true, placeholder: "項目名を入力(20文字まで登録できます)※必須" %>
             <%= f.submit "項目を追加", class: "btn btn-primary", title: 'フォームに入力してこのボタンで保存します(保存をすると保存順に切り替わります)' %>
           </div>
         <% end %>

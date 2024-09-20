@@ -1,5 +1,6 @@
 class MultiCreatesController < ApplicationController
   def new
+    @user = current_user
     @category = Category.new
     @title = @category.titles.build
     @genre = @title.genres.build

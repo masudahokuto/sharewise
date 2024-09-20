@@ -1,3 +1,9 @@
+html, body {
+  height: 100%; /* 必ず全体の高さを指定 */
+  margin: 0;
+  padding: 0;
+}
+
 #flash-messages .alert {
   margin: 0;
   text-align: center;
@@ -70,6 +76,34 @@
   display: flex;
   height: 100%;
 }
+
+.custom-footer {
+  display: flex;
+  justify-content: center; /* 文字を中央に配置 */
+  align-items: center;
+  position: relative;
+  background-color: #8FBC8F; /* 背景色 */
+  min-height: 100px;
+}
+
+.footer-content {
+  font-weight: bold;
+  color: #ffffff;
+}
+
+#back {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 1000;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+#back a {
+  color: #808080;
+  text-decoration: none;
+}
+
 
 .fa-search {
   color: white;

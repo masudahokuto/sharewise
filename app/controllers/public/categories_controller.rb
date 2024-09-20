@@ -14,8 +14,10 @@ class Public::CategoriesController < ApplicationController
   def create
     @category = current_user.categories.build(category_params)
     if @category.save
-      redirect_to new_category_path, notice: "カテゴリを登録しました。"
+       flash[:success] = "もくじを作成しました"
+      redirect_back(fallback_location: root_path)
     else
+      flash[:alert] = "エラーが発生しました"
       redirect_back(fallback_location: root_path)
     end
   end
@@ -32,9 +34,10 @@ class Public::CategoriesController < ApplicationController
     if @category.update(category_params)
       respond_to do |format|
         format.js # JavaScriptでレスポンスを返す
-        format.html { redirect_to new_category_path, notice: 'カテゴリー名が更新されました。' }
+        format.html { redirect_to new_category_path, notice: 'もくじが更新されました。' }
       end
     else
+      flash[:alert] = "エラーが発生しました"
       respond_to do |format|
         format.js
         format.html { render :new }
@@ -45,7 +48,7 @@ class Public::CategoriesController < ApplicationController
   def destroy
     # set_category と authorize_user! により、他ユーザーの削除を防止済み
     @category.destroy
-    redirect_to new_category_path, notice: "カテゴリを削除しました。"
+    redirect_back(fallback_location: root_path, notice: 'もくじが削除されました。')
   end
 
   private

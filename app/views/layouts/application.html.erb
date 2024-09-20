@@ -24,20 +24,12 @@
     </div>
     <main class="main-content py-5">
       <%= yield %>
+      <span id="back">
+        <a href="#">
+          <i class="fa-solid fa-chevron-up" style="font-size: 50px;" title="画面上部へ"></i>
+        </a>
+      </span>
     </main>
-    <footer class="custom-footer pt-3"></footer>
+    <%= render 'layouts/footer' %>
   </body>
 </html>
-<script>
-  // 3秒後にフラッシュメッセージをフェードアウト
-  setTimeout(function() {
-    var flashMessages = document.getElementById('flash-messages');
-    if (flashMessages) {
-      flashMessages.style.transition = 'opacity 0.5s ease';
-      flashMessages.style.opacity = '0';
-      setTimeout(function() {
-        flashMessages.remove();
-      }, 500);  // フェードアウトが終わった後に要素を削除
-    }
-  }, 3000);  // 3000ms = 3秒
-</script>
