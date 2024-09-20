@@ -10,6 +10,7 @@ class Public::ContentsController < ApplicationController
     @content = @genre.contents.new
     @user = current_user
     @include_clock_js = true
+    @links = Link.all
   end
 
   def create

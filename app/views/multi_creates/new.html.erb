@@ -3,8 +3,8 @@
   <div class="row d-flex justify-content-center">
     <div class="col-2 d-flex flex-column align-items-center">
       <%= render 'public/clocks/clock' %>
-      <%= render 'public/users/user_card', user: @user %>
       <%= render 'public/content_names' %>
+      <%= render 'public/links/link_table', links: @links %>
     </div>
     <div class="col-md-10">
       <%= form_with model: @category, url: multi_creates_path, local: true, html: { id: 'content_form', enctype: 'multipart/form-data' } do |f| %>

@@ -62,16 +62,16 @@ A(半角大文字)
           <% @sorted_links.each_slice(3) do |slice| %>
             <tr>
               <% slice.each do |link| %>
-                  <% if link.present? %>
-                    <td style='background-color: #ffffff; vertical-align: middle; text-align: left;'>
-                      <%= link_to link.link_name, link.web_url, target: '_blank',class: 'full-link d-flex align-items-center' %>
-                    </td>
-                    <td class="text-center" style='background-color: #ffffff;'>
-                      <%= link_to '削除', user_link_path(@user, link), method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger btn-sm' %>
-                    </td>
-                  <% else %>
-                    リンクが見つかりませんでした。
-                  <% end %>
+                <% if link.present? %>
+                  <td style='background-color: #ffffff; vertical-align: middle; text-align: left;'>
+                    <%= link_to link.link_name, link.web_url, target: '_blank',class: 'full-link d-flex align-items-center' %>
+                  </td>
+                  <td class="text-center" style='background-color: #ffffff;'>
+                    <%= link_to '削除', user_link_path(@user, link), method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger btn-sm' %>
+                  </td>
+                <% else %>
+                  リンクが見つかりませんでした。
+                <% end %>
               <% end %>
             </tr>
           <% end %>
