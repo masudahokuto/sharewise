@@ -16,8 +16,10 @@ class Public::GenresController < ApplicationController
     @title = Title.find(params[:title_id])
     @genre = @title.genres.new(genre_params)
     if @genre.save
+       flash[:success] = "もくじを作成しました"
       redirect_back(fallback_location: root_path)
     else
+      flash[:alert] = "エラーが発生しました"
       redirect_back(fallback_location: root_path)
     end
   end
@@ -28,9 +30,10 @@ class Public::GenresController < ApplicationController
     if @genre.update(genre_params)
       respond_to do |format|
         format.js # JavaScriptでレスポンスを返す
-        format.html { redirect_to category_title_path(@category, @title), notice: 'カテゴリー名が更新されました。' }
+        format.html { redirect_to category_title_path(@category, @title), notice: 'もくじが更新されました。' }
       end
     else
+      flash[:alert] = "エラーが発生しました"
       respond_to do |format|
         format.js
         format.html { render :show }
@@ -40,7 +43,7 @@ class Public::GenresController < ApplicationController
 
   def destroy
     @genre.destroy
-    redirect_back(fallback_location: root_path, notice: 'ジャンルが削除されました。')
+    redirect_back(fallback_location: root_path, notice: 'もくじが削除されました。')
   end
 
   private

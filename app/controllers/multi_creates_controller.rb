@@ -1,10 +1,12 @@
 class MultiCreatesController < ApplicationController
   def new
+    @user = current_user
     @category = Category.new
     @title = @category.titles.build
     @genre = @title.genres.build
     @content = @genre.contents.build
     @include_clock_js = true
+    @links = Link.all
   end
 
   def create

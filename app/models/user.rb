@@ -7,6 +7,7 @@ class User < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_many :liked_posts, through: :favorites, source: :post #Favoriteモデルを通じて関連するPostモデルのレコードを取得
   has_many :categories, dependent: :destroy
+  has_many :links, dependent: :destroy
   has_many :notifications, dependent: :destroy
   has_one_attached :profile_image
   # フォローフォロワーここから-----------------------------------------------------------

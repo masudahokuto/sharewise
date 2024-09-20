@@ -1,0 +1,17 @@
+<table class="mt-3">
+  <th>リンク一覧</th>
+    <% links.each do |link| %>
+      <tr>
+        <% if link.present? %>
+          <td style="vertical-align: middle; text-align: left; height: 30px;">
+            <div style="display: inline-flex; align-items: center;">
+              <span>・</span>
+              <%= link_to link.link_name, link.web_url, target: '_blank', class: 'font-weight-bold', style: 'font-size: 15px; margin-left: 5px;' %>
+            </div>
+          </td>
+        <% else %>
+          <td>リンクが見つかりませんでした。</td>
+        <% end %>
+      </tr>
+    <% end %>
+</table>

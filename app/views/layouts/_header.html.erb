@@ -20,11 +20,19 @@
           <% end %>
         <% end %>
       </div>
-
       <% if user_signed_in? %>
-        <%= link_to new_category_path, class: "header-link text-decoration-none hover-effect mx-3 #{'active' if current_page?(new_category_path)}" do %>
-          <i class="fa-solid fa-book-open" title="My Dictionary"></i>
-        <% end %>
+        <div class="category-page">
+          <%= link_to new_category_path, class: "header-link text-decoration-none hover-effect mx-3 #{'active' if current_page?(new_category_path)}" do %>
+            <i class="fa-solid fa-book-open" title="My Dictionary"></i>
+          <% end %>
+        </div>
+      <% end %>
+      <% if user_signed_in? %>
+        <div class="link-page">
+          <%= link_to new_user_link_path(current_user), class: "header-link text-decoration-none hover-effect mx-3 #{'active' if current_page?(new_user_link_path(current_user))}" do %>
+            <i class="fa-solid fa-link" title="リンク一覧"></i>
+          <% end %>
+        </div>
       <% end %>
     </div>
 

@@ -15,8 +15,10 @@ class Public::TitlesController < ApplicationController
     @category = Category.find(params[:category_id])
     @title = @category.titles.new(title_params)
     if @title.save
+       flash[:success] = "もくじを作成しました"
       redirect_back(fallback_location: root_path)
     else
+      flash[:alert] = "エラーが発生しました"
       redirect_back(fallback_location: root_path)
     end
   end
@@ -26,19 +28,20 @@ class Public::TitlesController < ApplicationController
     if @title.update(title_params)
       respond_to do |format|
         format.js # JavaScriptでレスポンスを返す
-        format.html { redirect_to category_path(@category), notice: 'カテゴリー名が更新されました。' }
+        format.html { redirect_to category_path(@category), notice: 'もくじが更新されました。' }
       end
     else
+      flash[:alert] = "エラーが発生しました"
       respond_to do |format|
         format.js
-        format.html { render :sho }
+        format.html { render :show }
       end
     end
   end
 
   def destroy
     @title.destroy
-    redirect_back(fallback_location: root_path)
+    redirect_back(fallback_location: root_path, notice: 'もくじが削除されました。')
   end
 
   private
