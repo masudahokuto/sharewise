@@ -27,20 +27,23 @@ class Public::PostsController < ApplicationController
     end
   end
 
-def show
-  @post = Post.find_by(id: params[:id])
-
-  if @post.nil? || !@post.user.is_active
-    redirect_back(fallback_location: root_path)
-  elsif current_user.nil? && @post.user.is_active
-    redirect_back(fallback_location: root_path)
-  else
+  def show
     @current_user = current_user
-    @user = @post.user
+    @post = Post.find_by(id: params[:id])
     @post_comments = @post.post_comments.active_user_comments.page(params[:page]).per(10)
-    @post_comment = PostComment.new
+    if @post.nil? || !@post.user.is_active
+      redirect_to posts_path
+    else
+      @current_user = current_user
+      @user = @post.user
+      @post_comment = PostComment.new
+    end
+    @is_following = current_user.following?(@user) if current_user.present?
+    @relationship = current_user.relationships.find_by(followed_id: @user.id) if user_signed_in?
+    # # フォローフォロワー数確認
+    # @followings_count = @user.followings.count
+    # @followers_count = @user.followers.count
   end
-end
 
   def search
     @current_user = current_user

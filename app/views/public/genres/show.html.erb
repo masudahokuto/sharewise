@@ -10,7 +10,7 @@
       <%= link_to @title.title_name, category_title_path(@category, @title), class: 'return-link-blue', title: 'ひとつ前に戻る' %>＞
       <div class="d-flex justify-content-center align-items-center my-2">
         <div class="d-flex">
-          <%= link_to '新しいページを作成', new_category_title_genre_content_path(@category, @title, @genre), class: 'btn btn-primary', title: 'ページを作成する' %>
+          <%= link_to '新しいページを作成', new_category_title_genre_content_path(@category, @title, @genre), class: 'btn btn-primary', data: {"turbolinks" => false}, title: 'ページを作成する' %>
         </div>
       </div>
       <span class="genre-name"><%= @genre.genre_name %></span>

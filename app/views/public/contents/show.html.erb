@@ -23,7 +23,7 @@
         <div class="ml-auto">
           <% if current_user == @content.genre.title.category.user %>
             <%= link_to 'ページを投稿', create_from_content_post_path(content_id: @content.id), method: :post, class: 'btn btn-info mr-1', data: { confirm: 'この内容を投稿しますか？' }, style: 'margin-right: 0;' %>
-            <%= link_to 'ページを作成', new_category_title_genre_content_path(@category, @title, @genre), class: 'btn btn-primary mr-1', title: 'ページを作成する' %>
+            <%= link_to 'ページを作成', new_category_title_genre_content_path(@category, @title, @genre), class: 'btn btn-primary mr-1', data: {"turbolinks" => false}, title: 'ページを作成する' %>
             <%= link_to 'ページを編集', edit_category_title_genre_content_path(@category, @title, @genre, @content), class: 'btn btn-success mr-1', style: 'margin-right: 0;' %>
             <%= link_to 'ページを削除', category_title_genre_content_path(@category, @title, @genre, @content), method: :delete, data: { confirm: '本当に削除してもよろしいですか？' }, class: 'btn btn-danger mr-1', style: 'margin-right: 0;' %>
           <% end %>
