@@ -10,7 +10,7 @@
           <%= form_with(url: admin_posts_path, method: :get, local: true, class: 'form-inline') do %>
             <div class="form-group position-relative">
               <i class="fas fa-search position-absolute" style="left: 10px; top: 50%; transform: translateY(-50%); color: #aaa;"></i>
-              <%= text_field_tag :query, params[:query], class: 'form-control pl-5', placeholder: '検索...' %>
+              <%= text_field_tag :query, params[:query], class: 'form-control pl-5', placeholder: '投稿の内容を検索' %>
             </div>
             <%= submit_tag '検索', class: 'btn btn-secondary ml-3' %>
           <% end %>
