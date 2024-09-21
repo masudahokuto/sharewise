@@ -1,7 +1,7 @@
 class Public::ContentsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_content, only: [:show, :edit, :update, :destroy]
-  before_action :authorize_user!, only: [:update, :destroy]
+  before_action :authorize_user!, only: [:show, :update, :destroy]
 
   def new
     @category = Category.find(params[:category_id])
@@ -10,7 +10,7 @@ class Public::ContentsController < ApplicationController
     @content = @genre.contents.new
     @user = current_user
     @include_clock_js = true
-    @links = Link.all
+    @links = current_user.links
   end
 
   def create
@@ -72,10 +72,10 @@ class Public::ContentsController < ApplicationController
   end
 
   def authorize_user!
-    # @content から関連するカテゴリを取得
-    @category = @content.genre.title.category
-    # current_user がカテゴリの所有者であることを確認
-    redirect_to mypage_path, alert: 'アクセス権がありません' unless @category.user == current_user
+    @genre = @content.genre
+    @title = @genre.title
+    @category = @title.category
+    redirect_to root_path, alert: 'アクセス権がありません' unless @category.user == current_user
   end
 
   def content_params

@@ -15,7 +15,8 @@ class Public::LinksController < ApplicationController
     if @link.save
       redirect_to new_user_link_path(current_user), notice: 'リンクが登録されました。'
     else
-      render :new
+      flash[:alert] = "エラーが発生しました"
+      redirect_back(fallback_location: root_path)
     end
   end
 
