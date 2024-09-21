@@ -1,6 +1,13 @@
 class Public::SessionsController < Devise::SessionsController
   before_action :user_state, only: [:create]
+  def create
+    if admin_signed_in?
+      sign_out(current_admin)
+    end
 
+    super
+  end
+  
   def after_sign_in_path_for(resource)
      mypage_users_path
   end
