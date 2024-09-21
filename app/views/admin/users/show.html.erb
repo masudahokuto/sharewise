@@ -12,15 +12,18 @@
             remote: true,
             params: { user: { is_active: false } },
             class: "btn btn-danger",
-            data: { confirm: '本当に退会させますか？' } %>
+            data: { confirm: '本当に退会させますか？' }, style: 'width: 100px;' %>
         <% else %>
           <%= button_to '再開させる', admin_user_path(@user),
             method: :patch,
             remote: true,
             params: { user: { is_active: true } },
             class: "btn btn-success",
-            data: { confirm: 'このユーザーを再開させますか？' } %>
+            data: { confirm: 'このユーザーを再開させますか？' }, style: 'width: 100px;' %>
         <% end %>
+      </div>
+      <div class="mt-2">
+        <%= button_to '登録抹消', admin_user_path(@user), method: :delete,class: "btn btn-dark",data: { confirm: '全てのデータが消えますが削除しますか？' }, style: 'width: 100px;' %>
       </div>
     </div>
     <div class="col-md-9">

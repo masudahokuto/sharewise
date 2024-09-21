@@ -1,0 +1,38 @@
+<%= stylesheet_link_tag 'public/posts', media: 'all' %>
+<div class="container-fluid">
+  <div class="row d-flex justify-content-center">
+    <div class="col-md-10">
+      <%= link_to  mypage_users_path, class: 'mypage-link', title: 'マイページ' do %>
+        <i class="fa-solid fa-user"></i>
+      <% end %>＞
+      <%= link_to 'もくじ', new_category_path, class: 'return-link-black', title: 'ふたつ前に戻る' %>＞
+      <%= link_to @category.category_name, category_path(@category), class: 'return-link-brown', title: 'ひとつ前に戻る' %>＞
+      <div class="d-flex justify-content-center align-items-center my-2">
+
+        <%= form_with(model: [@category, @title, @genre], url: category_title_genres_path(@category, @title), method: :post, local: true, class: 'w-50') do |f| %>
+
+          <div class="d-flex">
+            <%= f.text_field :genre_name, class: "form-control mr-2", id: 'genre_name', autofocus: true, placeholder: "項目名を入力(20文字まで登録できます)※必須" %>
+            <%= f.submit "項目を追加", class: "btn btn-primary", title: 'フォームに入力してこのボタンで保存します(保存をすると保存順に切り替わります)' %>
+          </div>
+        <% end %>
+      </div>
+      <span class="title-name"><%= @title.title_name %></span>
+      <%= link_to '五十音順', category_title_path(sort_order: 'alphabetical'),title:
+'0(半角数字)
+０(全角数字)a(半角小文字)
+ａ(全角小文字)
+A(半角大文字)
+Ａ(全角大文字)
+ｱ(半角カナ)
+ァ(全角カナ)
+ぁ(かな)
+漢字
+その他の順で並びます
+' %>
+      |
+      <%= link_to '登録順', category_title_path(sort_order: 'created_at'), genre: '保存順で並びます' %>
+      <%= render 'genre_save_order', sorted_genres: @sorted_genres, title: @title, category: @category %>
+    </div>
+  </div>
+</div>

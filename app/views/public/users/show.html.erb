@@ -3,7 +3,6 @@
   <div class="row d-flex justify-content-center">
     <div class="col-md-2 d-flex flex-column align-items-center">
       <%= render 'user_card', user: @user, followings_count: @followings_count, followers_count: @followers_count %>
-
       <% if current_user.present? %>
         <% if @is_following %>
           <%= link_to 'フォローを外す', user_relationship_path(current_user, @user), method: :delete, class: 'btn btn-danger mt-3' %>
@@ -13,6 +12,7 @@
       <% end %>
     </div>
     <div class="col-md-9">
+      <h3><%= @user.nick_name %>さんの投稿一覧ページ</h>
       <% if @posts.any? %>
         <% @posts.each do |post| %>
           <div class="text-center d-flex justify-content-end align-items-center">
@@ -20,14 +20,11 @@
           </div>
           <%= link_to post_path(post), class: "post-link" do %>
             <div class="post-row d-flex mb-3">
-              <!-- 本文の列 -->
               <div class="col-md-8 d-flex flex-column">
                 <div class="flex-grow-1">
                   <p><%= simple_format(post.body) %></p>
                 </div>
               </div>
-
-              <!-- 画像の列（右寄せ） -->
               <div class="col-md-4 d-flex flex-column align-items-end">
                 <% post.images.each do |image| %>
                   <div class="mb-3 text-right">

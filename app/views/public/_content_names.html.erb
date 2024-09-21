@@ -1,0 +1,17 @@
+<div class="mt-3">
+  <table>
+    <tr><th>今日保存したリスト</th></tr>
+    <% today_contents.each do |content| %>
+      <tr><td id="content-name">・<%= content_link(content) %></td></tr>
+    <% end %>
+  </table>
+</div>
+
+<div class="mt-3">
+  <table>
+    <tr><th>昨日保存したリスト</th></tr>
+    <% yesterday_contents.each do |content| %>
+      <tr><td id="content-name">・<%= content_link(content) %></td></tr>
+    <% end %>
+  </table>
+</div>

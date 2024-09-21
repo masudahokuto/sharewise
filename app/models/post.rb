@@ -4,12 +4,16 @@ class Post < ApplicationRecord
   has_many :favorites, dependent: :destroy
   #Postがfavoritesを介してUserに関連付けられfavorited_by_usersメソッドを使用してポストをいいねしたユーザーを取得
   has_many :favorited_by_users, through: :favorites, source: :user
-
+  # has_many :notifications, as: :notificable
   has_many_attached :images  # 複数画像
 
-  validates :body, presence: true
+  validates :body, presence: true, length: { maximum: 3000 }
   validate :images_format
   validate :image_length
+  # 許可するファイル形式を設定
+  validates :images, content_type: { in: ['image/jpg', 'image/jpeg', 'image/png'] }
+  # 画像のサイズを制限 (例: 5MB 以下)
+  validates :images, size: { less_than: 5.megabytes }
 
   # 退会したユーザーのコメントを除外
   scope :active_user_posts, -> { joins(:user).where(users: { is_active: true }) }
@@ -36,9 +40,18 @@ class Post < ApplicationRecord
   def favorited_by?(user)
     favorites.exists?(user_id: user.id)
   end
+  # アクティブなユーザーの投稿を取得するスコープ
+  scope :active_user_posts, -> {
+    joins(:user).where(users: { is_active: true })
+  }
 
   # ユーザーがいいねした投稿を取得するスコープ
   scope :liked_by, -> (user) {
     joins(:favorites).where(favorites: { user_id: user.id })
+  }
+
+  # 部分一致検索をするスコープ
+  scope :search_by_body, ->(query) {
+    where('body LIKE ?', "%#{query}%")
   }
 end

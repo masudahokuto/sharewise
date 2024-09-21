@@ -6,12 +6,25 @@
       <%= render 'user_data' %>
     </div>
     <div class="col-md-9">
-      <div class="d-flex">      <!-- 非アクティブユーザー表示ボタン -->
-        <%= button_to '退会ユーザーを表示', inactive_admin_users_path, method: :get, remote: true, class: 'btn btn-danger', id: 'show-inactive-users' %>
-      　<%= link_to 'ユーザー一覧を表示', admin_users_path, class: 'btn btn-primary' %>
-    　</div>
+      <div class="d-flex mb-3 align-items-center">
+        <%= form_with(url: admin_users_path, method: :get, local: true, class: 'form-inline d-flex align-items-center') do %>
+          <div class="form-group mr-2">
+            <%= label_tag :search_field, '検索項目:', class: 'mr-2' %>
+            <%= select_tag :search_field, options_for_select([['ID', 'id'], ['姓', 'last_name'], ['名', 'first_name'], ['ニックネーム', 'nick_name'], ['メール', 'email']], params[:search_field]), class: 'form-control' %>
+          </div>
+          <div class="form-group position-relative">
+            <i class="fas fa-search position-absolute" style="left: 10px; top: 50%; transform: translateY(-50%); color: #aaa;"></i>
+            <%= text_field_tag :query, params[:query], class: 'form-control pl-5', placeholder: '検索...' %>
+          </div>
+          <%= submit_tag '検索', class: 'btn btn-secondary ml-2' %>
+        <% end %>
+        <div class="ml-auto d-flex">
+          <%= button_to '退会ユーザーを表示', inactive_admin_users_path, method: :get, remote: true, class: 'btn btn-danger mr-2', id: 'show-inactive-users' %>
+          <%= link_to 'ユーザー一覧を表示', admin_users_path, class: 'btn btn-primary' %>
+        </div>
+      </div>
     　<div id="admin-users-list" class="row">
-        <% @admin_users.each_slice(5) do |user_slice| %> <!-- 5つごとに行を作成 -->
+        <% @admin_users.each_slice(5) do |user_slice| %>
           <% user_slice.each do |user| %>
             <%= render 'user_card_admin', user: user %>
           <% end %>
@@ -24,4 +37,3 @@
     </div>
   </div>
 </div>
-<!--inactive.js呼び出し-->

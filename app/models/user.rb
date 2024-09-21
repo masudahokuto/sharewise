@@ -6,7 +6,10 @@ class User < ApplicationRecord
   has_many :post_comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
   has_many :liked_posts, through: :favorites, source: :post #Favoriteモデルを通じて関連するPostモデルのレコードを取得
-
+  has_many :categories, dependent: :destroy
+  has_many :links, dependent: :destroy
+  has_many :notifications, dependent: :destroy
+  has_one_attached :profile_image
   # フォローフォロワーここから-----------------------------------------------------------
   has_many :relationships, foreign_key: 'follower_id', dependent: :destroy
   has_many :followings, -> { where(is_active: true) }, through: :relationships, source: :followed
@@ -32,24 +35,26 @@ class User < ApplicationRecord
   enum gender: { male: 0, female: 1, other: 2 }
 
   # バリデーション設定
-  validates :last_name, presence: true, length: { maximum: 10 }
-  validates :first_name, presence: true, length: { maximum: 10 }
-  validates :nick_name, presence: true, length: { maximum: 10 }
+  validates :last_name, presence: true, length: { maximum: 20 }
+  validates :first_name, presence: true, length: { maximum: 20 }
+  validates :nick_name, presence: true, length: { maximum: 20 }
   validates :profile, length: { maximum: 40 }
   validates :gender, presence: true, inclusion: { in: genders.keys }
   validates :birthday, presence: true
   validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :password, presence: true, length: { minimum: 6 }, if: -> { new_record? || !password.nil? }
 
-  # ActiveStorageの設定（画像1つ）
-  has_one_attached :profile_image
+  # 許可するファイル形式を設定
+  validates :profile_image, content_type: { in: ['image/jpg', 'image/jpeg', 'image/png'] }
+  # 画像のサイズを制限 (例: 5MB 以下)
+  validates :profile_image, size: { less_than: 5.megabytes }
 
   def get_profile_image(width, height)
     unless profile_image.attached?
       file_path = Rails.root.join('app/assets/images/no_image.jpg')
       profile_image.attach(io: File.open(file_path), filename: 'default-image.jpg', content_type: 'image/jpeg')
     end
-    profile_image.variant(resize_to_limit: [width, height]).processed
+    profile_image.variant(resize_to_limit: [150, 150]).processed
   end
 
   # ユーザーの最新の投稿を取得
@@ -65,7 +70,7 @@ class User < ApplicationRecord
     age -= 1 if today < birthday + age.years # 誕生日がまだ来ていない場合は1歳引く
     age
   end
-  
+
   def favorite(post)
     self.favorites.find_or_create_by(post_id: post.id)
   end
@@ -74,4 +79,21 @@ class User < ApplicationRecord
   def favorited_by?(post)
     favorites.exists?(post_id: post.id)
   end
+
+  def full_name
+    "#{last_name} #{first_name}"
+  end
+
+  # user検索機能　部分一致のみ
+  scope :search, -> (query) {
+    where('nick_name LIKE ?', "%#{query}%")
+  }
+
+  scope :search_by, -> (field, query) {
+    if field == 'id'
+      where('id LIKE ?', "%#{query}%")
+    else
+      where("#{field} LIKE ?", "%#{query}%")
+    end
+  }
 end

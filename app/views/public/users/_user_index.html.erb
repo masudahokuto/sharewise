@@ -1,0 +1,55 @@
+     <!-- ユーザー一覧 -->
+      <% if @users.any? %>
+        <% @users.each do |user| %>
+          <% latest_post = user.posts.order(created_at: :desc).first %> <!-- 直近1件のポストを取得 -->
+          <% if latest_post %>
+            <div class="text-center d-flex justify-content-end align-items-center">
+              <%= render 'public/favorites/like', post: latest_post, user: user %>
+            </div>
+            <div class="post-row d-flex mb-3">
+              <!-- ユーザー情報 -->
+              <div class="user-card-link col-md-2 d-flex flex-column">
+                <%= render 'public/users/index_user_card', user: user %>
+              </div>
+
+              <!-- 投稿内容と画像部分 -->
+              <div class="show-link col-md-10 d-flex">
+                <%= link_to post_path(user), style: 'text-decoration: none; display: flex; width: 100%;' do %>
+                  <!-- 投稿内容 -->
+                  <div class="d-flex flex-column flex-grow-1 me-3">
+                    <div class="mb-3">
+                      <p><%= simple_format(latest_post.body) %></p>
+                    </div>
+                  </div>
+                  <!-- 画像部分 -->
+                  <div class="col-md-5 d-flex flex-column align-items-end">
+                    <% if latest_post.images.any? %>
+                      <% latest_post.images.each do |image| %>
+                        <div class="post-image mb-3">
+                          <%= image_tag image, class: "img-fluid", alt: "Post Image", style: "max-width: 100%;" %>
+                        </div>
+                      <% end %>
+                    <% end %>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          <% else %>
+            <div class="post-row col-md-12 d-flex mb-3">
+              <div class="user-card-link col-md-2 d-flex flex-column">
+                <%= render 'public/users/index_user_card', user: user %>
+              </div>
+              <%= link_to user_path(user), style: 'text-decoration: none; display: flex; width: 100%;' do %>
+                <!-- 投稿内容 -->
+                <div class="d-flex flex-column flex-grow-1 me-3">
+                  <div class="mb-3" style="color: black;">
+                    投稿はまだありません。
+                  </div>
+                </div>
+              <% end %>
+            </div>
+          <% end %>
+        <% end %>
+      <% else %>
+        <p>ユーザーはまだいません。</p>
+      <% end %>

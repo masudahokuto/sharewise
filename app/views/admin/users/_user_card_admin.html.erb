@@ -5,9 +5,11 @@
     <% else %>
       <%= image_tag 'no_image.jpg', size: '150x150', class: 'profile-image' %>
     <% end %>
-    <h5 class="user-nick-name"><%= user.nick_name %></h5>
+    <p class="user-nick-name"><%= user.nick_name %></p>
     <p class="user-profile"><%= user.profile %></p>
-    <p class="user_id">User_ID: <%= user.id %></p>
+    ﾌｫﾛﾜｰ数：<span class="followed-count"><%= user.followers.count %></span>
+    <p class="user-full-name"><%= user.full_name %></p>
+    <p class="mail"><%= user.email %></p>
     <% if user.is_active %>
       <p class="is_active_true">登録中</p>
     <% else %>

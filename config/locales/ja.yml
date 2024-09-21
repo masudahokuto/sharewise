@@ -1,0 +1,50 @@
+ja:
+  date:
+    formats:
+      default: "%Y/%m/%d"
+    month_names: [nil, "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+    order:
+      - :year
+      - :month
+      - :day
+  activerecord:
+    attributes:
+      user:
+        gender:
+          male: "男性"
+          female: "女性"
+          other: "その他"
+  activestorage:
+    valid:
+      content_type: "ファイル形式はJPEGまたはPNGのみ許可されています"
+  errors:
+    messages:
+      content_type_invalid: "無効なコンテンツタイプです"
+      file_size_not_less_than: "ファイルサイズは %{max_size} 未満でなければなりません (現在のサイズは %{file_size})"
+      file_size_not_less_than_or_equal_to: "ファイルサイズは %{max_size} 以下でなければなりません (現在のサイズは %{file_size})"
+      file_size_not_greater_than: "ファイルサイズは %{min_size} より大きくなければなりません (現在のサイズは %{file_size})"
+      file_size_not_greater_than_or_equal_to: "ファイルサイズは %{min_size} 以上でなければなりません (現在のサイズは %{file_size})"
+      file_size_not_between: "ファイルサイズは %{min_size} から %{max_size} の範囲でなければなりません (現在のサイズは %{file_size})"
+      total_file_size_not_less_than: "合計ファイルサイズは %{max_size} 未満でなければなりません (現在のサイズは %{total_file_size})"
+      total_file_size_not_less_than_or_equal_to: "合計ファイルサイズは %{max_size} 以下でなければなりません (現在のサイズは %{total_file_size})"
+      total_file_size_not_greater_than: "合計ファイルサイズは %{min_size} より大きくなければなりません (現在のサイズは %{total_file_size})"
+      total_file_size_not_greater_than_or_equal_to: "合計ファイルサイズは %{min_size} 以上でなければなりません (現在のサイズは %{total_file_size})"
+      total_file_size_not_between: "合計ファイルサイズは %{min_size} から %{max_size} の範囲でなければなりません (現在のサイズは %{total_file_size})"
+      limit_out_of_range: "ファイル数が範囲外です"
+      image_metadata_missing: "有効な画像ではありません"
+      dimension_min_inclusion: "幅と高さは %{width} x %{height} ピクセル以上でなければなりません"
+      dimension_max_inclusion: "幅と高さは %{width} x %{height} ピクセル以下でなければなりません"
+      dimension_width_inclusion: "幅は %{min} から %{max} ピクセルの範囲でなければなりません"
+      dimension_height_inclusion: "高さは %{min} から %{max} ピクセルの範囲でなければなりません"
+      dimension_width_greater_than_or_equal_to: "幅は %{length} ピクセル以上でなければなりません"
+      dimension_height_greater_than_or_equal_to: "高さは %{length} ピクセル以上でなければなりません"
+      dimension_width_less_than_or_equal_to: "幅は %{length} ピクセル以下でなければなりません"
+      dimension_height_less_than_or_equal_to: "高さは %{length} ピクセル以下でなければなりません"
+      dimension_width_equal_to: "幅は %{length} ピクセルでなければなりません"
+      dimension_height_equal_to: "高さは %{length} ピクセルでなければなりません"
+      aspect_ratio_not_square: "正方形の画像でなければなりません"
+      aspect_ratio_not_portrait: "縦長の画像でなければなりません"
+      aspect_ratio_not_landscape: "横長の画像でなければなりません"
+      aspect_ratio_is_not: "アスペクト比は %{aspect_ratio} でなければなりません"
+      aspect_ratio_unknown: "アスペクト比が不明です"
+      image_not_processable: "有効な画像ではありません"

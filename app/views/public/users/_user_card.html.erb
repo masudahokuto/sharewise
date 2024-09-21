@@ -8,12 +8,12 @@
     <h5 class="nick-name"><%= user.nick_name %></h5>
     <p class="user-profile"><%= user.profile %></p>
     <div>
-      <%= link_to "#{user.followings.count} フォロー", user_followings_path(user), class: "follows-count" %>
+      <%= link_to "#{user.followings.count} フォロー", user_followings_path(user), class: "follows-count", title: 'フォローしているUserを見る' %>
       |
-      <%= link_to "#{user.followers.count} フォロワー", user_followers_path(user), class: "follows-count" %>
+      <%= link_to "#{user.followers.count} フォロワー", user_followers_path(user), class: "follows-count", title: 'フォローされているUserを見る' %>
     </div>
     <% if user == @current_user %>
-      <span><%= link_to '❤いいねした投稿を見る', likes_user_path(user), class: 'favo-link' %></span>
+      <span><%= link_to '❤いいね一覧', likes_user_path(user), class: 'favo-link', title: 'いいねしている投稿を見る'%></span>
     <% end %>
   </div>
 <% else %>

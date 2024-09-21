@@ -1,0 +1,55 @@
+<%= stylesheet_link_tag 'public/users', media: 'all' %>
+<div class="container-fluid">
+  <div class="row d-flex justify-content-center">
+    <div class="col-md-2 d-flex flex-column align-items-center">
+      <div class="d-flex justify-content-center mb-2">
+        <%= render 'searches/post_search_form' %>
+      </div>
+      <%= render 'public/users/user_card', user: @current_user %>
+      <% if @current_user %>
+        <%= link_to 'プロフィール編集', edit_user_path(@current_user), class: 'btn btn-primary mt-3' %>
+      <% end %>
+    </div>
+    <div class="col-md-9">
+      <% if @posts.any? %>
+        <% @posts.each do |post| %>
+          <div class="text-center d-flex justify-content-end align-items-center">
+            <%= render 'public/favorites/like', post: post %>
+          </div>
+          <div class="post-row post-link d-flex">
+            <!-- ユーザー情報 -->
+            <div class="user-card-link col-md-2 d-flex flex-column">
+              <%= render 'public/users/index_user_card', user: post.user %>
+            </div>
+
+            <!-- 投稿内容と画像部分 -->
+            <div class="show-link col-md-10 d-flex" style="flex-grow: 1;">
+              <%= link_to post_path(post), style: 'text-decoration: none; display: flex; width: 100%;' do %>
+                <!-- 本文部分 -->
+                <div class="col-md-7 d-flex" style="flex-grow: 1;">
+                  <div>
+                    <p><%= simple_format(post.body) %></p>
+                  </div>
+                </div>
+                <!-- 画像部分 -->
+                <div class="col-md-5 d-flex flex-column align-items-end">
+                  <% post.images.each do |image| %>
+                    <div class="post-image mb-3">
+                      <%= image_tag image, class: "img-fluid", alt: "Post Image", style: "max-width: 100%;" %>
+                    </div>
+                  <% end %>
+                </div>
+              <% end %> <!-- link_to post_path -->
+            </div>
+          </div>
+        <% end %>
+      <% else %>
+        <p>検索結果がありません。</p>
+      <% end %>
+      <!-- ページネーション -->
+      <div id="pagination">
+        <%= paginate @posts %>
+      </div>
+    </div>
+  </div>
+</div>
