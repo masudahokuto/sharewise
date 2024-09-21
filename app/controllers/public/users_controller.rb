@@ -1,6 +1,6 @@
 class Public::UsersController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]  # ユーザーがログインしていることを確認
-
+  before_action :redirect_if_admin, only: [:index, :show, :mypage]
   def mypage
     @user = current_user
     @posts = @user.posts.order(created_at: :desc).page(params[:page]).per(10)
@@ -81,6 +81,13 @@ class Public::UsersController < ApplicationController
   def newest
     posts.order(created_at: :desc)
   end
+
+  def redirect_if_admin
+    if admin_signed_in?
+      redirect_to admin_path, alert: "管理者はこのページにアクセスできません。"
+    end
+  end
+
   def user_params
     params.require(:user).permit(:last_name, :first_name, :nick_name, :profile, :gender, :birthday_1i, :birthday_2i, :birthday_3i, :email, :profile_image, :is_active)
   end

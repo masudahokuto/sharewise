@@ -1,7 +1,7 @@
 class Public::PostsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :correct_user, only: [:edit, :update]
-
+  before_action :redirect_if_admin, only: [:index, :show]
   def new
     @user = current_user
     @post = Post.new
@@ -21,24 +21,26 @@ class Public::PostsController < ApplicationController
   def index
     @current_user = current_user
     @posts = Post.active_user_posts.order(created_at: :desc).page(params[:page]).per(10)
-  # ポスト検索機能
+
     if params[:query].present?
       @posts = @posts.search(params[:query])
     end
   end
 
-  def show
+def show
+  @post = Post.find_by(id: params[:id])
+
+  if @post.nil? || !@post.user.is_active
+    redirect_back(fallback_location: root_path)
+  elsif current_user.nil? && @post.user.is_active
+    redirect_back(fallback_location: root_path)
+  else
     @current_user = current_user
-    @post = Post.find_by(id: params[:id])
+    @user = @post.user
     @post_comments = @post.post_comments.active_user_comments.page(params[:page]).per(10)
-    if @post.nil? || !@post.user.is_active
-      redirect_to posts_path
-    else
-      @current_user = current_user
-      @user = @post.user
-      @post_comment = PostComment.new
-    end
+    @post_comment = PostComment.new
   end
+end
 
   def search
     @current_user = current_user
@@ -102,5 +104,11 @@ class Public::PostsController < ApplicationController
 
   def post_params
     params.require(:post).permit(:body, :user_id, images: [])
+  end
+
+  def redirect_if_admin
+    if admin_signed_in?
+      redirect_to admin_path, alert: "管理者はこのページにアクセスできません。"
+    end
   end
 end
