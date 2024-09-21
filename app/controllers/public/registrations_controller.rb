@@ -1,8 +1,6 @@
-# frozen_string_literal: true
-
 class Public::RegistrationsController < Devise::RegistrationsController
   before_action :configure_permitted_parameters, if: :devise_controller?
-
+  before_action :redirect_if_admin_signed_in, only: [:new, :create]
   # サインイン後のリダイレクト先
   def after_sign_in_path_for(resource)
     mypage_users_path
@@ -26,31 +24,37 @@ class Public::RegistrationsController < Devise::RegistrationsController
   protected
 
   # サインアップ時に許可するパラメータの設定
-def configure_permitted_parameters
-  devise_parameter_sanitizer.permit(:sign_up, keys: [
-    :last_name, 
-    :first_name, 
-    :nick_name, 
-    :profile, 
-    :gender, 
-    :birthday, 
-    :email, 
-    :password, 
-    :password_confirmation, 
-    :profile_image
-  ])
-  devise_parameter_sanitizer.permit(:account_update, keys: [
-    :last_name, 
-    :first_name, 
-    :nick_name, 
-    :profile, 
-    :gender, 
-    :birthday, 
-    :email, 
-    :password, 
-    :password_confirmation, 
-    :current_password, 
-    :profile_image
-  ])
-end
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:sign_up, keys: [
+      :last_name,
+      :first_name,
+      :nick_name,
+      :profile,
+      :gender,
+      :birthday,
+      :email,
+      :password,
+      :password_confirmation,
+      :profile_image
+    ])
+    devise_parameter_sanitizer.permit(:account_update, keys: [
+      :last_name,
+      :first_name,
+      :nick_name,
+      :profile,
+      :gender,
+      :birthday,
+      :email,
+      :password,
+      :password_confirmation,
+      :current_password,
+      :profile_image
+    ])
+  end
+
+  def redirect_if_admin_signed_in
+    if admin_signed_in?
+      redirect_to admin_users_path, alert: "アドミンとしてログインしています。"
+    end
+  end
 end
