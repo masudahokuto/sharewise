@@ -24,11 +24,11 @@
     </div>
     <main class="main-content py-5">
       <%= yield %>
-      <span id="back">
-        <a href="#" data-turbolinks="false">
-          <i class="fa-solid fa-chevron-up" style="font-size: 50px;" title="画面上部へ"></i>
-        </a>
-      </span>
+        <span id="back">
+          <%= link_to title: "画面上部へ", data: { turbolinks: false } do %>
+            <i class="fa-solid fa-chevron-up" style="font-size: 50px;"></i>
+          <% end %>
+        </span>
     </main>
     <%= render 'layouts/footer' %>
   </body>
