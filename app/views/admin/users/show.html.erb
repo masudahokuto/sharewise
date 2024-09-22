@@ -30,6 +30,7 @@
       <% if @posts.any? %>
         <% @posts.each do |post| %>
           <div class="text-center d-flex justify-content-end align-items-center">
+            <span class="mr-3"><%= time_ago_in_words(post.updated_at) %>前</span>
             <i class="fas fa-heart mb-1" style="color: red;">いいね数 <%= post.favorites.count %></i>
           </div>
           <%= link_to admin_post_path(post), class: "post-link" do %>

@@ -11,6 +11,7 @@
       <div class="text-center d-flex justify-content-end align-items-center">
         <%= link_to '削除する', admin_post_path(@post), method: :delete, data: { confirm: 'このポストを削除しますか？' }, class: 'btn btn-danger mr-1', style: 'margin-right: 0;' %>
         <div class="favorite-post-show">
+          <span class="mr-3"><%= time_ago_in_words(@post.updated_at) %>前</span>
           <i class="fas fa-heart mb-1" style="color: red;">いいね数 <%= @post.favorites.count %></i>
         </div>
       </div>

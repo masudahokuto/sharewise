@@ -76,7 +76,11 @@
             <button class="btn btn-success btn-sm edit-btn" data-title-id="<%= title.id %>">編集</button>
           </td>
           <td>
-            <%= link_to '削除', category_title_path(category, title), method: :delete, data: { confirm: '中身も全て消えてしまいますが本当に削除しますか？' }, class: 'full-link', style: 'color: red;' %>
+            <%= link_to '削除', category_title_path(category, title),
+              method: :delete,
+              data: { confirm: '中身も全て消えてしまいますが本当に削除しますか？' },
+              class: 'btn btn-danger btn-sm'
+            %>
           </td>
         <% end %>
       </tr>

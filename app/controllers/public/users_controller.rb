@@ -46,7 +46,7 @@ class Public::UsersController < ApplicationController
       redirect_to posts_path
       return
     end
-    @posts = @user.liked_posts.page(params[:page]).per(10)
+    @posts = @user.liked_posts.active_user_posts.order(created_at: :desc).page(params[:page]).per(10)
   end
 
   def edit

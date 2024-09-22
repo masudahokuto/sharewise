@@ -80,8 +80,12 @@
           <td>
             <button class="btn btn-success btn-sm edit-btn" data-genre-id="<%= genre.id %>">編集</button>
           </td>
-          <td class="link-cell">
-            <%= link_to '削除', category_title_genre_path(category, title, genre), method: :delete, data: { confirm: '中身も全て消えてしまいますが本当に削除しますか？' }, class: 'full-link', style: 'color: red;' %>
+          <td>
+            <%= link_to '削除', category_title_genre_path(category, title, genre),
+              method: :delete,
+              data: { confirm: '中身も全て消えてしまいますが本当に削除しますか？' },
+              class: 'btn btn-danger btn-sm'
+            %>
           </td>
         <% end %>
       </tr>

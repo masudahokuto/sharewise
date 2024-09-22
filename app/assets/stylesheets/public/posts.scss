@@ -29,6 +29,7 @@
     height: 120px; /* 固定サイズ */
     object-fit: cover; /* 画像の切り取り */
     margin-bottom: 10px;
+    
   }
 
   .user-card-name,
@@ -73,10 +74,19 @@
     }
   }
 
+.post-show-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  .post-show-card:hover {
+    background-color: black;
+  }
+}
+
   &:not(.current-user) {
     // その他のユーザーのスタイルが必要であればここに追加
   }
 }
+
+
 
 // 右側のユーザーリスト
 .col-md-10 {

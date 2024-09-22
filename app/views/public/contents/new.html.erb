@@ -29,7 +29,7 @@
             </div>
             <div class="row">
               <div class="col-md-8 p-0">
-                <%= f.text_area :body, class: "post-text-area", id: 'body', placeholder: "内容を入力してください(3000文字まで登録できます)" %>
+                <%= render 'content_form', content: @content, category: @category, title: @title, genre: @genre %>
               </div>
               <div class="col-md-4 pt-0">
                 <div class="d-flex justify-content-left mb-1">

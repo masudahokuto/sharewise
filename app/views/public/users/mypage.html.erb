@@ -10,6 +10,7 @@
       <% if @posts.any? %>
         <% @posts.each do |post| %>
           <div class="text-center d-flex justify-content-end align-items-center">
+            <span class="mr-3"><%= time_ago_in_words(post.updated_at) %>前</span>
             <%= render 'public/favorites/like', post: post %>
           </div>
           <%= link_to post_path(post), class: "post-link" do %>

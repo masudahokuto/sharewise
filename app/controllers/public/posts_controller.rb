@@ -21,7 +21,7 @@ class Public::PostsController < ApplicationController
   def index
     @current_user = current_user
     @posts = Post.active_user_posts.order(created_at: :desc).page(params[:page]).per(10)
-
+    @user = @current_user
     if params[:query].present?
       @posts = @posts.search(params[:query])
     end
@@ -30,6 +30,7 @@ class Public::PostsController < ApplicationController
   def show
     @current_user = current_user
     @post = Post.find_by(id: params[:id])
+    @user = @post.user
     @post_comments = @post.post_comments.active_user_comments.page(params[:page]).per(10)
     if @post.nil? || !@post.user.is_active
       redirect_to posts_path
@@ -67,7 +68,7 @@ class Public::PostsController < ApplicationController
   def destroy
     @post = Post.find(params[:id])
     @post.destroy
-    redirect_back(fallback_location: root_path)
+    redirect_to mypage_users_path
   end
 
   # contentのpost機能

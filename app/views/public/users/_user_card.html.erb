@@ -1,9 +1,11 @@
 <% if user %>
-  <div class="user-card <%= 'current-user' if user == @current_user %>">
-    <% if user.profile_image.attached? %>
-      <%= image_tag user.get_profile_image(150, 150), class: 'profile-image' %>
-    <% else %>
-      <%= image_tag 'no_image.jpg', size: '150x150', class: 'profile-image' %>
+  <div class="user-card <%= 'current-user' if user == current_user %>">
+    <%= link_to user_path(user), class: 'post-show-card' do %>
+      <% if user.profile_image.attached? %>
+        <%= image_tag user.get_profile_image(150, 150), class: 'profile-image' %>
+      <% else %>
+        <%= image_tag 'no_image.jpg', size: '150x150', class: 'profile-image' %>
+      <% end %>
     <% end %>
     <h5 class="nick-name"><%= user.nick_name %></h5>
     <p class="user-profile"><%= user.profile %></p>
@@ -12,7 +14,7 @@
       |
       <%= link_to "#{user.followers.count} フォロワー", user_followers_path(user), class: "follows-count", title: 'フォローされているUserを見る' %>
     </div>
-    <% if user == @current_user %>
+    <% if user == current_user %>
       <span><%= link_to '❤いいね一覧', likes_user_path(user), class: 'favo-link', title: 'いいねしている投稿を見る'%></span>
     <% end %>
   </div>

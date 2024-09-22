@@ -6,7 +6,6 @@
       <% if @current_user %>
         <%= link_to 'プロフィール編集', edit_user_path(@current_user), class: 'btn btn-primary mt-3' %>
       <% end %>
-      <%= render 'public/content_names' %>
     </div>
     <div class="col-md-10">
       <h4><%= @user.nick_name %>さんがフォローしているUser</h4>

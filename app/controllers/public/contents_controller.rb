@@ -49,7 +49,7 @@ class Public::ContentsController < ApplicationController
   def update
     # @content は set_content コールバックで設定されている
     if @content.update(content_params)
-      redirect_to category_title_genre_path(@category, @title, @genre), notice: 'コンテンツが更新されました。'
+      redirect_to category_title_genre_content_path(@category, @title, @genre), notice: 'コンテンツが更新されました。'
     else
       flash[:alert] = "エラーが発生しました"
       redirect_back(fallback_location: root_path)

@@ -63,8 +63,11 @@
           <td>
             <%= content.created_at.in_time_zone("Tokyo").strftime("%Y/%m/%d %H:%M") %>
           </td>
-          <td class="link-cell">
-            <%= link_to '削除', category_title_genre_content_path(category, title, content.genre, content), method: :delete, data: { confirm: '中身が全て消えてしまいますが本当に削除しますか？' }, class: 'full-link', style: 'color: red;' %>
+          <td>
+            <%= link_to '削除', category_title_genre_content_path(category, title, content.genre, content),
+              method: :delete, data: { confirm: '中身が全て消えてしまいますが本当に削除しますか？' },
+              class: 'btn btn-danger btn-sm'
+            %>
           </td>
         <% end %>
       </tr>

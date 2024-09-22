@@ -45,7 +45,48 @@
             </div>
           </div>
           <div class="col-md-8">
-              <%= content_form.text_area :body, class: "post-text-area", id: 'body', placeholder: "内容を入力してください(5000文字まで登録できます)※必須" %>
+              <%= content_form.text_area :body, sanitize: true, class: "post-text-area", id: 'body', placeholder: "内容を入力してください(3000文字まで登録できます)
+※<タグ>Share Wise</タグ>とすることで文字に属性を与えられます
+
+・文字サイズを変える方法
+h1(大)~h6(小)で文字サイズを変更できます
+<h1>Share Wise</h1>
+
+・文字を太くする
+<strong>Share Wise</strong>
+
+・斜体
+<em>Share Wise</em>
+
+──────────────────────────────────
+※ul ol liでリストを作れます
+
+<ul>
+  <li>Share Wise1</li>
+  <li>Share Wise2</li>
+</ul>
+↓
+・Share Wise1
+・Share Wise2
+
+<ol>
+  <li>Share Wise1</li>
+  <li>Share Wise2</li>
+</ol>
+↓
+1.Share Wise1
+2.Share Wise2
+
+─────────────────────────────────────────────────────
+<a href='リンク'>リンク名</a>でリンクを生成できます
+
+<a href='https://www.google.co.jp/'>Google</a>
+↓
+Googleという文字のGoogleへのリンクが生成されます
+
+─────────────────────────────────────────────────────
+※文字カラーの変更などは対応していないためご了承下さい
+(リッチテキストエディタの導入を検討中です)" %>
             <% end %>
           </div>
           <div class="col-4">

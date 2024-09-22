@@ -1,4 +1,3 @@
-<!-- app/views/public/post_comments/_comment_index.html.erb -->
 <table class="comment-table">
   <tbody>
     <% post_comments.each do |post_comment| %>
@@ -43,7 +42,11 @@
         <td style="border-bottom: 1px solid #bbb;"></td>
       </tr>
       <tr>
-        <td class="table-blank">&nbsp;</td><td class="table-blank">&nbsp;</td><td class="table-blank">&nbsp;</td>
+        <td colspan="3" class="table-blank">
+          <div class="d-flex justify-content-end mb-3">
+            <%= time_ago_in_words(post_comment.updated_at) %>前
+          </div>
+        </td>
       </tr>
     <% end %>
   </tbody>

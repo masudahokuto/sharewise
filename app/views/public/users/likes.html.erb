@@ -10,10 +10,14 @@
       <% if @posts.any? %>
         <% @posts.each do |post| %>
           <div class="text-center d-flex justify-content-end align-items-center">
+            <span class="mr-3"><%= time_ago_in_words(post.updated_at) %>前</span>
             <%= render 'public/favorites/like', post: post %>
           </div>
           <%= link_to post_path(post), class: "post-link" do %>
             <div class="post-row d-flex mb-3">
+              <div class="user-card-link col-md-2 d-flex flex-column">
+                <%= render 'public/users/index_user_card', user: post.user %>
+              </div>
               <div class="col-8 d-flex flex-column">
                 <div class="flex-grow-1">
                   <p><%= simple_format(post.body) %></p>
