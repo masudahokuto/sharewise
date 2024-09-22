@@ -10,11 +10,10 @@ setTimeout(function() {
   }
 }, 3000);
 
-// 上部に戻るボタン
-$(function() {
-  $('#back a').on('click',function(event){
+$(document).on('turbolinks:load', function() {
+  $('#back').on('click', function(event) {
     $('body, html').animate({
-      scrollTop:0
+      scrollTop: 0
     }, 500);
     event.preventDefault();
   });

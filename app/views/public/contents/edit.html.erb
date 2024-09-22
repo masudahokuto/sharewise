@@ -31,7 +31,7 @@
             </div>
             <div class="row">
               <div class="col-md-8 p-0">
-                <%= f.text_area :body, class: 'post-text-area', id: 'body', placeholder: "内容を入力してください(5000文字まで登録できます)" %>
+                <%= f.text_area :body, sanitize: true, class: 'post-text-area', id: 'body', placeholder: "内容を入力してください(5000文字まで登録できます)" %>
               </div>
               <div class="pt-0 col-md-4 pt-0">
                 <div class="d-flex justify-content-left mb-1">

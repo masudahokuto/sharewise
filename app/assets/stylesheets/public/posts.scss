@@ -29,7 +29,7 @@
     height: 120px; /* 固定サイズ */
     object-fit: cover; /* 画像の切り取り */
     margin-bottom: 10px;
-    
+
   }
 
   .user-card-name,
@@ -511,6 +511,7 @@
     left: 50%; /* 時計の中心から50%左 */
     background-color: red;
     transform: translateX(-50%) rotate(0deg);
+    transition: transform 0s ease-in-out; /* アニメーションの設定 */
   }
 
   .center-dot {

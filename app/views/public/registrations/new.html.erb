@@ -27,7 +27,7 @@
 
             <div class="form-group">
               <%= f.label :profile, "プロフィール", class: 'form-label' %>
-              <%= f.text_area :profile, class: 'form-control', id: 'profile', placeholder: "プロフィールを入力(40文字まで登録できます)" %>
+              <%= f.text_area :profile, sanitize: true, class: 'form-control', id: 'profile', placeholder: "プロフィールを入力(40文字まで登録できます)" %>
             </div>
 
             <div class="form-group">
