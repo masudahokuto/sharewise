@@ -1,3 +1,140 @@
-// Place all the styles related to the public/homes controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: https://sass-lang.com/
+.port-share {
+  background-color: #D3D3A0;
+  height: 540px;
+  width: 1000px;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+  border: 2px solid #8B4513;
+  border-radius: 15px;
+}
+
+.port-share-2 {
+  background-color: #D3D3A0;
+  height: 540px;
+  width: 1000px;
+  align-items: center;
+  text-align: center;
+  border: 2px solid #8B4513;
+  border-radius: 15px;
+}
+
+.share-wise {
+  font-family: 'Lobster', cursive;
+  color: #8B4513;
+  border-radius: 15px;
+  align-items: center;
+  background-color: #F8F5E6;
+  font-size: 7em;
+  font-weight: bold;
+  text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8);
+}
+
+.fa-book-atlas,
+.fa-pencil {
+  color: #004d00;
+}
+
+.port-folio {
+  font-family: 'Merriweather', cursive;
+  border-top: 1px solid #000;
+  border-bottom: 1px solid #000;
+  margin-top: 50px;
+  color: #fffafa;
+  font-size: 100px !important;
+  letter-spacing: 2px;
+  text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  background-color: #8B4513;
+  border-radius: 5px;
+}
+
+/* スマホサイズ (600px以下) */
+@media (max-width: 600px) {
+  .port-folio {
+    font-size: 80px;
+  }
+}
+
+/* タブレットサイズ (601pxから900px) */
+@media (min-width: 601px) and (max-width: 900px) {
+  .port-folio {
+    font-size: 120px;
+  }
+}
+
+/* デスクトップサイズ (901px以上) */
+@media (min-width: 901px) {
+  .port-folio {
+    font-size: 200px;
+  }
+}
+
+
+.vertical-table {
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+  table-layout: fixed;
+}
+
+.vertical-table td {
+  padding: 10px;
+  vertical-align: middle;
+  align-items: center;
+  flex-direction: column;
+}
+
+.tableicon {
+  height: 540px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.carousel-item {
+  text-align: center;
+}
+
+table tr td {
+  width: 20%;
+  background-color: #FFFFFF;
+}
+
+td {
+  word-wrap: break-word;
+}
+.abouticon {
+  font-size: 50px;
+  color: #8B4513;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.abouticon-bell {
+  font-size: 50px;
+  color: #ff0;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.abouticon-new {
+  font-size: 30px;
+  color: #8B4513;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.abouticon-return {
+  font-size: 50px;
+  color: #808080;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.explanation {
+  font-weight: bold;
+}
+
+.about-image {
+  border-radius: 10px;
+}

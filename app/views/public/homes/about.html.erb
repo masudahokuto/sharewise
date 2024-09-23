@@ -1,2 +1,90 @@
-<h1>Public::Homes#about</h1>
-<p>Find me in app/views/public/homes/about.html.erb</p>
+<%= stylesheet_link_tag 'public/homes', media: 'all' %>
+<div class="container-fluid">
+  <div class="row d-flex justify-content-center">
+    <div class="col-md-8 d-flex flex-column align-items-center">
+      <div id="carouselExampleControlsNoTouching" class="carousel slide" data-touch="false" data-interval="false">
+        <ol class="carousel-indicators">
+          <li data-target="#carouselExampleControlsNoTouching" data-slide-to="0" class="active"></li>
+          <li data-target="#carouselExampleControlsNoTouching" data-slide-to="1"></li>
+          <li data-target="#carouselExampleControlsNoTouching" data-slide-to="2"></li>
+          <li data-target="#carouselExampleControlsNoTouching" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner">
+          <div class="carousel-item port-share active">
+            <%= render 'slide_first' %>
+          </div>
+
+
+          <div class="carousel-item port-share-2">
+            <div class="row d-flex justify-content-center align-items-center">
+              <div class="about-image col-md-3">
+                <%= image_tag 'sharewise.jpg', alt: '画像', class: 'about-image' %>
+              </div>
+              <div class="col-md-6 tableicon d-flex align-items-center">
+                <table class="vertical-table">
+                  <tr>
+                    <td><i class="fa-solid fa-house abouticon"></i></td>
+                    <td><i class="fa-solid fa-puzzle-piece abouticon"></i></td>
+                    <td><i class="fa-solid fa-right-to-bracket fa-flip-horizontal abouticon"></i></td>
+                    <td><i class="fa-solid fa-right-to-bracket abouticon"></i></td>
+                  </tr>
+                  <tr>
+                    <td class="explanation">トップ</td>
+                    <td class="explanation">作品紹介</td>
+                    <td class="explanation">ログイン</td>
+                    <td class="explanation">ログアウト</td>
+                  </tr>
+                  <tr>
+                    <td><i class="fa-solid fa-book abouticon"></i></td>
+                    <td><i class="fa-solid fa-link abouticon"></i></td>
+                    <td><i class="fa-solid fa-bell abouticon-bell"></i></td>
+                    <td><i class="fa-solid fa-address-card abouticon"></i></td>
+                  </tr>
+                  <tr>
+                    <td class="explanation">My Dictionary</td>
+                    <td class="explanation">リンク</td>
+                    <td class="explanation">通知</td>
+                    <td class="explanation">My Page</td>
+                  </tr>
+                  <tr>
+                    <td><i class="fa-solid fa-users abouticon"></i></td>
+                    <td><i class="fa-solid fa-comments abouticon"></i></td>
+                    <td><i class="fa-solid fa-user abouticon-new"><i class="fa-solid fa-comment abouticon-new"></i></i></td>
+                    <td><i class="fa-solid fa-chevron-up abouticon-return"></i></td>
+                  </tr>
+                  <tr>
+                    <td class="explanation">User一覧</td>
+                    <td class="explanation">投稿一覧</td>
+                    <td class="explanation">新規投稿</td>
+                    <td class="explanation">画面上部</td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+          </div>
+
+
+
+
+          <div class="carousel-item">
+            <div>Share Wise</div>
+            <div>～ gest ～</div>
+          </div>
+          <div class="carousel-item">
+            <div>Share Wise</div>
+            <div>～ gest ～</div>
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-target="#carouselExampleControlsNoTouching" data-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-target="#carouselExampleControlsNoTouching" data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
