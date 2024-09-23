@@ -1,7 +1,7 @@
 .port-share {
   background-color: #D3D3A0;
   height: 540px;
-  width: 1000px;
+  width: 1200px;
   align-items: center;
   text-align: center;
   padding: 20px;
@@ -9,10 +9,10 @@
   border-radius: 15px;
 }
 
-.port-share-2 {
+.port-share-icon {
   background-color: #D3D3A0;
   height: 540px;
-  width: 1000px;
+  width: 1200px;
   align-items: center;
   text-align: center;
   border: 2px solid #8B4513;
@@ -48,6 +48,8 @@
 
 .carousel-control-prev-icon,
 .carousel-control-next-icon {
+  width: 30px;
+  height: 100px;
   background-color: #8B4513;
   border-radius: 5px;
 }
@@ -89,7 +91,6 @@
 }
 
 .tableicon {
-  height: 540px;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
@@ -137,4 +138,8 @@ td {
 
 .about-image {
   border-radius: 10px;
+}
+
+.tableicon h2 {
+  margin-bottom: 10px; /* ヘッダーリンクとテーブルの距離を狭くする */
 }
