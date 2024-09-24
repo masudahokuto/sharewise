@@ -7,12 +7,38 @@
           <li data-target="#carouselExampleControlsNoTouching" data-slide-to="0" class="active"></li>
           <li data-target="#carouselExampleControlsNoTouching" data-slide-to="1"></li>
           <li data-target="#carouselExampleControlsNoTouching" data-slide-to="2"></li>
-          <li data-target="#carouselExampleControlsNoTouching" data-slide-to="2"></li>
+          <li data-target="#carouselExampleControlsNoTouching" data-slide-to="3"></li>
+          <li data-target="#carouselExampleControlsNoTouching" data-slide-to="4"></li>
         </ol>
         <div class="carousel-inner">
           <div class="carousel-item port-share active">
             <%= render 'slide_first' %>
           </div>
+
+
+<div class="carousel-item port-share">
+  <div class="row d-flex justify-content-center">
+    <div class="col-md-6 d-flex flex-column align-items-start">
+      <!-- サイト紹介を中央寄せ -->
+      <h2 class="site-introduction text-center w-100">２ サイト紹介(もくじ)</h2>
+      <h4 class="site-introduction text-left w-100 my-2">１ タイトル</h4>
+      <h4 class="site-introduction text-left w-100  my-2">２ サイト紹介(もくじ)</h4>
+      <h4 class="site-introduction text-center w-100 mt-3 mb-1">サイトの使い方</h4>
+      <h4 class="site-introduction text-left w-100 my-2">３ ユーザーカード/ヘッダーアイコン 概要</h4>
+      <h4 class="site-introduction text-left w-100 my-2">４ 投稿方法</h4>
+      <h4 class="site-introduction text-left w-100 my-2">５ 辞書構造</h4>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
           <div class="carousel-item port-share-icon align-items-center">
             <%= render 'slide_icon' %>
           </div>
@@ -20,14 +46,32 @@
 
 
 
-          <div class="carousel-item">
-            <div>Share Wise</div>
-            <div>～ gest ～</div>
+          <div class="carousel-item port-share">
+            <h2 class="site-introduction ml-auto mr-auto  w-50 my-2">
+              ４ 投稿方法
+              <i class="fa-solid fa-user abouticon-new">
+                <i class="fa-solid fa-comment abouticon-new"></i>
+              </i>
+            </h2>
+            <%= image_tag 'post-new', alt: '画像', class: 'post-new-image mx-5' %>
           </div>
-          <div class="carousel-item">
-            <div>Share Wise</div>
-            <div>～ gest ～</div>
+
+
+
+
+          <div class="carousel-item port-share">
+            <h2 class="site-introduction ml-auto mr-auto  w-50 my-2">
+              ５ 辞書構造
+              <i class="fa-solid fa-book-open abouticon-new"></i>
+            </h2>
+            <%= image_tag 'tree', alt: '画像', class: 'tree mx-5' %>
           </div>
+
+
+
+
+
+
         </div>
         <button class="carousel-control-prev" type="button" data-target="#carouselExampleControlsNoTouching" data-slide="prev">
           <span class="carousel-control-prev-icon" aria-hidden="true"></span>

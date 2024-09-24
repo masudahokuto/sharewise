@@ -15,9 +15,9 @@ class Public::UsersController < ApplicationController
   def index
     @current_user = current_user
     if @current_user
-      @users = User.includes(:posts).where(is_active: true).where.not(id: @current_user.id).page(params[:page]).per(10)
+      @users = User.includes(:posts).where(is_active: true).where.not(id: @current_user.id).order(created_at: :desc).page(params[:page]).per(10)
     else
-      @users = User.includes(:posts).where(is_active: true).page(params[:page]).per(10) # ログインしていない場合もアクティブなユーザーのみを表示
+      @users = User.includes(:posts).where(is_active: true).order(created_at: :desc).page(params[:page]).per(10) # ログインしていない場合もアクティブなユーザーのみを表示
     end
   end
 

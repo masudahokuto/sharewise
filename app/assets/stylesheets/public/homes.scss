@@ -46,13 +46,35 @@
   text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
 }
 
-.carousel-control-prev-icon,
-.carousel-control-next-icon {
-  width: 30px;
-  height: 100px;
+.carousel-control-prev-icon {
+  width: 50px;
+  height: 540px;
   background-color: #8B4513;
-  border-radius: 5px;
+  margin-right: 130px;
+  border-top-left-radius: 15px;
+  border-bottom-left-radius: 15px;
 }
+
+.carousel-control-next-icon {
+  width: 50px;
+  height: 540px;
+  background-color: #8B4513;
+  margin-left: 130px;
+  border-top-right-radius: 15px;
+  border-bottom-right-radius: 15px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* スマホサイズ (600px以下) */
 @media (max-width: 600px) {
@@ -75,10 +97,10 @@
   }
 }
 
-
+// ──────────────────────────────────────────────────────────────────────
 .vertical-table {
   width: 100%;
-  margin: 0 auto;
+  margin: 0; /* マージンをリセット */
   text-align: center;
   table-layout: fixed;
 }
@@ -93,21 +115,29 @@
 .tableicon {
   display: flex;
   justify-content: center;
+  align-items: flex-start; /* 上寄せに変更 */
   flex-wrap: wrap;
+  margin: 0; /* マージンをリセット */
 }
 
 .carousel-item {
   text-align: center;
 }
 
+table {
+  margin: 0; /* テーブル全体のマージンをリセット */
+}
+
 table tr td {
   width: 20%;
   background-color: #FFFFFF;
+  padding: 5px; /* セルのパディングを調整 */
 }
 
 td {
   word-wrap: break-word;
 }
+
 .abouticon {
   font-size: 50px;
   color: #8B4513;
@@ -141,5 +171,22 @@ td {
 }
 
 .tableicon h2 {
-  margin-bottom: 10px; /* ヘッダーリンクとテーブルの距離を狭くする */
+  margin: 0; /* ヘッダーリンクとテーブルの距離を狭くする */
+  padding: 5px 0; /* 上下のパディングを調整 */
+}
+
+
+// ──────────────────────────────────────────────────────────────────────
+
+.site-introduction {
+  font-family: 'Kosugi Maru', cursive;
+  font-weight: bold;
+  border-bottom: solid 1px #2e8b57;
+}
+
+// ──────────────────────────────────────────────────────────────────────
+
+.post-new-image {
+  height: 80%;
+  width: 80%;
 }
