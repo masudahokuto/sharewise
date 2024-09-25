@@ -1,13 +1,23 @@
 <%= stylesheet_link_tag 'homes', media: 'all' %>
 <div class="home-container text-center">
-  <h1 class="site-title">
-    <i class="fa-solid fa-book-atlas"></i>
-    ShareWise
-    <i class="fa-solid fa-pencil"></i>
-  </h1>
-  <div class="home-buttons text-center mt-4">
-    <%= link_to '新規登録', new_user_registration_path, class: 'btn btn-primary my-4 w-50' %>
-    <%= link_to 'ログイン', new_user_session_path, class: 'btn btn-success my-4 w-50' %>
-    <%= link_to 'ゲストログイン', posts_path, class: 'btn btn-secondary my-4 w-50' %>
+  <div class="home-text-box ml-auto mr-auto">
+    <h1 class="site-title ml-auto mr-auto">
+      <i class="fa-solid fa-book-atlas"></i>
+        ShareWise
+      <i class="fa-solid fa-pencil"></i>
+    </h1>
+    <p class="site-description">「知識を整理し、共有して成長する。あなたの学びが誰かの一歩になる。」</p>
+
+    <p class="site-description">
+      学んだことを整理して、自分の知識を他のユーザーとシェアしませんか？
+    </p>
+    <p class="site-description">
+      好きなテーマを深掘りし、新しい視点やアイデアを得ることができます。一緒に成長を共有しよう！</p>
+    </p>
+    <div class="home-buttons text-center mt-4">
+      <%= link_to '新規登録', new_user_registration_path, class: 'btn btn-primary my-2 w-50' %>
+      <%= link_to 'ログイン', new_user_session_path, class: 'btn btn-success my-2 w-50' %>
+      <%= link_to 'ゲストログイン', posts_path, class: 'btn btn-secondary my-2 w-50' %>
+    </div>
   </div>
 </div>

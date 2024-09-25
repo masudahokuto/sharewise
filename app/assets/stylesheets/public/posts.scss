@@ -485,7 +485,7 @@
     position: absolute;
     background-color: #333;
     transform-origin: bottom center; /* 針の底部を回転の中心に設定 */
-    transition: transform 0.5s ease-in-out;
+    transition: transform 0s ease-in-out;
   }
 
   .hour-hand {
@@ -494,6 +494,7 @@
     bottom: 50%; /* 時計の中心から50%上 */
     left: 50%; /* 時計の中心から50%左 */
     transform: translateX(-50%) rotate(0deg); /* 中心に合わせて移動し、回転 */
+    transition: transform 0s ease-in-out;
   }
 
   .minute-hand {
@@ -502,6 +503,7 @@
     bottom: 50%; /* 時計の中心から50%上 */
     left: 50%; /* 時計の中心から50%左 */
     transform: translateX(-50%) rotate(0deg);
+    transition: transform 0s ease-in-out;
   }
 
   .second-hand {

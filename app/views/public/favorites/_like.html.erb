@@ -1,12 +1,13 @@
-<div id="like-button-<%= post.id %>">
-  <% if current_user && post.favorited_by?(current_user) %>
-    <%= link_to post_favorite_path(post), method: :delete, remote: true, style: "color: red; text-decoration: none;" do %>
-      <i class="fas fa-heart"></i> いいね <%= post.favorites.count %>
+<% if user_signed_in? %> <!-- ユーザーがログインしている場合 -->
+  <div id="like-button-<%= post.id %>">
+    <% if post.favorited_by?(current_user) %>
+      <%= link_to post_favorite_path(post), method: :delete, remote: true, style: "color: red; text-decoration: none;" do %>
+        <i class="fas fa-heart"></i> いいね <%= post.favorites.count %>
+      <% end %>
+    <% else %>
+      <%= link_to post_favorite_path(post), method: :post, remote: true, style: "color: blue; text-decoration: none;" do %>
+        <i class="far fa-heart"></i> いいね <%= post.favorites.count %>
+      <% end %>
     <% end %>
-  <% else %>
-    <%= link_to post_favorite_path(post), method: :post, remote: true, style: "color: blue; text-decoration: none;" do %>
-      <i class="far fa-heart"></i> いいね <%= post.favorites.count %>
-    <% end %>
-  <% end %>
-</div>
-
+  </div>
+<% end %>
