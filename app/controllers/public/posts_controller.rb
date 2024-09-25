@@ -8,7 +8,11 @@ class Public::PostsController < ApplicationController
   end
 
   def create
-    @post = current_user.posts.new(post_params) # current_user を使用して投稿を作成
+    # post_paramsからbodyを取得し、HTMLタグを除去
+    sanitized_body = strip_tags(post_params[:body])
+
+    @post = current_user.posts.new(post_params.merge(body: sanitized_body))
+
     if @post.save
       flash[:success] = "投稿しました"
       redirect_to mypage_users_path
@@ -72,27 +76,36 @@ class Public::PostsController < ApplicationController
   end
 
   # contentのpost機能
-  def create_from_content
-    content = Content.find(params[:id])
-    # Postモデルのbodyにcontent_nameとbodyとuser_idをセット
-    @post = Post.new(
-      body: "#{content.content_name}\n\n#{content.body}",
-      user_id: current_user.id
-    )
+  class Public::PostsController < ApplicationController
+    include ActionView::Helpers::SanitizeHelper  # 追加
 
-    # ContentのimagesをPostのimagesにコピー
-    if content.images.attached?
-      content.images.each do |image|
-        @post.images.attach(image.blob)
+    def create_from_content
+      content = Content.find(params[:id])
+
+      # content_nameとbodyを組み合わせてから、HTMLタグを除去
+      combined_content = "#{content.content_name}\n\n#{content.body}"
+      sanitized_body = strip_tags(combined_content)  # HTMLタグを除去
+
+      # Postモデルのbodyにsanitized_bodyとuser_idをセット
+      @post = Post.new(
+        body: sanitized_body,
+        user_id: current_user.id
+      )
+
+      # ContentのimagesをPostのimagesにコピー
+      if content.images.attached?
+        content.images.each do |image|
+          @post.images.attach(image.blob)
+        end
       end
-    end
 
-    if @post.save
-      flash[:success] = "投稿しました"
-      redirect_to post_path(@post)
-    else
-      flash[:alert] = "エラーが発生しました"
-      redirect_to root_path
+      if @post.save
+        flash[:success] = "投稿しました"
+        redirect_to post_path(@post)
+      else
+        flash[:alert] = "エラーが発生しました"
+        redirect_to root_path
+      end
     end
   end
 
