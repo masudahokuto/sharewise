@@ -1,2 +1,90 @@
-<h1>Public::Homes#about</h1>
-<p>Find me in app/views/public/homes/about.html.erb</p>
+<%= stylesheet_link_tag 'public/homes', media: 'all' %>
+<div class="container-fluid">
+  <div class="row d-flex justify-content-center">
+    <div class="col-md-8 d-flex flex-column align-items-center">
+      <div id="carouselExampleControlsNoTouching" class="carousel slide" data-touch="false" data-interval="false">
+        <ol class="carousel-indicators">
+          <li data-target="#carouselExampleControlsNoTouching" data-slide-to="0" class="active"></li>
+          <li data-target="#carouselExampleControlsNoTouching" data-slide-to="1"></li>
+          <li data-target="#carouselExampleControlsNoTouching" data-slide-to="2"></li>
+          <li data-target="#carouselExampleControlsNoTouching" data-slide-to="3"></li>
+          <li data-target="#carouselExampleControlsNoTouching" data-slide-to="4"></li>
+          <li data-target="#carouselExampleControlsNoTouching" data-slide-to="5"></li>
+          <li data-target="#carouselExampleControlsNoTouching" data-slide-to="6"></li>
+          <li data-target="#carouselExampleControlsNoTouching" data-slide-to="7"></li>
+          <li data-target="#carouselExampleControlsNoTouching" data-slide-to="8"></li>
+          <li data-target="#carouselExampleControlsNoTouching" data-slide-to="9"></li>
+        </ol>
+        <div class="carousel-inner mt-4">
+          <div class="carousel-item port-share active">
+            <%= render 'slide_first' %>
+          </div>
+
+          <div class="carousel-item port-share">
+            <div class="row d-flex justify-content-center">
+              <div class="slide-content col-md-6 d-flex flex-column align-items-start">
+                <%= render 'slide_table_of_contents' %>
+              </div>
+            </div>
+          </div>
+
+          <div class="carousel-item port-share-icon align-items-center">
+            <%= render 'slide_icon' %>
+          </div>
+
+          <div class="carousel-item port-share">
+            <%= render 'slide_post_new' %>
+          </div>
+
+          <div class="carousel-item port-share">
+            <div class="row d-flex justify-content-center">
+              <div class="col-md-10">
+                <%= render 'slide_sns_others' %>
+              </div>
+            </div>
+          </div>
+
+          <div class="carousel-item port-share">
+            <%= render 'slide_my_dictionary' %>
+          </div>
+
+          <div class="carousel-item port-share">
+            <%= render 'slide_multi_create' %>
+          </div>
+
+          <div class="carousel-item port-share">
+            <div class="content-wrapper d-flex flex-column justify-content-center align-items-center">
+              <div class="col-md-10 text-center">
+                <%= render 'slide_dictionary_others' %>
+              </div>
+            </div>
+          </div>
+
+          <div class="carousel-item port-share">
+            <div class="row d-flex justify-content-center">
+              <div class="row d-flex justify-content-center col-md-10">
+                <%= render 'slide_site_theme' %>
+              </div>
+            </div>
+          </div>
+
+          <div class="carousel-item port-share">
+            <%= render 'slide_profile' %>
+          </div>
+        </div>
+
+        <button class="carousel-control-prev" type="button" data-target="#carouselExampleControlsNoTouching" data-slide="prev">
+          <span class="carousel-control-prev-icon mt-4" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </button>
+
+        <button class="carousel-control-next" type="button" data-target="#carouselExampleControlsNoTouching" data-slide="next">
+          <span class="carousel-control-next-icon mt-4" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </button>
+
+      </div>
+    </div>
+  </div>
+</div>
+

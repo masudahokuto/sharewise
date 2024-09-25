@@ -10,6 +10,8 @@
     <%= stylesheet_link_tag 'custom', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Kosugi+Maru&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/f6eb215aef.js" crossorigin="anonymous"></script>
   </head>
 
@@ -22,11 +24,11 @@
         </div>
       <% end %>
     </div>
-    <main class="main-content py-5">
+    <main class="main-content py-4">
       <%= yield %>
         <span id="back">
-          <%= link_to title: "画面上部へ", data: { turbolinks: false } do %>
-            <i class="fa-solid fa-chevron-up" style="font-size: 50px;"></i>
+          <%= link_to data: { turbolinks: false } do %>
+            <i class="fa-solid fa-chevron-up" style="font-size: 50px;" title="画面上部へ"></i>
           <% end %>
         </span>
     </main>
