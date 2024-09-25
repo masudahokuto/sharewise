@@ -27,7 +27,7 @@
   background-color: #F8F5E6;
   font-size: 7em;
   font-weight: bold;
-  text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8);
+  text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.6);
 }
 
 .fa-book-atlas,
@@ -44,6 +44,11 @@
   font-size: 100px !important;
   letter-spacing: 2px;
   text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
+}
+
+.date {
+  font-family: 'Lobster', cursive;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
 }
 
 .carousel-control-prev-icon {
@@ -182,6 +187,16 @@ td {
 
 // ──────────────────────────────────────────────────────────────────────
 
+.introduction-box {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  background-color: #F8F5E6;
+  text: left;
+  border-radius: 15px;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
 .site-introduction {
   font-family: 'Kosugi Maru', cursive;
   font-weight: bold;
@@ -193,6 +208,8 @@ td {
 .post-new-image {
   height: 80%;
   width: 80%;
+  border-radius: 15px;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 
@@ -205,6 +222,13 @@ td {
 }
 
 // ──────────────────────────────────────────────────────────────────────
+.tree,
+.multi-create-image {
+  border-radius: 15px;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+// ──────────────────────────────────────────────────────────────────────
+
 .site-theme-origin {
   background-color: #d2b48c;
   color: #FFFFFF;
