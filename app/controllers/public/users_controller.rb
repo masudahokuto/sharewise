@@ -1,9 +1,11 @@
 class Public::UsersController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]  # ユーザーがログインしていることを確認
   before_action :redirect_if_admin, only: [:index, :show, :mypage]
+
   def mypage
     @user = current_user
     @posts = @user.posts.order(created_at: :desc).page(params[:page]).per(10)
+    @links = @user.links
     if user_signed_in?
       @notifications = current_user.notifications.where(read: false).page(params[:page]).per(50)
       @unread_count = @notifications.where(read: false).count
@@ -14,6 +16,7 @@ class Public::UsersController < ApplicationController
 
   def index
     @current_user = current_user
+    @links = @current_user.links
     if @current_user
       @users = User.includes(:posts).where(is_active: true).where.not(id: @current_user.id).order(created_at: :desc).page(params[:page]).per(10)
     else

@@ -5,6 +5,7 @@
       <%= render 'user_card', user: @user %>
       <%= link_to 'プロフィール編集', edit_user_path(@user), class: 'btn btn-primary mt-3' %>
       <%= render 'public/content_names' %>
+      <%= render 'public/links/link_table', links: @links %>
     </div>
     <div class="col-md-8">
       <% if @posts.any? %>

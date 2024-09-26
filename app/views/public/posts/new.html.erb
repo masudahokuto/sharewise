@@ -7,6 +7,7 @@
         <%= link_to 'プロフィール編集', edit_user_path(@current_user), class: 'btn btn-primary mt-3' %>
       <% end %>
       <%= render 'public/content_names' %>
+      <%= render 'public/links/link_table', links: @links %>
     </div>
     <!-- 本文を表示する部分 -->
     <div class="col-md-10">
