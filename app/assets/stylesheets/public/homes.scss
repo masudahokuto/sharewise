@@ -69,38 +69,23 @@
   border-bottom-right-radius: 15px;
 }
 
+// @media (max-width: 600px) {
+//   .port-folio {
+//     font-size: 80px;
+//   }
+// }
 
+// @media (min-width: 601px) and (max-width: 900px) {
+//   .port-folio {
+//     font-size: 120px;
+//   }
+// }
 
-
-
-
-
-
-
-
-
-
-
-/* スマホサイズ (600px以下) */
-@media (max-width: 600px) {
-  .port-folio {
-    font-size: 80px;
-  }
-}
-
-/* タブレットサイズ (601pxから900px) */
-@media (min-width: 601px) and (max-width: 900px) {
-  .port-folio {
-    font-size: 120px;
-  }
-}
-
-/* デスクトップサイズ (901px以上) */
-@media (min-width: 901px) {
-  .port-folio {
-    font-size: 200px;
-  }
-}
+// @media (min-width: 901px) {
+//   .port-folio {
+//     font-size: 200px;
+//   }
+// }
 
 // ──────────────────────────────────────────────────────────────────────
 .slide-content {
@@ -124,9 +109,9 @@
 .tableicon {
   display: flex;
   justify-content: center;
-  align-items: flex-start; /* 上寄せに変更 */
+  align-items: flex-start;
   flex-wrap: wrap;
-  margin: 0; /* マージンをリセット */
+  margin: 0;
 }
 
 .carousel-item {
@@ -134,13 +119,13 @@
 }
 
 table {
-  margin: 0; /* テーブル全体のマージンをリセット */
+  margin: 0;
 }
 
 table tr td {
   width: 20%;
   background-color: #FFFFFF;
-  padding: 5px; /* セルのパディングを調整 */
+  padding: 5px;
 }
 
 td {
@@ -180,10 +165,9 @@ td {
 }
 
 .tableicon h2 {
-  margin: 0; /* ヘッダーリンクとテーブルの距離を狭くする */
-  padding: 5px 0; /* 上下のパディングを調整 */
+  margin: 0;
+  padding: 5px 0;
 }
-
 
 // ──────────────────────────────────────────────────────────────────────
 
@@ -216,9 +200,9 @@ td {
 .content-wrapper {
   display: flex;
   flex-direction: column;
-  justify-content: center; /* 上下中央に配置 */
-  align-items: center; /* 水平方向中央に配置 */
-  height: 100%; /* wrapperを親要素の高さ全体に広げる */
+  justify-content: center;
+  align-items: center;
+  height: 100%;
 }
 
 // ──────────────────────────────────────────────────────────────────────
