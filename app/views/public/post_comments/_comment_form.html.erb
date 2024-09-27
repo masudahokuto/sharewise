@@ -1,5 +1,5 @@
 <%= form_with model: [@post, @post_comment] do |f| %>
-  <%= f.text_area :comment, rows:'5', autofocus: true , placeholder: "コメントを入力して下さい(200文字まで入力できます)", class: "comment-field", id: 'comment' %>
+  <%= f.text_area :comment, sanitize: true, rows:'5', autofocus: true , placeholder: "コメントを入力して下さい(200文字まで入力できます)", class: "comment-field", id: 'comment' %>
   <div class="text-center">
     <%= f.submit "コメントを送信", class: 'btn btn-primary w-30' %>
   </div>

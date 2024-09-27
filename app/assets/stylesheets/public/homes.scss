@@ -52,8 +52,8 @@
 }
 
 .carousel-control-prev-icon {
-  width: 50px;
-  height: 540px;
+  padding-right: 50px;
+  padding-top: 540px;
   background-color: #8B4513;
   margin-right: 130px;
   border-top-left-radius: 15px;
@@ -61,8 +61,8 @@
 }
 
 .carousel-control-next-icon {
-  width: 50px;
-  height: 540px;
+  padding-right: 50px;
+  padding-top: 540px;
   background-color: #8B4513;
   margin-left: 130px;
   border-top-right-radius: 15px;
@@ -189,9 +189,7 @@ td {
 
 // ──────────────────────────────────────────────────────────────────────
 
-.post-new-image {
-  height: 80%;
-  width: 80%;
+.post-new {
   border-radius: 15px;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }

@@ -2,7 +2,7 @@ class Public::PostsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :correct_user, only: [:edit, :update]
   before_action :redirect_if_admin, only: [:index, :show]
-  
+
   def new
     @user = current_user
     @post = Post.new
@@ -28,7 +28,6 @@ class Public::PostsController < ApplicationController
     @current_user = current_user
     @posts = Post.active_user_posts.order(created_at: :desc).page(params[:page]).per(10)
     @user = @current_user
-    @links = @user.links
     if params[:query].present?
       @posts = @posts.search(params[:query])
     end

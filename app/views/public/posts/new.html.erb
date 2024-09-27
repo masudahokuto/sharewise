@@ -14,9 +14,9 @@
       <%= form_with model: @post, local: true, html: { id: 'post_form', enctype: 'multipart/form-data' } do |f| %>
         <div class="row d-flex justify-content-center mb-3">
           <div class="field col-md-8">
-            <div style="width: 57%; background-color: #ffff00">
-              ！こちらから投稿する内容はノートには保存されません<br>
-              保存されたい場合はノートに保存後、詳細ページから投稿してください。
+            <div style="width: 60%; background-color: #ffff00">
+              ！こちらから投稿する内容は辞書には保存されません<br>
+              保存されたい場合は辞書に保存後、内容確認ページから投稿してください。
             </div>
             <div class="d-flex justify-content-between mb-1">
               <%= f.submit "投稿する", class: 'btn btn-primary ml-auto', style: 'width: 20%', title: "このボタンで投稿します" %>

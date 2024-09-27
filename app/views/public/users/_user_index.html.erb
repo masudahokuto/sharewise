@@ -17,7 +17,7 @@
                 <%= link_to post_path(user), style: 'text-decoration: none; display: flex; width: 100%;' do %>
                   <!-- 投稿内容 -->
                   <div class="d-flex flex-column flex-grow-1 me-3">
-                    <div class="mb-3">
+                    <div class="mb-3" style="word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;">
                       <p><%= simple_format(latest_post.body) %></p>
                     </div>
                   </div>

@@ -10,7 +10,6 @@
         <%= link_to 'プロフィール編集', edit_user_path(@current_user), class: 'btn btn-primary mt-3' %>
       <% end %>
       <%= render 'public/content_names' %>
-      <%= render 'public/links/link_table', links: @links %>
     </div>
     <div class="col-md-10">
       <!-- ユーザー一覧 -->
@@ -29,7 +28,7 @@
               <div class="show-link col-md-10 d-flex">
                 <%= link_to post_path(latest_post), style: 'text-decoration: none; display: flex; width: 100%;' do %>
                   <div class="d-flex flex-column flex-grow-1 me-3">
-                    <div class="mb-3">
+                    <div class="mb-3" style="word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;">
                       <p><%= simple_format(latest_post.body) %></p>
                     </div>
                   </div>
