@@ -7,8 +7,8 @@
       <%= render 'public/links/link_table', links: @links %>
     </div>
     <div class="col-md-10">
-      
-      <div class="d-flex justify-content-center flex-column align-items-center mb-2">
+
+      <div class="d-flex justify-content-center flex-column align-items-center mb-3">
         <button id="help-button" class="btn btn-secondary mb-3" title="ヘルプ"><i class="fa-solid fa-question"></i></button>
         <div id="help-content" class="d-none" style="max-width:800px; height: auto;  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); border-radius: 15px; border: 2px solid #898989; padding: 15px">
           <h5 class="font-weight-bold">もくじ４、内容、imageを入力してください。</h5>
@@ -16,7 +16,7 @@
           <h5><span class="btn btn-info btn-sm">保存して新規作成</span> ➡ ページを保存後、新しいページ作成画面へ移動します。</h5>
         </div>
       </div>
-      
+
       <%= form_with model: @content, url: category_title_genre_contents_path(@category, @title, @genre), local: true, html: { id: 'content_form', enctype: 'multipart/form-data' } do |f| %>
         <div class="row d-flex justify-content-center mb-3">
           <div class="field col-md-12">
