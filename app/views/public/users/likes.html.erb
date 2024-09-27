@@ -13,26 +13,29 @@
             <span class="mr-3"><%= time_ago_in_words(post.updated_at) %>前</span>
             <%= render 'public/favorites/like', post: post %>
           </div>
-            <div class="post-row d-flex mb-3">
-              <div class="user-card-link col-md-2 d-flex flex-column">
-                <%= render 'public/users/index_user_card', user: post.user %>
-              </div>
-              <div class="show-link col-8 d-flex flex-column">
-              <%= link_to post_path(post), class: "post-link", style: 'text-decoration: none; display: flex; width: 100%; height: 100%;' do %>
-                <div class="flex-grow-1" style="word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;">
-                  <p><%= simple_format(post.body) %></p>
-                </div>
-              </div>
-
-              <div class="col-4 d-flex flex-column align-items-end">
-                <% post.images.each do |image| %>
-                  <div class="post-image mb-3">
-                    <%= image_tag image, class: "img-fluid", alt: "Post Image" %>
-                  </div>
-                <% end %>
-              </div>
-            <% end %>
+          <div class="post-row d-flex mb-3">
+            <div class="user-card-link col-md-2 d-flex flex-column">
+              <%= render 'public/users/index_user_card', user: post.user %>
             </div>
+
+            <div class="show-link col-md-10 d-flex" style="flex-grow: 1;">
+              <%= link_to post_path(post), style: 'text-decoration: none; display: flex; width: 100%;' do %>
+                <div class="col-md-7 d-flex" style="flex-grow: 1; word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;">
+                  <div>
+                    <p><%= simple_format(post.body) %></p>
+                  </div>
+                </div>
+
+                <div class="col-5 d-flex flex-column align-items-end">
+                  <% post.images.each do |image| %>
+                    <div class="post-image mb-3">
+                      <%= image_tag image, class: "img-fluid", alt: "Post Image", style: "max-width: 100%;"  %>
+                    </div>
+                  <% end %>
+                </div>
+              <% end %>
+            </div>
+          </div>
         <% end %>
         <div id="pagination">
           <%= paginate @posts %>

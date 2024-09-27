@@ -135,7 +135,6 @@
 
   p {
     margin: 0;
-    white-space: pre-wrap; /* 改行を維持 */
     color: #333;           /* 文字色 */
   }
 
@@ -245,7 +244,7 @@
 }
 
 .user-full-name {
-  
+
 }
 .user-card-link:hover {
   text-decoration: none; /* ホバー時も下線を消す */
