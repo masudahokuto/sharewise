@@ -9,7 +9,9 @@
     <div class="col-md-10">
 
       <div class="d-flex justify-content-center flex-column align-items-center mb-4">
-        <button id="help-button" class="btn btn-secondary mb-3" title="ヘルプ"><i class="fa-solid fa-question"></i></button>
+        <%= button_tag(id: 'help-button', class: 'btn btn-secondary mb-3', title: 'ヘルプ', data: { turbolinks: false }) do %>
+          <i class="fa-solid fa-question"></i>
+        <% end %>
         <div id="help-content" class="d-none" style="max-width:800px; height: auto;  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); border-radius: 15px; border: 2px solid #898989; padding: 15px">
           <h5 class="font-weight-bold">もくじ４、内容、imageを入力してください。</h5>
           <h5><span class="btn btn-primary btn-sm">保存して内容確認</span> ➡ ページを保存後、内容確認画面へ移動します。</h5>
@@ -69,12 +71,15 @@
     const helpButton = document.getElementById('help-button');
     const helpContent = document.getElementById('help-content');
 
-    helpButton.addEventListener('click', function () {
+    function toggleHelpButton() {
       if (helpContent.classList.contains('d-none')) {
         helpContent.classList.remove('d-none');
       } else {
         helpContent.classList.add('d-none');
       }
-    });
+    }
+
+    // クリックイベントを関数に変更
+    helpButton.addEventListener('click', toggleHelpButton);
   });
 </script>

@@ -7,7 +7,9 @@
       <% end %>＞
 　　　<!--HELPボタン-->
       <div class="d-flex justify-content-center flex-column align-items-center mb-2">
-        <button id="help-button" class="btn btn-secondary mb-3" title="ヘルプ"><i class="fa-solid fa-question"></i></button>
+        <%= button_tag(id: 'help-button', class: 'btn btn-secondary mb-3', title: 'ヘルプ', data: { turbolinks: false }) do %>
+          <i class="fa-solid fa-question"></i>
+        <% end %>
         <div id="help-content" class="d-none">
           <img src="<%= asset_path('dictionary-help.png') %>" alt="ヘルプ画像" class="img-fluid" style="max-width:500px; height: auto;  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); border-radius: 15px; border: 2px solid #898989;">
         </div>
@@ -47,16 +49,19 @@
 
 <!--HELP表示-->
 <script>
-  document.addEventListener('turbolinks:load', function () {
+  document.addEventListener('turbolinks:load', (event) => {
     const helpButton = document.getElementById('help-button');
     const helpContent = document.getElementById('help-content');
 
-    helpButton.addEventListener('click', function () {
+    function toggleHelpButton() {
       if (helpContent.classList.contains('d-none')) {
         helpContent.classList.remove('d-none');
       } else {
         helpContent.classList.add('d-none');
       }
-    });
+    }
+
+    // クリックイベントを関数に変更
+    helpButton.addEventListener('click', toggleHelpButton);
   });
 </script>

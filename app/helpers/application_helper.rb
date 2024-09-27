@@ -26,6 +26,6 @@ module ApplicationHelper
     genre = content.genre
     title = genre.title
     category = title.category
-    link_to content.content_name, category_title_genre_content_path(category, title, genre, content)
+    link_to content.content_name, category_title_genre_content_path(category, title, genre, content), data: { turbolinks: false }
   end
 end
