@@ -23,7 +23,7 @@ class MultiCreatesController < ApplicationController
     redirect_to category_title_genre_content_path(@category, @title, @genre, @content)
     flash[:success] = "カテゴリー、タイトル、ジャンル、コンテンツを作成しました。"
   rescue ActiveRecord::RecordInvalid => e
-    flash[:error] = "エラーが発生しました: #{e.message}"
+    flash[:alert] = "エラーが発生しました"
     redirect_back(fallback_location: root_path)
   end
 

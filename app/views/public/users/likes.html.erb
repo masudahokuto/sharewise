@@ -13,12 +13,12 @@
             <span class="mr-3"><%= time_ago_in_words(post.updated_at) %>前</span>
             <%= render 'public/favorites/like', post: post %>
           </div>
-          <%= link_to post_path(post), class: "post-link" do %>
             <div class="post-row d-flex mb-3">
               <div class="user-card-link col-md-2 d-flex flex-column">
                 <%= render 'public/users/index_user_card', user: post.user %>
               </div>
-              <div class="col-8 d-flex flex-column">
+              <div class="show-link col-8 d-flex flex-column">
+              <%= link_to post_path(post), class: "post-link", style: 'text-decoration: none; display: flex; width: 100%; height: 100%;' do %>
                 <div class="flex-grow-1" style="word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;">
                   <p><%= simple_format(post.body) %></p>
                 </div>
@@ -31,8 +31,8 @@
                   </div>
                 <% end %>
               </div>
+            <% end %>
             </div>
-          <% end %>
         <% end %>
         <div id="pagination">
           <%= paginate @posts %>
