@@ -52,7 +52,7 @@
           <div class="d-flex flex-column align-items-end">
             <% @content.images.each do |image| %>
               <div class="my-3">
-                <%= image_tag image, style: "width: 500px; height: 300px; object-fit: cover;", alt: "Content Image", class: "img-fluid" %>
+                <%= image_tag image, style: "width: 500px; height: 300px; object-fit: contain;", alt: "Content Image", class: "img-fluid" %>
               </div>
             <% end %>
           </div>

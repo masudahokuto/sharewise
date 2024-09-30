@@ -15,6 +15,9 @@ class Post < ApplicationRecord
   # 画像のサイズを制限 (例: 5MB 以下)
   validates :images, size: { less_than: 5.megabytes }
 
+  # ワードで投稿拒否
+  validate :reject_forbidden_words
+
   # 退会したユーザーのコメントを除外
   scope :active_user_posts, -> { joins(:user).where(users: { is_active: true }) }
 
@@ -54,4 +57,11 @@ class Post < ApplicationRecord
   scope :search_by_body, ->(query) {
     where('body LIKE ?', "%#{query}%")
   }
+
+  def reject_forbidden_words
+    if body.include?("投稿はできません")
+      errors[:base] << "エラーが発生しました"
+    end
+  end
+
 end
