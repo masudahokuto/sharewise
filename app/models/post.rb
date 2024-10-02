@@ -1,57 +1,45 @@
 class Post < ApplicationRecord
+  # アソシエーション
   belongs_to :user
   has_many :post_comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
-  #Postがfavoritesを介してUserに関連付けられfavorited_by_usersメソッドを使用してポストをいいねしたユーザーを取得
   has_many :favorited_by_users, through: :favorites, source: :user
-  # has_many :notifications, as: :notificable
-  has_many_attached :images  # 複数画像
+  has_many_attached :images
 
+  # バリデーション
   validates :body, presence: true, length: { maximum: 3000 }
-  validate :images_format
-  validate :image_length
-  # 許可するファイル形式を設定
+  validate :images_format, :image_length, :reject_forbidden_words
+
   validates :images, content_type: { in: ['image/jpg', 'image/jpeg', 'image/png'] }
-  # 画像のサイズを制限 (例: 5MB 以下)
   validates :images, size: { less_than: 5.megabytes }
 
-  # 退会したユーザーのコメントを除外
+  # スコープ
   scope :active_user_posts, -> { joins(:user).where(users: { is_active: true }) }
+  scope :liked_by, -> (user) { joins(:favorites).where(favorites: { user_id: user.id }) }
+  scope :search_by_body, ->(query) { where('body LIKE ?', "%#{query}%") }
 
-  # 画像の拡張子指定
+  # メソッド
+  def favorited_by?(user)
+    favorites.exists?(user_id: user.id)
+  end
+
+  private
+
   def images_format
-    if images.attached?
-      images.each do |image|
-        unless image.content_type.in?(%('image/jpeg image/png'))
-          errors.add(:images, 'にはJPEGまたはPNGの画像ファイルを指定してください。')
-        end
+    return unless images.attached?
+
+    images.each do |image|
+      unless image.content_type.in?(%('image/jpeg image/png'))
+        errors.add(:images, 'にはJPEGまたはPNGの画像ファイルを指定してください。')
       end
     end
   end
 
-  # 画像3枚まで
   def image_length
-    if images.length >= 4
-      errors.add(:images, "は3枚以内にしてください")
-    end
+    errors.add(:images, "は3枚以内にしてください") if images.length >= 4
   end
 
-  # いいねテーブルにuser_idが存在していればtrueしていなければfalseを返す
-  def favorited_by?(user)
-    favorites.exists?(user_id: user.id)
+  def reject_forbidden_words
+    errors[:base] << "エラーが発生しました" if body.include?("投稿はできません")
   end
-  # アクティブなユーザーの投稿を取得するスコープ
-  scope :active_user_posts, -> {
-    joins(:user).where(users: { is_active: true })
-  }
-
-  # ユーザーがいいねした投稿を取得するスコープ
-  scope :liked_by, -> (user) {
-    joins(:favorites).where(favorites: { user_id: user.id })
-  }
-
-  # 部分一致検索をするスコープ
-  scope :search_by_body, ->(query) {
-    where('body LIKE ?', "%#{query}%")
-  }
 end

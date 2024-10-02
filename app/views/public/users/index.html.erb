@@ -11,7 +11,7 @@
       <% end %>
       <%= render 'public/content_names' %>
     </div>
-    <div class="col-md-10">
+    <div class="col-md-9">
       <!-- ユーザー一覧 -->
       <% if @users.any? %>
         <% @users.each do |user| %>
@@ -27,8 +27,8 @@
               </div>
               <div class="show-link col-md-10 d-flex">
                 <%= link_to post_path(latest_post), style: 'text-decoration: none; display: flex; width: 100%;' do %>
-                  <div class="d-flex flex-column flex-grow-1 me-3">
-                    <div class="mb-3">
+                  <div class="col-md-7 d-flex" style="flex-grow: 1; word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;">
+                    <div>
                       <p><%= simple_format(latest_post.body) %></p>
                     </div>
                   </div>

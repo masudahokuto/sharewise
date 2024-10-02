@@ -79,7 +79,12 @@
               <%= f.label :profile_image, "プロフィール画像", class: 'form-label' %>
               <%= f.file_field :profile_image, class: 'form-control-file' %>
             </div>
-
+            <% if @user.profile_image.attached? %>
+              <div class="form-group-image-dereate">
+                <span class="font-weight-bold">画像を削除する</span>
+                <span><%= f.check_box :remove_profile_image, class: 'form-check-input ml-3' %></span>
+              </div>
+            <% end %>
             <div class="form-group text-center">
               <%= f.submit "更新", class: 'btn btn-primary' %>
             </div>

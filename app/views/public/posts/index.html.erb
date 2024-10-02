@@ -29,7 +29,7 @@
             <div class="show-link col-md-10 d-flex" style="flex-grow: 1;">
               <%= link_to post_path(post), style: 'text-decoration: none; display: flex; width: 100%;' do %>
                 <!-- 本文部分 -->
-                <div class="col-md-7 d-flex" style="flex-grow: 1;">
+                <div class="col-md-7 d-flex" style="flex-grow: 1; word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;">
                   <div>
                     <p><%= simple_format(post.body) %></p>
                   </div>

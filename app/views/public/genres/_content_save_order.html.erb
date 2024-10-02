@@ -1,6 +1,6 @@
 <style>
   tbody tr:nth-child(even) {
-    background-color: #ff00e217; /* 偶数行の背景色 */
+    background-color: #d8bfd8; /* 偶数行の背景色 */
   }
   tbody tr:nth-child(odd) {
     background-color: #ffffff; /* 奇数行の背景色 */
@@ -15,7 +15,7 @@
     display: block;
     text-decoration: none !important;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-    color: #dc143c;
+    color: #8b008b;
     height: 100%;
     width: 100%;
     font-weight: bold;
@@ -23,7 +23,7 @@
   }
 
   .full-link:hover {
-    color: #dc143c;
+    color: #8b008b;
   }
 
   .link-cell {
@@ -55,7 +55,7 @@
       <tr>
         <% slice.each do |content| %>
           <td class="link-cell">
-            <%= link_to category_title_genre_content_path(category, title, content.genre, content), class: 'full-link d-flex align-items-center' do %>
+            <%= link_to category_title_genre_content_path(category, title, content.genre, content), data: { turbolinks: false }, class: 'full-link d-flex align-items-center' do %>
               <i class="fa-solid fa-book mr-3 icon-shadow" style="color: #8b4513; font-size: 20px;"></i>
               <%= content.content_name %>
             <% end %>
@@ -66,8 +66,7 @@
           <td>
             <%= link_to '削除', category_title_genre_content_path(category, title, content.genre, content),
               method: :delete, data: { confirm: '中身が全て消えてしまいますが本当に削除しますか？' },
-              class: 'btn btn-danger btn-sm'
-            %>
+              class: 'btn btn-danger btn-sm' %>
           </td>
         <% end %>
       </tr>

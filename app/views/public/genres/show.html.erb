@@ -3,10 +3,12 @@
   <div class="row d-flex justify-content-center">
     <div class="col-md-10">
       <%= link_to  mypage_users_path, class: 'mypage-link', title: 'マイページ' do %>
-        <i class="fa-solid fa-user"></i>
+        <i class="fa-solid fa-address-card"></i>
       <% end %>＞
-      <%= link_to 'もくじ', new_category_path, class: 'return-link-black', title: 'みっつ前に戻る' %>＞
-      <%= link_to @category.category_name, category_path(@category), class: 'return-link-brown', title: 'ふたつ前に戻る' %>＞
+      <%= link_to new_category_path, class: 'return-link-brown', title: 'みっつ前に戻る' do %>
+        <i class="fa-solid fa-book-open"></i>
+      <% end %>＞
+      <%= link_to @category.category_name, category_path(@category), class: 'return-link-gold', title: 'ふたつ前に戻る' %>＞
       <%= link_to @title.title_name, category_title_path(@category, @title), class: 'return-link-blue', title: 'ひとつ前に戻る' %>＞
       <div class="d-flex justify-content-center align-items-center my-2">
         <div class="d-flex">

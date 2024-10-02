@@ -15,9 +15,14 @@
       好きなテーマを深掘りし、新しい視点やアイデアを得ることができます。一緒に成長を共有しよう！</p>
     </p>
     <div class="home-buttons text-center mt-4">
-      <%= link_to '新規登録', new_user_registration_path, class: 'btn btn-primary my-2 w-50' %>
-      <%= link_to 'ログイン', new_user_session_path, class: 'btn btn-success my-2 w-50' %>
-      <%= link_to 'ゲストログイン', posts_path, class: 'btn btn-secondary my-2 w-50' %>
+      <% if user_signed_in? %>
+        <%= link_to 'ログアウト', destroy_user_session_path, method: :delete,
+        data: { confirm: 'ログアウトしますか？' }, class: 'btn btn-danger my-2 w-50' %>
+      <% else %>
+        <%= link_to '新規登録', new_user_registration_path, class: 'btn btn-primary my-2 w-50' %>
+        <%= link_to 'ログイン', new_user_session_path, class: 'btn btn-success my-2 w-50' %>
+        <%= link_to 'ゲストログイン', posts_path, class: 'btn btn-secondary my-2 w-50' %>
+      <% end %>
     </div>
   </div>
 </div>

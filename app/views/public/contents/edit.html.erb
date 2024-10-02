@@ -15,10 +15,12 @@
           <div class="field col-md-12">
             <div>
               <%= link_to  mypage_users_path, class: 'mypage-link', title: 'マイページ' do %>
-                <i class="fa-solid fa-user"></i>
+                <i class="fa-solid fa-address-card"></i>
               <% end %>＞
-              <%= link_to 'もくじ', new_category_path, class: 'return-link-black', title: 'よっつ前に戻る' %>＞
-              <%= link_to @category.category_name, category_path(@category), class: 'return-link-brown', title: 'みっつ前に戻る' %>＞
+              <%= link_to new_category_path, class: 'return-link-brown', title: 'よっつ前に戻る' do %>
+                <i class="fa-solid fa-book-open"></i>
+              <% end %>＞
+              <%= link_to @category.category_name, category_path(@category), class: 'return-link-gold', title: 'みっつ前に戻る' %>＞
               <%= link_to @title.title_name, category_title_path(@category, @title), class: 'return-link-blue', title: 'ふたつ前に戻る' %>＞
               <%= link_to @genre.genre_name, category_title_genre_path(@category, @title, @genre), class: 'return-link-green', title: 'ひとつ前に戻る' %>＞
             </div>

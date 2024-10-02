@@ -21,7 +21,7 @@ html, body {
 
 .home-icon .site-title {
   font-family: 'Lobster', cursive;
-  font-size: 30px;
+  font-size: 30px !important;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
@@ -161,7 +161,7 @@ body {
 }
 
 #content-name a {
-  color : #dc143c;
+  color : #8b008b;
   padding: 3px;
   font-size: 14px !important;
   font-weight: bold !important;
@@ -173,7 +173,7 @@ body {
 
 #content-name a:hover {
   color : #F8F5E6;
-  background-color: #dc143c;
+  background-color: #8b008b;
   font-size: 15px !important;
   font-weight: bold !important;
   text-decoration: none;

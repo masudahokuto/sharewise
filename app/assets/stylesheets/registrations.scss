@@ -53,3 +53,14 @@
   box-shadow: 0 0 0 0.2rem rgba(255, 111, 97, 0.25); /* フォーカス時にシャドウ */
 }
 
+.form-group-image-delete {
+  display: flex;
+  align-items: center; /* チェックボックスと文字を縦方向に中央揃え */
+  margin-bottom: 20px;
+}
+
+.form-check-input {
+  width: 20px;
+  height: 20px;
+  margin-left: 10px; /* チェックボックスとテキストの間隔を調整 */
+}

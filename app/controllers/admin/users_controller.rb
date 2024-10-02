@@ -1,33 +1,18 @@
 class Admin::UsersController < ApplicationController
-  before_action :authenticate_admin!  # 管理者がログインしていることを確認
+  before_action :authenticate_admin!
+  before_action :set_user, only: %i[show update destroy]
+  before_action :set_gender_counts, only: :index
+  before_action :set_age_distribution, only: :index
 
   def index
-    @admin_users = User.page(params[:page]).per(50)
-
-    @gender_counts = {
-      male: User.where(gender: :male).count,
-      female: User.where(gender: :female).count,
-      other: User.where(gender: :other).count
-    }
-
-    @total_users = @admin_users.count
-    # 年齢分布のデータを取得
-    @age_distribution = age_distribution
+    @admin_users = load_users.page(params[:page]).per(10)
     @total_users = User.count
     @inactive_users = User.where(is_active: false).count
     @active_users = @total_users - @inactive_users
-
-    # params[:query] が存在する場合は検索、なければ全ユーザーを表示
-    if params[:query].present? && params[:search_field].present?
-      @admin_users = User.search_by(params[:search_field], params[:query]).page(params[:page]).per(10)
-    else
-      @admin_users = User.page(params[:page]).per(10)
-    end
   end
 
-  # 退会中のuserを取得
   def inactive
-    @inactive_users = User.where(is_active: false).page(params[:page]).per(50) # is_activeがfalseのユーザーのみ取得
+    @inactive_users = User.where(is_active: false).page(params[:page]).per(50)
 
     respond_to do |format|
       format.js # 非同期でJSのレスポンスを返す
@@ -35,18 +20,11 @@ class Admin::UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
     @posts = @user.posts.order(created_at: :desc).page(params[:page]).per(10)
   end
 
   def update
-    @user = User.find(params[:id])
     if @user.update(user_params)
-      if @user.is_active?
-        flash.now[:notice] = "顧客が再開されました"
-      else
-        flash.now[:alert] = "顧客が退会されました"
-      end
       respond_to do |format|
         format.html { redirect_to admin_user_path(@user) }
         format.js   # update.js.erb を呼び出す
@@ -61,15 +39,33 @@ class Admin::UsersController < ApplicationController
   end
 
   def destroy
-    @user = User.find(params[:id])
     @user.destroy
     redirect_to admin_users_path, notice: 'ユーザーが削除されました。'
   end
 
   private
 
-  def age_distribution
-    # 各年齢層ごとのユーザー数を集計
+  def set_user
+    @user = User.find(params[:id])
+  end
+
+  def load_users
+    if params[:query].present? && params[:search_field].present?
+      User.search_by(params[:search_field], params[:query])
+    else
+      User
+    end
+  end
+
+  def set_gender_counts
+    @gender_counts = {
+      male: User.where(gender: :male).count,
+      female: User.where(gender: :female).count,
+      other: User.where(gender: :other).count
+    }
+  end
+
+  def set_age_distribution
     age_groups = {
       '19歳以下' => User.where('birthday > ?', 19.years.ago).count,
       '20歳〜29歳' => User.where('birthday <= ? AND birthday > ?', 19.years.ago, 29.years.ago).count,
@@ -80,8 +76,6 @@ class Admin::UsersController < ApplicationController
     }
 
     total_users = User.count
-
-    # 割合を計算
     @age_distribution = age_groups.transform_values { |count| (count.to_f / total_users * 100).round(2) }
   end
 
@@ -89,4 +83,3 @@ class Admin::UsersController < ApplicationController
     params.require(:user).permit(:is_active)
   end
 end
-# :last_name, :first_name, :nick_name, :profile, :gender, :birthday, :email, :profile_image,

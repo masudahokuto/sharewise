@@ -5,6 +5,7 @@
       <%= render 'user_card', user: @user %>
       <%= link_to 'プロフィール編集', edit_user_path(@user), class: 'btn btn-primary mt-3' %>
       <%= render 'public/content_names' %>
+      <%= render 'public/links/link_table', links: @links %>
     </div>
     <div class="col-md-8">
       <% if @posts.any? %>
@@ -16,7 +17,7 @@
           <%= link_to post_path(post), class: "post-link" do %>
             <div class="post-row d-flex mb-3">
               <div class="col-8 d-flex flex-column">
-                <div class="flex-grow-1">
+                <div class="flex-grow-1" style="word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;">
                   <p><%= simple_format(post.body) %></p>
                 </div>
               </div>

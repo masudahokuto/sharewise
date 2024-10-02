@@ -17,10 +17,11 @@
     </div>
     <div class="col-md-9">
       <%= link_to  mypage_users_path, class: 'mypage-link', title: 'マイページ' do %>
-        <i class="fa-solid fa-user"></i>
-      <% end %>
-      <%= link_to 'もくじ', new_category_path, class: 'return-link-black', title: 'もくじページ' %>
-
+        <i class="fa-solid fa-address-card"></i>
+      <% end %>＞
+      <%= link_to new_category_path, class: 'return-link-brown', title: 'もくじページ' do %>
+        <i class="fa-solid fa-book-open"></i>
+      <% end %>＞
       <%= form_with model: @link, url: user_links_path(@user), local: true do |f| %>
         <div class="d-flex justify-content-center align-items-center my-3">
           <div class="mr-1">リンク名</div>

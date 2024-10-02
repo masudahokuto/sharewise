@@ -1,11 +1,13 @@
 <%= stylesheet_link_tag 'homes', media: 'all' %>
-<div class="home-container text-center">
-  <h1 class="site-title">
-    <i class="fa-solid fa-book-atlas"></i>
-    ShareWise
-    <i class="fa-solid fa-pencil"></i>
-  </h1>
-  <div class="home-buttons text-center mt-4">
-    <%= link_to 'ログイン', new_admin_session_path, class: 'btn btn-success my-4 w-50' %>
+<div class="admin-home-container text-center align-item-center">
+  <div class="home-text-box ml-auto mr-auto">
+    <h1 class="site-title ml-auto mr-auto">
+      <i class="fa-solid fa-book-atlas mt-5"></i>
+        ShareWise
+      <i class="fa-solid fa-pencil"></i>
+    </h1>
+    <div class="home-buttons text-center mt-4">
+      <%= link_to 'ログイン', new_admin_session_path, class: 'btn btn-success my-4 w-50' %>
+    </div>
   </div>
 </div>

@@ -22,7 +22,7 @@
           <%= link_to post_path(post), class: "post-link" do %>
             <div class="post-row d-flex mb-3">
               <div class="col-md-8 d-flex flex-column">
-                <div class="flex-grow-1">
+                <div class="flex-grow-1" style="word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;">
                   <p><%= simple_format(post.body) %></p>
                 </div>
               </div>

@@ -135,7 +135,6 @@
 
   p {
     margin: 0;
-    white-space: pre-wrap; /* 改行を維持 */
     color: #333;           /* 文字色 */
   }
 
@@ -220,8 +219,7 @@
 }
 
 .profile-image {
-  max-width: 150px;
-  height: 150px;
+  object-fit: cover;
   display: block;
   margin: 0 auto;
   border-radius: 50%;
@@ -245,6 +243,9 @@
   color: inherit; /* 親要素の文字色を継承 */
 }
 
+.user-full-name {
+
+}
 .user-card-link:hover {
   text-decoration: none; /* ホバー時も下線を消す */
   color: inherit; /* ホバー時も親要素の文字色を継承 */

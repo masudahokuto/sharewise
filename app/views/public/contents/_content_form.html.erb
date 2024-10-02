@@ -1,5 +1,5 @@
 <%= form_with model: content, url: category_title_genre_contents_path(category, title, genre), local: true, html: { id: 'content_form', enctype: 'multipart/form-data' } do |f| %>
-  <%= f.text_area :body, sanitize: true, class: "post-text-area", id: 'body', placeholder: "内容を入力してください(3000文字まで登録できます)
+  <%= f.text_area :body, sanitize: true, class: "post-text-area", id: 'body', placeholder: "内容を入力してください(3000文字まで登録できます)※必須
 ※<タグ>Share Wise</タグ>とすることで文字に属性を与えられます
 
 ・文字サイズを変える方法

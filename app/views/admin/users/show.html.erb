@@ -3,7 +3,7 @@
   <div class="row d-flex justify-content-center">
     <div class="col-md-2 d-flex flex-column align-items-center">
       <div class="card_is_active">
-        <%= render 'user_card_admin', user: @user %>
+        <%= render 'user_card_admin_show', user: @user %>
       </div>
       <div id="user-status">
         <% if @user.is_active? %>
@@ -36,7 +36,7 @@
           <%= link_to admin_post_path(post), class: "post-link" do %>
             <div class="post-row d-flex mb-3">
               <!-- 本文の列 -->
-              <div class="col-8 d-flex flex-column">
+              <div class="col-8 d-flex flex-column"  style="word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;">
                 <div class="flex-grow-1">
                   <p><%= simple_format(post.body) %></p>
                 </div>

@@ -4,17 +4,17 @@
       <!-- アイコンとShareWiseの文字部分 -->
       <div class="home-icon d-flex align-items-center">
         <% if admin_signed_in? %>
-          <%= link_to admin_posts_path, class: (current_page?(admin_path) ? 'text-decoration-none active-header' : 'text-decoration-none') do %>
+          <%= link_to admin_posts_path, class: (current_page?(admin_path) ? 'text-decoration-none' : 'text-decoration-none') do %>
             <i class="fa-solid fa-house" title="投稿一覧"></i>
             <span class="site-title" title="投稿一覧">ShareWise</span>
           <% end %>
         <% elsif user_signed_in? %>
-          <%= link_to root_path, class: (current_page?(root_path) ? 'text-decoration-none active-header' : 'text-decoration-none') do %>
+          <%= link_to root_path, class: (current_page?(root_path) ? 'text-decoration-none' : 'text-decoration-none') do %>
             <i class="fa-solid fa-house" title="Top page"></i>
             <span class="site-title" title="Top page">ShareWise</span>
           <% end %>
         <% else %>
-          <%= link_to root_path, class: (current_page?(root_path) ? 'text-decoration-none active-header' : 'text-decoration-none') do %>
+          <%= link_to root_path, class: (current_page?(root_path) ? 'text-decoration-none' : 'text-decoration-none') do %>
             <i class="fa-solid fa-house" title="Top page"></i>
             <span class="site-title" title="Top page">ShareWise</span>
           <% end %>
@@ -38,6 +38,9 @@
 
     <div>
       <% if user_signed_in? %>
+        <%= link_to about_path, class: "header-link text-decoration-none hover-effect mx-3 #{'active-header' if current_page?(about_path)}" do %>
+          <i class="fa-solid fa-puzzle-piece" title="Introduction"></i>
+        <% end %>
         <% unread_count = current_user.notifications.where(read: false).count %>
         <%= link_to mypage_users_path, class: "notification-icon #{'has-unread' if unread_count > 0}" do %>
           <i class="fas fa-bell"></i>
