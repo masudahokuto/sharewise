@@ -23,7 +23,7 @@ class Public::CategoriesController < ApplicationController
   end
 
   def show
-    # set_category と authorize_user! により、他ユーザーのアクセスを防止済み
+    # set_categoryとauthorize_user!で、他ユーザーのアクセスを防止済み
     @title = Title.new
     @titles = @category.titles
     @sort_order = params[:sort_order] || 'created_at'
@@ -33,7 +33,7 @@ class Public::CategoriesController < ApplicationController
   def update
     if @category.update(category_params)
       respond_to do |format|
-        format.js # JavaScriptでレスポンスを返す
+        format.js
         format.html { redirect_to new_category_path, notice: 'もくじが更新されました。' }
       end
     else
@@ -46,7 +46,7 @@ class Public::CategoriesController < ApplicationController
   end
 
   def destroy
-    # set_category と authorize_user! により、他ユーザーの削除を防止済み
+    # set_categoryとauthorize_user!で、他ユーザーの削除を防止済み
     @category.destroy
     redirect_back(fallback_location: root_path, notice: 'もくじが削除されました。')
   end
@@ -59,7 +59,7 @@ class Public::CategoriesController < ApplicationController
   end
 
   def authorize_user!
-    # current_user がそのカテゴリの所有者であるか確認
+    # current_userがそのカテゴリの所有者であるか確認
     redirect_to root_path, alert: 'アクセス権がありません' unless @category.user == current_user
   end
 
