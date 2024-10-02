@@ -13,23 +13,3 @@
   $("#user-status").html('<%= j button_to "再開させる", admin_user_path(@user), method: :patch, remote: true, params: { user: { is_active: true } }, class: "btn btn-success", data: { confirm: "このユーザーを再開させますか？" } %>');
 <% end %>
 
-// フラッシュメッセージの表示
-<% if flash[:notice] %>
-  $("#flash-messages").html('<div class="alert alert-success"><%= j flash[:notice] %></div>');  // 成功メッセージは緑色
-<% elsif flash[:alert] %>
-  $("#flash-messages").html('<div class="alert alert-danger"><%= j flash[:alert] %></div>');    // 警告メッセージは赤色
-<% end %>
-
-// フラッシュメッセージを自動的に消す処理(notice)
-setTimeout(function() {
-  $(".notice").fadeOut("slow", function() {
-    $(this).remove();
-  });
-}, 3000);
-
-// フラッシュメッセージを自動的に消す処理(alert)
-setTimeout(function() {
-  $(".alert").fadeOut("slow", function() {
-    $(this).remove();
-  });
-}, 3000);

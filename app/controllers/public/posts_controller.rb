@@ -19,7 +19,7 @@ class Public::PostsController < ApplicationController
       flash[:success] = "投稿しました"
       redirect_to mypage_users_path
     else
-      flash[:alert] = "エラーが発生しました"
+      flash[:alert] = "こちらの内容は投稿出来ません"
       redirect_back(fallback_location: root_path)
     end
   end
