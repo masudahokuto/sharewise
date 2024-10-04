@@ -7,12 +7,12 @@ class Public::UsersController < ApplicationController
   # マイページ
   def mypage
     @user = current_user
+    return redirect_to new_user_session_path, alert: 'ログインしてください' unless user_signed_in?
     @posts = newest(@user.posts)
     @links = @user.links
-    return redirect_to new_user_session_path, alert: 'ログインしてください' unless user_signed_in?
 
-    @notifications = @user.notifications.unread.page(params[:page]).per(50)
-    @unread_count = @notifications.count
+    @notifications = @user.notifications.unread.page(params[:page]).per(10)
+    @unread_count = @user.notifications.unread.count
   end
 
   # ユーザー一覧

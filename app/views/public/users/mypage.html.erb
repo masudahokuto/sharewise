@@ -1,13 +1,16 @@
 <%= stylesheet_link_tag 'public/users', media: 'all' %>
 <div class="container-fluid">
   <div class="row d-flex justify-content-center">
-    <div class="col-md-2 d-flex flex-column align-items-center">
+    <!-- 左カラム -->
+    <div class="col-sm-12 col-md-12 col-lg-2 d-flex flex-column align-items-center">
       <%= render 'user_card', user: @user %>
       <%= link_to 'プロフィール編集', edit_user_path(@user), class: 'btn btn-primary mt-3' %>
       <%= render 'public/content_names' %>
       <%= render 'public/links/link_table', links: @links %>
     </div>
-    <div class="col-md-8">
+
+    <!-- 中央カラム -->
+    <div class="col-sm-12 col-md-9 col-lg-8">
       <% if @posts.any? %>
         <% @posts.each do |post| %>
           <div class="text-center d-flex justify-content-end align-items-center">
@@ -16,9 +19,9 @@
           </div>
           <%= link_to post_path(post), class: "post-link" do %>
             <div class="post-row d-flex mb-3">
-              <div class="col-8 d-flex flex-column">
+              <div class="col-8 d-flex">
                 <div class="flex-grow-1" style="word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;">
-                  <p><%= simple_format(post.body) %></p>
+                  <%= content_tag :div, simple_format(post.body), class: "simple-format" %>
                 </div>
               </div>
               <div class="col-4 d-flex flex-column align-items-end">
@@ -38,9 +41,9 @@
         <%= paginate @posts %>
       </div>
     </div>
-    <div class="col-2 d-flex flex-column align-items-center">
+
+    <div class="col-sm-12 col-md-3 col-lg-2 d-flex flex-column align-items-center">
       <% if @notifications.any? %>
-        <!-- ボタン -->
         <%= link_to mark_all_as_read_notifications_path, method: :patch, class: 'notification-all-check', title: '全ての通知を既読にする', data: { confirm: '全ての通知を既読にしますか？' } do %>
           <i class="fas fa-bell"></i>
           <span class="unread-count"><%= @unread_count if @unread_count > 0 %></span>
@@ -54,17 +57,21 @@
               <% when 'Favorite' %>
                 <% unless notification.read %>
                   <i class="fas fa-bell" style="color: #ffd700"></i>
-                  <%= link_to notification_path(notification), method: :patch, class: "notification-favo-name" do %>
-                    <span><%= "#{notification.notificable.user.nick_name}" %>さんから </span>
-                      <i class="fa-solid fa-heart"></i> されました
+                  <%= link_to notification_path(notification), method: :patch, class: "notification-favo-name text-wrap" do %>
+                    <span><%= "#{truncate(notification.notificable.user.nick_name, length: 13)}" %>さんに </span>
+                    <div>
+                      <i class="fa-solid fa-heart">いいね</i> されました
+                    </div>
                   <% end %>
                 <% end %>
               <% when 'PostComment' %>
                 <% unless notification.read %>
                   <i class="fas fa-bell" style="color: #ffd700"></i>
-                  <%= link_to notification_path(notification), method: :patch, class: "notification-comment-name" do %>
-                    <span><%= "#{notification.notificable.user.nick_name}" %>さんから </span>
-                  <i class="fa-solid fa-comment"></i> が来ました
+                  <%= link_to notification_path(notification), method: :patch, class: "notification-comment-name text-wrap" do %>
+                    <span><%= "#{truncate(notification.notificable.user.nick_name, length: 13)}" %>さんから </span>
+                    <div>
+                      <i class="fa-solid fa-comment">コメント</i> が来ました
+                    </div>
                   <% end %>
                 <% end %>
               <% else %>
@@ -74,7 +81,9 @@
           <% end %>
         </ul>
         <div class="pagination">
-          <%= paginate @notifications, params: { notification_page: params[:notification_page] || 1 } %>
+          <% if @notifications.total_pages > 1 %>
+            <%= paginate @notifications %>
+          <% end %>
         </div>
       <% else %>
         <i class="fas fa-bell" style="color: gray; font-size: 20px"> 通知はありません</i>
@@ -82,4 +91,3 @@
     </div>
   </div>
 </div>
-
