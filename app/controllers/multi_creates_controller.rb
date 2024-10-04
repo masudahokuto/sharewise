@@ -5,7 +5,7 @@ class MultiCreatesController < ApplicationController
     @title = @category.titles.build
     @genre = @title.genres.build
     @content = @genre.contents.build
-    @include_clock_js = true
+    @include_clock_js = true # 時計機能
     @links = current_user.links
   end
 
@@ -15,14 +15,15 @@ class MultiCreatesController < ApplicationController
       @category.user = current_user
       @category.save!
 
+      # タイトル、ジャンル、コンテンツを関連付けて作成
       @title = @category.titles.create!(title_params)
       @genre = @title.genres.create!(genre_params)
       @content = @genre.contents.create!(content_params)
     end
 
+    flash[:success] = "もくじ１～４と内容を作成しました。"
     redirect_to category_title_genre_content_path(@category, @title, @genre, @content)
-    flash[:success] = "カテゴリー、タイトル、ジャンル、コンテンツを作成しました。"
-  rescue ActiveRecord::RecordInvalid => e
+  rescue ActiveRecord::RecordInvalid
     flash[:alert] = "エラーが発生しました"
     redirect_back(fallback_location: root_path)
   end
