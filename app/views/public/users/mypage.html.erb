@@ -19,12 +19,12 @@
           </div>
           <%= link_to post_path(post), class: "post-link" do %>
             <div class="post-row d-flex mb-3">
-              <div class="col-8 d-flex">
+              <div class="col-sm-9 col-md-9 col-lg-8 d-flex">
                 <div class="flex-grow-1" style="word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;">
                   <%= content_tag :div, simple_format(post.body), class: "simple-format" %>
                 </div>
               </div>
-              <div class="col-4 d-flex flex-column align-items-end">
+              <div class="col-sm-3 col-md-9 col-lg-4 d-flex flex-column align-items-end">
                 <% post.images.each do |image| %>
                   <div class="post-image mb-3">
                     <%= image_tag image, class: "img-fluid", alt: "Post Image" %>
@@ -44,6 +44,7 @@
 
     <div class="col-sm-12 col-md-3 col-lg-2 d-flex flex-column align-items-center">
       <% if @notifications.any? %>
+        <!-- ボタン -->
         <%= link_to mark_all_as_read_notifications_path, method: :patch, class: 'notification-all-check', title: '全ての通知を既読にする', data: { confirm: '全ての通知を既読にしますか？' } do %>
           <i class="fas fa-bell"></i>
           <span class="unread-count"><%= @unread_count if @unread_count > 0 %></span>

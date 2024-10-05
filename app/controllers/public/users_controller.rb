@@ -4,23 +4,20 @@ class Public::UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :likes]
   before_action :redirect_if_not_current_user, only: [:edit, :update, :likes]
 
-  # マイページ
   def mypage
     @user = current_user
     return redirect_to new_user_session_path, alert: 'ログインしてください' unless user_signed_in?
     @posts = newest(@user.posts)
     @links = @user.links
 
-    @notifications = @user.notifications.unread.page(params[:page]).per(10)
+    @notifications = @user.notifications.unread.page(params[:page]).per(20)
     @unread_count = @user.notifications.unread.count
   end
 
-  # ユーザー一覧
   def index
     @users = User.includes(:posts).active_users(current_user).order_by_recent.page(params[:page]).per(10)
   end
 
-  # ユーザー詳細
   def show
     return redirect_to mypage_users_path if @user == current_user
     return redirect_to users_path unless @user.is_active?
@@ -30,15 +27,12 @@ class Public::UsersController < ApplicationController
     @relationship = current_user.relationships.find_by(followed_id: @user.id) if user_signed_in?
   end
 
-  # いいねした投稿
   def likes
     @posts = newest(@user.liked_posts.active_user_posts)
   end
 
-  # プロフィール編集
   def edit; end
 
-  # プロフィール更新
   def update
     if @user.update(user_params)
       redirect_to mypage_users_path, notice: 'プロフィールが更新されました'

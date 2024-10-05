@@ -133,6 +133,7 @@ img.profile-image {
 // 投稿画像
 .post-image,
 .img-fluid {
+  max-width: 270px;
   width: 100%;
   object-fit: cover;
 }
@@ -197,3 +198,4 @@ img.profile-image {
 .favo-link:hover {
   color: #b30000;
 }
+

@@ -1,23 +1,18 @@
 class Public::PostCommentsController < ApplicationController
   before_action :authenticate_user!
   def create
-    post = Post.find(params[:post_id])
-    comment = current_user.post_comments.new(post_comment_params)
-    comment.post_id = post.id
-    if comment.save
-      redirect_to request.referer
-    else
-      redirect_to request.referer
-    end
+    @post = Post.find(params[:post_id])
+    @comment = current_user.post_comments.new(post_comment_params)
+    @comment.post_id = @post.id
+    @post_comments = @post.post_comments.active_user_comments.page(params[:page]).per(10)
+    @comment.save
   end
 
   def destroy
-    comment = PostComment.active_user_comments.find(params[:id])
-    if comment.destroy
-      redirect_to request.referer
-    else
-      redirect_to request.referer
-    end
+    @post = Post.find(params[:post_id])
+    @comment = PostComment.find(params[:id])
+    @post_comments = @post.post_comments.active_user_comments.page(params[:page]).per(10)
+    @comment.destroy
   end
 
   private
