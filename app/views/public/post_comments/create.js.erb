@@ -1,2 +1,5 @@
-$("#post-comments").html("<%= j(render 'public/post_comments/comment_index', post: @post, post_comments: @post.post_comments) %>");
-$("form#new_post_comment")[0].reset();
+// コメントリストの最後に追加
+$(".comment-list").html("<%= j(render 'public/post_comments/comment_index', post: @post, post_comments: @post_comments ) %>");
+
+// フォームのリセット
+$("textarea").val(' ');

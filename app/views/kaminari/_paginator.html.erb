@@ -17,28 +17,3 @@
 <% end -%>
 
 <%# Check for pagination on @posts or @users %>
-<% if defined?(@posts) && @posts.respond_to?(:next_page) %>
-  <% if @posts.next_page %>
-    <%= link_to '次の10件', url_for(request.query_parameters.merge(page: @posts.next_page)) %>
-  <% end %>
-
-  <% if @posts.prev_page %>
-    <%= link_to '前の10件', url_for(request.query_parameters.merge(page: @posts.prev_page)) %>
-  <% end %>
-  <% elsif defined?(@admin_users) && @admin_users.respond_to?(:next_page) %>
-    <% if @admin_users.next_page %>
-      <%= link_to '次の50件', url_for(request.query_parameters.merge(page: @admin_users.next_page)) %>
-    <% end %>
-
-    <% if @admin_users.prev_page %>
-      <%= link_to '前の50件', url_for(request.query_parameters.merge(page: @admin_users.prev_page)) %>
-    <% end %>
-  <% elsif defined?(@users) && @users.respond_to?(:next_page) %>
-  <% if @users.next_page %>
-    <%= link_to '次の10件', url_for(request.query_parameters.merge(page: @users.next_page)) %>
-  <% end %>
-
-  <% if @users.prev_page %>
-    <%= link_to '前の10件', url_for(request.query_parameters.merge(page: @users.prev_page)) %>
-  <% end %>
-<% end %>

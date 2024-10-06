@@ -1,17 +1,17 @@
 class Public::PostsController < ApplicationController
   include ActionView::Helpers::SanitizeHelper  # HTMLタグを除去するためのヘルパー
   before_action :authenticate_user!, except: [:index, :show]
-  before_action :correct_user, only: [:edit, :update]
+  before_action :set_post, only: [:edit, :update, :destroy, :correct_user]
+  before_action :correct_user, only: [:edit, :update, :destroy]
   before_action :redirect_if_admin, only: [:index, :show]  # 管理者リダイレクト
 
   def new
-    @user = current_user
-    @post = Post.new
-    @links = @user.links
+    @post = current_user.posts.new
+    @links = current_user.links
   end
 
   def create
-    sanitized_body = strip_tags(post_params[:body])  # HTMLタグを除去
+    sanitized_body = sanitize_post_body(post_params[:body])  # HTMLタグを除去
     @post = current_user.posts.new(post_params.merge(body: sanitized_body))
 
     if @post.save
@@ -24,8 +24,10 @@ class Public::PostsController < ApplicationController
   end
 
   def index
-    @current_user = current_user
-    @posts = Post.active_user_posts.order(created_at: :desc).page(params[:page]).per(10)  # 投稿を取得
+    @posts = Post.active_user_posts
+                 .order(created_at: :desc)
+                 .page(params[:page])
+                 .per(10)
     @posts = @posts.search(params[:query]) if params[:query].present?  # 検索機能
   end
 
@@ -44,18 +46,18 @@ class Public::PostsController < ApplicationController
   end
 
   def search
-    @current_user = current_user
-    @posts = Post.active_user_posts.search_by_body(params[:query]).order(created_at: :desc).page(params[:page]).per(10)  # 検索結果を取得
+    @posts = Post.active_user_posts
+                 .search_by_body(params[:query])
+                 .order(created_at: :desc)
+                 .page(params[:page])
+                 .per(10)
   end
 
-  def edit
-    @user = current_user
-    @post = Post.find(params[:id])
-  end
+  def edit; end
 
   def update
-    @post = Post.find(params[:id])
-    if @post.update(post_params)
+    sanitized_body = sanitize_post_body(post_params[:body])  # HTMLタグを除去
+    if @post.update(post_params.merge(body: sanitized_body))
       redirect_to @post
     else
       render :edit
@@ -63,7 +65,6 @@ class Public::PostsController < ApplicationController
   end
 
   def destroy
-    @post = Post.find(params[:id])
     @post.destroy
     redirect_to mypage_users_path
   end
@@ -73,9 +74,8 @@ class Public::PostsController < ApplicationController
     content = Content.find(params[:id])
     sanitized_body = sanitize_content(content)  # HTMLタグを除去
 
-    @post = Post.new(
-      body: sanitized_body,
-      user_id: current_user.id
+    @post = current_user.posts.new(
+      body: sanitized_body
     )
 
     copy_content_images(content)  # コンテンツの画像を投稿にコピー
@@ -91,18 +91,29 @@ class Public::PostsController < ApplicationController
 
   private
 
-  # 自分以外のユーザーがedit、update、destroyできないようにする
-  def correct_user
-    @post = Post.find(params[:id])
-    redirect_to posts_path unless @post.user == current_user  # 認可されていない場合はリダイレクト
-  end
-
+  # パラメータを許可するメソッド
   def post_params
-    params.require(:post).permit(:body, :user_id, images: [])  # 投稿パラメータを許可
+    params.require(:post).permit(:body, images: [])
   end
 
+  # 投稿が自分のものであるかを確認するメソッド
+  def correct_user
+    redirect_to posts_path unless @post.user == current_user
+  end
+
+  # 現在の投稿を取得するメソッド
+  def set_post
+    @post = Post.find(params[:id])
+  end
+
+  # 管理者としてサインインしている場合にリダイレクト
   def redirect_if_admin
-    redirect_to admin_path, alert: "管理者はこのページにアクセスできません。" if admin_signed_in?  # 管理者リダイレクト
+    redirect_to admin_path, alert: "管理者はこのページにアクセスできません。" if admin_signed_in?
+  end
+
+  # 投稿内容をサニタイズするメソッド
+  def sanitize_post_body(body)
+    strip_tags(body)  # HTMLタグを除去
   end
 
   # コンテンツの内容をサニタイズするメソッド
@@ -113,8 +124,6 @@ class Public::PostsController < ApplicationController
 
   # コンテンツの画像を投稿にコピーするメソッド
   def copy_content_images(content)
-    if content.images.attached?
-      content.images.each { |image| @post.images.attach(image.blob) }  # 画像をコピー
-    end
+    content.images.each { |image| @post.images.attach(image.blob) } if content.images.attached?
   end
 end

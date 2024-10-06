@@ -1,13 +1,17 @@
 <%= stylesheet_link_tag 'public/posts', media: 'all' %>
 <div class="container-fluid">
   <div class="row d-flex justify-content-center">
-    <div class="col-2 d-flex flex-column align-items-center">
-      <%= render 'public/clocks/clock' %>
+    <div class="side-content col-sm-12 col-sm-12 col-lg-2 d-flex flex-column align-items-center">
+      <div class="clock-md d-flex flex-column justify-content-center">
+        <%= render 'public/clocks/clock' %>
+      </div>
       <%= render 'public/content_names' %>
-      <%= render 'public/links/link_table', links: @links %>
+      <div>
+        <%= render 'public/links/link_table', links: @links %>
+      </div>
     </div>
-    <div class="col-md-10">
 
+    <div class="col-sm-12 col-md-12 col-lg-10">
       <div class="d-flex justify-content-center flex-column align-items-center mb-3">
         <%= button_tag(id: 'help-button', class: 'btn btn-secondary mb-3', title: 'ヘルプ', data: { turbolinks: false }) do %>
           <i class="fa-solid fa-question"></i>
@@ -19,19 +23,21 @@
 
       <%= form_with model: @category, url: multi_creates_path, local: true, html: { id: 'content_form', enctype: 'multipart/form-data' } do |f| %>
         <div class="row d-flex justify-content-center mb-3">
-          <div class="field col-md-12">
+          <div class="field col-12">
             <div class="mb-2">
               <%= link_to mypage_users_path, class: 'mypage-link', title: 'マイページ' do %>
                 <i class="fa-solid fa-user"></i>
               <% end %>＞
-              <%= link_to new_category_path, class: 'return-link-brown', title: 'ひとつ前に戻る' do %>
+              <%= link_to new_category_path, class: 'return-link-brown', title: 'ひとつ前に戻る', data: {"turbolinks" => false} do %>
                 <i class="fa-solid fa-book-open"></i>
               <% end %>＞
+            </div>
+            <div class="div-message">
+              ※同名のもくじ１が既に保存されている場合、こちらの画面からはページを保存できません
             </div>
             <div class="mb-2 d-flex justify-content-left align-items-center">
               <div style="color: #8b4513; font-weight: bold;">もくじ１</div>
               <%= f.text_field :category_name, class: "form-control", id: 'category_name', autofocus: true, placeholder: "20文字まで登録できます※必須", style: "width: 350px;" %>
-              <div class="ml-2"style="background-color: yellow;">※同名のもくじ１が既に保存されている場合、こちらの画面からはページを保存できません</div>
             </div>
             <%= fields_for @title do |title_form| %>
             <div class="mb-2 d-flex justify-content-left align-items-center">
@@ -56,7 +62,7 @@
               </div>
             </div>
           </div>
-          <div class="col-md-8">
+          <div class="col-sm-12 col-md-8 col-lg-8">
               <%= content_form.text_area :body, sanitize: true, class: "post-text-area", id: 'body', placeholder: "内容を入力してください(3000文字まで登録できます)
 ※<タグ>Share Wise</タグ>とすることで文字に属性を与えられます
 
@@ -101,8 +107,8 @@ Googleという文字のGoogleへのリンクが生成されます
 (リッチテキストエディタの導入を検討中です)" %>
             <% end %>
           </div>
-          <div class="col-4">
-            <div class="text-left mb-1">
+          <div class="col-sm-12 col-md-4 col-lg-4 pt-0">
+            <div class="d-flex justify-content-left mb-1">
               <button id="add_image_button" type="button" class="image-add-btn btn-secondary" title="画像を追加出来ます">画像を追加する</button>
               ※画像(.jpg/.jpeg/.pngのみ)3枚まで
             </div>
@@ -119,20 +125,4 @@ Googleという文字のGoogleへのリンクが生成されます
   </div>
 </div>
 
-<script>
-  document.addEventListener('DOMContentLoaded', (event) => {
-    const helpButton = document.getElementById('help-button');
-    const helpContent = document.getElementById('help-content');
-
-    function toggleHelpButton() {
-      if (helpContent.classList.contains('d-none')) {
-        helpContent.classList.remove('d-none');
-      } else {
-        helpContent.classList.add('d-none');
-      }
-    }
-
-    // クリックイベントを関数に変更
-    helpButton.addEventListener('click', toggleHelpButton);
-  });
-</script>
+<%= javascript_pack_tag 'multi_create_help', 'data-turbolinks-track': 'reload' %>

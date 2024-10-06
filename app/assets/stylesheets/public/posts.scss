@@ -144,7 +144,7 @@
 
   p {
     margin: 0;
-    color: #333;           /* 文字色 */
+    color: #333;
   }
 
   &:hover {
@@ -197,6 +197,14 @@
 }
 
 .show-row {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+}
+
+.post-show-row {
+  width: 100%;
   border: 1px solid #ddd;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -557,4 +565,61 @@
 #toggleClockButton {
   font-size: 10px;
   margin-bottom: 5px;
+}
+
+
+.user-card-post-show {
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background-color: #C19A6B;
+}
+
+.user-card-post-show:hover {
+  transform: scale(1.02);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.user-nick-name-post-show,
+.user-nick-name-post-show:hover,
+.post-show-card-link,
+.post-show-card-link:hover {
+  color: black;
+  text-decoration: none !important;
+}
+
+img.profile-image {
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+.modal-dialog {
+  max-width: 70%;
+}
+
+.modal-body {
+  text-align: center; /* 画像を中央に配置 */
+}
+
+@media (max-width: 992px) {
+  .side-content {
+    margin-bottom: 20px;
+    flex-direction: row !important;
+    justify-content: center;
+  }
+}
+
+.div-message {
+  font-weight: bold;
+  background-color: yellow;
+  display: inline-block;
+  background-color: yellow;
+  border-radius: 5px;
+  margin-bottom: 10px;
 }
