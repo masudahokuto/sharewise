@@ -1,27 +1,39 @@
 <%= stylesheet_link_tag 'public/posts', media: 'all' %>
 <div class="container-fluid">
   <div class="row d-flex justify-content-center">
-    <div class="col-md-2 d-flex flex-column align-items-center">
-      <%= render 'public/clocks/clock' %>
+    <div class="side-content col-sm-12 col-sm-12 col-lg-2 d-flex flex-column align-items-center">
+      <div class="clock-md d-flex flex-column justify-content-center">
+        <%= render 'public/clocks/clock' %>
+      </div>
       <%= render 'public/content_names' %>
-      <%= render 'public/links/link_table', links: @links %>
+      <div>
+        <%= render 'public/links/link_table', links: @links %>
+      </div>
     </div>
-    <div class="col-md-10">
 
+    <div class="col-sm-12 col-md-12 col-lg-10">
       <div class="d-flex justify-content-center flex-column align-items-center mb-4">
         <%= button_tag(id: 'help-button', class: 'btn btn-secondary mb-3', title: 'ヘルプ', data: { turbolinks: false }) do %>
           <i class="fa-solid fa-question"></i>
         <% end %>
         <div id="help-content" class="d-none" style="max-width:800px; height: auto;  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); border-radius: 15px; border: 2px solid #898989; padding: 15px">
-          <h5 class="font-weight-bold">もくじ４、内容、imageを入力してください。</h5>
-          <h5><span class="btn btn-primary btn-sm">保存して内容確認</span> ➡ ページを保存後、内容確認画面へ移動します。</h5>
-          <h5><span class="btn btn-info btn-sm">保存して新規作成</span> ➡ ページを保存後、新しいページ作成画面へ移動します。</h5>
+          <h5 class="font-weight-bold">
+            もくじ４、内容、imageを入力してください。
+          </h5>
+          <h5>
+            <span class="btn btn-primary btn-sm">保存して内容確認</span>
+            ➡ ページを保存後、内容確認画面へ移動します。
+          </h5>
+          <h5>
+            <span class="btn btn-info btn-sm">保存して新規作成</span>
+            ➡ ページを保存後、新しいページ作成画面へ移動します。
+          </h5>
         </div>
       </div>
 
       <%= form_with model: @content, url: category_title_genre_contents_path(@category, @title, @genre), local: true, html: { id: 'content_form', enctype: 'multipart/form-data' } do |f| %>
         <div class="row d-flex justify-content-center mb-3">
-          <div class="field col-md-12">
+          <div class="field col-12">
             <div>
               <%= link_to mypage_users_path, class: 'mypage-link', title: 'マイページ' do %>
                 <i class="fa-solid fa-address-card"></i>
@@ -42,10 +54,10 @@
               </div>
             </div>
             <div class="row">
-              <div class="col-md-8 p-0">
+              <div class="col-sm-12 col-md-8 col-lg-8 p-0">
                 <%= render 'content_form', content: @content, category: @category, title: @title, genre: @genre %>
               </div>
-              <div class="col-md-4 pt-0">
+              <div class="col-sm-12 col-md-4 col-lg-4 pt-0">
                 <div class="d-flex justify-content-left mb-1">
                   <button id="add_image_button" type="button" class="image-add-btn btn-secondary">画像を追加する</button>
                   ※画像(.jpg/.jpeg/.pngのみ)3枚まで
@@ -65,21 +77,4 @@
   </div>
 </div>
 
-<!--HELP表示-->
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-    const helpButton = document.getElementById('help-button');
-    const helpContent = document.getElementById('help-content');
-
-    function toggleHelpButton() {
-      if (helpContent.classList.contains('d-none')) {
-        helpContent.classList.remove('d-none');
-      } else {
-        helpContent.classList.add('d-none');
-      }
-    }
-
-    // クリックイベントを関数に変更
-    helpButton.addEventListener('click', toggleHelpButton);
-  });
-</script>
+<%= javascript_pack_tag 'content_new_help', 'data-turbolinks-track': 'reload' %>

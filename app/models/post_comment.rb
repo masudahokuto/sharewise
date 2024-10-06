@@ -10,6 +10,7 @@ class PostComment < ApplicationRecord
 
   # アクティブユーザーによるコメントのみを表示する
   scope :active_user_comments, -> { joins(:user).where(users: { is_active: true }) }
+  default_scope { order(created_at: :desc) }
 
   validates :comment, presence: true, length: { maximum: 200 }
 

@@ -1,5 +1,5 @@
 class Admin::UsersController < ApplicationController
-  before_action :authenticate_admin!  # 管理者がログインしていることを確認
+  before_action :authenticate_admin!
   before_action :set_user, only: %i[show update destroy]
   before_action :set_gender_counts, only: :index
   before_action :set_age_distribution, only: :index

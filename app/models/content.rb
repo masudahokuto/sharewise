@@ -7,7 +7,7 @@ class Content < ApplicationRecord
   validates :body, presence: true, length: { maximum: 3000 }
   # 許可するファイル形式を設定
   validates :images, content_type: { in: ['image/jpg', 'image/jpeg', 'image/png'] }
-  # 画像のサイズを制限 (例: 5MB 以下)
+  # 画像のサイズを制限5MB以下
   validates :images, size: { less_than: 5.megabytes }
   # 画像3枚まで
   def image_length

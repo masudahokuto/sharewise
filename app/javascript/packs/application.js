@@ -20,4 +20,6 @@ ActiveStorage.start()
 // require('./preview')
 import './preview'
 import './valid_color'
+//import './category_name_edit'
+//import './title_name_edit'
 // import './clock'

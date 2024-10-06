@@ -1,317 +1,192 @@
-// ユーザーカード全般
-
-.user-card-link {
-  display: block;
-}
-
-// ユーザーカードリストのスタイル
+// 共通のリンクスタイル
 .user-card-list {
   background-color: #C19A6B;
   border: 1px solid #ddd;
   border-radius: 8px;
-  padding: 15px; /* パディングを少し小さく */
+  padding: 15px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   text-align: center;
-  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-  width: 170px; /* 幅を小さく */
-  height: 220px; /* 高さを小さく */
-  overflow: hidden; /* 内容がはみ出さないように */
+  width: 170px;
+  height: 220px;
+  overflow: hidden;
 
   img.profile-image {
-    border-radius: 50%; /* 画像を丸く表示 */
-    width: 120px; /* 固定サイズ */
-    height: 120px; /* 固定サイズ */
-    object-fit: cover; /* 画像の切り取り */
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
     margin-bottom: 10px;
   }
-
-  .user-card-name,
+    .user-card-name,
   .user-card-profile {
-    font-size: 1.1em; /* フォントサイズ調整 */
-    margin: 0; /* マージンをリセット */
-    text-decoration: none; /* 下線を削除 */
-    color: black; /* 文字色 */
+    font-size: 1.1em;
+    margin: 0;
+    color: black;
   }
 
   .user-card-profile {
-    font-size: 0.8em; /* フォントサイズ調整 */
-    overflow: hidden; /* 内容がカード外に出ないように */
-    text-overflow: ellipsis; /* 長いテキストを省略記号で表示 */
-    white-space: nowrap; /* テキストが折り返さないように */
+    font-size: 0.8em;
   }
 
   &:hover {
     background-color: #D2B48C;
-    border-color: #007bff; /* ホバー時の枠線色 */
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    transform: scale(1.02);
+    border-color: #007bff;
   }
-}
-
-
-// ユーザーカードのスタイル
-.user-card {
-  width: 220px;
-  background-color: #C19A6B;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-
-  img {
-    border-radius: 50%; // 画像を丸くする
-    width: 150px; // 幅を固定
-    height: 150px; // 高さも同じに設定
-    object-fit: cover; // 画像が枠に収まるようにカバー
-    margin-bottom: 10px;
-  }
-
-  &.current-user {
-    img {
-      width: 150px; // current-user では自動サイズに戻す
-      height: 150px;
-    }
-  }
-
-  &:not(.current-user) {
-    // その他のユーザーのスタイルが必要であればここに追加
-  }
-}
-
-// 右側のユーザーリスト
-.col-md-10 {
-  .row {
-    margin: -15px; // カード間の余白を調整
-
-    .col-md-4 {
-      padding: 15px;
-
-      .user-card {
-        border: none;
-        border-radius: 8px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-
-        &:hover {
-          transform: translateY(-5px);
-          box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-        }
-      }
-    }
-  }
-}
-
-// 投稿リンクのスタイル
-.post-link {
-  display: block;          /* ブロック要素として表示 */
-  text-decoration: none;  /* 下線を削除 */
-  color: inherit;         /* 親要素の文字色を継承 */
-  transition: transform 0.3s ease, box-shadow 0.3s ease; /* トランジションの追加 */
-
-  &:hover {
-    text-decoration: none;  /* ホバー時も下線を削除 */
-
-    .post-row {
-      background-color: #fafafa; /* ホバー時の背景色 */
-      border-color: #007bff;     /* ホバー時のボーダー色 */
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* ホバー時のシャドウ */
-      transform: scale(1.02);    /* ホバー時に少し拡大 */
-    }
-  }
-}
-
-// 投稿行のスタイル
-.post-row {
-  border: 1px solid #ddd;   /* デフォルトのボーダー色 */
-  border-radius: 8px;      /* ボーダーの角を丸くする */
-  padding: 15px;            /* 内側の余白を追加 */
-  margin-bottom: 15px;      /* 下の余白を追加 */
-  overflow-y: auto;
-  max-height: 300px;
-  background-color: #fff;   /* 背景色 */
-  transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease; /* トランジションの追加 */
-
-  p {
-    margin: 0;
-    color: #333;           /* 文字色 */
-  }
-
-  &:hover {
-    border-color: #007bff; /* ホバー時の背景色 */
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* ホバー時のシャドウ */
-    transform: scale(1.02); /* ホバー時に少し拡大 */
-  }
-}
-
-// 画像のスタイル
-.img-fluid {
-  width: 100%;  // 画像の幅をコンテナに合わせる
-  height: 100%;  // 高さを自動調整
-}
-
-.no-image {
-  background-color: #FFC0CB;
-  border-radius: 8px;
-  text-align: center;
-  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
-
-  img.no-image {
-    // border-radius: 80%; /* 画像を丸く表示 */
-    width: 150px; /* 幅を固定 */
-    height: 150px; /* 高さも同じに設定 */
-    object-fit: cover; /* 画像が枠に収まるようにカバー */
-    margin-bottom: 10px; /* 下にマージンを設定 */
-  }
-}
-
-.post-image {
-  width: 100%;
-  height: 270px;
-  object-fit: cover;
 }
 
 .index_card_image {
   border: none !important;
-  padding-top: 25px;
 }
 
-.nick-name {
-  font-weight: bold;
-}
-.user-profile {
-  margin: 0px;
-}
-
-.follows-count {
-  font-size: 15px;
-  font-weight: bold;
-  color: #008080;
-  margin: 0px;
-  text-decoration: none !important;
+.user-card-link,
+.post-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
+.user-card-link:hover,
+.post-link:hover {
+  text-decoration: none;
+}
+
+// ユーザーカード全般
+.user-card,
 .user-card-follows {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  background-color: #C19A6B;
-  width: 220px; /* カードの幅を固定 */
-  height: 360px; /* カードの高さを固定 */
+  width: 220px;
   padding: 1rem;
-  border: 1px solid #dee2e6;
-  border-radius: 0.375rem;
-  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
-  text-align: center; /* テキストを中央揃えに */
-  margin: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background-color: #C19A6B;
+}
+
+.user-card:hover,
+.user-card-follows:hover {
+  transform: scale(1.02);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+// プロフィール画像
+img.profile-image {
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+.user-card .profile-image {
+  width: 150px;
+  height: 150px;
+}
+
+// ユーザー名、プロフィールのテキスト
+.user-card-name,
+.user-card-profile,
+.user-nick-name,
+.notification-favo-name,
+.notification-comment-name {
+  font-size: 1.1em;
+  margin: 0;
+  color: black;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   overflow: hidden;
-  transition: box-shadow 0.3s ease, transform 0.3s ease; /* ホバー時のアニメーション */
+}
+
+// フォローのカード特有のスタイル
+.user-card-follows {
+  height: 360px;
 }
 
 .follows-info {
   margin-top: auto;
 }
 
-.user-card-follows:hover {
-  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.2);
+// 投稿のスタイル
+.post-row {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 15px;
+  background-color: #fff;
+  overflow-y: auto;
+  max-height: 300px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+
+  p {
+    margin: 0;
+    color: #333;           /* 文字色 */
+  }
+}
+
+.post-row:hover {
+  border-color: #007bff;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
   transform: scale(1.02);
 }
 
-.profile-image {
+// 投稿画像
+.post-image,
+.img-fluid {
+  max-width: 270px;
+  width: 100%;
   object-fit: cover;
-  display: block;
-  margin: 0 auto;
-  border-radius: 50%;
 }
 
-.user-nick-name {
-  margin-bottom: 0rem;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  font-weight: bold;
+.post-image {
+  height: 270px;
 }
 
-.user-profile {
-  margin-bottom: -0.1rem;
+// 通知部分
+.notification-favo-message {
+  padding: 5px;
+  border-radius: 10px;
+  background-color: rgba(228, 0, 127, 0.3);
+  transition: transform 0.2s ease;
 }
 
-.user-card-link {
-  height: 276px;
-  text-decoration: none; /* 下線を消す */
-  color: inherit; /* 親要素の文字色を継承 */
+.notification-favo-message:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.user-full-name {
-
-}
-.user-card-link:hover {
-  text-decoration: none; /* ホバー時も下線を消す */
-  color: inherit; /* ホバー時も親要素の文字色を継承 */
-}
-
-.spacer {
-  width: 100%; /* 空白の幅 */
+.notification-comment-message {
+  padding: 5px;
+  border-radius: 10px;
+  background-color: rgba(187, 226, 241, 0.7);
+  transition: transform 0.2s ease;
 }
 
-.favorite-post-show {
-  margin-top: 30px;
+.notification-comment-message:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.favorite-link {
-  text-decoration: none !important;
-}
-
-.favorite-link:hover {
-  text-decoration: none !important;
-}
-
-.favo-link {
-  font-weight: bold;
-  text-decoration: none !important;
+.notification-favo-name .fa-heart {
+  text-decoration: none;
   color: red;
 }
 
-.favo-link:hover {
-  font-weight: bold;
-  text-decoration: none !important;
-  color: #b30000;
-}
-
-.notification-favo-name {
-  color: #696969;
-  font-size: 15px;
-  font-weight: bold;
-  text-decoration: none !important;
-
-  .fa-heart {
-    color: red;
-  }
-}
-
 .notification-favo-name:hover {
-  font-size: 15px;
-  color: #333333;
-  font-weight: bold;
+  color: black;
+  text-decoration: none;
 }
 
 .notification-comment-name {
-  color: #696969;
-  font-size: 15px;
-  font-weight: bold;
   text-decoration: none !important;
+}
 
-  .fa-comment {
-    color: blue;
-  }
+.notification-comment-name .fa-comment {
+  color: blue;
 }
 
 .notification-comment-name:hover {
-  color: #333333;
-  font-size: 15px;
-  font-weight: bold;
-  text-decoration: none !important;
+  color: black;
 }
 
 .notification-all-check {
@@ -322,32 +197,45 @@
   position: relative;
   text-decoration: none !important;
   margin-bottom: 10px;
-
-  .unread-count {
-    font-size: 16px;
-    color: #ffd700;
-    border-radius: 50%;
-    padding: 2px 6px;
-    position: absolute;
-    top: 0;
-    right: 0;
-    transform: translate(50%, -50%);
-  }
+  transition: transform 0.2s ease;
 }
 
 .notification-all-check:hover {
+  transform: scale(1.1);
   color: #ccad00;
-  font-size: 30px;
-  text-decoration: none !important;
-
-    .unread-count {
-    font-size: 16px;
-    color: #ccad00;
-    border-radius: 50%;
-    padding: 2px 6px;
-    position: absolute;
-    top: 0;
-    right: 0;
-    transform: translate(50%, -50%);
-  }
 }
+
+.unread-count {
+  font-size: 16px;
+  color: #ffd700;
+  border-radius: 50%;
+  padding: 2px 6px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translate(50%, -50%);
+}
+
+.notification-all-check:hover .unread-count {
+  color: #ccad00;
+}
+
+// フォローカウント
+.follows-count {
+  font-size: 15px;
+  font-weight: bold;
+  color: #008080;
+  text-decoration: none;
+}
+
+// お気に入り
+.favo-link {
+  font-weight: bold;
+  color: red;
+  text-decoration: none;
+}
+
+.favo-link:hover {
+  color: #b30000;
+}
+

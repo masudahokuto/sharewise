@@ -19,7 +19,7 @@ class Category < ApplicationRecord
           WHEN substr(category_name, 1, 1) GLOB '[ァ-ン]*' THEN 7
           WHEN substr(category_name, 1, 1) GLOB '[ぁ-ん]*' THEN 8
           WHEN substr(category_name, 1, 1) GLOB '[一-龥]*' THEN 9
-          ELSE 5
+          ELSE 10
         END, category_name"))
       else
         # MySQL用のSQL
@@ -33,7 +33,7 @@ class Category < ApplicationRecord
           WHEN category_name REGEXP '^[ァ-ン]' THEN 7
           WHEN category_name REGEXP '^[ぁ-ん]' THEN 8
           WHEN category_name REGEXP '^[一-龥]' THEN 9
-          ELSE 5
+          ELSE 10
         END, category_name"))
       end
     else

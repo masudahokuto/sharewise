@@ -4,6 +4,12 @@ html, body {
   padding: 0;
 }
 
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
 #flash-messages .alert {
   margin: 0;
   text-align: center;
@@ -13,7 +19,11 @@ html, body {
 .home-icon {
   font-size: 30px;
   font-weight: bold;
+  display: flex; /* フレックスボックスを使用 */
+  align-items: center; /* 垂直方向の中央揃え */
+  white-space: nowrap; /* 折り返しを防ぐ */
 }
+
 .home-icon i, .home-icon .site-title {
   color: #fff;
   transition: color 0.3s ease;
@@ -51,6 +61,9 @@ html, body {
   font-size: 30px;
   text-decoration: none;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  display: flex; /* フレックスボックスを使用 */
+  align-items: center; /* 垂直方向の中央揃え */
+  white-space: nowrap; /* 折り返しを防ぐ */
 }
 
 /* アクティブ時のリンク */
@@ -67,22 +80,23 @@ html, body {
   height: 100px;
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 .customer-greeting {
   font-size: 12px;
   color: #f8f9fa;
-  align-items: center;
+  // align-items: center;
   display: flex;
   height: 100%;
 }
 
 .custom-footer {
   display: flex;
-  justify-content: center; /* 文字を中央に配置 */
+  justify-content: center;
   align-items: center;
   position: relative;
-  background-color: #8FBC8F; /* 背景色 */
+  background-color: #8FBC8F;
   min-height: 100px;
 }
 
@@ -107,22 +121,6 @@ html, body {
 
 .fa-search {
   color: white;
-}
-
-html, body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-}
-
-body {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
-
-.custom-header {
-  flex-shrink: 0;
 }
 
 .main-content {
@@ -179,4 +177,56 @@ body {
   text-decoration: none;
   transform: translateY(-2px);
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+
+/* レスポンシブデザイン */
+@media (max-width: 768px) {
+  .header-link {
+    font-size: 24px; /* フォントサイズを小さくする */
+  }
+
+  .home-icon {
+    font-size: 24px; /* フォントサイズを小さくする */
+  }
+
+  .site-title {
+    font-size: 28px; /* フォントサイズを小さくする */
+  }
+
+  .custom-header {
+    flex-direction: column; /* 縦に並ぶように */
+    height: auto; /* 高さを自動調整 */
+  }
+}
+
+.pagination {
+  display: flex;
+  list-style-type: none;
+  padding: 0;
+  align-items: center;
+}
+
+.pagination a {
+  text-decoration: none;
+  padding: 8px 10px;
+  background-color: #007bff; /* ボタンの背景色 */
+  color: white; /* テキストの色 */
+  border-radius: 5px; /* 角の丸み */
+
+}
+
+.pagination a:hover {
+  background-color: #0056b3; /* ホバー時の色 */
+}
+
+.pagination .page.current {
+  background-color: #8B4513; /* アクティブなページの背景色 */
+  // padding: 10px;
+  color: #fff; /* アクティブなページの文字色 */
+  font-weight: bold; /* アクティブなページのフォントを太字に */
+  border-radius: 5px; /* 角を丸くする */
+  margin-right: 10px;
+  margin-left: 10px;
+  padding: 10px 15px;
 }

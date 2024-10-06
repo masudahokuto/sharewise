@@ -1,18 +1,17 @@
 class Public::PostsController < ApplicationController
+  include ActionView::Helpers::SanitizeHelper  # HTMLタグを除去するためのヘルパー
   before_action :authenticate_user!, except: [:index, :show]
-  before_action :correct_user, only: [:edit, :update]
-  before_action :redirect_if_admin, only: [:index, :show]
+  before_action :set_post, only: [:edit, :update, :destroy, :correct_user]
+  before_action :correct_user, only: [:edit, :update, :destroy]
+  before_action :redirect_if_admin, only: [:index, :show]  # 管理者リダイレクト
 
   def new
-    @user = current_user
-    @post = Post.new
-    @links = @user.links
+    @post = current_user.posts.new
+    @links = current_user.links
   end
 
   def create
-    # post_paramsからbodyを取得し、HTMLタグを除去
-    sanitized_body = strip_tags(post_params[:body])
-
+    sanitized_body = sanitize_post_body(post_params[:body])  # HTMLタグを除去
     @post = current_user.posts.new(post_params.merge(body: sanitized_body))
 
     if @post.save
@@ -25,46 +24,40 @@ class Public::PostsController < ApplicationController
   end
 
   def index
-    @current_user = current_user
-    @posts = Post.active_user_posts.order(created_at: :desc).page(params[:page]).per(10)
-    @user = @current_user
-    if params[:query].present?
-      @posts = @posts.search(params[:query])
-    end
+    @posts = Post.active_user_posts
+                 .order(created_at: :desc)
+                 .page(params[:page])
+                 .per(10)
+    @posts = @posts.search(params[:query]) if params[:query].present?  # 検索機能
   end
 
   def show
     @current_user = current_user
     @post = Post.find_by(id: params[:id])
-    @user = @post.user
-    @post_comments = @post.post_comments.active_user_comments.page(params[:page]).per(10)
     if @post.nil? || !@post.user.is_active
       redirect_to posts_path
     else
-      @current_user = current_user
       @user = @post.user
+      @post_comments = @post.post_comments.active_user_comments.page(params[:page]).per(10)  # コメントを取得
       @post_comment = PostComment.new
     end
-    @is_following = current_user.following?(@user) if current_user.present?
-    @relationship = current_user.relationships.find_by(followed_id: @user.id) if user_signed_in?
-    # # フォローフォロワー数確認
-    # @followings_count = @user.followings.count
-    # @followers_count = @user.followers.count
+    @is_following = current_user.following?(@user) if current_user.present?  # フォロー状態を確認
+    @relationship = current_user.relationships.find_by(followed_id: @user.id) if user_signed_in?  # フォロワー関係を取得
   end
 
   def search
-    @current_user = current_user
-    @posts = Post.active_user_posts.search_by_body(params[:query]).order(created_at: :desc).page(params[:page]).per(10)
+    @posts = Post.active_user_posts
+                 .search_by_body(params[:query])
+                 .order(created_at: :desc)
+                 .page(params[:page])
+                 .per(10)
   end
 
-  def edit
-    @user = current_user
-    @post = Post.find(params[:id])
-  end
+  def edit; end
 
   def update
-    @post = Post.find(params[:id])
-    if @post.update(post_params)
+    sanitized_body = sanitize_post_body(post_params[:body])  # HTMLタグを除去
+    if @post.update(post_params.merge(body: sanitized_body))
       redirect_to @post
     else
       render :edit
@@ -72,62 +65,65 @@ class Public::PostsController < ApplicationController
   end
 
   def destroy
-    @post = Post.find(params[:id])
     @post.destroy
     redirect_to mypage_users_path
   end
 
-  # contentのpost機能
-  class Public::PostsController < ApplicationController
-    include ActionView::Helpers::SanitizeHelper  # 追加
+  # コンテンツからの投稿作成機能
+  def create_from_content
+    content = Content.find(params[:id])
+    sanitized_body = sanitize_content(content)  # HTMLタグを除去
 
-    def create_from_content
-      content = Content.find(params[:id])
+    @post = current_user.posts.new(
+      body: sanitized_body
+    )
 
-      # content_nameとbodyを組み合わせてから、HTMLタグを除去
-      combined_content = "#{content.content_name}\n\n#{content.body}"
-      sanitized_body = strip_tags(combined_content)  # HTMLタグを除去
+    copy_content_images(content)  # コンテンツの画像を投稿にコピー
 
-      # Postモデルのbodyにsanitized_bodyとuser_idをセット
-      @post = Post.new(
-        body: sanitized_body,
-        user_id: current_user.id
-      )
-
-      # ContentのimagesをPostのimagesにコピー
-      if content.images.attached?
-        content.images.each do |image|
-          @post.images.attach(image.blob)
-        end
-      end
-
-      if @post.save
-        flash[:success] = "投稿しました"
-        redirect_to post_path(@post)
-      else
-        flash[:alert] = "エラーが発生しました"
-        redirect_to root_path
-      end
+    if @post.save
+      flash[:success] = "投稿しました"
+      redirect_to post_path(@post)
+    else
+      flash[:alert] = "エラーが発生しました"
+      redirect_to root_path
     end
   end
 
   private
 
-  # 自分以外のuserがedit、update、destroy出来ないようにする
-  def correct_user
-    @post = Post.find(params[:id])
-    unless @post.user == current_user
-      redirect_to posts_path
-    end
-  end
-
+  # パラメータを許可するメソッド
   def post_params
-    params.require(:post).permit(:body, :user_id, images: [])
+    params.require(:post).permit(:body, images: [])
   end
 
+  # 投稿が自分のものであるかを確認するメソッド
+  def correct_user
+    redirect_to posts_path unless @post.user == current_user
+  end
+
+  # 現在の投稿を取得するメソッド
+  def set_post
+    @post = Post.find(params[:id])
+  end
+
+  # 管理者としてサインインしている場合にリダイレクト
   def redirect_if_admin
-    if admin_signed_in?
-      redirect_to admin_path, alert: "管理者はこのページにアクセスできません。"
-    end
+    redirect_to admin_path, alert: "管理者はこのページにアクセスできません。" if admin_signed_in?
+  end
+
+  # 投稿内容をサニタイズするメソッド
+  def sanitize_post_body(body)
+    strip_tags(body)  # HTMLタグを除去
+  end
+
+  # コンテンツの内容をサニタイズするメソッド
+  def sanitize_content(content)
+    combined_content = "#{content.content_name}\n\n#{content.body}"
+    strip_tags(combined_content)  # HTMLタグを除去
+  end
+
+  # コンテンツの画像を投稿にコピーするメソッド
+  def copy_content_images(content)
+    content.images.each { |image| @post.images.attach(image.blob) } if content.images.attached?
   end
 end
