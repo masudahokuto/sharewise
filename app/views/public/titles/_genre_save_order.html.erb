@@ -1,48 +1,4 @@
-<style>
-  tbody tr:nth-child(even) {
-    background-color: #28a74524; /* 偶数行の背景色 */
-  }
-  tbody tr:nth-child(odd) {
-    background-color: #ffffff; /* 奇数行の背景色 */
-  }
-
-  .table th, .table td {
-    vertical-align: middle;
-  }
-
-  .icon-shadow {
-    color: #ffd700;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-  }
-
-  .full-link {
-    display: block;
-    text-decoration: none !important;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-    color: #2e8b57;
-    height: 100%;
-    width: 100%;
-    font-weight: bold;
-    box-sizing: border-box;
-  }
-
-    .full-link:hover {
-    color: #2e8b57;
-  }
-
-  .link-cell {
-    padding: 0;
-    border: none;
-    vertical-align: middle;
-  }
-
-  .link-cell:hover {
-    background-color: #f0e68c;  /* ホバー時の背景色 (例として薄い黄色) */
-    transition: background-color 0.3s ease;  /* スムーズな色の変化 */
-  }
-</style>
-
-<table class="table ">
+<table class="table large-table">
   <thead>
     <tr>
       <th style="background-color: #d3d3d3">もくじ名</th>
@@ -57,7 +13,7 @@
   </thead>
 
   <tbody>
-    <% @sorted_genres.each_slice(2) do |slice| %>
+    <% sorted_genres.each_slice(2) do |slice| %>
       <tr>
         <% slice.each do |genre| %>
           <td class="link-cell">
@@ -93,29 +49,47 @@
   </tbody>
 </table>
 
-<script>
-  $(document).on('turbolinks:load', function() {
+<table class="table small-table">
+  <thead>
+    <tr>
+      <th style="background-color: #d3d3d3">もくじ名</th>
+      <th style="background-color: #d3d3d3">保存日</th>
+      <th style="background-color: #d3d3d3"></th>
+      <th style="background-color: #d3d3d3"></th>
+    </tr>
+  </thead>
 
-    window.toggleEditForm = function(genreId) {
-      $('#genre-name-' + genreId).toggle();
-      $('#genre-edit-form-' + genreId).toggle();
-    };
-
-    $(document).on('click', '.edit-btn', function() {
-      var genreId = $(this).data('genre-id');
-      toggleEditForm(genreId);
-    });
-
-    // フォーム送信の処理（`form_with` の非同期送信を活用する場合）
-    $(document).on('ajax:success', 'form[id^="edit-form-"]', function(event) {
-      var [data, status, xhr] = event.detail;
-      var form = $(this);
-      var genreId = form.attr('id').replace('edit-form-', '');
-      $('#genre-name-' + genreId).text(form.find('input[name="genre_name"]').val());
-      toggleEditForm(genreId); // フォームを隠す
-    });
-
-    $(document).on('ajax:error', 'form[id^="edit-form-"]', function(event) {
-    });
-  });
-</script>
+  <tbody>
+    <% sorted_genres.each do |genre| %>
+      <tr>
+        <td class="link-cell">
+          <span id="genre-name-<%= genre.id %>">
+            <%= link_to category_title_genre_path(category, title, genre), class: 'full-link d-flex align-items-center' do %>
+              <i class="fa-solid fa-book mr-3 icon-shadow" style="color: #8b4513;"></i>
+              <%= genre.genre_name %>
+            <% end %>
+          </span>
+          <span id="genre-edit-form-<%= genre.id %>" style="display: none;">
+            <%= form_with(model: genre, url: category_title_genre_path(category, title, genre), method: :patch, remote: true, html: { id: "edit-form-#{genre.id}" }) do |f| %>
+              <%= f.text_field :genre_name, value: genre.genre_name %>
+              <%= f.submit '保存', class: 'btn btn-primary btn-sm' %>
+            <% end %>
+          </span>
+        </td>
+        <td>
+          <%= genre.created_at.in_time_zone("Tokyo").strftime("%Y/%m/%d %H:%M") %>
+        </td>
+        <td>
+          <button class="btn btn-success btn-sm edit-btn" data-genre-id="<%= genre.id %>">編集</button>
+        </td>
+        <td>
+          <%= link_to '削除', category_title_genre_path(category, title, genre),
+            method: :delete,
+            data: { confirm: '中身も全て消えてしまいますが本当に削除しますか？' },
+            class: 'btn btn-danger btn-sm'
+          %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -1,12 +1,8 @@
 tbody tr:nth-child(even) {
-  background-color: #007bff29; /* 偶数行の背景色 */
+  background-color: #d8bfd8; /* 偶数行の背景色 */
 }
 tbody tr:nth-child(odd) {
   background-color: #ffffff; /* 奇数行の背景色 */
-}
-
-.table th, .table td {
-  vertical-align: middle;
 }
 
 .icon-shadow {
@@ -18,10 +14,15 @@ tbody tr:nth-child(odd) {
   display: block;
   text-decoration: none !important;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  color: #8b008b;
   height: 100%;
   width: 100%;
   font-weight: bold;
   box-sizing: border-box;
+}
+
+.full-link:hover {
+  color: #8b008b;
 }
 
 .link-cell {
@@ -31,8 +32,8 @@ tbody tr:nth-child(odd) {
 }
 
 .link-cell:hover {
-  background-color: #f0e68c;  /* ホバー時の背景色 (例として薄い黄色) */
-  transition: background-color 0.3s ease;  /* スムーズな色の変化 */
+  background-color: #f0e68c;
+  transition: background-color 0.3s ease;
 }
 
   /* 初期状態：大きなテーブルを表示、小さなテーブルを非表示 */

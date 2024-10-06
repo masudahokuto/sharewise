@@ -46,34 +46,39 @@
       <% if @notifications.any? %>
         <!-- ボタン -->
         <%= link_to mark_all_as_read_notifications_path, method: :patch, class: 'notification-all-check', title: '全ての通知を既読にする', data: { confirm: '全ての通知を既読にしますか？' } do %>
+          <i class="fa-solid fa-circle-check"></i>
           <i class="fas fa-bell"></i>
           <span class="unread-count"><%= @unread_count if @unread_count > 0 %></span>
-          <i class="fa-solid fa-circle-check"></i>
+
         <% end %>
         <!-- 通知リスト -->
         <ul class="list-unstyled">
           <% @notifications.each do |notification| %>
-            <li style="margin-bottom: 20px;">
+            <li>
               <% case notification.notificable_type %>
               <% when 'Favorite' %>
                 <% unless notification.read %>
-                  <i class="fas fa-bell" style="color: #ffd700"></i>
-                  <%= link_to notification_path(notification), method: :patch, class: "notification-favo-name text-wrap" do %>
-                    <span><%= "#{truncate(notification.notificable.user.nick_name, length: 13)}" %>さんに </span>
-                    <div>
-                      <i class="fa-solid fa-heart">いいね</i> されました
-                    </div>
-                  <% end %>
+                  <div class="notification-favo-message my-2">
+                    <i class="fas fa-bell" style="color: #ffd700"></i>
+                    <%= link_to notification_path(notification), method: :patch, class: "notification-favo-name text-wrap", title: 'いいねされた投稿を見る' do %>
+                      <span class="font-weight-bold"><%= "#{truncate(notification.notificable.user.nick_name, length: 10)}" %></span>さんに
+                      <div>
+                        <i class="fa-solid fa-heart">いいね</i> されました
+                      </div>
+                    <% end %>
+                  </div>
                 <% end %>
               <% when 'PostComment' %>
                 <% unless notification.read %>
-                  <i class="fas fa-bell" style="color: #ffd700"></i>
-                  <%= link_to notification_path(notification), method: :patch, class: "notification-comment-name text-wrap" do %>
-                    <span><%= "#{truncate(notification.notificable.user.nick_name, length: 13)}" %>さんから </span>
-                    <div>
-                      <i class="fa-solid fa-comment">コメント</i> が来ました
-                    </div>
-                  <% end %>
+                  <div class="notification-comment-message my-2">
+                    <i class="fas fa-bell" style="color: #ffd700"></i>
+                    <%= link_to notification_path(notification), method: :patch, class: "notification-comment-name text-wrap", title: 'コメントを見る' do %>
+                      <span class="font-weight-bold"><%= "#{truncate(notification.notificable.user.nick_name, length: 10)}" %></span>さんから
+                      <div>
+                        <i class="fa-solid fa-comment">コメント</i> が来ました
+                      </div>
+                    <% end %>
+                  </div>
                 <% end %>
               <% else %>
                 <%= "Unknown notification type" %>

@@ -31,20 +31,18 @@ class Public::GenresController < ApplicationController
 
     if @genre.update(genre_params)
       respond_to do |format|
-        format.js
         format.html { redirect_to category_title_path(@category, @title), notice: 'もくじが更新されました。' }
       end
     else
       flash[:alert] = "エラーが発生しました"
       respond_to do |format|
-        format.js
         format.html { render :show }
       end
     end
   end
 
   def destroy
-    @genre.destro
+    @genre.destroy
     redirect_back(fallback_location: root_path, notice: 'もくじが削除されました。')
   end
 

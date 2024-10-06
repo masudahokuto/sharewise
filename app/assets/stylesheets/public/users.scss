@@ -143,12 +143,50 @@ img.profile-image {
 }
 
 // 通知部分
+.notification-favo-message {
+  padding: 5px;
+  border-radius: 10px;
+  background-color: rgba(228, 0, 127, 0.3);
+  transition: transform 0.2s ease;
+}
+
+.notification-favo-message:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.notification-comment-message {
+  padding: 5px;
+  border-radius: 10px;
+  background-color: rgba(187, 226, 241, 0.7);
+  transition: transform 0.2s ease;
+}
+
+.notification-comment-message:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
 .notification-favo-name .fa-heart {
+  text-decoration: none;
   color: red;
+}
+
+.notification-favo-name:hover {
+  color: black;
+  text-decoration: none;
+}
+
+.notification-comment-name {
+  text-decoration: none !important;
 }
 
 .notification-comment-name .fa-comment {
   color: blue;
+}
+
+.notification-comment-name:hover {
+  color: black;
 }
 
 .notification-all-check {
@@ -157,11 +195,13 @@ img.profile-image {
   display: inline-flex;
   align-items: center;
   position: relative;
-  text-decoration: none;
+  text-decoration: none !important;
   margin-bottom: 10px;
+  transition: transform 0.2s ease;
 }
 
 .notification-all-check:hover {
+  transform: scale(1.1);
   color: #ccad00;
 }
 

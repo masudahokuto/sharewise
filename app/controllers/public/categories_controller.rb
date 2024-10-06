@@ -33,22 +33,19 @@ class Public::CategoriesController < ApplicationController
   def update
     if @category.update(category_params)
       respond_to do |format|
-        format.js
         format.html { redirect_to new_category_path, notice: 'もくじが更新されました。' }
       end
     else
       flash[:alert] = "エラーが発生しました"
       respond_to do |format|
-        format.js
         format.html { render :new }
       end
     end
   end
 
   def destroy
-    # set_categoryとauthorize_user!で、他ユーザーの削除を防止済み
     @category.destroy
-    redirect_back(fallback_location: root_path, notice: 'もくじが削除されました。')
+    redirect_back(fallback_location: root_path, alert: 'もくじが削除されました。')
   end
 
   private

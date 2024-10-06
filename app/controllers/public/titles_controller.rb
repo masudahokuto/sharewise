@@ -29,13 +29,11 @@ class Public::TitlesController < ApplicationController
 
     if @title.update(title_params)
       respond_to do |format|
-        format.js
         format.html { redirect_to category_path(@category), notice: 'もくじが更新されました。' }
       end
     else
       flash[:alert] = "エラーが発生しました"
       respond_to do |format|
-        format.js
         format.html { render :show }
       end
     end
@@ -43,7 +41,7 @@ class Public::TitlesController < ApplicationController
 
   def destroy
     @title.destroy
-    redirect_back(fallback_location: root_path, notice: 'もくじが削除されました。')
+    redirect_back(fallback_location: root_path, alert: 'もくじが削除されました。')
   end
 
   private

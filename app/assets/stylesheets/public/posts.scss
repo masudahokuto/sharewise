@@ -606,3 +606,20 @@ img.profile-image {
 .modal-body {
   text-align: center; /* 画像を中央に配置 */
 }
+
+@media (max-width: 992px) {
+  .side-content {
+    margin-bottom: 20px;
+    flex-direction: row !important;
+    justify-content: center;
+  }
+}
+
+.div-message {
+  font-weight: bold;
+  background-color: yellow;
+  display: inline-block;
+  background-color: yellow;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
