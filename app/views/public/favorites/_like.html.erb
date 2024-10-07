@@ -1,4 +1,4 @@
-<% if user_signed_in? %> <!-- ユーザーがログインしている場合 -->
+<% if user_signed_in? %>
   <div id="like-button-<%= post.id %>">
     <% if post.favorited_by?(current_user) %>
       <%= link_to post_favorite_path(post), method: :delete, remote: true, style: "color: red; text-decoration: none;" do %>

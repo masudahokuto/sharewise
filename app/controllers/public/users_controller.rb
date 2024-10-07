@@ -15,6 +15,7 @@ class Public::UsersController < ApplicationController
   end
 
   def index
+    @current_user = current_user
     @users = User.includes(:posts).active_users(current_user).order_by_recent.page(params[:page]).per(10)
   end
 

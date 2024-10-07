@@ -17,21 +17,20 @@
             <%= render 'public/favorites/like', post: post %>
           </div>
           <div class="post-row post-link d-flex">
-            <!-- ユーザー情報 -->
+
             <div class="user-card-link col-md-2 d-flex flex-column">
               <%= render 'public/users/index_user_card', user: post.user %>
             </div>
 
-            <!-- 投稿内容と画像部分 -->
             <div class="show-link col-md-10 d-flex" style="flex-grow: 1;">
               <%= link_to post_path(post), style: 'text-decoration: none; display: flex; width: 100%;' do %>
-                <!-- 本文部分 -->
+
                 <div class="col-md-7 d-flex" style="flex-grow: 1;">
                   <div>
                     <p><%= simple_format(post.body) %></p>
                   </div>
                 </div>
-                <!-- 画像部分 -->
+
                 <div class="col-md-5 d-flex flex-column align-items-end">
                   <% post.images.each do |image| %>
                     <div class="post-image mb-3">
@@ -39,14 +38,14 @@
                     </div>
                   <% end %>
                 </div>
-              <% end %> <!-- link_to post_path -->
+              <% end %>
             </div>
           </div>
         <% end %>
       <% else %>
         <p>検索結果がありません。</p>
       <% end %>
-      <!-- ページネーション -->
+
       <div id="pagination">
         <%= paginate @posts %>
       </div>

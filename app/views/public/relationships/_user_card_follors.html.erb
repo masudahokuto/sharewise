@@ -1,5 +1,5 @@
 <!-- user_card_admin.html.erb -->
-<div class="user-card-follows <%= user.is_active ? 'user-card-true' : 'user-card-false' %>">
+<div class="user-card-follows mr-3 <%= user.is_active ? 'user-card-true' : 'user-card-false' %>">
   <%= link_to user_path(user), class: 'user-card-link' do %>
     <% if user.profile_image.attached? %>
       <%= image_tag user.get_profile_image(150, 150), class: 'profile-image', size: '150x150' %>
@@ -19,13 +19,13 @@
     <!-- フォローボタン -->
     <% if current_user == user %>
       <!-- current_userと表示しているuserが同じ場合はマイページへのリンクを表示 -->
-      <%= link_to 'マイページ', mypage_users_path, class: 'btn btn-success btn-sm' %>
+      <%= link_to 'マイページ', mypage_users_path, class: 'btn btn-success btn-sm', style: 'border-radius: 20px;' %>
     <% elsif current_user.following?(user) %>
       <!-- フォロー中の場合はフォローを外すボタンを表示 -->
-      <%= link_to 'フォローを外す', user_relationship_path(current_user, user), method: :delete, class: 'btn btn-danger btn-sm' %>
+      <%= link_to 'フォローを外す', user_relationship_path(current_user, user), method: :delete, class: 'btn btn-danger btn-sm', style: 'border-radius: 20px;' %>
     <% else %>
       <!-- フォローしていない場合はフォローボタンを表示 -->
-      <%= link_to 'フォローする', user_relationships_path(followed_id: user.id), method: :post, class: 'btn btn-primary btn-sm' %>
+      <%= link_to 'フォローする', user_relationships_path(followed_id: user.id), method: :post, class: 'btn btn-primary btn-sm', style: 'border-radius: 20px;' %>
     <% end %>
   </div>
 </div>

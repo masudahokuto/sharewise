@@ -48,6 +48,13 @@
   }
 }
 
+.profile-image-post-show {
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+}
+
 // ユーザーカードのスタイル
 .user-card {
   width: 220px;
@@ -569,7 +576,6 @@
 
 
 .user-card-post-show {
-  padding: 1rem;
   border: 1px solid #ddd;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -622,4 +628,13 @@ img.profile-image {
   background-color: yellow;
   border-radius: 5px;
   margin-bottom: 10px;
+}
+
+.full-link {
+  display: block;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  height: 100%;
+  width: 100%;
+  font-weight: bold;
+  box-sizing: border-box;
 }

@@ -1,21 +1,24 @@
 <% if user %>
   <div class="user-card <%= 'current-user' if user == current_user %>">
-    <%= link_to user_path(user), class: 'post-show-card' do %>
+    <%= link_to user_path(user), class: 'post-show-card', style: "text-decoration: none;" do %>
       <% if user.profile_image.attached? %>
         <%= image_tag user.get_profile_image(150, 150), class: 'profile-image' %>
       <% else %>
         <%= image_tag 'no_image.jpg', size: '150x150', class: 'profile-image' %>
       <% end %>
+    <h5 class="nick-name font-weight-bold" style="color: black; word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;"><%= user.nick_name %></h5>
+    <p class="user-profile" style="color: black; word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;"><%= user.profile %></p>
     <% end %>
-    <h5 class="nick-name" style="word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;"><%= user.nick_name %></h5>
-    <p class="user-profile" style="word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;"><%= user.profile %></p>
     <div>
-      <%= link_to "#{user.followings.count} フォロー", user_followings_path(user), class: "follows-count", title: 'フォローしているUserを見る' %>
+      <%= link_to "#{user.followings.count} フォロー", user_followings_path(user), class: "follows-count", title: 'フォローしているユーザーを見る' %>
       |
-      <%= link_to "#{user.followers.count} フォロワー", user_followers_path(user), class: "follows-count", title: 'フォローされているUserを見る' %>
+      <%= link_to "#{user.followers.count} フォロワー", user_followers_path(user), class: "follows-count", title: 'フォローされているユーザーを見る' %>
     </div>
     <% if user == current_user %>
       <span><%= link_to '❤いいね一覧', likes_user_path(user), class: 'favo-link', title: 'いいねしている投稿を見る'%></span>
+      <%= link_to edit_user_path(user), class: "user-edit-icon ml-4", data: {"turbolinks" => false} do %>
+        <i class="fa-solid fa-gear fa-xl" style="color: #4d4d4d;" title="ユーザー情報編集"></i>
+      <% end %>
     <% end %>
   </div>
 <% else %>

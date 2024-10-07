@@ -6,9 +6,7 @@
         <%= render "searches/post_search_form" %>
       </div>
       <%= render 'public/users/user_card', user: @current_user %>
-      <% if @current_user %>
-        <%= link_to 'プロフィール編集', edit_user_path(@current_user), class: 'btn btn-primary mt-3' %>
-      <% end %>
+
       <%= render 'public/content_names' %>
     </div>
     <div class="col-sm-12 col-md-12 col-lg-9">
@@ -28,13 +26,13 @@
             <!-- 投稿内容と画像部分 -->
             <div class="show-link col-sm-9 col-md-9 col-lg-10 d-flex" style="flex-grow: 1;">
               <%= link_to post_path(post), style: 'text-decoration: none; display: flex; width: 100%;' do %>
-                <!-- 本文部分 -->
+                <!-- 本文 -->
                 <div class="col-sm-9 col-md-9 col-lg-8 d-flex" style="flex-grow: 1; word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;">
                   <div>
                     <p><%= simple_format(post.body) %></p>
                   </div>
                 </div>
-                <!-- 画像部分 -->
+                <!-- 画像 -->
                 <div class="col-sm-3 col-md-3 col-lg-4 d-flex flex-column align-items-end">
                   <% post.images.each do |image| %>
                     <div class="post-image mb-3">
@@ -42,14 +40,14 @@
                     </div>
                   <% end %>
                 </div>
-              <% end %> <!-- link_to post_path -->
+              <% end %>
             </div>
           </div>
         <% end %>
       <% else %>
         <p>投稿がありません。</p>
       <% end %>
-      <!-- ページネーション -->
+
       <div id="pagination">
         <%= paginate @posts %>
       </div>

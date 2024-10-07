@@ -6,6 +6,7 @@ class Public::PostsController < ApplicationController
   before_action :redirect_if_admin, only: [:index, :show]  # 管理者リダイレクト
 
   def new
+    @current_user = current_user
     @post = current_user.posts.new
     @links = current_user.links
   end

@@ -6,9 +6,6 @@
         <%= render "searches/search_form" %>
       </div>
       <%= render 'public/users/user_card', user: @current_user %>
-      <% if @current_user %>
-        <%= link_to 'プロフィール編集', edit_user_path(@current_user), class: 'btn btn-primary mt-3' %>
-      <% end %>
       <%= render 'public/content_names' %>
     </div>
     <div class="col-sm-12 col-md-12 col-lg-9">

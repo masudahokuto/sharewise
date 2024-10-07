@@ -1,3 +1,14 @@
+document.getElementById('toggleClockButton').addEventListener('click', function() {
+  var clockContainer = document.getElementById('clockContainer');
+
+  if (clockContainer.classList.contains('hidden')) {
+    clockContainer.classList.remove('hidden');
+    this.textContent = '時計'; // ボタンのテキストを更新
+  } else {
+    clockContainer.classList.add('hidden');
+    this.textContent = '時計'; // ボタンのテキストを更新
+  }
+});
 document.addEventListener('DOMContentLoaded', (event) => {
   function updateClock() {
     const now = new Date();
