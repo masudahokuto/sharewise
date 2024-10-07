@@ -1,18 +1,14 @@
 <%= stylesheet_link_tag 'public/users', media: 'all' %>
 <div class="container-fluid">
   <div class="row d-flex justify-content-center">
-    <div class="col-sm-12 col-md-12 col-lg-2 d-flex flex-column align-items-center">
-      <div class="d-flex justify-content-center mb-2">
-        <%= render "searches/search_form" %>
-      </div>
+    <div class="side-content col-sm-12 col-md-12 col-lg-2 d-flex flex-column align-items-center">
       <%= render 'public/users/user_card', user: @current_user %>
-      <% if @current_user %>
-        <%= link_to 'プロフィール編集', edit_user_path(@current_user), class: 'btn btn-primary mt-3' %>
-      <% end %>
       <%= render 'public/content_names' %>
     </div>
     <div class="col-sm-12 col-md-12 col-lg-9">
-      <!-- ユーザー一覧 -->
+      <div class="d-flex justify-content-center">
+        <%= render "searches/search_form" %>
+      </div>
       <% if @users.any? %>
         <% @users.each do |user| %>
           <% latest_post = user.posts.order(created_at: :desc).first %>
@@ -25,6 +21,8 @@
               <div class="user-card-link col-sm-3 col-md-3 col-lg-2 d-flex flex-column">
                 <%= render 'public/users/index_user_card', user: user %>
               </div>
+
+
               <div class="show-link col-sm-9 col-md-9 col-lg-10 d-flex" style="flex-grow: 1;">
                 <%= link_to post_path(latest_post), style: 'text-decoration: none; display: flex; width: 100%;' do %>
                   <div class="col-sm-9 col-md-9 col-lg-8 d-flex" style="flex-grow: 1; word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;">
@@ -45,14 +43,14 @@
               </div>
             </div>
           <% else %>
-            <div class="post-row col-sm-12 d-flex mb-3">
-              <div class="user-card-link col-sm-12 col-md-4 col-lg-3 d-flex flex-column">
+            <div class="post-row d-flex mb-3">
+              <div class="user-card-link col-sm-3 col-md-3 col-lg-2 d-flex flex-column">
                 <%= render 'public/users/index_user_card', user: user %>
               </div>
               <%= link_to user_path(user), style: 'text-decoration: none; display: flex; width: 100%;' do %>
                 <div class="d-flex flex-column flex-grow-1 me-3">
-                  <div class="mb-3" style="color: black;">
-                    投稿はまだありません。
+                  <div class="show-link col-sm-9 col-md-9 col-lg-10 d-flex" style="flex-grow: 1;">
+                    <p style="color: black;">投稿はまだありません。</p>
                   </div>
                 </div>
               <% end %>

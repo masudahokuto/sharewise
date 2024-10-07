@@ -1,23 +1,24 @@
-<!-- app/views/posts/edit.html.erb -->
 <%= stylesheet_link_tag 'public/posts', media: 'all' %>
 <div class="container-fluid">
   <div class="row d-flex justify-content-center">
-    <div class="col-md-2 d-flex flex-column align-items-center">
-      <%= render 'public/users/user_card', user: @user %>
-       <% if @current_user %>
-        <%= link_to 'プロフィール編集', edit_user_path(@current_user), class: 'btn btn-primary mt-3' %>
-      <% end %>
+    <div class="side-content col-sm-12 col-md-12 col-lg-2 d-flex flex-column align-items-center">
+      <div class="clock-md d-flex flex-column justify-content-center">
+        <%= render 'public/clocks/clock' %>
+      </div>
       <%= render 'public/content_names' %>
+      <div>
+        <%= render 'public/links/link_table', links: @links %>
+      </div>
     </div>
-    <div class="col-md-10">
+    <div class="col-sm-12 col-md-12 col-lg-10">
       <%= form_with model: [@category, @title, @genre, @content], local: true, html: { id: 'post_form', enctype: 'multipart/form-data' } do |f| %>
         <div class="row d-flex justify-content-center mb-3">
-          <div class="field col-md-12">
+          <div class="field col-12">
             <div>
               <%= link_to  mypage_users_path, class: 'mypage-link', title: 'マイページ' do %>
                 <i class="fa-solid fa-address-card"></i>
               <% end %>＞
-              <%= link_to new_category_path, class: 'return-link-brown', title: 'よっつ前に戻る' do %>
+              <%= link_to new_category_path, class: 'return-link-brown', title: 'よっつ前に戻る', data: {"turbolinks" => false} do %>
                 <i class="fa-solid fa-book-open"></i>
               <% end %>＞
               <%= link_to @category.category_name, category_path(@category), class: 'return-link-gold', title: 'みっつ前に戻る' %>＞
@@ -32,13 +33,13 @@
               </div>
             </div>
             <div class="row">
-              <div class="col-md-8 p-0">
+              <div class="col-sm-12 col-md-8 col-lg-8 p-0">
                 <%= f.text_area :body, sanitize: true, class: 'post-text-area', id: 'body', placeholder: "内容を入力してください(5000文字まで登録できます)" %>
               </div>
-              <div class="pt-0 col-md-4 pt-0">
+              <div class="col-sm-12 col-md-4 col-lg-4 pt-0">
                 <div class="d-flex justify-content-left mb-1">
                   <button id="add_image_button" type="button" class="image-add-btn btn-secondary" style="width: 50%">画像を追加する</button>
-                  ※画像は3枚まで登録できます
+                  ※(.jpg/.jpeg/.pngのみ)3枚まで
                 </div>
                 <div class="content-image-field">
                   <div class="file-field_0 mb-3">
@@ -55,3 +56,25 @@
     </div>
   </div>
 </div>
+
+<script>
+$(document).on('turbolinks:load', function() {
+  function switchUserCardTemplate() {
+    const windowWidth = $(window).width();
+    const userCardContainer = $('#user-card-container');
+
+    // 画面幅がmdサイズ未満の場合（Bootstrapのmdは992px以下）
+    if (windowWidth < 992) {
+      userCardContainer.load('/path/to/user_card_partial', { user: <%= @user.id %> });
+    }
+    // mdサイズ以上の場合
+    else {
+      userCardContainer.load('/path/to/post_show_user_card_partial', { user: <%= @user.id %> });
+    }
+  }
+
+  // 初回読み込み時とウィンドウリサイズ時に関数を呼び出す
+  switchUserCardTemplate();
+  $(window).resize(switchUserCardTemplate);
+});
+</script>

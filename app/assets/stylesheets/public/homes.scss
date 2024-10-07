@@ -35,6 +35,11 @@
   color: #004d00;
 }
 
+.introduction {
+  font-weight: bold;
+  font-family: 'Kosugi Maru', cursive;
+}
+
 .port-folio {
   font-family: 'Merriweather', cursive;
   border-top: 1px solid #000;
@@ -69,29 +74,6 @@
   border-bottom-right-radius: 15px;
 }
 
-// @media (max-width: 600px) {
-//   .port-folio {
-//     font-size: 80px;
-//   }
-// }
-
-// @media (min-width: 601px) and (max-width: 900px) {
-//   .port-folio {
-//     font-size: 120px;
-//   }
-// }
-
-// @media (min-width: 901px) {
-//   .port-folio {
-//     font-size: 200px;
-//   }
-// }
-
-// ──────────────────────────────────────────────────────────────────────
-.slide-content {
-
-}
-// ──────────────────────────────────────────────────────────────────────
 .vertical-table {
   width: 100%;
   margin: 0; /* マージンをリセット */

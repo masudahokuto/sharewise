@@ -1,18 +1,18 @@
 <%= stylesheet_link_tag 'public/posts', media: 'all' %>
 <div class="container-fluid">
   <div class="row d-flex justify-content-center">
-    <div class="col-sm-12 col-md-10 col-lg-4 d-flex flex-column align-items-center">
+    <div class="col-sm-12 col-md-12 col-lg-8 d-flex flex-column align-items-center">
       <%= render 'public/users/post_show_user_card', user: @user %>
       <% if current_user.present? && @post.user_id != current_user.id %>
         <% if @is_following %>
-          <%= link_to 'フォローを外す', user_relationship_path(current_user, @post.user), method: :delete, class: 'btn btn-danger mt-3' %>
+          <%= link_to 'フォローを外す', user_relationship_path(current_user, @post.user), method: :delete, class: 'btn btn-danger btn-sm mt-2', style: 'border-radius: 20px;' %>
         <% else %>
-          <%= link_to 'フォローする', user_relationships_path(user_id: current_user.id, followed_id: @post.user.id), method: :post, class: 'btn btn-primary mt-3' %>
+          <%= link_to 'フォローする', user_relationships_path(user_id: current_user.id, followed_id: @post.user.id), method: :post, class: 'btn btn-primary btn-sm mt-2', style: 'border-radius: 20px;' %>
         <% end %>
       <% end %>
     </div>
   </div>
-  <div class="col-sm-12 col-md-9 col-lg-9">
+  <div class="col-sm-12 col-md-12 col-lg-9">
     <div class="text-center d-flex justify-content-end align-items-center" style="margin-right: 70px;">
       <% if current_user == @post.user %>
         <%= link_to '投稿を編集', edit_post_path(@post), class: 'btn btn-success mr-1', style: 'margin-right: 0;' %>
@@ -28,19 +28,19 @@
   </div>
 
   <div class="row d-flex justify-content-center" style="word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;">
-    <div class="post-show-row col-sm-12 col-md-8 col-lg-8 d-flex justify-content-between">
-      <div class="col-sm-12 col-md-8 col-lg-8" style="padding-right: 0rem;">
+    <div class="post-show-row col-sm-12 col-md-12 col-lg-8 mb-3 d-flex justify-content-between">
+      <div class="col-sm-8 col-md-8 col-lg-8" style="padding-right: 0rem;">
         <%= simple_format(@post.body) %>
       </div>
 
-      <div class="col-sm-12 col-md-4 col-lg-4 d-flex flex-column">
+      <div class="col-sm-4 col-md-4 col-lg-4 d-flex flex-column">
         <% @post.images.each do |image| %>
           <div class="my-3">
-            <%= link_to image_tag(image, style: "max-width: 500px; max-height: 300px; object-fit: contain;", alt: "Post Image", class: "img-fluid"), '#', data: { toggle: 'modal', target: '#imageModal', image: image } %>
+            <%= link_to image_tag(image, style: "max-width: 500px; max-height: 300px; object-fit: contain;", alt: "Post Image", class: "img-fluid"), '#', data: { toggle: 'modal', target: '#imageModal', image: image }, title: "画像を拡大して見る" %>
           </div>
         <% end %>
       </div>
-      
+
       <!--画像拡大BootStrapモーダル-->
       <div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -62,8 +62,8 @@
         </div>
       </div>
     </div>
-    
-    <div class="col-sm-12 col-md-3 col-lg-3" id="comment">
+
+    <div class="col-sm-12 col-md-12 col-lg-3" id="comment">
       <div id="comment">
         <%= render "public/post_comments/comment_form", post: @post, post_comment: @post_comment %>
       </div>

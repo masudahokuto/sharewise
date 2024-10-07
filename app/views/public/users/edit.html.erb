@@ -99,41 +99,4 @@
   </div>
 </div>
 
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-    const daySelect = document.querySelector('#user_birthday_3i');
-    const monthSelect = document.querySelector('#user_birthday_2i');
-    const yearSelect = document.querySelector('#user_birthday_1i');
-
-    function updateDayOptions() {
-      const month = parseInt(monthSelect.value, 10);
-      const year = parseInt(yearSelect.value, 10);
-
-      let maxDays;
-
-      if (month === 2) {
-        maxDays = (year % 4 === 0 && (year % 100 !== 0 || year % 400 === 0)) ? 29 : 28;
-      } else if ([4, 6, 9, 11].includes(month)) {
-        maxDays = 30;
-      } else {
-        maxDays = 31;
-      }
-
-      for (let day = 1; day <= 31; day++) {
-        const option = daySelect.querySelector(`option[value="${day}"]`);
-        if (option) {
-          if (day > maxDays) {
-            option.style.display = 'none';
-          } else {
-            option.style.display = 'block';
-          }
-        }
-      }
-    }
-
-    monthSelect.addEventListener('change', updateDayOptions);
-    yearSelect.addEventListener('change', updateDayOptions);
-
-    updateDayOptions();
-  });
-</script>
+<%= javascript_pack_tag 'birthday', 'data-turbolinks-track': 'reload' %>

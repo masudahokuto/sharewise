@@ -5,9 +5,9 @@
       <%= render 'user_card', user: @user, followings_count: @followings_count, followers_count: @followers_count %>
       <% if current_user.present? %>
         <% if @is_following %>
-          <%= link_to 'フォローを外す', user_relationship_path(current_user, @user), method: :delete, class: 'btn btn-danger mt-3' %>
+          <%= link_to 'フォローを外す', user_relationship_path(current_user, @user), method: :delete, class: 'btn btn-danger btn-sm mt-2', style: 'border-radius: 20px;' %>
         <% else %>
-          <%= link_to 'フォローする', user_relationships_path(user_id: current_user.id, followed_id: @user.id), method: :post, class: 'btn btn-primary mt-3' %>
+          <%= link_to 'フォローする', user_relationships_path(user_id: current_user.id, followed_id: @user.id), method: :post, class: 'btn btn-primary btn-sm mt-2', style: 'border-radius: 20px;' %>
         <% end %>
       <% end %>
     </div>

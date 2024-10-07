@@ -1,22 +1,22 @@
 <% if user %>
-  <div class="user-card-post-show <%= 'current-user' if user == current_user %>" style="display: flex; flex-direction: column; padding: 20px;">
+  <div class="user-card-post-show <%= 'current-user' if user == current_user %>" style="display: flex; flex-direction: column; padding: 10px;">
     <div class="d-flex align-items-center" style="margin-bottom: 10px; width: 100%; height: 100%;">
       <div class="user-image" style="margin-right: 20px;">
         <%= link_to user, class: "post-show-card-link d-flex align-items-center", style: "text-decoration: none;" do %>
           <div class="user-image" style="margin-right: 20px;">
             <div>
               <% if user.profile_image.attached? %>
-                <%= image_tag user.get_profile_image(120, 120), class: 'profile-image' %>
+                <%= image_tag user.get_profile_image(120, 120), class: 'profile-image-post-show' %>
               <% else %>
-                <%= image_tag 'no_image.jpg', size: '120x120', class: 'profile-image' %>
+                <%= image_tag 'no_image.jpg', size: '120x120', class: 'profile-image-post-show' %>
               <% end %>
             </div>
           </div>
 
           <div class="user-profile" style="flex-grow: 1;">
-            <h3 class="user-nick-name-post-show font-weight-bold" style="word-wrap: break-word; word-break: break-word; overflow-wrap: break-word; margin-bottom: 5px;">
+            <h4 class="user-nick-name-post-show font-weight-bold" style="word-wrap: break-word; word-break: break-word; overflow-wrap: break-word; margin-bottom: 5px;">
               <%= user.nick_name %>
-            </h3>
+            </h4>
             <p style="word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;">
               <%= user.profile %>
             </p>
@@ -25,7 +25,7 @@
       </div>
     </div>
 
-    <div class="d-flex align-items-center justify-content-first">
+    <div class="d-flex align-items-center justify-content-center">
       <div style="margin-right: 10px;">
         <%= link_to "#{user.followings.count} フォロー", user_followings_path(user), class: "follows-count", title: 'フォローしているUserを見る' %>
       </div>
@@ -35,6 +35,9 @@
       <% if user == current_user %>
         <div>
           <%= link_to '❤いいね一覧', likes_user_path(user), class: 'favo-link', title: 'いいねしている投稿を見る' %>
+          <%= link_to edit_user_path(user), class: "user-edit-icon ml-3", data: {"turbolinks" => false} do %>
+            <i class="fa-solid fa-gear fa-xl" style="color: #4d4d4d;" title="ユーザー情報編集"></i>
+          <% end %>
         </div>
       <% end %>
     </div>

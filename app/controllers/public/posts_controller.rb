@@ -6,6 +6,7 @@ class Public::PostsController < ApplicationController
   before_action :redirect_if_admin, only: [:index, :show]  # 管理者リダイレクト
 
   def new
+    @current_user = current_user
     @post = current_user.posts.new
     @links = current_user.links
   end
@@ -24,6 +25,7 @@ class Public::PostsController < ApplicationController
   end
 
   def index
+    @current_user = current_user
     @posts = Post.active_user_posts
                  .order(created_at: :desc)
                  .page(params[:page])
@@ -53,7 +55,8 @@ class Public::PostsController < ApplicationController
                  .per(10)
   end
 
-  def edit; end
+  def edit
+  end
 
   def update
     sanitized_body = sanitize_post_body(post_params[:body])  # HTMLタグを除去
