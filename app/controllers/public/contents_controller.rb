@@ -32,6 +32,8 @@ class Public::ContentsController < ApplicationController
 
   def edit
     @user = current_user
+    @include_clock_js = true
+    @links = current_user.links
   end
 
   def update

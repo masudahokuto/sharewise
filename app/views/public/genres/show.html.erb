@@ -6,7 +6,7 @@
       <%= link_to  mypage_users_path, class: 'mypage-link', title: 'マイページ' do %>
         <i class="fa-solid fa-address-card"></i>
       <% end %>＞
-      <%= link_to new_category_path, class: 'return-link-brown', title: 'みっつ前に戻る' do %>
+      <%= link_to new_category_path, class: 'return-link-brown', title: 'みっつ前に戻る', data: {"turbolinks" => false} do %>
         <i class="fa-solid fa-book-open"></i>
       <% end %>＞
       <%= link_to @category.category_name, category_path(@category), class: 'return-link-gold', title: 'ふたつ前に戻る' %>＞

@@ -55,7 +55,8 @@ class Public::PostsController < ApplicationController
                  .per(10)
   end
 
-  def edit; end
+  def edit
+  end
 
   def update
     sanitized_body = sanitize_post_body(post_params[:body])  # HTMLタグを除去
