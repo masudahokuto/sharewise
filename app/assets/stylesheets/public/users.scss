@@ -34,6 +34,14 @@
   }
 }
 
+.index-profile-image {
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
 .index_card_image {
   border: none !important;
 }
@@ -239,3 +247,10 @@ img.profile-image {
   color: #b30000;
 }
 
+@media (max-width: 992px) {
+  .side-content {
+    margin-bottom: 20px;
+    flex-direction: row !important;
+    justify-content: center;
+  }
+}

@@ -1,15 +1,11 @@
 <%= stylesheet_link_tag 'public/posts', media: 'all' %>
 <div class="container-fluid">
   <div class="row d-flex justify-content-center">
-    <div class="col-md-2 d-flex flex-column align-items-center">
+    <div class="side-content col-sm-12 col-sm-12 col-lg-2 d-flex flex-column align-items-center">
       <%= render 'public/users/user_card', user: @user %>
-       <% if @current_user %>
-        <%= link_to 'プロフィール編集', edit_user_path(@current_user), class: 'btn btn-primary mt-3' %>
-      <% end %>
       <%= render 'public/content_names' %>
     </div>
-    <div class="col-md-9">
-
+    <div class="col-sm-12 col-md-12 col-lg-10">
       <div class="d-flex justify-content-center flex-column align-items-center mb-3">
         <%= button_tag(id: 'help-button', class: 'btn btn-secondary mb-3', title: 'ヘルプ', data: { turbolinks: false }) do %>
           <i class="fa-solid fa-question"></i>
@@ -39,7 +35,7 @@
           <% if current_user == @content.genre.title.category.user %>
             <%= link_to 'ページを投稿', create_from_content_post_path(content_id: @content.id), method: :post, class: 'btn btn-info mr-1', data: { confirm: 'この内容をSNSに投稿しますか？' }, style: 'margin-right: 0;', title: 'ページをSNSに投稿出来ます' %>
             <%= link_to 'ページを作成', new_category_title_genre_content_path(@category, @title, @genre), class: 'btn btn-primary mr-1', data: {"turbolinks" => false}, title: '新しいページを作成出来ます' %>
-            <%= link_to 'ページを編集', edit_category_title_genre_content_path(@category, @title, @genre, @content), class: 'btn btn-success mr-1', style: 'margin-right: 0;', title: 'このページを編集出来ます' %>
+            <%= link_to 'ページを編集', edit_category_title_genre_content_path(@category, @title, @genre, @content), class: 'btn btn-success mr-1', style: 'margin-right: 0;', title: 'このページを編集出来ます', data: {"turbolinks" => false} %>
             <%= link_to 'ページを削除', category_title_genre_content_path(@category, @title, @genre, @content), method: :delete, data: { confirm: '本当に削除してもよろしいですか？' }, class: 'btn btn-danger mr-1', style: 'margin-right: 0;', title: 'このページを削除します' %>
           <% end %>
         </div>
