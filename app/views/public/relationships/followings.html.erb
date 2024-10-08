@@ -2,15 +2,15 @@
 <div class="container-fluid">
   <div class="row d-flex">
     <div class="col-md-2 d-flex flex-column align-items-center">
-      <%= render 'public/users/user_card', user: @user, followings_count: @followings_count, followers_count: @followers_count %>
+      <%= render 'public/users/user_card', user: @user %>
     </div>
-    <div class="col-md-10">
+    <div class="col-md-9 mx-auto">
       <h4><%= @user.nick_name %>さんがフォローしているUser</h4>
       <% if @followings.any? %>
         <div id="admin-users-list" class="row">
-          <% @followings.each_slice(5) do |followings_slice| %>
+          <% @followings.each_slice(6) do |followings_slice| %>
             <% followings_slice.each do |user| %>
-              <%= render 'user_card_follors', user: user %>
+              <%= render 'user_card_follows', user: user %>
             <% end %>
           <% end %>
         </div>

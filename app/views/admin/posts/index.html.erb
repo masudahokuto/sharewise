@@ -1,42 +1,54 @@
 <%= stylesheet_link_tag 'admin/posts', media: 'all' %>
 <%= stylesheet_link_tag 'admin/users', media: 'all' %>
+
 <div class="container-fluid">
-  <div class="row d-flex">
-    <div class="col-md-2 d-flex flex-column align-items-center">
+  <div class="row d-flex justify-content-center">
+    <div class="side-content col-sm-12 col-md-12 col-lg-2 d-flex flex-column align-items-center">
       <%= render 'admin/users/user_data' %>
     </div>
-      <div class="col-md-10">
-        <div class="d-flex align-items-center">
-          <%= form_with(url: admin_posts_path, method: :get, local: true, class: 'form-inline') do %>
-            <div class="form-group position-relative">
-              <i class="fas fa-search position-absolute" style="left: 10px; top: 50%; transform: translateY(-50%); color: #aaa;"></i>
-              <%= text_field_tag :query, params[:query], class: 'form-control pl-5', placeholder: '投稿の内容を検索' %>
-            </div>
-            <%= submit_tag '検索', class: 'btn btn-secondary ml-3' %>
-          <% end %>
-        </div>
-        <% if @posts.any? %>
-          <% @posts.each do |post| %>
-            <div class="text-center d-flex justify-content-end align-items-center">
-              <div class="favorite-post-show">
+
+    <div class="col-sm-12 col-md-12 col-lg-10">
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <%= form_with(url: admin_posts_path, method: :get, local: true, class: 'form-inline') do %>
+          <div class="form-group position-relative">
+            <i class="fas fa-search position-absolute" style="left: 10px; top: 50%; transform: translateY(-50%); color: #aaa;"></i>
+            <%= text_field_tag :query, params[:query], class: 'form-control pl-5', placeholder: '投稿の内容を検索' %>
+          </div>
+          <%= submit_tag '検索', class: 'btn btn-secondary ml-2' %>
+        <% end %>
+        <span class="mx-2">
+          <%= link_to '最新の投稿', admin_posts_path(sort: 'recent'), class: 'btn btn-outline-secondary btn-sm' %>
+          <span>
+            <i class="fas fa-heart" style="color: red; font-weight:bold ">いいね</i>多い順
+          </span>
+          <%= link_to '全期間', admin_posts_path(sort: 'favorites_count'), class: 'btn btn-outline-secondary btn-sm' %> /
+          <%= link_to '日間', admin_posts_path(sort: 'daily_favorites'), class: 'btn btn-outline-secondary btn-sm' %> /
+          <%= link_to '週間', admin_posts_path(sort: 'weekly_favorites'), class: 'btn btn-outline-secondary btn-sm' %> /
+          <%= link_to '月間', admin_posts_path(sort: 'monthly_favorites'), class: 'btn btn-outline-secondary btn-sm' %>
+        </span>
+      </div>
+
+      <% if @posts.any? %>
+        <% @posts.each do |post| %>
+          <div class="post-row mb-4">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+              <div>
                 <span class="mr-3"><%= time_ago_in_words(post.updated_at) %>前</span>
-                <i class="fas fa-heart mb-1" style="color: red;">いいね数 <%= post.favorites.count %></i>
+                <i class="fas fa-heart" style="color: red;">いいね数 <%= post.favorites.count %></i>
               </div>
             </div>
-            <div class="post-row post-link d-flex">
-              <!-- ユーザー情報 -->
-              <div class="user-card-link col-md-2 d-flex flex-column">
+
+            <div class="row">
+              <div class="col-sm-3 col-md-3 col-lg-2">
                 <%= render 'admin/posts/user_card_admin_posts', user: post.user %>
               </div>
             <div class="show-link col-md-10 d-flex" style="flex-grow: 1;">
               <%= link_to admin_post_path(post), style: 'text-decoration: none; display: flex; width: 100%;' do %>
-                <!-- 本文部分 -->
                 <div class="col-md-7 d-flex" style="flex-grow: 1;">
-                  <div style="word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;">
+                  <div>
                     <p><%= simple_format(post.body) %></p>
                   </div>
                 </div>
-                <!-- 画像部分 -->
                 <div class="col-md-5 d-flex flex-column align-items-end">
                   <% post.images.each do |image| %>
                     <div class="post-image mb-3">
@@ -44,15 +56,16 @@
                     </div>
                   <% end %>
                 </div>
-              <% end %> <!-- link_to post_path -->
+              <% end %>
+            </div>
             </div>
           </div>
         <% end %>
       <% else %>
         <p>投稿がありません。</p>
       <% end %>
-      <!-- ページネーション -->
-      <div id="pagination">
+
+      <div class="pagination justify-content-center mt-4">
         <%= paginate @posts %>
       </div>
     </div>

@@ -18,6 +18,37 @@ class Post < ApplicationRecord
   scope :liked_by, -> (user) { joins(:favorites).where(favorites: { user_id: user.id }) }
   scope :search_by_body, ->(query) { where('body LIKE ?', "%#{query}%") }
 
+  # 通算いいね数順
+  scope :order_by_favorites_count, -> {
+    left_joins(:favorites)
+    .group('posts.id')
+    .order('COUNT(favorites.id) DESC')
+  }
+
+  # 日間いいね数順
+  scope :order_by_daily_favorites_count, -> {
+    left_joins(:favorites)
+    .where('favorites.created_at >= ?', Time.zone.now.beginning_of_day)
+    .group('posts.id')
+    .order('COUNT(favorites.id) DESC')
+  }
+  
+  # 週間いいね数順
+  scope :order_by_weekly_favorites_count, -> {
+    left_joins(:favorites)
+    .where('favorites.created_at >= ?', 1.week.ago)
+    .group('posts.id')
+    .order('COUNT(favorites.id) DESC')
+  }
+  
+  # 月間いいね数順
+  scope :order_by_monthly_favorites_count, -> {
+    left_joins(:favorites)
+    .where('favorites.created_at >= ?', 1.month.ago)
+    .group('posts.id')
+    .order('COUNT(favorites.id) DESC')
+  }
+  
   # メソッド
   def favorited_by?(user)
     favorites.exists?(user_id: user.id)

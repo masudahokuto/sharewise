@@ -11,7 +11,7 @@
   <%= link_to user_path(user), class: 'user-card-link', style: 'text-decoration: none;' do %>
     <div class="index_card_image d-flex border rounded">
       <div class="user-card-list d-flex flex-column align-items-center">
-        <%= image_tag user.get_profile_image(90, 90), class: 'profile-image' %>
+        <%= image_tag user.get_profile_image(90, 90), class: 'index-profile-image' %>
         <h5 style="color: black; font-size: 15px; word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;"><%= user.nick_name %></h5>
       </div>
     </div>

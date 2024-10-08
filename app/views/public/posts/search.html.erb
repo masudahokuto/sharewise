@@ -1,16 +1,25 @@
 <%= stylesheet_link_tag 'public/users', media: 'all' %>
 <div class="container-fluid">
   <div class="row d-flex justify-content-center">
-    <div class="col-md-2 d-flex flex-column align-items-center">
-      <div class="d-flex justify-content-center mb-2">
-        <%= render 'searches/post_search_form' %>
-      </div>
+    <div class="side-content col-sm-12 col-md-12 col-lg-2 d-flex flex-column align-items-center">
       <%= render 'public/users/user_card', user: @current_user %>
-      <% if @current_user %>
-        <%= link_to 'プロフィール編集', edit_user_path(@current_user), class: 'btn btn-primary mt-3' %>
-      <% end %>
+      <%= render 'public/content_names' %>
     </div>
-    <div class="col-md-9">
+    <div class="col-sm-12 col-md-12 col-lg-9">
+      <div class="d-flex justify-content-between align-items-center">
+        <%= render 'searches/post_search_form' %>
+        <span class="mx-2">
+          <%= link_to '最新の投稿', posts_path(sort: 'recent'), class: 'btn btn-outline-secondary btn-sm' %>
+          <span class="ml-3">
+            <i class="fas fa-heart" style="color: red; font-weight:bold ">いいね</i>多い順
+          </span>
+          <%= link_to '全期間', posts_path(sort: 'favorites_count'), class: 'btn btn-outline-secondary btn-sm' %> /
+          <%= link_to '日間', posts_path(sort: 'daily_favorites'), class: 'btn btn-outline-secondary btn-sm' %> /
+          <%= link_to '週間', posts_path(sort: 'weekly_favorites'), class: 'btn btn-outline-secondary btn-sm' %> /
+          <%= link_to '月間', posts_path(sort: 'monthly_favorites'), class: 'btn btn-outline-secondary btn-sm' %>
+        </span>
+      </div>
+
       <% if @posts.any? %>
         <% @posts.each do |post| %>
           <div class="text-center d-flex justify-content-end align-items-center">
