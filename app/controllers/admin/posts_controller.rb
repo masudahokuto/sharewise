@@ -1,23 +1,42 @@
 class Admin::PostsController < ApplicationController
   before_action :authenticate_admin!
+
   def index
-    if params[:query].present?
-      @posts = Post.search_by_body(params[:query]).order(created_at: :desc).page(params[:page]).per(10)
+    # 検索クエリがある場合、本文を検索
+    @posts = params[:query].present? ? Post.search_by_body(params[:query]) : Post.all
+
+    # ソート条件の分岐
+    case params[:sort]
+    when 'favorites_count' # 通算いいね多い順
+      @posts = @posts.order_by_favorites_count
+    when 'daily_favorites' # 日間いいね多い順
+      @posts = @posts.order_by_daily_favorites_count
+    when 'weekly_favorites' # 週間いいね多い順
+      @posts = @posts.order_by_weekly_favorites_count
+    when 'monthly_favorites' # 月間いいね多い順
+      @posts = @posts.order_by_monthly_favorites_count
     else
-      @posts = Post.order(created_at: :desc).page(params[:page]).per(10)
+      @posts = @posts.order(created_at: :desc) # デフォルトは作成日順
     end
 
-    @admin_users = User.page(params[:page]).per(50)
-      @gender_counts = {
+    @posts = @posts.page(params[:page]).per(10)
+
+    # その他のデータ
+    @admin_users = User.page(params[:admin_user_page]).per(50)
+
+    # 性別のカウント
+    @gender_counts = {
       male: User.where(gender: :male).count,
       female: User.where(gender: :female).count,
       other: User.where(gender: :other).count
     }
 
-    @total_users = @admin_users.count
+    # ユーザー全体数
     @total_users = User.count
     @inactive_users = User.where(is_active: false).count
     @active_users = @total_users - @inactive_users
+
+    # 年齢分布データの取得
     @age_distribution = age_distribution
   end
 

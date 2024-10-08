@@ -5,11 +5,22 @@ class Admin::UsersController < ApplicationController
   before_action :set_age_distribution, only: :index
 
   def index
-    @admin_users = load_users.page(params[:page]).per(10)
     @total_users = User.count
     @inactive_users = User.where(is_active: false).count
     @active_users = @total_users - @inactive_users
+    @admin_users = User.all
+
+    @admin_users = User.order(created_at: :asc)
+
+
+    # 検索機能
+    if params[:search_field].present? && params[:query].present?
+      @admin_users = @admin_users.search_by(params[:search_field], params[:query])
+    end
+
+    @admin_users = @admin_users.page(params[:page]).per(50)
   end
+
 
   def inactive
     @inactive_users = User.where(is_active: false).page(params[:page]).per(50)

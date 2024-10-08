@@ -16,16 +16,7 @@ class Public::UsersController < ApplicationController
 
   def index
     @current_user = current_user
-    @users = User.includes(:posts).active_users(current_user)
-
-    # フォロワー多い順
-    if params[:sort] == 'follower_count'
-      @users = @users.order_by_followers
-    else
-      @users = @users.order_by_recent
-    end
-
-    @users = @users.page(params[:page]).per(10)
+    @users = User.includes(:posts).active_users(current_user).order_by_recent.page(params[:page]).per(10)
   end
 
   def show

@@ -27,11 +27,25 @@ class Public::PostsController < ApplicationController
   def index
     @current_user = current_user
     @posts = Post.active_user_posts
-                 .order(created_at: :desc)
-                 .page(params[:page])
-                 .per(10)
-    @posts = @posts.search(params[:query]) if params[:query].present?  # 検索機能
+
+    case params[:sort]
+    when 'favorites_count' #通算いいね多い順
+      @posts = @posts.order_by_favorites_count
+    when 'daily_favorites'
+      @posts = @posts.order_by_daily_favorites_count
+    when 'weekly_favorites' #週間いいね多い順
+      @posts = @posts.order_by_weekly_favorites_count
+    when 'monthly_favorites' #月間いいね多い順
+      @posts = @posts.order_by_monthly_favorites_count
+    else
+      @posts = @posts.order(created_at: :desc)
+    end
+
+    @posts = @posts.page(params[:page]).per(10)
+
+    @posts = @posts.search(params[:query]) if params[:query].present?
   end
+
 
   def show
     @current_user = current_user
@@ -48,11 +62,12 @@ class Public::PostsController < ApplicationController
   end
 
   def search
+    @current_user = current_user
     @posts = Post.active_user_posts
-                 .search_by_body(params[:query])
-                 .order(created_at: :desc)
-                 .page(params[:page])
-                 .per(10)
+     .search_by_body(params[:query])
+     .order(created_at: :desc)
+     .page(params[:page])
+     .per(10)
   end
 
   def edit

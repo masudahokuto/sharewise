@@ -1,5 +1,5 @@
 <!-- user_card_admin.html.erb -->
-<div class="user-card-follows mr-3 <%= user.is_active ? 'user-card-true' : 'user-card-false' %>">
+<div class="user-card-follows mr-3 mb-3 <%= user.is_active ? 'user-card-true' : 'user-card-false' %>">
   <%= link_to user_path(user), class: 'user-card-link' do %>
     <% if user.profile_image.attached? %>
       <%= image_tag user.get_profile_image(150, 150), class: 'profile-image', size: '150x150' %>
