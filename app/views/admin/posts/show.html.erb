@@ -2,12 +2,12 @@
 <%= stylesheet_link_tag 'admin/users', media: 'all' %>
 <div class="container-fluid">
   <div class="row d-flex justify-content-center">
-    <div class="col-md-2 d-flex flex-column align-items-end">
+    <div class="side-content col-sm-12 col-md-12 col-lg-2 d-flex flex-column align-items-center">
       <%= render 'admin/users/user_card_admin', user: @user %>
     </div>
     <!-- 本文を表示する部分 -->
 
-    <div class="col-md-7">
+    <div class="col-sm-12 col-md-12 col-lg-7">
       <div class="text-center d-flex justify-content-end align-items-center">
         <%= link_to '削除する', admin_post_path(@post), method: :delete, data: { confirm: 'このポストを削除しますか？' }, class: 'btn btn-danger mr-1', style: 'margin-right: 0;' %>
         <div class="favorite-post-show">
@@ -16,17 +16,38 @@
         </div>
       </div>
       <div class="show-row row d-flex mb-3">
-        <div class="col-md-8 d-flex flex-column" style="word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;">
+        <div class="col-sm-12 col-md-12 col-lg-8 d-flex flex-column" style="word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;">
           <%= simple_format(@post.body) %>
         </div>
-        <div class="col-md-4 d-flex flex-column align-items-end">
+        <div class="col-sm-12 col-md-12 col-lg-4 d-flex flex-column align-items-end">
           <div class="d-flex flex-column align-items-end">
             <% @post.images.each do |image| %>
               <div class="my-3">
-                <%= image_tag image, style: "width: 500px; height: 300px; object-fit: cover;", alt: "Post Image", class: "img-fluid" %>
+                <%= link_to image_tag(image, style: "max-width: 500px; max-height: 300px; object-fit: contain;", alt: "Post Image", class: "img-fluid"), '#', data: { toggle: 'modal', target: '#imageModal', image: image }, title: "画像を拡大して見る" %>
               </div>
             <% end %>
           </div>
+          <!--画像拡大BootStrapモーダル-->
+          <div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="imageModalLabel">画像</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <% @post.images.each do |image| %>
+                    <div class="my-3">
+                      <%= link_to image_tag(image, alt: "Post Image", class: "img-fluid"), '#', data: { toggle: 'modal', target: '#imageModal', image: image } %>
+                    </div>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+          
         </div>
       </div>
     </div>
@@ -38,3 +59,4 @@
     </div>
   </div>
 </div>
+
