@@ -98,4 +98,11 @@ class User < ApplicationRecord
   scope :order_by_recent, -> {
     order(created_at: :desc)
   }
+
+  # フォロワー数が多い順にソート
+  scope :order_by_followers, -> {
+    left_joins(:reverse_relationships)
+      .group('users.id')
+      .order('COUNT(relationships.follower_id) DESC')
+  }
 end
