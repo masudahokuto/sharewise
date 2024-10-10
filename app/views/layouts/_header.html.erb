@@ -52,10 +52,10 @@
           <%= link_to mypage_users_path, class: "header-link text-decoration-none hover-effect mx-3 #{'active-header' if current_page?(mypage_users_path)}" do %>
             <i class="fa-solid fa-address-card" title="My Page"></i>
           <% end %>
-          <%= link_to users_path, class: "header-link text-decoration-none hover-effect mx-3 #{'active-header' if current_page?(users_path)}" do %>
+          <%= link_to users_path, class: "header-link text-decoration-none hover-effect mx-3 #{'active-header' if current_page?(users_path) || current_page?(search_path)}" do %>
             <i class="fa-solid fa-users" title="user一覧"></i>
           <% end %>
-          <%= link_to posts_path, class: "header-link text-decoration-none hover-effect mx-3 #{'active-header' if current_page?(posts_path)}" do %>
+          <%= link_to posts_path, class: "header-link text-decoration-none hover-effect mx-3 #{'active-header' if current_page?(posts_path) || current_page?(post_search_path)}" do %>
             <i class="fa-solid fa-comments" title="投稿一覧"></i>
           <% end %>
           <%= link_to new_post_path, class: "header-link text-decoration-none hover-effect mx-3 #{'active-header' if current_page?(new_post_path)}" do %>
