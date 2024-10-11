@@ -1,4 +1,4 @@
-ShareWise(仮)
+ShareWise
 ## サイト概要
   ### サイトテーマ
   自分だけの知識を整理し、他のユーザーとシェアして成長を促すSNS型辞書サイト。
@@ -45,6 +45,8 @@ ShareWise(仮)
 ​
 ## 使用素材
 Font Awesome・・・https://fontawesome.com/
-
+Google Fonts・・・https://fonts.google.com/
+photoAC・・・https://www.photo-ac.com/
+いらすとや・・・https://www.irasutoya.com/
 作成者
 増田北斗

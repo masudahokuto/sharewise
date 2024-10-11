@@ -21,7 +21,7 @@ class Admin::UsersController < ApplicationController
     @admin_users = @admin_users.page(params[:page]).per(50)
   end
 
-
+  # 非アクティブユーザーの取得
   def inactive
     @inactive_users = User.where(is_active: false).page(params[:page]).per(50)
 
