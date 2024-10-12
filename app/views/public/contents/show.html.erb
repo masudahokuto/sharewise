@@ -22,12 +22,12 @@
         <%= link_to  mypage_users_path, class: 'mypage-link', title: 'マイページ' do %>
           <i class="fa-solid fa-address-card"></i>
         <% end %>＞
-        <%= link_to new_category_path, data: { turbolinks: false }, class: 'return-link-brown', title: 'よっつ前に戻る' do %>
+        <%= link_to new_category_path, data: { turbolinks: false }, class: 'return-link-brown', title: '４つ前に戻る' do %>
           <i class="fa-solid fa-book-open"></i>
         <% end %>＞
-        <%= link_to @category.category_name, category_path(@category), class: 'return-link-gold', title: 'みっつ前に戻る' %>＞
-        <%= link_to @title.title_name, category_title_path(@category, @title), class: 'return-link-blue', title: 'ふたつ前に戻る' %>＞
-        <%= link_to @genre.genre_name, category_title_genre_path(@category, @title, @genre), class: 'return-link-green', title: 'ひとつ前に戻る' %>＞
+        <%= link_to @category.category_name, category_path(@category), class: 'return-link-gold', title: '３つ前に戻る' %>＞
+        <%= link_to @title.title_name, category_title_path(@category, @title), class: 'return-link-blue', title: '２つ前に戻る' %>＞
+        <%= link_to @genre.genre_name, category_title_genre_path(@category, @title, @genre), class: 'return-link-green', title: '１つ前に戻る' %>＞
       </div>
       <div class="row d-flex justify-content-between align-items-center my-1">
         <div class="content-name"><%= @content.content_name %></div>
