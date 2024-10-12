@@ -5,10 +5,12 @@ class NotificationsController < ApplicationController
       notification = current_user.notifications.find(params[:id])
       notification.update(read: true)
       case notification.notificable_type
-      when "Favorite"
-        redirect_to post_path(notification.notificable.post_id)
+      when "Favorite" # いいね通知の処理
+        redirect_to post_path(notification.notificable.post_id)  # いいねされた投稿詳細
+      when "Relationship"  # フォロー通知の処理
+        redirect_to user_path(notification.notificable.follower_id)  # フォローしてきたユーザーのページ
       else
-        redirect_to post_path(notification.notificable.post_id)
+        redirect_to post_path(notification.notificable.post_id)  # コメントされた投稿詳細
       end
     else
       redirect_to new_user_session_path, alert: 'ログインしてください'

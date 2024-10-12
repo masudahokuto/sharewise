@@ -77,6 +77,22 @@
                     <% end %>
                   </div>
                 <% end %>
+              <% when 'Relationship' %> <!-- フォローの通知処理を追加 -->
+                <% unless notification.read %>
+                  <div class="notification-follow-message my-2">
+                    <i class="fas fa-bell" style="color: #ffd700"></i>
+                    <%= link_to notification_path(notification), method: :patch, class: "notification-follow-name text-wrap", title: 'フォロワーを見る' do %>
+                      <span class="font-weight-bold" style="color: black;">
+                        <%= "#{truncate(notification.notificable.follower.nick_name, length: 10)}" %>
+                        </span>
+                        <span style="color: black;">さんに</span>
+                      <div>
+                        <i class="fa-solid fa-user-plus">フォロー</i>
+                         <span style="color: black;"> されました</span>
+                      </div>
+                    <% end %>
+                  </div>
+                <% end %>
               <% else %>
                 <%= "Unknown notification type" %>
               <% end %>

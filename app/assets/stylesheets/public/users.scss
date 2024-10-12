@@ -97,7 +97,8 @@ img.profile-image {
 .user-card-profile,
 .user-nick-name,
 .notification-favo-name,
-.notification-comment-name {
+.notification-comment-name,
+.notification-follow-message {
   font-size: 1.1em;
   margin: 0;
   color: black;
@@ -163,6 +164,16 @@ img.profile-image {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+.notification-favo-name .fa-heart {
+  text-decoration: none;
+  color: red;
+}
+
+.notification-favo-name:hover {
+  color: black;
+  text-decoration: none;
+}
+
 .notification-comment-message {
   padding: 5px;
   border-radius: 10px;
@@ -175,16 +186,6 @@ img.profile-image {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.notification-favo-name .fa-heart {
-  text-decoration: none;
-  color: red;
-}
-
-.notification-favo-name:hover {
-  color: black;
-  text-decoration: none;
-}
-
 .notification-comment-name {
   text-decoration: none !important;
 }
@@ -195,6 +196,28 @@ img.profile-image {
 
 .notification-comment-name:hover {
   color: black;
+}
+
+.notification-follow-message {
+  padding: 5px;
+  border-radius: 10px;
+  background-color: rgba(0, 128, 0, 0.3);
+  transition: transform 0.2s ease;
+}
+
+.notification-follow-message:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.notification-follow-name .fa-user-plus {
+  text-decoration: none;
+  color: #008080;
+}
+
+.notification-follow-name:hover {
+  color: black;
+  text-decoration: none;
 }
 
 .notification-all-check {
