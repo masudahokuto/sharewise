@@ -34,10 +34,12 @@ ShareWise
 - [ER図]
 - ![ER図](https://raw.githubusercontent.com/masudahokuto/sharewise/main/app/assets/images/erd.png)
 
-- ・[テーブル定義書] https://docs.google.com/spreadsheets/d/1geA0IuUFgYjfIfqcWmjKSkLnVWqlbrHFJFydUzHIngk/edit?usp=sharing
+- [テーブル定義書]
+- ![アプリケーション詳細設計書](https://raw.githubusercontent.com/masudahokuto/sharewise/main/app/assets/images/tdd.png)
 
 - [アプリケーション詳細設計書]
-  ![アプリケーション詳細設計書](https://raw.githubusercontent.com/masudahokuto/sharewise/main/app/assets/images/app-detail.png)
+- ![アプリケーション詳細設計書](https://raw.githubusercontent.com/masudahokuto/sharewise/main/app/assets/images/app-detail.png)
+
 ## 開発環境
 - OS：Linux(CentOS)
 - 言語：HTML,CSS,JavaScript,Ruby,SQL
