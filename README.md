@@ -1,5 +1,5 @@
 ## ShareWise
-(https://raw.githubusercontent.com/masudahokuto/sharewise/main/app/assets/images/sharewise-top.png)
+![ShareWise](https://raw.githubusercontent.com/masudahokuto/sharewise/main/app/assets/images/sharewise-top.png)
 ## サイト概要
   ### サイトテーマ
   自分だけの知識を整理し、他のユーザーとシェアして成長を促すSNS型辞書サイト。
