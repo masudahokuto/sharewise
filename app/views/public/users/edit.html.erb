@@ -78,8 +78,8 @@
               </div>
               <% if @user.profile_image.attached? %>
                 <div class="form-group-image-dereate">
-                  <span class="font-weight-bold">画像を削除する</span>
-                  <span><%= f.check_box :remove_profile_image, class: 'form-check-input ml-3' %></span>
+                  <span>画像を削除する</span>
+                  <span><%= f.check_box :remove_profile_image, class: 'form-check-input ml-2', style: 'width: 15px; height: 16px;' %></span>
                 </div>
               <% end %>
               <div class="form-group text-center">

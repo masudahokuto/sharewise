@@ -3,6 +3,9 @@
   <div class="row d-flex justify-content-center">
     <div class="side-content col-sm-12 col-md-12 col-lg-2 d-flex flex-column align-items-center">
       <%= render 'user_card', user: @user %>
+      <%= link_to new_category_path, class: 'link-dictionary mt-3', title: 'My Dictionary', data: { "turbolinks" => false } do %>
+        <i class="fa-solid fa-book-open"> 辞書を開く</i>
+      <% end %>
       <%= render 'public/content_names' %>
       <%= render 'public/links/link_table', links: @links %>
     </div>

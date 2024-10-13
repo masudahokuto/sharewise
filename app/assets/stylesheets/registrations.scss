@@ -26,18 +26,25 @@
 }
 
 .btn-primary {
-  background-color: #ff6f61;
   border: none;
   border-radius: 6px;
-  padding: 12px 24px;
-  font-size: 18px;
   color: white;
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .btn-primary:hover {
-  background-color: #e55e50;
-  transform: scale(1.05);
+  transform: scale(1.05); /* ホバー時に少し拡大 */
+}
+
+.btn-success {
+  border: none;
+  border-radius: 6px;
+  color: white;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-success:hover {
+  transform: scale(1.05); /* ホバー時に少し拡大 */
 }
 
 .error-message {

@@ -17,6 +17,11 @@ class Public::UsersController < ApplicationController
   def index
     @current_user = current_user
     @users = User.includes(:posts).active_users(current_user).order_by_recent.page(params[:page]).per(10)
+    if @current_user.present?
+      @links = @current_user.links
+    else
+      @links = [] # ゲストの場合は空の配列を設定
+    end
   end
 
   def show

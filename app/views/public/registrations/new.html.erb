@@ -73,8 +73,9 @@
             </div>
 
             <div class="form-group text-center">
-              <%= f.submit "登録", class: 'btn btn-primary my-2 w-50' %>
+              <%= f.submit "新規登録", class: 'btn btn-primary my-2 w-50' %>
             </div>
+            <div class="actions text-center"><%= link_to 'ログインはこちら', new_user_session_path, class: 'btn btn-success my-2 w-50' %></div>
           </div>
         </div>
       <% end %>

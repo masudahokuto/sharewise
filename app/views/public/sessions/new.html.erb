@@ -7,7 +7,6 @@
         <div class="card p-4 shadow-sm">
           <div class="card-body">
             <h2 class="text-center mb-4">ログイン</h2>
-
             <div class="field">
               <%= f.label :email, class: 'form-label' %><br />
               <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control' %>
@@ -19,8 +18,9 @@
             </div>
 
             <div class="actions text-center">
-              <%= f.submit "ログイン", class: 'btn btn-primary my-2 w-50' %>
+              <%= f.submit "ログイン", class: 'btn btn-success my-2 w-50' %>
             </div>
+            <div class="actions text-center"><%= link_to '新規登録はこちら', new_user_registration_path, class: 'btn btn-primary my-2 w-50', data: {"turbolinks" => false} %></div>
           </div>
         </div>
       <% end %>

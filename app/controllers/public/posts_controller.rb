@@ -27,6 +27,11 @@ class Public::PostsController < ApplicationController
   def index
     @current_user = current_user
     @posts = Post.active_user_posts
+    if @current_user.present?
+      @links = @current_user.links
+    else
+      @links = [] # ゲストの場合は空の配列を設定
+    end
 
     case params[:sort]
     when 'favorites_count' #通算いいね多い順
