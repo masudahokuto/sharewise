@@ -52,9 +52,13 @@
 - JSライブラリ：jQuery
 - IDE：Cloud9
 - AWS
+
   ◦ VPC
+
   ◦ EC2
+
   ◦ RDS
+
   ◦ CloudWatch
 
 ## AWS構成図
