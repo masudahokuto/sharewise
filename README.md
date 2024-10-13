@@ -1,8 +1,9 @@
-## ShareWise
+<h1 style="color: blue; font-weight: bold;">ShareWise</h1>
   自分だけの知識を整理し、他のユーザーとシェアして成長を促すSNS型辞書サイト。
 ![ShareWise](https://raw.githubusercontent.com/masudahokuto/sharewise/main/app/assets/images/sharewise-top.png)
 ## URL
-(URL)
+(URL後述)
+
 ゲストログインから投稿一覧などを閲覧することが出来ます。
 ## サイト概要
   ### テーマを選んだ理由
@@ -71,3 +72,4 @@
 
 ##作成者
 - 増田北斗
+- 
