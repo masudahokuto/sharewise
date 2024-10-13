@@ -1,9 +1,7 @@
-<!-- app/views/devise/sessions/new.html.erb -->
-
 <%= stylesheet_link_tag 'sessions', media: 'all', 'data-turbolinks-track': 'reload' %>
 
-<div class="session-form-container">
-  <div class="row justify-content-center">
+<div class="session-form-container align-content-center">
+  <div class="row justify-content-center py-5" style="background-color: rgba(255, 255, 255, 0.6)";>
     <div class="col-md-8 col-lg-6">
       <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
         <div class="card p-4 shadow-sm">
@@ -21,7 +19,7 @@
             </div>
 
             <div class="actions text-center">
-              <%= f.submit "ログイン", class: 'btn btn-primary' %>
+              <%= f.submit "ログイン", class: 'btn btn-primary my-2 w-50' %>
             </div>
           </div>
         </div>

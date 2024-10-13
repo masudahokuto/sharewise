@@ -1,18 +1,17 @@
-/* app/assets/stylesheets/registrations.scss */
-
 .registration-form-container {
-  margin-top: 40px;
-  background: #f7f7f7; /* 背景色を明るいグレーに設定 */
-  padding: 20px; /* 内側の余白を追加 */
-  border-radius: 10px; /* 角を丸くする */
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* 大きめのシャドウを追加 */
+  background-image: url('home-top.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 
 .card {
   border-radius: 12px;
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-  background: #ffffff; /* カードの背景色 */
-  border: 1px solid #e0e0e0; /* カードのボーダー色 */
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
 }
 
 .form-label {
@@ -23,7 +22,7 @@
 .form-control, .form-control-file {
   border-radius: 6px;
   border: 1px solid #ddd;
-  padding: 12px; /* 内側の余白を調整 */
+  padding: 12px;
 }
 
 .btn-primary {
@@ -38,29 +37,27 @@
 
 .btn-primary:hover {
   background-color: #e55e50;
-  transform: scale(1.05); /* ホバー時に少し拡大 */
+  transform: scale(1.05);
 }
 
-/* フォーム内のエラー表示 */
 .error-message {
   color: #e55e50;
   font-size: 14px;
 }
 
-/* 入力フィールドのフォーカス時 */
 .form-control:focus, .form-control-file:focus {
   border-color: #ff6f61;
-  box-shadow: 0 0 0 0.2rem rgba(255, 111, 97, 0.25); /* フォーカス時にシャドウ */
+  box-shadow: 0 0 0 0.2rem rgba(255, 111, 97, 0.25);
 }
 
 .form-group-image-delete {
   display: flex;
-  align-items: center; /* チェックボックスと文字を縦方向に中央揃え */
+  align-items: center;
   margin-bottom: 20px;
 }
 
 .form-check-input {
   width: 20px;
   height: 20px;
-  margin-left: 10px; /* チェックボックスとテキストの間隔を調整 */
+  margin-left: 10px;
 }

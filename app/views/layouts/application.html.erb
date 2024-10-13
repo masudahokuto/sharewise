@@ -24,7 +24,7 @@
         </div>
       <% end %>
     </div>
-    <main class="main-content py-4 <%= 'public-background' if ['searches', 'public/posts', 'public/users', 'public/searches', 'public/relationships'].include?(controller_path) %>">
+    <main class="main-content <%= 'public-background' if ['searches', 'public/posts', 'public/users', 'public/searches', 'public/relationships'].include?(controller_path) %>">
       <%= yield %>
         <span id="back">
           <%= link_to data: { turbolinks: false } do %>
