@@ -30,7 +30,7 @@ ShareWise
 ## 設計書
 - ・![UI-flow](https://raw.githubusercontent.com/masudahokuto/sharewise/main/app/assets/images/UI-flow.png)
 
-- ・![ER図](https://raw.githubusercontent.com/masudahokuto/sharewise/main/app/assets/images/ERD.png)
+- ・![ER図](https://raw.githubusercontent.com/masudahokuto/sharewise/main/app/assets/images/erd.png)
 
 - ・[テーブル定義書] https://docs.google.com/spreadsheets/d/1geA0IuUFgYjfIfqcWmjKSkLnVWqlbrHFJFydUzHIngk/edit?usp=sharing
 
