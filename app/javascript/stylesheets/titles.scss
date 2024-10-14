@@ -1,0 +1,10 @@
+.title-name-link {
+  color: #007bff;
+}
+
+.title tr:nth-child(even) {
+  background-color: #007bff29; /* 偶数行の背景色 */
+}
+.title tr:nth-child(odd) {
+  background-color: #ffffff; /* 奇数行の背景色 */
+}

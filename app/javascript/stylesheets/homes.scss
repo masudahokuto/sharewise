@@ -16,7 +16,7 @@
 
 .home-container, .admin-home-container {
   flex-grow: 1;
-  background-image: url('home-top.jpg');
+  background-image: url('../images/home-top.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -40,7 +40,8 @@
   margin: auto;
 }
 
-.site-title {
+.site {
+  font-family: 'Lobster', cursive;
   font-size: 5rem; /* サイト名のフォントサイズを大きく設定 */
   color: #8B4513;
   font-weight: bold; /* フォントを太くする */

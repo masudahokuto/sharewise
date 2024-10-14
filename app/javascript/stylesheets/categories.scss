@@ -1,0 +1,60 @@
+.category tr:nth-child(even) {
+  background-color: #d1a07d52; /* 偶数行の背景色 */
+}
+.category tr:nth-child(odd) {
+  background-color: #ffffff; /* 奇数行の背景色 */
+}
+
+.table th, .table td {
+  vertical-align: middle;
+}
+
+.icon-shadow {
+  color: #ffd700;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.category-name-link {
+  color: #c1ab05;
+}
+
+.full-link {
+  display: block;
+  text-decoration: none !important;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  height: 100%;
+  width: 100%;
+  font-weight: bold;
+  box-sizing: border-box;
+}
+
+.link-cell {
+  padding: 0;
+  border: none;
+  vertical-align: middle;
+}
+
+.link-cell:hover {
+  background-color: #f0e68c;
+  transition: background-color 0.3s ease;
+}
+
+/* 初期状態：大きなテーブルを表示、小さなテーブルを非表示 */
+.large-table {
+  display: table;
+}
+
+.small-table {
+  display: none;
+}
+
+// 小さなテーブルを表示、大きなテーブルを非表示に
+@media (max-width: 992px) {
+  .large-table {
+    display: none;
+  }
+
+  .small-table {
+    display: table;
+  }
+}

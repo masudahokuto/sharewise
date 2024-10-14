@@ -1,4 +1,3 @@
-<%= stylesheet_link_tag 'public/users', media: 'all' %>
 <div class="container-fluid">
   <div class="row d-flex justify-content-center">
     <div class="side-content col-sm-12 col-md-12 col-lg-2 d-flex flex-column align-items-center">
@@ -6,42 +5,44 @@
       <%= render 'public/content_names' %>
     </div>
     <div class="col-sm-12 col-md-12 col-lg-9">
-      <% if @posts.any? %>
-        <% @posts.each do |post| %>
-          <div class="text-center d-flex justify-content-end align-items-center">
-            <span class="mr-3"><%= time_ago_in_words(post.updated_at) %>前</span>
-            <%= render 'public/favorites/like', post: post %>
-          </div>
-          <div class="post-row d-flex mb-3">
-            <div class="user-card-link col-sm-3 col-md-3 col-lg-2 d-flex flex-column">
-              <%= render 'public/users/index_user_card', user: post.user %>
+      <div class="auto-scroll">
+        <% if @posts.any? %>
+          <% @posts.each do |post| %>
+            <div class="text-center d-flex justify-content-end align-items-center">
+              <span class="mr-3"><%= time_ago_in_words(post.updated_at) %>前</span>
+              <%= render 'public/favorites/like', post: post %>
             </div>
+            <div class="post-row d-flex mb-3">
+              <div class="user-card-link col-sm-3 col-md-3 col-lg-2 d-flex flex-column">
+                <%= render 'public/users/index_user_card', user: post.user %>
+              </div>
 
-            <div class="show-link col-sm-9 col-md-9 col-lg-10 d-flex" style="flex-grow: 1;">
-              <%= link_to post_path(post), style: 'text-decoration: none; display: flex; width: 100%;' do %>
-                <div class="col-sm-9 col-md-9 col-lg-8 d-flex" style="flex-grow: 1; word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;">
-                  <div>
-                    <p><%= simple_format(post.body) %></p>
-                  </div>
-                </div>
-
-                <div class="col-sm-3 col-md-3 col-lg-4 d-flex flex-column align-items-end">
-                  <% post.images.each do |image| %>
-                    <div class="post-image mb-3">
-                      <%= image_tag image, class: "img-fluid", alt: "Post Image", style: "max-width: 100%;"  %>
+              <div class="show-link col-sm-9 col-md-9 col-lg-10 d-flex" style="flex-grow: 1;">
+                <%= link_to post_path(post), style: 'text-decoration: none; display: flex; width: 100%;' do %>
+                  <div class="col-sm-9 col-md-9 col-lg-8 d-flex" style="flex-grow: 1; word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;">
+                    <div>
+                      <p><%= simple_format(post.body) %></p>
                     </div>
-                  <% end %>
-                </div>
-              <% end %>
+                  </div>
+
+                  <div class="col-sm-3 col-md-3 col-lg-4 d-flex flex-column align-items-end">
+                    <% post.images.each do |image| %>
+                      <div class="post-image mb-3">
+                        <%= image_tag image, class: "img-fluid", alt: "Post Image", style: "max-width: 100%;"  %>
+                      </div>
+                    <% end %>
+                  </div>
+                <% end %>
+              </div>
             </div>
-          </div>
+          <% end %>
+        <% else %>
+          <p>いいねした投稿はありません。</p>
         <% end %>
-        <div id="pagination">
+        <div id="pagination" style="display: none;">
           <%= paginate @posts %>
         </div>
-      <% else %>
-        <p>いいねした投稿はありません。</p>
-      <% end %>
+      </div>
     </div>
   </div>
 </div>

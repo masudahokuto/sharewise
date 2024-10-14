@@ -1,24 +1,71 @@
-<table class="table large-table">
-  <thead>
-    <tr>
-      <th style="background-color: #d3d3d3">もくじ名</th>
-      <th style="background-color: #d3d3d3">保存日</th>
-      <th style="background-color: #d3d3d3"></th>
-      <th style="background-color: #d3d3d3"></th>
-      <th style="background-color: #d3d3d3">もくじ名</th>
-      <th style="background-color: #d3d3d3">保存日</th>
-      <th style="background-color: #d3d3d3"></th>
-      <th style="background-color: #d3d3d3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% sorted_titles.each_slice(2) do |slice| %>
+<div class="title">
+  <table class="table large-table">
+    <thead>
       <tr>
-        <% slice.each do |title| %>
+        <th style="background-color: #d3d3d3">もくじ名</th>
+        <th style="background-color: #d3d3d3">保存日</th>
+        <th style="background-color: #d3d3d3"></th>
+        <th style="background-color: #d3d3d3"></th>
+        <th style="background-color: #d3d3d3">もくじ名</th>
+        <th style="background-color: #d3d3d3">保存日</th>
+        <th style="background-color: #d3d3d3"></th>
+        <th style="background-color: #d3d3d3"></th>
+      </tr>
+    </thead>
+
+    <tbody class="title">
+      <% sorted_titles.each_slice(2) do |slice| %>
+        <tr>
+          <% slice.each do |title| %>
+            <td class="link-cell">
+              <span id="title-name-<%= title.id %>">
+                <%= link_to category_title_path(category, title), class: 'full-link title-name-link d-flex align-items-center', data: {"turbolinks" => false} do %>
+                  <i class="fa-solid fa-book mr-3 icon-shadow" style="color: #8b4513;"></i>
+                  <%= title.title_name %>
+                <% end %>
+              </span>
+              <span id="title-edit-form-<%= title.id %>" style="display: none;">
+                <%= form_with(model: title, url: category_title_path(category, title), method: :patch, remote: true, html: { id: "edit-form-#{title.id}" }) do |f| %>
+                  <%= f.text_field :title_name, value: title.title_name %>
+                  <%= f.submit '保存', class: 'btn btn-primary btn-sm' %>
+                <% end %>
+              </span>
+            </td>
+            <td>
+              <%= title.created_at.in_time_zone("Tokyo").strftime("%Y/%m/%d %H:%M") %>
+            </td>
+            <td>
+              <button class="btn btn-success btn-sm edit-btn" data-title-id="<%= title.id %>">編集</button>
+            </td>
+            <td>
+              <%= link_to '削除', category_title_path(category, title),
+                method: :delete,
+                data: { confirm: '中身も全て消えてしまいますが本当に削除しますか？' },
+                class: 'btn btn-danger btn-sm'
+              %>
+            </td>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <table class="table small-table">
+    <thead>
+      <tr>
+        <th style="background-color: #d3d3d3">もくじ名</th>
+        <th style="background-color: #d3d3d3">保存日</th>
+        <th style="background-color: #d3d3d3"></th>
+        <th style="background-color: #d3d3d3"></th>
+      </tr>
+    </thead>
+
+    <tbody class="title">
+      <% sorted_titles.each do |title| %>
+        <tr>
           <td class="link-cell">
             <span id="title-name-<%= title.id %>">
-              <%= link_to category_title_path(category, title), class: 'full-link d-flex align-items-center', data: {"turbolinks" => false} do %>
+              <%= link_to category_title_path(category, title), class: 'full-linke title-name-link d-flex align-items-center', data: {"turbolinks" => false} do %>
                 <i class="fa-solid fa-book mr-3 icon-shadow" style="color: #8b4513;"></i>
                 <%= title.title_name %>
               <% end %>
@@ -43,53 +90,8 @@
               class: 'btn btn-danger btn-sm'
             %>
           </td>
-        <% end %>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<table class="table small-table">
-  <thead>
-    <tr>
-      <th style="background-color: #d3d3d3">もくじ名</th>
-      <th style="background-color: #d3d3d3">保存日</th>
-      <th style="background-color: #d3d3d3"></th>
-      <th style="background-color: #d3d3d3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% sorted_titles.each do |title| %>
-      <tr>
-        <td class="link-cell">
-          <span id="title-name-<%= title.id %>">
-            <%= link_to category_title_path(category, title), class: 'full-link d-flex align-items-center', data: {"turbolinks" => false} do %>
-              <i class="fa-solid fa-book mr-3 icon-shadow" style="color: #8b4513;"></i>
-              <%= title.title_name %>
-            <% end %>
-          </span>
-          <span id="title-edit-form-<%= title.id %>" style="display: none;">
-            <%= form_with(model: title, url: category_title_path(category, title), method: :patch, remote: true, html: { id: "edit-form-#{title.id}" }) do |f| %>
-              <%= f.text_field :title_name, value: title.title_name %>
-              <%= f.submit '保存', class: 'btn btn-primary btn-sm' %>
-            <% end %>
-          </span>
-        </td>
-        <td>
-          <%= title.created_at.in_time_zone("Tokyo").strftime("%Y/%m/%d %H:%M") %>
-        </td>
-        <td>
-          <button class="btn btn-success btn-sm edit-btn" data-title-id="<%= title.id %>">編集</button>
-        </td>
-        <td>
-          <%= link_to '削除', category_title_path(category, title),
-            method: :delete,
-            data: { confirm: '中身も全て消えてしまいますが本当に削除しますか？' },
-            class: 'btn btn-danger btn-sm'
-          %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

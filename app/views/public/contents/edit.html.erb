@@ -1,4 +1,4 @@
-<%= stylesheet_link_tag 'public/posts', media: 'all' %>
+
 <div class="container-fluid">
   <div class="row d-flex justify-content-center">
     <div class="side-content col-sm-12 col-md-12 col-lg-2 d-flex flex-column align-items-center">
@@ -21,10 +21,10 @@
               <%= link_to new_category_path, class: 'return-link-brown', title: '５つ前に戻る', data: {"turbolinks" => false} do %>
                 <i class="fa-solid fa-book-open"></i>
               <% end %>＞
-              <%= link_to @category.category_name, category_path(@category), class: 'return-link-gold', title: '４つ前に戻る' %>＞
-              <%= link_to @title.title_name, category_title_path(@category, @title), class: 'return-link-blue', title: '３つ前に戻る' %>＞
-              <%= link_to @genre.genre_name, category_title_genre_path(@category, @title, @genre), class: 'return-link-green', title: '２つ前に戻る' %>＞
-              <%= link_to @content.content_name, category_title_genre_content_path(@category, @title, @genre, @content), class: 'return-link-purple', title: '１つ前に戻る' %>＞
+              <%= link_to @category.category_name, category_path(@category), class: 'return-link-gold', title: '４つ前に戻る', data: {"turbolinks" => false} %>＞
+              <%= link_to @title.title_name, category_title_path(@category, @title), class: 'return-link-blue', title: '３つ前に戻る', data: {"turbolinks" => false} %>＞
+              <%= link_to @genre.genre_name, category_title_genre_path(@category, @title, @genre), class: 'return-link-green', title: '２つ前に戻る', data: {"turbolinks" => false} %>＞
+              <%= link_to @content.content_name, category_title_genre_content_path(@category, @title, @genre, @content), class: 'return-link-purple', title: '１つ前に戻る', data: {"turbolinks" => false} %>＞
             </div>
             <div class="d-flex justify-content-between align-items-center my-4">
               <%= f.text_field :content_name, class: "form-control", id: 'content_name', autofocus: true , placeholder: "項目名を入力(20文字まで登録できます)", style: "width: 350px;" %>

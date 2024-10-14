@@ -1,0 +1,238 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+#flash-messages .alert {
+  margin: 0;
+  text-align: center;
+  font-weight: bold;
+}
+
+.home-icon {
+  font-size: 30px;
+  font-weight: bold;
+  display: flex; /* フレックスボックスを使用 */
+  align-items: center; /* 垂直方向の中央揃え */
+  white-space: nowrap; /* 折り返しを防ぐ */
+}
+
+.home-icon i, .home-icon .site-title {
+  color: #fff;
+  transition: color 0.3s ease;
+}
+
+.home-icon .site-title {
+  font-family: 'Lobster', cursive;
+  font-size: 30px !important;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.home-icon:hover i, .home-icon:hover .site-title {
+  color: #8B4513;
+}
+
+/* "ShareWise"の文字スタイル */
+.site-title {
+  font-family: 'Lobster', cursive;
+  font-size: 36px;
+  color: #fff;
+  margin: 0;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.hover-effect {
+  color: #f8f9fa;
+  transition: color 0.3s ease;
+}
+
+.hover-effect:hover {
+  color: #8B4513;
+}
+
+.header-link {
+  font-size: 30px;
+  text-decoration: none;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  display: flex; /* フレックスボックスを使用 */
+  align-items: center; /* 垂直方向の中央揃え */
+  white-space: nowrap; /* 折り返しを防ぐ */
+}
+
+/* アクティブ時のリンク */
+.active-header {
+  color: #8B4513;
+  font-size: 40px;
+  font-weight: bold;
+  text-decoration: none;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.custom-header {
+  background-color: #8FBC8F;
+  min-height: 100px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.customer-greeting {
+  font-size: 12px;
+  color: #f8f9fa;
+  // align-items: center;
+  display: flex;
+  height: 100%;
+}
+
+.custom-footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  background-color: #8FBC8F;
+  min-height: 100px;
+}
+
+.footer-content {
+  font-weight: bold;
+  color: #ffffff;
+}
+
+#back {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 1000;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+#back a {
+  color: #808080;
+  text-decoration: none;
+}
+
+
+.fa-search {
+  color: white;
+}
+
+.main-content {
+  flex-grow: 1;
+  background-color: #f8f4e6;
+}
+
+.public-background {
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: #eef4fb ;
+}
+
+// 通知部分
+.notification-icon {
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+  text-decoration: none !important;
+
+  i.fas.fa-bell {
+    font-size: 20px;
+    color: #ffffff;
+  }
+
+  .unread-count {
+    font-size: 12px;
+    color: #ff0;
+    border-radius: 50%;
+    padding: 2px 6px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translate(50%, -50%);
+  }
+
+  &.has-unread {
+    i.fas.fa-bell {
+      color: #ff0;
+    }
+  }
+}
+
+#content-name a {
+  color : #8b008b;
+  padding: 3px;
+  font-size: 14px !important;
+  font-weight: bold !important;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: all 0.1s ease-in-out;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+#content-name a:hover {
+  color : #F8F5E6;
+  background-color: #8b008b;
+  font-size: 15px !important;
+  font-weight: bold !important;
+  text-decoration: none;
+  transform: translateY(-2px);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+
+/* レスポンシブデザイン */
+@media (max-width: 768px) {
+  .header-link {
+    font-size: 24px; /* フォントサイズを小さくする */
+  }
+
+  .home-icon {
+    font-size: 24px; /* フォントサイズを小さくする */
+  }
+
+  .site-title {
+    font-size: 28px; /* フォントサイズを小さくする */
+  }
+
+  .custom-header {
+    flex-direction: column; /* 縦に並ぶように */
+    height: auto; /* 高さを自動調整 */
+  }
+}
+
+.pagination {
+  display: flex;
+  list-style-type: none;
+  padding: 0;
+  align-items: center;
+}
+
+.pagination a {
+  text-decoration: none;
+  padding: 8px 10px;
+  background-color: #007bff; /* ボタンの背景色 */
+  color: white; /* テキストの色 */
+  border-radius: 5px; /* 角の丸み */
+
+}
+
+.pagination a:hover {
+  background-color: #0056b3; /* ホバー時の色 */
+}
+
+.pagination .page.current {
+  background-color: #8B4513; /* アクティブなページの背景色 */
+  // padding: 10px;
+  color: #fff; /* アクティブなページの文字色 */
+  font-weight: bold; /* アクティブなページのフォントを太字に */
+  border-radius: 5px; /* 角を丸くする */
+  margin-right: 10px;
+  margin-left: 10px;
+  padding: 10px 15px;
+}

@@ -1,1 +1,14 @@
 @use '~bootstrap/scss/bootstrap';
+@import "./sessions";
+@import "./homes";
+@import "./public_users";
+@import "./public_posts";
+@import "./registrations";
+@import "./admin_users";
+@import "./customs";
+@import "./categories";
+@import "./titles";
+@import "./genres";
+@import "./contents";
+@import "./public_homes";
+@import "./admin_posts";

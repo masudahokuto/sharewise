@@ -1,0 +1,10 @@
+.genre-name-link {
+  color: #2e8b57;
+}
+
+.genre tr:nth-child(even) {
+  background-color: #28a74524; /* 偶数行の背景色 */
+}
+.genre tr:nth-child(odd) {
+  background-color: #ffffff; /* 奇数行の背景色 */
+}

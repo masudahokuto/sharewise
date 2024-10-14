@@ -9,17 +9,19 @@
       <div class="d-flex justify-content-center align-items-center">
         <%= render 'searches/search_form' %>
       </div>
-      <% if @users.present? %>
-        <div class="user-list">
-          <%= render 'public/users/user_index', users: @users %>
-        </div>
-        <!-- ページネーション -->
-        <div id="pagination">
+      <div class="auto-scroll">
+        <% if @users.present? %>
+          <div class="user-list">
+            <%= render 'public/users/user_index', users: @users %>
+          </div>
+          <!-- ページネーション -->
+        <% else %>
+          <p>検索結果がありません。</p>
+        <% end %>
+        <div id="pagination" style="display: none;">
           <%= paginate @users %>
         </div>
-      <% else %>
-        <p>検索結果がありません。</p>
-      <% end %>
+      </div>
     </div>
   </div>
 </div>

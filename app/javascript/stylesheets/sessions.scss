@@ -1,0 +1,54 @@
+.session-form-container {
+  background-image: url('../images/home-top.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  min-height: calc(100vh - 200px);
+}
+
+.card {
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+}
+
+.field {
+  margin-bottom: 15px;
+}
+
+.field label {
+  font-weight: 600;
+  color: #333;
+}
+
+.field input {
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  padding: 10px;
+  width: 100%;
+}
+
+.btn-primary {
+  border: none;
+  border-radius: 6px;
+  color: white;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-primary:hover {
+  transform: scale(1.05); /* ホバー時に少し拡大 */
+}
+
+.btn-success {
+  border: none;
+  border-radius: 6px;
+  color: white;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-success:hover {
+  transform: scale(1.05); /* ホバー時に少し拡大 */
+}

@@ -10,7 +10,7 @@ class Public::UsersController < ApplicationController
     @posts = newest(@user.posts)
     @links = @user.links
 
-    @notifications = @user.notifications.unread.page(params[:page]).per(20)
+    @notifications = @user.notifications.unread.page(params[:page]).per(40)
     @unread_count = @user.notifications.unread.count
   end
 

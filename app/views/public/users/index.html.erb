@@ -1,4 +1,3 @@
-<%= stylesheet_link_tag 'public/users', media: 'all' %>
 <div class="container-fluid">
   <div class="row d-flex justify-content-center">
     <div class="side-content col-sm-12 col-md-12 col-lg-2 d-flex flex-column align-items-center">
@@ -13,60 +12,62 @@
       <div class="d-flex justify-content-center align-items-center">
         <%= render "searches/search_form" %>
       </div>
-      <% if @users.any? %>
-        <% @users.each do |user| %>
-          <% latest_post = user.posts.order(created_at: :desc).first %>
-          <% if latest_post %>
-            <div class="text-center d-flex justify-content-end align-items-center">
-              <span class="mr-3"><%= time_ago_in_words(latest_post.updated_at) %>前</span>
-              <%= render 'public/favorites/like', post: latest_post, user: user %>
-            </div>
-            <div class="post-row d-flex mb-3">
-              <div class="user-card-link col-sm-3 col-md-3 col-lg-2 d-flex flex-column">
-                <%= render 'public/users/index_user_card', user: user %>
+      <div class="auto-scroll">
+        <% if @users.any? %>
+          <% @users.each do |user| %>
+            <% latest_post = user.posts.order(created_at: :desc).first %>
+            <% if latest_post %>
+              <div class="text-center d-flex justify-content-end align-items-center">
+                <span class="mr-3"><%= time_ago_in_words(latest_post.updated_at) %>前</span>
+                <%= render 'public/favorites/like', post: latest_post, user: user %>
               </div>
+              <div class="post-row d-flex mb-3">
+                <div class="user-card-link col-sm-3 col-md-3 col-lg-2 d-flex flex-column">
+                  <%= render 'public/users/index_user_card', user: user %>
+                </div>
 
 
-              <div class="show-link col-sm-9 col-md-9 col-lg-10 d-flex" style="flex-grow: 1;">
-                <%= link_to post_path(latest_post), style: 'text-decoration: none; display: flex; width: 100%;' do %>
-                  <div class="col-sm-9 col-md-9 col-lg-8 d-flex" style="flex-grow: 1; word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;">
-                    <div>
-                      <p><%= simple_format(latest_post.body) %></p>
+                <div class="show-link col-sm-9 col-md-9 col-lg-10 d-flex" style="flex-grow: 1;">
+                  <%= link_to post_path(latest_post), style: 'text-decoration: none; display: flex; width: 100%;' do %>
+                    <div class="col-sm-9 col-md-9 col-lg-8 d-flex" style="flex-grow: 1; word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;">
+                      <div>
+                        <p><%= simple_format(latest_post.body) %></p>
+                      </div>
                     </div>
-                  </div>
-                  <div class="col-sm-3 col-md-3 col-lg-4 d-flex flex-column align-items-end">
-                    <% if latest_post.images.any? %>
-                      <% latest_post.images.each do |image| %>
-                        <div class="post-image mb-3">
-                          <%= image_tag image, class: "img-fluid", alt: "Post Image", style: "max-width: 100%;" %>
-                        </div>
+                    <div class="col-sm-3 col-md-3 col-lg-4 d-flex flex-column align-items-end">
+                      <% if latest_post.images.any? %>
+                        <% latest_post.images.each do |image| %>
+                          <div class="post-image mb-3">
+                            <%= image_tag image, class: "img-fluid", alt: "Post Image", style: "max-width: 100%;" %>
+                          </div>
+                        <% end %>
                       <% end %>
-                    <% end %>
+                    </div>
+                  <% end %>
+                </div>
+              </div>
+            <% else %>
+              <div class="post-row d-flex mb-3">
+                <div class="user-card-link col-sm-3 col-md-3 col-lg-2 d-flex flex-column">
+                  <%= render 'public/users/index_user_card', user: user %>
+                </div>
+                <%= link_to user_path(user), style: 'text-decoration: none; display: flex; width: 100%;' do %>
+                  <div class="d-flex flex-column flex-grow-1 me-3">
+                    <div class="show-link col-sm-9 col-md-9 col-lg-10 d-flex" style="flex-grow: 1;">
+                      <p style="color: black;">投稿はまだありません。</p>
+                    </div>
                   </div>
                 <% end %>
               </div>
-            </div>
-          <% else %>
-            <div class="post-row d-flex mb-3">
-              <div class="user-card-link col-sm-3 col-md-3 col-lg-2 d-flex flex-column">
-                <%= render 'public/users/index_user_card', user: user %>
-              </div>
-              <%= link_to user_path(user), style: 'text-decoration: none; display: flex; width: 100%;' do %>
-                <div class="d-flex flex-column flex-grow-1 me-3">
-                  <div class="show-link col-sm-9 col-md-9 col-lg-10 d-flex" style="flex-grow: 1;">
-                    <p style="color: black;">投稿はまだありません。</p>
-                  </div>
-                </div>
-              <% end %>
-            </div>
+            <% end %>
           <% end %>
+        <% else %>
+          <p>ユーザーはまだいません。</p>
         <% end %>
-      <% else %>
-        <p>ユーザーはまだいません。</p>
-      <% end %>
-      <!-- ページネーション -->
-      <div id="pagination">
-        <%= paginate @users %>
+        <!-- ページネーション -->
+        <div id="pagination" style="display: none;">
+          <%= paginate @users %>
+        </div>
       </div>
     </div>
   </div>

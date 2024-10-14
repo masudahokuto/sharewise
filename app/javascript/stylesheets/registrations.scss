@@ -1,0 +1,70 @@
+.registration-form-container {
+  //background-image: url('home-top.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.card {
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+}
+
+.form-label {
+  font-weight: 600;
+  color: #333;
+}
+
+.form-control, .form-control-file {
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  padding: 12px;
+}
+
+.btn-primary {
+  border: none;
+  border-radius: 6px;
+  color: white;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-primary:hover {
+  transform: scale(1.05); /* ホバー時に少し拡大 */
+}
+
+.btn-success {
+  border: none;
+  border-radius: 6px;
+  color: white;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-success:hover {
+  transform: scale(1.05); /* ホバー時に少し拡大 */
+}
+
+.error-message {
+  color: #e55e50;
+  font-size: 14px;
+}
+
+.form-control:focus, .form-control-file:focus {
+  border-color: #ff6f61;
+  box-shadow: 0 0 0 0.2rem rgba(255, 111, 97, 0.25);
+}
+
+.form-group-image-delete {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.form-check-input {
+  width: 20px;
+  height: 20px;
+  margin-left: 10px;
+}

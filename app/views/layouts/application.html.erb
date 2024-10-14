@@ -7,12 +7,14 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= stylesheet_link_tag 'custom', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%#= stylesheet_link_tag 'custom', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Kosugi+Maru&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/f6eb215aef.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jscroll/2.4.1/jquery.jscroll.min.js"></script>
+    
   </head>
 
   <body>
@@ -26,11 +28,11 @@
     </div>
     <main class="main-content <%= 'public-background' if ['searches', 'public/posts', 'public/users', 'public/searches', 'public/relationships'].include?(controller_path) %>">
       <%= yield %>
-        <span id="back">
-          <%= link_to data: { turbolinks: false } do %>
-            <i class="fa-solid fa-chevron-up" style="font-size: 50px;" title="画面上部へ"></i>
-          <% end %>
-        </span>
+      <span id="back">
+        <%= link_to data: { turbolinks: false } do %>
+          <i class="fa-solid fa-chevron-up" style="font-size: 50px;" title="画面上部へ"></i>
+        <% end %>
+      </span>
     </main>
     <%= render 'layouts/footer' %>
   </body>
