@@ -9,7 +9,7 @@
           <%= form_with(url: admin_users_path, method: :get, local: true, class: 'form-inline d-flex align-items-center') do %>
             <div class="form-group mr-2">
               <%= label_tag :search_field, '項目:', class: 'mr-2' %>
-              <%= select_tag :search_field, options_for_select([['ID', 'id'], ['姓', 'last_name'], ['名', 'first_name'], ['ニックネーム', 'nick_name'], ['メール', 'email']], params[:search_field]), class: 'form-control' %>
+              <%= select_tag :search_field, options_for_select([['ID', 'id'], ['姓', 'last_name'], ['名', 'first_name'], ['ニックネーム', 'nick_name'], ['メール', 'email']], params[:search_field]), class: 'form-control-admin' %>
             </div>
             <div class="form-group position-relative">
               <i class="fas fa-search position-absolute" style="left: 10px; top: 50%; transform: translateY(-50%); color: #aaa;"></i>

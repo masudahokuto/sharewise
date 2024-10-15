@@ -14,16 +14,7 @@
   height: 100%;  // 高さを自動調整
 }
 
-.comment-table {
-  width: 100%;
-  background-color: #ffffff;
-  border-collapse: collapse;
 
-  .mt-2 {
-    max-width: 280px;
-    overflow-wrap: break-word;
-  }
-}
 
 .no-underline {
   text-decoration: none !important;
