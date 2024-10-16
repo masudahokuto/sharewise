@@ -24,3 +24,8 @@ import './auto_scroll'
 //import './category_name_edit'
 //import './title_name_edit'
 // import './clock'
+
+window.addEventListener('popstate', function (e) {
+window.location.reload();
+console.log("Reload!");
+});
