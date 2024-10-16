@@ -43,6 +43,13 @@ class Public::RelationshipsController < ApplicationController
   def destroy
     @user = User.find(params[:id])
     current_user.unfollow(@user)
+
+    Notification.find_by(
+      user: @user, # 受信者(フォローされたユーザー)
+      notificable: relationship, # Relationshipモデルのインスタンスを指定
+      notificable_type: "Relationship"
+    ).destroy
+
     redirect_back(fallback_location: root_path, alert: 'フォローを外しました')
   end
 end
