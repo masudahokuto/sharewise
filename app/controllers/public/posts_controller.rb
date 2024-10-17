@@ -78,7 +78,7 @@ class Public::PostsController < ApplicationController
     else
       @links = [] # ゲストの場合は空の配列を設定
     end
-
+    
     if params[:query].blank?
       flash[:alert] = "検索内容を入力してください。"
       redirect_to posts_path and return
