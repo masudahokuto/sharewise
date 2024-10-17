@@ -7,7 +7,7 @@ class Public::HomesController < ApplicationController
 
   def about
   end
-
+  # 管理者ログイン中の処理
   def redirect_if_admin
     if admin_signed_in?
       redirect_to admin_path, alert: "管理者はこのページにアクセスできません。"

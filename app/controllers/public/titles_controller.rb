@@ -51,14 +51,14 @@ class Public::TitlesController < ApplicationController
     @title = Title.find(params[:id])
   end
 
-  # ユーザーのアクセス権を確認するメソッド
+  # ユーザーのアクセス権確認メソッド
   def authorize_user!
     @category = Category.find(params[:category_id])  # カテゴリを取得
-    # current_user がカテゴリの所有者であることを確認
+    # current_userがカテゴリの所有者であることを確認
     redirect_to root_path, alert: 'アクセス権がありません' unless @category.user == current_user  # アクセス権がない場合はリダイレクト
   end
 
-  # タイトルのパラメータを許可するプライベートメソッド
+  # タイトルのパラメータを許可する
   def title_params
     params.require(:title).permit(:title_name)  # タイトルのパラメータを許可
   end

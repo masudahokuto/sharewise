@@ -16,7 +16,7 @@ class NotificationsController < ApplicationController
       redirect_to new_user_session_path, alert: 'ログインしてください'
     end
   end
-
+  # 通知全既読
   def mark_all_as_read
     current_user.notifications.where(read: false).update_all(read: true)
     redirect_to mypage_users_path, notice: 'すべての通知を既読にしました'
