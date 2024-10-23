@@ -47,6 +47,17 @@
   transform: scale(1.05); /* ホバー時に少し拡大 */
 }
 
+.btn-secondary {
+  border: none;
+  border-radius: 6px;
+  color: white;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-secondary:hover {
+  transform: scale(1.05); /* ホバー時に少し拡大 */
+}
+
 .error-message {
   color: #e55e50;
   font-size: 14px;
@@ -67,4 +78,15 @@
   width: 20px;
   height: 20px;
   margin-left: 10px;
+}
+
+.sign_up_errors {
+  font-weight: bold;
+  color: #c72121; /* 赤色に近いダークトーン */
+  background-color: #fff3cd; /* 明るい黄色 */
+  border: 1px solid #ffeeba; /* 薄い黄色のボーダー */
+  padding: 15px; /* 内側の余白を追加 */
+  border-radius: 5px; /* 角を丸くする */
+  margin-bottom: 20px; /* 下の余白を追加 */
+  text-align: center; /* テキストを中央揃え */
 }

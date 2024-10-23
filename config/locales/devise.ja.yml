@@ -2,6 +2,7 @@ ja:
   errors:
     format: "%{attribute} %{message}"
     messages:
+      not_saved: "%{count} 件の入力エラーが発生しました"
       accepted: "を受け入れる必要があります"
       absent: "を含んではいけません"
       blank: "を入力してください"
@@ -56,3 +57,11 @@ ja:
       updated_not_active: "パスワードが更新されましたが、アカウントはアクティブではありません"
     unlocks:
       unlocked: "アカウントがアンロックされました"
+  activerecord:
+    attributes:
+      user:
+        email: "メールアドレス"
+        password: "パスワード"
+        last_name: "苗字"
+        first_name: "名前"
+        nick_name: "ニックネーム"
